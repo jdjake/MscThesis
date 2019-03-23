@@ -1,0 +1,383 @@
+%% The ubcdiss class provides several options:
+%%   gpscopy (aka fogscopy)
+%%       set parameters to exactly how GPS specifies
+%%         * single-sided
+%%         * page-numbering starts from title page
+%%         * the lists of figures and tables have each entry prefixed
+%%           with 'Figure' or 'Table'
+%%       This can be tested by `\ifgpscopy ... \else ... \fi'
+%%   10pt, 11pt, 12pt
+%%       set default font size
+%%   oneside, twoside
+%%       whether to format for single-sided or double-sided printing
+%%   balanced
+%%       when double-sided, ensure page content is centred
+%%       rather than slightly offset (the default)
+%%   singlespacing, onehalfspacing, doublespacing
+%%       set default inter-line text spacing; the ubcdiss class
+%%       provides \textspacing to revert to this configured spacing
+%%   draft
+%%       disable more intensive processing, such as including
+%%       graphics, etc.
+
+% For submission to GPS
+%\documentclass[gpscopy,onehalfspacing,12pt]{ubcdiss}
+
+% For your own copies (looks nicer)
+\documentclass[balanced,twoside,12pt]{ubcdiss}
+
+%%
+%% FONTS:
+%% 
+%% The defaults below configures Times Roman for the serif font,
+%% Helvetica for the sans serif font, and Courier for the
+%% typewriter-style font.
+
+%% NFSS font specification (New Font Selection Scheme)
+\usepackage{times,mathptmx,courier}
+\usepackage[scaled=.92]{helvet}
+
+\usepackage{amssymb, amsmath, amsfonts}
+
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{fact}{Fact}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{remark}{Remark}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\algblockdefx{MRepeat}{EndRepeat}{\textbf{Repeat}}{}
+\algnotext{EndRepeat}
+
+\algblockdefx{MForAll}{EndForAll}{\textbf{For all}}{}
+\algnotext{EndForAll}
+
+\usepackage{checkend} % better error messages on left-open environments
+\usepackage{graphicx} % for incorporating external images
+\usepackage{booktabs} % Provides commands for typesetting tables.
+\usepackage{comment} % Comment environment.
+
+\usepackage{listings} % Supports for source doe listings.
+\lstset{basicstyle=\sffamily\scriptsize,showstringspaces=false,fontadjust}
+
+\usepackage[printonlyused,nohyperlinks]{acronym} % Acronyms and Glossaries
+% Typeset acronyms in small-caps, as recommended by Bringhurst.
+\renewcommand{\acsfont}[1]{{\scshape \MakeTextLowercase{#1}}}
+
+%% For an excellent set of examples, see Tufte's "Visual Display of
+%% Quantitative Information" or "Envisioning Information".
+\usepackage{color}
+\definecolor{greytext}{gray}{0.5}
+
+%% Provides citing commands such as \citeauthor{} to provide author names
+%% \citet{} to produce author-and-reference citation,
+%% \citep{} to produce parenthetical citations.
+%% We use \citeeg{} to provide examples
+\usepackage[numbers,sort&compress]{natbib}
+\newcommand{\citeeg}[1]{\citep[e.g.,][]{#1}}
+
+%% The titlesec package provides commands to vary how chapter and
+%% section titles are typeset.  The following uses more compact
+%% spacings above and below the title.  The titleformat that follow
+%% ensure chapter/section titles are set in singlespace.
+\usepackage[compact]{titlesec}
+\titleformat*{\section}{\singlespacing\raggedright\bfseries\Large}
+\titleformat*{\subsection}{\singlespacing\raggedright\bfseries\large}
+\titleformat*{\subsubsection}{\singlespacing\raggedright\bfseries}
+\titleformat*{\paragraph}{\singlespacing\raggedright\itshape}
+
+%% The caption package provides support for varying how table and
+%% figure captions are typeset.
+\usepackage[format=hang,indention=-1cm,labelfont={bf},margin=1em]{caption}
+
+%% url: for typesetting URLs and smart(er) hyphenation.
+%% \url{http://...} 
+\usepackage{url}
+\urlstyle{sf}	% typeset urls in sans-serif
+
+\usepackage{pdfpages}	% insert pages from other PDF files
+\usepackage{longtable}	% provide tables spanning multiple pages
+\usepackage{chngpage}	% for changing the page widths on demand
+\usepackage{tabularx}   % enhanced tabular environment
+\usepackage{enumitem}   % allows pausing and resuming enumerate environments.
+\usepackage{subfig}     % include subfigures in figures.
+
+%% ragged2e: provides several new new commands \Centering, \RaggedLeft,
+%% \RaggedRight and \justifying and new environments Center, FlushLeft,
+%% FlushRight and justify, which set ragged text and are easily
+%% configurable to allow hyphenation.
+%\usepackage{ragged2e}
+
+%% The ulem package provides a \sout{} for striking out text and
+%% \xout for crossing out text.  The normalem and normalbf are
+%% necessary as the package messes with the emphasis and bold fonts
+%% otherwise.
+%\usepackage[normalem,normalbf]{ulem}    % for \sout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HYPERREF:
+%% The hyperref package provides for embedding hyperlinks into your
+%% document.  By default the table of contents, references, citations,
+%% and footnotes are hyperlinked.
+%%
+%% Hyperref provides a very handy command for doing cross-references:
+%% \autoref{}.  This is similar to \ref{} and \pageref{} except that
+%% it automagically puts in the *type* of reference.  For example,
+%% referencing a figure's label will put the text `Figure 3.4'.
+%% And the text will be hyperlinked to the appropriate place in the
+%% document.
+%%
+%% Generally hyperref should appear after most other packages
+
+%% The following puts hyperlinks in very faint grey boxes.
+%% The `pagebackref' causes the references in the bibliography to have
+%% back-references to the citing page; `backref' puts the citing section
+%% number.  See further below for other examples of using hyperref.
+%% 2009/12/09: now use `linktocpage' (Jacek Kisynski): GPS now prefers
+%%   that the ToC, LoF, LoT place the hyperlink on the page number,
+%%   rather than the entry text.
+\usepackage[bookmarks,bookmarksnumbered,%
+    allbordercolors={0.8 0.8 0.8},%
+    pagebackref,linktocpage%
+    ]{hyperref}
+%% The following change how the the back-references text is typeset in a
+%% bibliography when `backref' or `pagebackref' are used
+%%
+%% Change \nocitations if you'd like some text shown where there
+%% are no citations found (e.g., pulled in with \nocite{xxx})
+\newcommand{\nocitations}{\relax}
+%%\newcommand{\nocitations}{No citations}
+%%
+%\renewcommand*{\backref}[1]{}% necessary for backref < 1.33
+\renewcommand*{\backrefsep}{,~}%
+\renewcommand*{\backreftwosep}{,~}% ', and~'
+\renewcommand*{\backreflastsep}{,~}% ' and~'
+\renewcommand*{\backrefalt}[4]{%
+\textcolor{greytext}{\ifcase #1%
+\nocitations%
+\or
+\(\rightarrow\) page #2%
+\else
+\(\rightarrow\) pages #2%
+\fi}}
+
+
+%% The following uses most defaults, which causes hyperlinks to be
+%% surrounded by colourful boxes; the colours are only visible in
+%% PDFs and don't show up when printed:
+%\usepackage[bookmarks,bookmarksnumbered]{hyperref}
+
+%% The following disables the colourful boxes around hyperlinks.
+%\usepackage[bookmarks,bookmarksnumbered,pdfborder={0 0 0}]{hyperref}
+
+%% The following disables all hyperlinking, but still enabled use of
+%% \autoref{}
+%\usepackage[draft]{hyperref}
+
+%% The following commands causes chapter and section references to
+%% uppercase the part name.
+\renewcommand{\chapterautorefname}{Chapter}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Section}
+\renewcommand{\subsubsectionautorefname}{Section}
+
+%% If you have long page numbers (e.g., roman numbers in the 
+%% preliminary pages for page 28 = xxviii), you might need to
+%% uncomment the following and tweak the \@pnumwidth length
+%% (default: 1.55em).  See the tocloft documentation at
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/tocloft/
+% \makeatletter
+% \renewcommand{\@pnumwidth}{3em}
+% \makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Some special settings that controls how text is typeset
+%%
+% \raggedbottom		% pages don't have to line up nicely on the last line
+% \sloppy		% be a bit more relaxed in inter-word spacing
+% \clubpenalty=10000	% try harder to avoid orphans
+% \widowpenalty=10000	% try harder to avoid widows
+% \tolerance=1000
+
+%% And include some of our own useful macros
+\input{macros}
+
+% My Math Operators
+\DeclareMathOperator{\minkdim}{\dim_{\mathbf{M}}}
+\DeclareMathOperator{\hausdim}{\dim_{\mathbf{H}}}
+\DeclareMathOperator{\lowminkdim}{\underline{\dim}_{\mathbf{M}}}
+\DeclareMathOperator{\upminkdim}{\overline{\dim}_{\mathbf{M}}}
+
+\DeclareMathOperator{\lhdim}{\underline{\dim}_{\mathbf{M}}}
+\DeclareMathOperator{\lmbdim}{\underline{\dim}_{\mathbf{MB}}}
+
+\DeclareMathOperator{\RR}{\mathbf{R}}
+\DeclareMathOperator{\ZZ}{\mathbf{Z}}
+\DeclareMathOperator{\CC}{\mathbf{C}}
+\DeclareMathOperator{\AAA}{\mathbf{A}}
+\DeclareMathOperator{\Prob}{\mathbf{P}}
+\DeclareMathOperator{\Expect}{\mathbf{E}}
+
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\C}{\mathcal{C}}
+
+\DeclareMathOperator{\Config}{\mathcal{C}}
+\DeclareMathOperator{\diam}{\text{diam}}
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Document meta-data: be sure to also change the \hypersetup information
+%%
+
+\title{Cartesian Products Avoiding Patterns}
+%\subtitle{If you want a subtitle}
+
+\author{Jacob Denson}
+\previousdegree{BSc. Computing Science, University of Alberta, 2017}
+
+% What is this dissertation for?
+\degreetitle{Master of Science}
+
+\institution{The University of British Columbia}
+\campus{Vancouver}
+
+\faculty{The Faculty of Science}
+\department{Mathematics}
+\submissionmonth{April}
+\submissionyear{2019}
+
+% details of your examining committee
+\examiningcommittee{Malabika Pramanik, Mathematics}{Supervisor}
+\examiningcommittee{Joshua Zahl, Mathematics}{Supervisor}
+
+%% hyperref package provides support for embedding meta-data in .PDF
+%% files
+\hypersetup{
+  pdftitle={Change this title!  (DRAFT: \today)},
+  pdfauthor={Johnny Canuck},
+  pdfkeywords={Your keywords here}
+}
+
+%% LaTeX's \includeonly commands causes any uses of \include{} to only
+%% include files that are in the list.  This is helpful to produce
+%% subsets of your thesis (e.g., for committee members who want to see
+%% the dissertation chapter by chapter).  It also saves time by 
+%% avoiding reprocessing the entire file.
+%\includeonly{intro,conclusions}
+%\includeonly{discussion}
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+% Thesis Guidelines available at:
+% 	http://www.grad.ubc.ca/current-students/dissertation-thesis-preparation/order-components
+
+% 1. Title page (mandatory)
+\maketitle
+
+% 2. Committee page (mandatory): lists supervisory committee and if applicable, the examining committee
+\makecommitteepage
+
+% 3. Abstract (mandatory - maximum 350 words)
+\include{abstract}
+\cleardoublepage
+
+% 4. Lay Summary (Effective May 2017, mandatory - maximum 150 words)
+\include{laysummary}
+\cleardoublepage
+
+% 5. Preface
+\include{preface}
+\cleardoublepage
+
+% 6. Table of contents (mandatory - list all items in the preliminary pages
+% starting with the abstract, followed by chapter headings and
+% subheadings, bibliographies and appendices)
+\tableofcontents
+\cleardoublepage	% required by tocloft package
+
+% 7. List of tables (mandatory if thesis has tables)
+%\listoftables
+%\cleardoublepage	% required by tocloft package
+
+% 8. List of figures (mandatory if thesis has figures)
+\listoffigures
+\cleardoublepage	% required by tocloft package
+
+% 9. List of illustrations (mandatory if thesis has illustrations)
+% 10. Lists of symbols, abbreviations or other (optional)
+
+% 11. Glossary (optional)
+\input{glossary}	% always input, since other macros may rely on it
+
+\textspacing		% begin one-half or double spacing
+
+% 12. Acknowledgements (optional)
+\include{ack}
+
+% 13. Dedication (optional)
+
+% Body of Thesis (not all sections may apply)
+\mainmatter
+
+\acresetall	% reset all acronyms used so far
+
+% 1. Introduction
+\include{intro}
+
+% 2. Main body
+\include{background}
+% Generally recommended to put each chapter into a separate file
+%\include{relatedwork}
+%\include{model}
+%\include{impl}
+%\include{discussion}
+%\include{conclusions}
+
+% 3. Notes
+% 4. Footnotes
+
+% 5. Bibliography
+\begin{singlespace}
+\raggedright
+\bibliographystyle{abbrvnat}
+\bibliography{biblio}
+\end{singlespace}
+
+%\appendix
+% 6. Appendices (including copies of all required UBC Research
+% Ethics Board's Certificates of Approval)
+% \include{reb-coa}	% pdfpages is useful here
+%\include{appendix}
+
+\backmatter
+% 7. Index
+% See the makeindex package: the following page provides a quick overview
+% <http://www.image.ufl.edu/help/latex/latex_indexes.shtml>
+
+\end{document}
