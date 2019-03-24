@@ -1,0 +1,26 @@
+%% The following is a directive for TeXShop to indicate the main file
+%%!TEX root = diss.tex
+
+\chapter{Introduction}
+\label{ch:Introduction}
+
+In this thesis, we study a simple question from the perspective of geometric measure theory:
+%
+\begin{center}
+	{\it How large can Euclidean sets be not containing geometric patterns?}.
+\end{center}
+%
+The patterns manifest as certain configurations of point tuples, often affine invariant. For instance, we might like to find large subsets $X$ of $\mathbf{R}^n$ that contain no three collinear points, or do not contain all of the vertices of any isoceles triangle. Aside from purely geometric interest, these problems provide useful scenarios in which to test the methods of ergodic theory and harmonic analysis.
+
+Geometric measure theory becomes important because sets which avoid the patterns we consider are highly irregular. Any open subset of $\mathbf{R}^n$ must contain a copy of the vertices of any suitably small isoceles triangle, and the Lebesgue density theorem shows that this remains true if we consider any subset of $\mathbf{R}^n$ of positive measure. Any set avoiding any of the patterns we study in this thesis must necessarily have Lebesgue measure zero. This means we cannot use the Lebesgue measure as a measure of the `maximal size' of a set avoiding patterns. A `second-order' measure of a set's size has to be introduced, and this is satisfied by the fractional dimension of a set, first introduced by Felix Hausdorff in 1918. We rephrase our problem as determining the maximum Hausdorff dimension a set can have avoiding patterns.
+
+At the time of this writing, many fundamental questions about the relation between the geometric arrangement of a set and it's fractional dimension remain open. It might be expected that sets with sufficiently large Hausdorff dimension contain patterns, but this is not always true. For example, Theorem 6.8 of \cite{Matilla} shows that any set $X \subset \RR^d$ with Hausdorff dimension exceeding one must contain three colinear points. On the other hand, \cite{Maga} constructs a set $X \subset \RR^d$ with full Hausdorff dimension such that no four points in $X$ form the vertices of a parallelogram. On the other hand, Theorem 6.8 of \cite{Matilla} shows that any set $X \subset \RR^d$ with Hausdorff dimension exceeding one must contain three colinear points. For most geometric configurations, it remains unknown at what threshold patterns are guaranteed, or whether such a threshold exists at all. So finding sets with large Hausdorff dimension avoiding patterns is an important topic to study in the study of contemporary geometric measure theory.
+
+Thus we derive new methods for constructing sets avoiding patterns. Furthermore, rather than studying particular instances of the configuration avoidance problem, we choose to study general methods for finding large subsets of space avoiding any pattern. In particular, we expand on a number of general {\it pattern dissection methods} which have proven useful in the area, originally developed by Keleti but also studied notably by Math\'{e}, and Pramanik/Fraser.
+
+Our novel contribution to the construction is that in an arbitrary configuration problem, random choices can overcome the lack of presence of structure. We use this to expand the utility of interval dissection methods to a set of {\it fractal avoidance problems}, that previous methods were completely unavailable to address. Such problems include finding large $X$ such that the angles formed by any three distinct points of $X$ avoid a specified set $Y$ of angles, where $Y$ has a fixed Hausdorff dimension. For instance, $Y$ could be the set of all angles expressable as $q + x$ radians, where $q$ is rational, and $x$ lies in the Cantor set.
+
+\endinput
+
+Any text after an \endinput is ignored.
+You could put scraps here or things in progress.

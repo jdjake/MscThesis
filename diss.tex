@@ -37,7 +37,10 @@
 \usepackage{times,mathptmx,courier}
 \usepackage[scaled=.92]{helvet}
 
-\usepackage{amssymb, amsmath, amsfonts}
+% \usepackage{mathabx}
+\usepackage{MnSymbol}
+\usepackage{amsmath, amsfonts, accents, mdwlist}
+\usepackage{mdwlist}
 
 \usepackage{amsthm}
 \theoremstyle{plain}
@@ -71,8 +74,10 @@
 
 %% For an excellent set of examples, see Tufte's "Visual Display of
 %% Quantitative Information" or "Envisioning Information".
-\usepackage{color}
+\usepackage{color, xcolor}
 \definecolor{greytext}{gray}{0.5}
+\definecolor{crimsonred}{RGB}{132,22,23}
+\definecolor{darkblue}{RGB}{72,61,139}
 
 %% Provides citing commands such as \citeauthor{} to provide author names
 %% \citet{} to produce author-and-reference citation,
@@ -104,8 +109,10 @@
 \usepackage{longtable}	% provide tables spanning multiple pages
 \usepackage{chngpage}	% for changing the page widths on demand
 \usepackage{tabularx}   % enhanced tabular environment
-\usepackage{enumitem}   % allows pausing and resuming enumerate environments.
 \usepackage{subfig}     % include subfigures in figures.
+
+\usepackage{enumitem}   % allows pausing and resuming enumerate environments.
+\setlist[enumerate]{label*={\normalfont(\Alph*)},ref=(\Alph*)}
 
 %% ragged2e: provides several new new commands \Centering, \RaggedLeft,
 %% \RaggedRight and \justifying and new environments Center, FlushLeft,
@@ -142,9 +149,17 @@
 %%   that the ToC, LoF, LoT place the hyperlink on the page number,
 %%   rather than the entry text.
 \usepackage[bookmarks,bookmarksnumbered,%
-    allbordercolors={0.8 0.8 0.8},%
+%    allbordercolors={0.8 0.8 0.8},%
     pagebackref,linktocpage%
     ]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
 %% The following change how the the back-references text is typeset in a
 %% bibliography when `backref' or `pagebackref' are used
 %%
@@ -221,6 +236,8 @@
 \DeclareMathOperator{\RR}{\mathbf{R}}
 \DeclareMathOperator{\ZZ}{\mathbf{Z}}
 \DeclareMathOperator{\CC}{\mathbf{C}}
+\DeclareMathOperator{\QQ}{\mathbf{Q}}
+
 \DeclareMathOperator{\AAA}{\mathbf{A}}
 \DeclareMathOperator{\Prob}{\mathbf{P}}
 \DeclareMathOperator{\Expect}{\mathbf{E}}
@@ -352,12 +369,11 @@
 
 % 2. Main body
 \include{background}
-% Generally recommended to put each chapter into a separate file
-%\include{relatedwork}
-%\include{model}
-%\include{impl}
-%\include{discussion}
-%\include{conclusions}
+\include{relatedwork}
+\include{roughsets}
+\include{lowrank}
+\include{squarefree}
+\include{conclusions}
 
 % 3. Notes
 % 4. Footnotes
@@ -375,6 +391,7 @@
 % \include{reb-coa}	% pdfpages is useful here
 %\include{appendix}
 
+\nocite{*}
 \backmatter
 % 7. Index
 % See the makeindex package: the following page provides a quick overview
