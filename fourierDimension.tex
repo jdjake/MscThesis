@@ -1,0 +1,178 @@
+%% The following is a directive for TeXShop to indicate the main file
+%%!TEX root = diss.tex
+
+\chapter{Fourier Dimension and Fractal Avoidance}
+\label{ch:RoughSets}
+
+\section{Singular Value Decomposition of Tensors}
+
+An \emph{$n$ tensor} with respect to $\RR^{k_1}, \dots, \RR^{k_n}$, is a multi-linear function
+%
+\[ A: \RR^{k_1} \times \dots \times \RR^{k_n} \to \RR. \]
+%
+The family of all $n$ tensors forms a vector space, denoted $\RR^{k_1} \otimes \dots \otimes \RR^{k_n}$, or $\bigotimes \RR^{k_i}$. Given a family of vectors $v_i$, with $v_i \in \RR^{k_i}$, we can consider a tensor $v_1 \otimes \dots \otimes v_n$, such that
+%
+\[ (v_1 \otimes \dots \otimes v_n)(w_1, \dots, w_n) = (v_1 \cdot w_1) \dots (v_n \cdot w_n). \]
+%
+It is easily verified that a basis for $\RR^{k_1} \otimes \dots \otimes \RR^{k_n}$ is given by
+%
+\[ \{ e_{j_1} \otimes \dots \otimes e_{j_n} : j_i \in [k_i] \}. \]
+%
+Thus a tensor $A$ can be identified with a family of coefficients
+%
+\[ \{ A_{j_1 \dots j_n} : 1 \leq j_i \leq k_i \} \]
+%
+such that
+%
+\[ A(v_1,\dots,v_n) = \sum A_{j_1 \dots j_n} \cdot e_{j_1} \otimes \dots \otimes e_{j_n}. \]
+%
+From this perspective, a tensor is a multi-dimensional array given by $n$ indices. This basis induces a natural inner product for which the basis is orthonormal. The norm with respect to this inner product is called the \emph{Frobenius norm}, denoted $\| A \|_F$.
+
+Recall that if $A$ is a rank $r$, $m \times n$ matrix, then the \emph{singular value decomposition} says that there are orthonormal families of vectors $\{ u_1, \dots, u_r \}$ and $\{ v_1, \dots, v_r \}$ in $\RR^m$ and $\RR^n$ respectively, and values $s_1, \dots, s_r > 0$ such that $A = \sum s_i (u_i^T v_i)$. We may view $A$ as a 2 tensor in $\RR^m \otimes \RR^n$ by setting $A(v,w) = v^T A w$. Then the singular value decomposition says that $A = \sum s_i (u_i \otimes v_i)$. Thus, viewing $A$ as a bilinear function, for any vectors $x \in \RR^m$ and $y$ in $\RR^n$, $A(x,y) = \sum s_i (u_i \cdot x) (v_i \cdot y)$. We want to try and generalize this result to $n$ tensors in $\RR^{k_1} \otimes \dots \otimes \RR^{k_n}$.
+
+One can reduce certain quantities over tensors to quantities defined with respect to linear maps. For instance, for each index $i_0 \in [n]$, we can define a linear map
+%
+\[ A_i: \bigotimes_{i' \neq i} \RR^{k_{i'}} \to \RR^{k_i} \]
+%
+by letting $A_{i_0}(v_1, \dots, \widehat{v_i}, \dots, v_n)$ to be the unique vector $w \in \RR^{k_i}$ such that for any vector $v_i \in \RR^{k_i}$,
+%
+\[ v_i \cdot w = A(v_1, \dots, v_n). \]
+%
+The matrix $A_i$ is known as the \emph{$i$'th unfolding of $A$}. We define the $i$ rank of $A$ to be $\text{rank}_i(A) = \text{rank}(A_i)$. This generalizes the column and row rank of matrices. Unlike in the case of matrices, these quantities can differ for different indices $i$. One can also obtain the $i$ rank
+
+The natural definition of the rank of a tensor in the study of the higher order singular value decomposition is defined in analogy with the fact that a rank $r$ matrix can be written as the sum of $r$ rank one matrices. We say a tensor is rank one if it can be written in the form $v_1 \otimes \dots \otimes v_n$ for some vectors $v_i \in \RR^{k_i}$. The \emph{rank} of a tensor $A$, denoted $\text{rank}(A)$, is the minimal number of rank one tensors which can be written in a linear combination to form $A$. We have $\text{rank}(A_i) \leq \text{rank}(A)$ for each $i$, but there may be a gap in these ranks.
+
+To obtain an SVD decomposition, fix an index $i$. Then we can perform a singular value decomposition on $A_i$, obtaining orthonormal basis
+
+\section{Decoupling Concentration Bounds}
+
+We require some methods in non-asymptotic probability theory in order to understand the concentration structure of the random quantities we study. Most novel of these is relying on a probabilistic decoupling bound of Bourgain.
+
+In this section, we fix a single underlying probability space, assumed large enough for us to produce any additional random quantities used in this section. Given a scalar valued random variable $X$, we define its \emph{Orlicz norm} as
+%
+\[ \| X \|_{\psi_2} = \inf \left\{ \lambda \geq 0 : \EE \left(\exp \left( |X|^2/\lambda^2 \right) \right) \leq 2 \right\}. \]
+%
+The family of random variables with finite Orlicz norm forms a Banach space, known as the space of \emph{subgaussian random variables}.
+
+\begin{theorem}
+	Let $X$ be a sub-gaussian random variable.
+	%
+	\begin{itemize}
+		\item For all $t \geq 0$,
+		%
+		\[ \PP \left( |X| \geq t \right) \leq 2 \exp \left( \frac{-t^2}{\| X \|_{\psi_2}^2} \right). \]
+
+		\item Conversely, if there is a constant $K > 0$ such that for all $t \geq 0$,
+		%
+		\[ \PP \left( |X| \geq t \right) \leq 2 \exp \left( \frac{-t^2}{K^2} \right), \]
+		%
+		then $\| X \|_{\psi_2} \leq 2K$.
+
+		\item For any bounded random variable $X$, $\| X \|_{\psi_2} \lesssim \| X \|_\infty$.
+
+		\item $\| X - \EE X \|_{\psi_2} \lesssim \| X \|$.
+
+		\item If $X_1, \dots, X_n$ are independent, then
+		%
+		\[ \| X_1 + \dots + X_n \|_{\psi_2} \lesssim \left( \| X_1 \|_{\psi_2}^2 + \dots + \| X_n \|_{\psi_2}^2 \right)^{1/2}. \] 
+	\end{itemize}
+\end{theorem}
+\begin{proof} See \cite{Vershynin}. \end{proof}
+
+Given a random vector $X$, taking values in $\RR^n$, we say it is \emph{uniformly subgaussian} if there is a constant $A$ such that for any $x \in \RR^n$, $\| X \cdot x \|_{\psi_2} \leq A \cdot |x|$. We define
+%
+\[ \| X \|_{\psi_2} = \sup_{|x| = 1} \| X \cdot x \|_{\psi_2}, \]
+%
+so that $\| X \cdot x \|_{\psi_2} \leq \| X \|_{\psi_2} \cdot |x|$ for any random vector $X$.
+
+The classic Hanson-Wright inequality gives a concentration bound for the magnitude of a quadratic form $X^T A X$ in terms of the matrix norms of $A$, assuming $X$ is a random vector with independant, mean zero, subgaussian coordinates.
+
+\begin{theorem}[Hanson-Wright]
+	Let $X = (X_1, \dots, X_k)$ be a random vector with independant, mean zero, subgaussian coordinates, with $\| X_i \|_{\psi_2} \leq K$ for each $i$, and let $A$ be a diagonal-free $k \times k$ matrix. Then there is a universal constant $c$ such that for every $t \geq 0$,
+	%
+	\[ \PP \left( |X^TAX| \geq t \right) \leq 2 \exp \left( -c \cdot \min \left( \frac{t^2}{K^4 \| A \|_F^2}, \frac{t}{K^2 \| A \|} \right) \right). \]
+	%
+	Here $\| A \|$ is the operator norm of $A$, and $\| A \|_F$ it's Frobenius norm.
+\end{theorem}
+
+In our work, we require a modified version of the Hanson Wright inequality where we replace the independant random variables $X_1, \dots, X_k$ with independant random vectors taking values in $\RR^d$, and where $A$ is replaced with a $n$ tensor on $\RR^{k \times d}$. To make things more tractable, we assume that $A_I = 0$ for each multi-index $I = ((i_1,j_1), \dots, (i_n,j_n))$ if there is $r \neq r'$ with $i_r = i_{r'}$. If this is satisfied, we say $A$ is a \emph{non-diagonal tensor}.
+
+\begin{theorem}
+	Let $X = (X_1, \dots, X_k)$, where $X_1, \dots, X_k$ are independant, mean zero random vectors taking values in $\RR^d$, with $\| X_i \|_{\psi_2} \leq K$ for each $i$. Let $A$ be a non-diagonal $n$-tensor in $\RR^{k \times d}$. Then for $t \geq 0$,
+	%
+	\[ \PP \left( |A(X,\dots,X)| \geq t \right) \leq 2 \cdot \exp \left( - c(n) \cdot \min \left( \frac{t^2}{K^4 \| A \|_F^2}, \dots, \frac{t^{2/n}}{K^{4/n} \| A \|_F^{2/n}} \right) \right). \]
+\end{theorem}
+
+The main technique involved is a statistical decoupling result due to J. Bourgain and L. Tzafriri. We follow the proof of the Hanson-Wright inequality from \cite{Vershynin}, altering various calculations to incorporate the vector-valued coordinates $X_1, \dots, X_n$, and incorporating more robust calculations of the moments of higher order Gaussian chaos.
+
+\begin{lemma}[Decoupling]
+	If $F: \RR \to \RR$ is convex, and $X = (X_1, \dots, X_k)$, where $X_1, \dots, X_k$ are independant, mean zero random vectors taking values in $\RR^d$. If $A$ is a non-diagonal $n$-tensor in $\RR^{d \times k}$, then
+	%
+	\[ \EE(F(A(X,\dots,X))) \leq \EE(F(n^n \cdot A(X^1,X^2,\dots,X^n))), \]
+	%
+	where $X^1, \dots, X^n$ are independant copies of $X$.
+\end{lemma}
+\begin{proof}
+	Given a set $I \subset [k]$, let $\pi_I: \RR^{k \times d} \to \RR^{k \times d}$ be defined by
+	%
+	\[ \pi_{I}(X)_{ij} = \begin{cases} X_{ij} &: \text{if}\ i \in I, \\ 0 &: \text{if}\ i \not \in I \end{cases}. \]
+	%
+	Thus given $X = (X_1, \dots, X_k)$, the vector $\pi_I(X)$ is obtained by zeroeing out all vectors $X_i$ with $i \not \in I$. Consider a random partition of $[k]$ into $n$ classes $I_1, \dots, I_n$, chosen uniformly at random. Thus given any $x \in \RR^{d \times k}$, we have
+	%
+	\[ \EE(A(\pi_{I_1}(x),\dots,\pi_{I_n}(x))) = \sum_{I=((i_1,j_1),\dots,(i_n,j_n))} A_I \cdot x_{i_1 j_1} \dots x_{i_n j_n} \PP(i_1 \in I_1, \dots, i_n \in I_n). \]
+	%
+	If $A_I \neq 0$, the indices $\{ i_r \}$ are distinct from one another. Since $(I_1,\dots,I_n)$ is selected uniformly at random, this means the positions of the indices $i_r$ are independent of one another. Thus
+	%
+	\[ \PP(i_1 \in I_1, \dots, i_n \in I_n) = \PP(i_1 \in I_1) \dots \PP(i_n \in I_n) = 1/n^n. \]
+	%
+	Thus we have shown
+	%
+	\[ A(x,\dots,x) = n^n \cdot \EE(A(\pi_{I_1}(x), \dots, \pi_{I_n}(x))). \]
+	%
+	In particular, substituting $X$ for $x$, we have
+	%
+	\[ A(X,\dots,X) = n^n \cdot \EE_I(A(\pi_{I_1}(X), \dots, \pi_{I_n}(X))) \]
+	%
+	Applying Jensen's inequality, we find
+	%
+	\begin{align*}
+		\EE_X(F(A(X,\dots,X))) &= \EE_X(F(n^n \cdot \EE_I(A(\pi_{I_1}(X), \dots, \pi_{I_n}(X)))))\\
+		&\leq \EE_X \EE_I F(n^n \cdot A(\pi_{I_1}(X), \dots, \pi_{I_n}(X)))\\
+		&= \EE_I \EE_X F(n^n \cdot A(\pi_{I_1}(X), \dots, \pi_{I_n}(X))).
+	\end{align*}
+	%
+	Thus we may select a \emph{deterministic} partition $I$ for which
+	%
+	\[ \EE(F(A(X,\dots,X))) \leq \EE(F(n^n \cdot A(\pi_{I_1}(X),\dots,\pi_{I_n}(X)))). \]
+	%
+	Since the classes $I_1, \dots, I_n$ are disjoint from one another, $(\pi_{I_1}(X), \dots, \pi_{I_n}(X))$ is identically distributed to $(\pi_{I_1}(X^1), \dots, \pi_{I_n}(X^n))$, so
+	%
+	\[ \EE(F(n^n \cdot A(\pi_{I_1}(X),\dots,\pi_{I_n}(X)))) = \EE(F(n^n \cdot A(\pi_{I_1}(X^1),\dots,\pi_{I_n}(X^n)))). \]
+	%
+	Let $Z = A(X^1,\dots,X^n) - A(\pi_{I_1}(X^1),\dots,\pi_{I_n}(X^n))$. If $\EE'$ denotes conditioning with respect to $\pi_{I_1}(X^1), \dots, \pi_{I_n}(X^n)$, then this expectation fixes $A(\pi_{I_1}(X_1),\dots,\pi_{I_n}(X_n))$, but $\EE'(Z) = 0$. Thus we can apply Jensen's inequality again to conclude
+	%
+	\begin{align*}
+		\EE(F(n^n \cdot A(\pi_{I_1}(X^1),\dots,\pi_{I_n}(X^n)))) &= \EE(F(n^n \cdot \EE'(A(\pi_{I_1}(X^1), \dots, \pi_{I_n}(X^n)) + Z)))\\
+		&= \EE(F(n^n \cdot \EE'(A(X^1,\dots,X^n))))\\
+		&\leq \EE(\EE'(F(n^n A(X^1,\dots,X^n))))\\
+		&= \EE(F(n^n A(X^1,\dots,X^n))). \qedhere
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	Note this theorem also implies that for each $\lambda \in \RR$,
+	%
+	\[ \EE(F((\lambda/n^n) \cdot A(X,\dots,X))) \leq \EE(F(\lambda \cdot A(X^1,\dots,X^n))). \]
+\end{remark}
+
+\begin{lemma}[Comparison]
+	Let $X^1,\dots,X^n$ be independant random vectors taking values in $\RR^{k \times d}$
+\end{lemma}
+
+To make things easy for ourselves, we assume that $A$ vanishes along it's diagonal. Reinterpreting the quantities in the Hanson-Wright inequality in this setting gives the result. For each $i$ and $j$, we define $A_{ij}$ be an $d \times d$ matrix, then we set $X^T A X = \sum X_i^T A_{ij} X_j$,
+%
+\[ \| A \|_F = \sqrt{\sum \| A_{ij} \|_F^2}, \quad\text{and}\quad \| A \| = \sup \left\{ |\sum x_i^T A_{ij} y_j| : \sum |x_i|^2 = \sum |y_j|^2 = 1 \right\}. \]
+%
+These are precisely the definitions of the operator norm and Frobenius norm if we interpret $A$ as a $dn \times dn$ matrix by expanding out the entries of each $A_{ij}$, and $X$ as a random vector taking values in $\RR^{dn}$ by expanding out the entries of each $X_i$.
+
+\endinput
