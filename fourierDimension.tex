@@ -4,6 +4,91 @@
 \chapter{Fourier Dimension and Fractal Avoidance}
 \label{ch:RoughSets}
 
+
+In the last few chapters, we have discovered that the presence of many configurations is not guaranteed by large Hausdorff dimension. We now turn to an analysis of a different dimensional quantity which in many cases gives much more structure than Hausdorff dimension. 
+
+in many problems involving arithmetic structure,
+
+
+
+
+\section{Schmerkin's Method}
+
+
+
+
+
+
+\section{Tail Bounds on Cube Selection}
+
+The aim of this section is to obtain tail bounds on the total number of intersections between the random set we select in the discrete selection schema, with the goal of obtaining a Fourier dimension bound on the set we construct. Consider the random process generating our interval selection scheme. We have three fixed lengths $l$, $r$, and $s$. We start with a set $E$, which is a non-empty union of cubes in $\B^d_l$, and a set $G$, which is a union of cubes in $\B^{dn}_s$. For each cube $J \in \B^d_r(E)$, we select a single random element of $\B^d_s(J)$, denoted $J_I$. We let $U = \bigcup J_I$. The aim of this section is to obtain tail bounds on the size of the random set
+%
+\[ \mathcal{K}(U) = \{ K \in \B^{dn}_s(G): K \in U^n, K\ \text{strongly non-diagonal} \}. \]
+%
+Here, this is obtained by applying the statistical decoupling techniques of Bourgain and Tzafriri.
+
+To understand the distribution of this random variable, it will be convenient to simplify notation. We write the random variable $\mathbf{I}(I_J = I_0)$ as $X_{J,I_0}$. We then set
+%
+\[ Z = \# \mathcal{K}(U) = \sum_{J_1, \dots, J_n} \sum_K X_{J_i,K_i}, \]
+%
+where $J_1, \dots, J_n$ ranges over all distinct choices of $n$ elements from $\B^d_l(E)$, and $K = K_1 \times \dots \times K_n$ ranges over all elements of $\B^{dn}_l(G) \cap \B^{dn}_s(J_1 \times \dots \times J_n)$. The random cubes $\{ I_J \}$ form an independant family, which should make the distribution easier to bound. But $Z$ is a multiplicative linear combination of this independant family. Random variables of this form as known as a \emph{chaos}.
+
+The idea behind statistical decoupling is to obtain tail bounds on the chaos $Z$ by studying the tail bounds on the modified random variable
+%
+\[ W = \sum_{J_1, \dots, J_n} \sum_K \left( \prod_{i = 1}^n X_{J_i,K_i}^i \right), \]
+%
+where $X^1, \dots, X^n$ are independant and identically distributed copies of $X$.
+
+\begin{lemma} \label{decouplinglemma}
+	Let $F: [0,\infty) \to [0,\infty)$ be a monotone, convex function. Then
+	%
+	\[ \EE(F(Z)) \leq \EE(F(n^n W)). \]
+\end{lemma}
+\begin{proof}
+	Consider a partition $\mathcal{J}_1, \dots, \mathcal{J}_n$ selected at random from all possible partitions of $\B^d_s(E)$ into $n$ classes. Then, for any distinct set of intervals $J_1, \dots, J_n \in \B^d_s(E)$,
+	%
+	\begin{equation} \label{partitionprob}
+		\PP(J_1 \in \mathcal{J}_1, \dots, J_n \in \mathcal{J}_n) = \PP(J_1 \in \mathcal{J}_1) \dots \PP(J_n \in \mathcal{J}_n) = 1/n^n.
+	\end{equation}
+	%
+	Thus if we consider
+	%
+	\[ Z' = \sum_{J_1 \in \mathcal{J}_1, \dots, J_n \in \mathcal{J}_n} \sum_K \left( \prod_{i = 1}^n X_{J_i,K_i} \right), \]
+	%
+	where $J_i$ ranges over elements of $\mathcal{J}_i$ for each $i \in [n]$. If we let $\EE_{\mathcal{J}}$ denote conditioning with respect to all random variables except those depending on $\mathcal{J}_1, \dots, \mathcal{J}_n$, then \eqref{partitionprob} implies
+	%
+	\begin{align*}
+		\EE_{\mathcal{J}}(Z') &= \sum_{J_1, \dots, J_n} \sum_K \PP(J_1 \in \mathcal{J}_1, \dots, J_n \in \mathcal{J}_n) \left( \prod_{i = 1}^n X_{J_i,K_i} \right) = Z/n^n.
+	\end{align*}
+	%
+	Thus Jensen's inequality implies that
+	%
+	\[ F(Z) = F(n^n \EE_{\mathcal{J}}(Z')) \leq \EE_{\mathcal{J}} F(n^n Z'). \]
+	%
+	In particular, this means we can select a single, non-random partition $\mathcal{J}_1, \dots, \mathcal{J}_n$ of $\B^d_s(E)$ such that $F(Z) \leq F(n^n Z')$. Because $\mathcal{J}_1, \dots, \mathcal{J}_n$ are disjoint sets, $Z'$ is identically distributed to
+	%
+	\[ W' = \sum_{J_1 \in \mathcal{J}_1, \dots, J_n \in \mathcal{J}_n} \sum_K \left( \prod_{i = 1}^n X_{J_i,K_i}^i \right). \]
+	%
+	But $W' \leq W$, and so by monotonicity,
+	%
+	\[ \EE(F(Z)) \leq \EE(F(n^n W')) \leq \EE(F(n^n W)). \qedhere \]
+\end{proof}
+
+\begin{lemma}
+	MOMENT BOUND THEOREM.
+\end{lemma}
+\begin{proof}
+	We now bound the moments of $W$, which by Lemma \ref{decouplinglemma} bounds the moments of $Z$. We write
+	%
+	\[ W^m = \sum_{J_{j,i}} \sum_{K_1, \dots, K_m} \left( \prod_{i = 1}^n \prod_{j = 1}^m X_{J_{j,i}, K_{j,i}}^i \right). \]
+	%
+	Thus
+	%
+	\[ \EE(W^m) = \sum_{J_{j,i}} \sum_{K_1, \dots, K_m} \prod_{i = 1}^n \EE \left( \prod_{j = 1}^m X_{J_{j,i}, K_{j,i}}^i \right) \]
+	%
+	For any collection of cubes $K_1, \dots, K_m$, how many distinct parent cubes do they generate? At most $nm$, but as few as $n$. But how many are as few as $n$?
+\end{proof}
+
 \section{Singular Value Decomposition of Tensors}
 
 An \emph{$n$ tensor} with respect to $\RR^{k_1}, \dots, \RR^{k_n}$, is a multi-linear function

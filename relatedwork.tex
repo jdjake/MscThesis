@@ -4,258 +4,78 @@
 \chapter{Related Work}
 \label{ch:RelatedWork}
 
-We now describe various approaches to configuration avoidance problems, both in the discrete and non discrete regimes, which inspired our methods.
-
-\section{Rusza: Difference Sets Without Squares}
-
-In this section, we describe the work of Ruzsa on the discrete squarefree difference problem, which provides inspiration for our speculated results for the squarefree subset problem in the continuous setting. If $X$ and $Y$ are subsets of integers, we shall let $X \pm Y = \{ x \pm y: x \in X, y \in Y, x \pm y > 0 \}$ denote the sums and difference of the set. The {\it differences} of a set $X$ are elements of $X - X$, and so the squarefree difference set problem asks to consider how large a subset of the integers can be, whose differences do not contain the square of any positive integer. We let $D(N)$ denote the maximum number of integers which can be selected from $[1,N]$ whose differences do not contain a square.
-
-\begin{example}
-    The set $X = \{ 1, 3, 6, 8 \}$ is squarefree, because $X - X = \{ 2, 3, 5, 7 \}$, and none of these elements are perfect squares. On the other hand, $\{ 1, 3, 5 \}$ is not a squarefree subset, because $5 - 1 = 4$ is a perfect square.
-\end{example}
-
-There are a few tricks to constructing large subsets of integers avoiding squares. If $p$ is prime, then $p \mathbf{Z} \cap [1,p^2)$ avoids squares, because the difference of two numbers must be divisible by $p$, but not by $p^2$. If $N = p^2$, this gives a set with $N^{1/2}$ elements. However, we can do just as well without using any properties of the set of squares except for their sparsity, by greedily applying a sieve. We start by writing out a large list of integers $1,2,3,4,\dots,N$. Then, while we still have numbers to pick, we greedily select the smallest number $x_*$ we haven't crossed out of the list, add it to our set $X$ of squarefree numbers, and then cross out all integers $y$ such that $y - x_*$ is a positive square. Thus we cross out $x_*$, $x_* + 1$, $x_* + 4$, and so on, all the way up to $x_* + m^2$, where $m$ is the largest integer with $x_* + m^2 \leq N$. This implies $m \leq \sqrt{N - x_*} \leq \sqrt{N-1}$, hence we cross out at most $\sqrt{N-1} + 1$ integers whenever with add a new element $x_*$ to $X$. When the algorithm terminates, all integers must be crossed out, and if the algorithm runs $n$ iterations, a union bound gives that we cross out at most $n[\sqrt{N-1} + 1]$ integers, hence $n[\sqrt{N-1} + 1] \geq N$. It follows that the set $X$ we end up with contains $\Omega(N^{1/2})$ elements. What's more, this algorithm generates an increasing family of squarefree subsets of the integers as $n$ increases, so we may take the union of these subsets over all $N$ to find an infinite squarefree subset $X$ with $|X \cap [1,N]| = \Omega(\sqrt{N})$ for all $N$.
-
-In 1978, S\'{a}rk\"{o}zy proved an upper bound on the size of squarefree subsets of the integers, showing $D(N) = O(N (\log N)^{-1/3 + \varepsilon})$ for every $\varepsilon > 0$. In particular, this proves a conjecture of Lov\'{a}sz that every infinite squarefree subset has density zero, because if $X$ is any infinite squarefree subset, then $|X \cap [1,N]| = o(N)$. S\'{a}rk\"{o}zy even conjectured that $D(N) = O(N^{1/2 + \varepsilon})$ for all $\varepsilon > 0$. Thus the sieve technique is essentially optimal, an incredibly pessimistic point of view, since the Sieve method doesn't depend on any properties of the set of perfect squares. Ruzsa's results shows we should be more optimistic, taking advantage of the digit expansion of numbers to obtain infinite squarefree subsets $X$ with $|X \cap [1,N]| = \Omega(N^{0.73})$. The method reduces the problem to a finitary problem of maximizing squarefree subsets modulo a squarefree integer $m$.
-
-\begin{theorem}
-    If $m$ is a squarefree integer, then
-    %
-    \[ D(N) \geq \frac{n^{\gamma_m}}{m} = \Omega_m(n^{\gamma_m}) \]
-    %
-    where
-    %
-    \[ \gamma_m = \frac{1}{2} + \frac{\log_m |R^*|}{m} \]
-    %
-    and $R^*$ denotes the maximal subset of $[1,m]$ whose differences contain no squares modulo $m$. Setting $m = 65$ gives
-    %
-    \[ \gamma_m = \frac{1}{2} \left( 1 + \frac{\log 7}{\log 65} \right) = 0.733077 \dots \]
-    %
-    and therefore $D(N) = \Omega(n^{0.7})$. For $m = 2$, we find $D(N) \geq \sqrt{N}/2$, which is only slightly worse than the sieve result.
-\end{theorem}
-
-\begin{remark}
-    Let us look at the analysis of the sieve method backwards. Rather than fixing $N$ and trying to find optimal solutions of $[1,N]$, let's fix a particular strategy (to start with, the sieve strategy), and think of varying $N$ and seeing how the size of the solution given by the strategy on $[1,N]$ increases over time. In our analysis, the size of a solution is directly related to the number of iterations the stategy can produce before it runs out of integers to add to a solution set. Because we apply a union bound in our analysis, the cost of each particular new iteration is the same as the cost of the other iterations. If the cost of each iteration was independant of $N$, we could increase the solution size by increasing $N$ by a fixed constant, leading to family of solutions which increases on the order of $N$. However, as we increase $N$, the cost of each iteration increases on the order of $\sqrt{N}$, leading to us only being able to perform $N/\sqrt{N} = \sqrt{N}$ iterations for a fixed $N$. Rusza's method applies the properties of the perfect squares to perform a similar method of expansion. At an exponential cost, Rusza's method increases the solution size exponentially. The advantage of exponentials is that, since Rusza's is based on a particular parameter, a squarefree integer $m$, we can vary $m$ to improve the iteration numbers more naturally.
-\end{remark}
-
-The idea of Rusza's construction is to break the problem into exponentially large intervals, upon which we can solve the problem modulo an integer. More enerally, Rusza constructs a set whose differences are free of $d$'th powers.
-
-\begin{theorem}
-    Let $R \subset [1,m]$ be a subset of integers such that no difference is a power of $d$ modulo $m$, where $m$ is a {\it squarefree integer}. Construct the set
-    %
-    \[ A = \left\{ \sum_{k = 0}^n r_k m^k : 0 \leq n < \infty, r_k \in \left. \begin{cases} R & d\ \text{divides}\ N\\ [1,m] & \text{otherwise} \end{cases} \right\} \right\} \]
-    %
-    Then $A$ is squarefree.
-\end{theorem}
-\begin{proof}
-    Suppose that we can write $\sum (r_k - r_k') m^k = N^d$. Let $s$ to be the smallest index with $r_s \neq r_s'$. Then $(r_s - r_s') m^s + M m^{s+1} = N^d$ where $M$ is some positive integer. If $s = ds_0$, then $(N/m^{s_0})^d = (r_s - r_s') + M m$, and this contradicts the fact that $r_s - r_s'$ cannot be a $d$'th power modulo $m$. On the other hand, we know $m^s$ divides $N^d$, but $m^{s+1}$ does not. This is impossible if $s$ is not divisible by $d$, because primes in $N^d$ occur in multiples of $d$, and $m$ is squarefree.
-\end{proof}
-
-For any $n$, we find
-%
-\[ A \cap [1,m^n - 1] = \left\{ \sum_{k = 0}^{n-1} r_km^k : r_k \in [1,m], r_k \in R\ \text{when $d$ divides $k$} \right\} \]
-%
-which therefore has cardinality
-%
-\begin{align*}
-    |R|^{1 + \lfloor \frac{n-1}{d} \rfloor} m^{n-1- \lfloor \frac{n-1}{d} \rfloor} = m^n \left( \frac{|R|}{m} \right)^{1 + \lfloor \frac{n-1}{d} \rfloor} \geq m^n \left( \frac{|R|}{m} \right)^{n/d} = m^{n \gamma(m,d)}
-\end{align*}
-%
-where $\gamma(m,d) = 1 - 1/d + \log_m |R|/d$. Therefore, for $m^{n+1} - 1 \geq k \geq m^n - 1$
-%
-\[ A \cap [1,k] \geq A \cap [1,m^n] \geq m^{n \gamma(m,d)} = \frac{m^{(n+1) \gamma(m,d)}}{m} \geq \frac{k^{\gamma(m,d)}}{m} \]
-%
-This completes Rusza's construction. Thus we have proved a more general result than was required.
-
-\begin{theorem}
-    For every $d$ and squarefree integer $m$, we can construct a set $X$ whose differences contain no $d$th powers and
-    %
-    \[ |X \cap [1,n]| \geq \frac{n^{\gamma(d,m)}}{m} = \Omega(n^{\gamma(d,m)}) \]
-    %
-    where $\gamma(d,m) = 1 - 1/d + \log_m |R^*|/d$, and $R^*$ is the largest subset of $[1,m]$ containing no $d$'th powers modulo $m$.
-\end{theorem}
-
-For $m = 65$, the group $\mathbf{Z}_{65}^* \cong \mathbf{Z}_{5}^* \times \mathbf{Z}_{13}^*$ has a set of squarefree residues of the form $\{ (0,0), (0,2), (1,8), (2,1), (2,3), (3,9), (4,7) \}$, which gives the required value for $\gamma_{65}$. In 2016, Mikhail Gabdullin proved that if $m$ is squarefree, then in $\mathbf{Z}_m$, any set $R$ such that $R - R$ is squarefree has $|R| \leq me^{-c \log m / \log \log m}$, where $n$ denotes the number of odd prime divisors of $m$, so that
-%
-\[ \gamma(d,m) \leq 1 - 1/d + \frac{\log(me^{-c \log m / \log \log m})}{m} \]
-%
-Rusza believes that we cannot choose $m$ to construct squarefree subsets of the integers growing better than $\Omega(n^{3/4})$, and he claims to have proved this assuming $m$ is squarefree and consists only of primes congruent to 1 modulo 4. Looking at some sophisticated papers in number theory (Though I forgot to write down the particular references), it seems that using modern estimates this is quite easy to prove. Thus expanding on Rusza's result in the discrete case requires a new strategy, or perhaps Rusza's result is the best possible.
-
-Let $D(N,d)$ denote the largest subset of $[1,N]$ containing no $d$th powers of positive integer. The last part of Rusza's paper is devoted to lower bounding the polynomial growth of $D(N,d)$ asymptotically.
-
-\begin{theorem}
-    If $p$ is the least prime congruent to one modulo $2d$, then
-    %
-    \[ \limsup_{N \to \infty} \frac{\log D(N,d)}{\log N} \geq 1 - \frac{1}{d} + \frac{\log_p d}{d} \]
-\end{theorem}
-\begin{proof}
-    The set $X$ we constructed in the last theorem shows that for any $m$,
-    %
-    \[ \frac{\log D(N,d)}{\log n} \geq \gamma(d,m) - \frac{\log m}{\log n} = 1 - \frac{1}{d} + \frac{\log_m |R^*|}{d} - \frac{\log m}{\log n} \]
-    %
-    Hence
-    %
-    \[ \limsup_{N \to \infty} \frac{\log D(N,d)}{\log n} \geq 1 - \frac{1}{d} + \frac{\log_m |R^*|}{d} \]
-    %
-    The claim is then completed by the following lemma.
-\end{proof}
-
-\begin{lemma}
-    If $p$ is a prime congruent to $1$ modulo $2d$, then we can construct a set $R \subset [1,p]$ whose differences do not contain a $d$th power modulo $p$ with $|R| \geq d$.
-\end{lemma}
-\begin{proof}
-    Let $Q \subset [1,p]$ be the set of powers $1^k, 2^k, \dots, p^k$ modulo $p$. We have
-    %
-    \[ |Q| = \frac{p-1}{k} + 1 \]
-    %
-    This follows because the nonzero elements of $Q$ are the images of the group homomorphism $x \mapsto x^k$ from $\mathbf{Z}_p^*$ to itself. Since $\mathbf{Z}_p^*$ is cyclic, the equation $x^k = 1$ has the same number of solutions as the equation $kx = 0$ modulo $p-1$, and since $p \equiv 1$ modulo $2k$, there are exactly $k$ solutions to this equation. The sieve method yields a $k$th power modulo $p$ free subset of size greater than or equal to
-    %
-    \[ p/q = \frac{p}{1 + \frac{p-1}{k}} = \frac{pk}{p + k - 1} \to k \]
-    %
-    as $p \to \infty$, which is greater than $k-1$ for large enough $p$. This shows the theorem is essentially trivial for large primes. However, for smaller primes a more robust analysis is required. We shall construct a sequence $b_1, \dots, b_k \in \mathbf{Z}_p$ such that $b_i - b_j \not \in Q$ for any $i,j$ and $|B_j + Q| \leq 1 + j(q-1)$. Given $b_1, \dots, b_j$, let $b_{j+1}$ be any element of $(B_j + Q + Q) - (B_j + Q)$. Since $b_{j+1} \not \in B_j + Q$, $b_{j+1} - b_i \not \in Q$ for any $i$. Since $b_{j+1} \in B_j + Q + Q$, the sets $B_j + Q$ and $b_{j+1} + Q$ are not disjoint (we have used $Q = -Q$, which is implied when $p \equiv 1$ mod $2k$), and so
-    %
-    \begin{align*}
-        |B_{j+1} + Q| &= |(B_j + Q) \cup (b_{j+1} + Q)|\\
-        &\leq |B_j + Q| + |b_{j+1} + Q| - 1\\
-        &\leq 1 + j(q-1) + q - 1\\
-        &= 1 + (j+1)(q-1)
-    \end{align*}
-    %
-    This procedure ends when $B_j + Q + Q = B_j + Q$, and this can only happen if $B_j + Q = \mathbf{Z}_p$, because we can obtain all integers by adding elements of $Q$ recursively, so $1 + j(q-1) \geq p$, and thus $j \geq k$.
-\end{proof}
-
-\begin{corollary}
-    In the special case of avoiding squarefree numbers, we find 
-    \[ \limsup \frac{\log D(N)}{\log N} \geq \frac{1}{2} + \frac{\log_5 2}{2} = 0.71533\dots \]
-    %
-    which is only slightly worse than the bound we obtain with $m = 65$.
-\end{corollary}
-
-Rusza's leaves the ultimate question of whether one can calculate
-%
-\[ \alpha = \lim_{N \to \infty} \log D(N) / \log N \]
-%
-or even whether it exists at all. The consequence of this would essentially solve the squarefree integers problem, since it gives the exact growth of $D(N)$ in terms of a monomial. Because of how conclusive this problem is, we should not expect to find a nontrivial way to calculate this constant.
-
-
-
-
-
-
-
-
-
 \section{Keleti: A Translate Avoiding Set}
 
-Keleti's two page paper constructs a full dimensional subset $X$ of $[0,1]$ such that $X$ intersects $t + X$ in at most one place for each nonzero real number $t$. Malabika has adapted this technique to construct high dimensional subsets avoiding nontrivial solutions to differentiable functions. In this section, and in the sequel, we shall find it is most convenient to avoid certain configurations by expressing them in terms of an equation, whose properties we can then exploit. One feature of translation avoidance is that the problem is specified in terms of a linear equation.
+Keleti's two page paper constructs a full dimensional subset $X$ of $[0,1]$ such that $X$ intersects $t + X$ in at most one place for each nonzero real number $t$. If this is true, we say that $X$ \emph{avoids translates}. Malabika has adapted this technique to construct high dimensional subsets avoiding nontrivial solutions to differentiable functions. In this section, and in the sequel, we shall find it is most convenient to avoid certain configurations by expressing them in terms of an equation, whose properties we can then exploit. One feature of translation avoidance is that the problem is specified in terms of a linear equation.
 
 \begin{lemma}
-    A set $X$ avoids translates if and only if there do not exists values $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = x_4 - x_3$.
+    Let $X$ be a set. Then $X$ avoids translates if and only if there do not exists values $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = x_4 - x_3$.
 \end{lemma}
 \begin{proof}
 
-    Suppose $t + X \cap X$ contains two points $a < b$. Without loss of generality, we may assume that $t > 0$. If $a \leq b - t$, then the equation $a - (a - t) = t = b - (b - t)$ satisfies the constraints, since $a - t < a \leq b - t < b$ are all elements of $X$. We also have $(b - t) - (a - t) = b - a$ which satisfies the constraints if $a - t < b - t \leq a < b$. This covers all possible cases. Conversely, if there are $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = t = x_4 - x_3$, then $X + t$ contains $x_2 = x_1 + (x_2 - x_1)$ and $x_4 = x_3 + (x_4 - x_3)$.
+    Suppose $(t + X) \cap X$ contains two points $a < b$. Without loss of generality, we may assume that $t > 0$. If $a \leq b - t$, then the equation
+    %
+    \[ a - (a - t) = t = b - (b - t) \]
+    %
+    satisfies the constraints, since $a - t < a \leq b - t < b$ are all elements of $X$. We also have
+    %
+    \[ (b - t) - (a - t) = b - a, \]
+    %
+    which satisfies the constraints if $a - t < b - t \leq a < b$. This covers all possible cases. Conversely, if there are $x_1 < x_2 \leq x_3 < x_4$ in $X$ with
+    %
+    \[ x_2 - x_1 = t = x_4 - x_3, \]
+    %
+    then $X + t$ contains $x_2 = x_1 + (x_2 - x_1)$ and $x_4 = x_3 + (x_4 - x_3)$.
 \end{proof}
 
 %\footnote{We always assume $L_n/L_{n+1}$ is an integer so that intervals in $\mathcal{B}(L_n)$ are either almost disjoint from intervals in $\mathcal{B}(L_{n+1})$ or contained completely within such an interval}
 
-The basic, but fundamental idea to Keleti's technique is to introduce memory into Cantor set constructions. Keleti constructs a nested family of discrete sets $X_0 \supset X_1 \supset \dots$ converging to $X$, with each $X_N$ a union of disjoint intervals in $\mathcal{B}(L_N)$, for a decreasing sequence of lengths $L_N$ converging to zero, to be chosen later, but with $10 L_{N+1} \mid L_N$. We initialize $X_0 = [0,1]$, and $L_0 = 1$. Furthermore, we consider a queue of intervals, initially just containining $[0,1]$. To construct $X_1, X_2, \dots$, Keleti iteratively performs the following procedure:
+The basic, but fundamental idea to Keleti's technique is to introduce memory into Cantor set constructions. Keleti constructs a nested family of discrete sets $X_0 \supset X_1 \supset \dots$ converging to $X$, with each $X_k$ a union of disjoint intervals in $\mathcal{B}(l_k, \RR^d)$, for a decreasing sequence of lengths $\{ l_k \}$ converging to zero, to be chosen later, but with $10 l_{k+1} \mid l_k$. We initialize $X_0 = [0,1]$, and $l_0 = 1$. Furthermore, we consider a queue of intervals, initially just containining $[0,1]$. To construct the sequence $\{ X_k \}$, Keleti iteratively performs the following procedure:
 %
 \begin{algorithm}
     \begin{algorithmic}%[1]
         \caption{Construction of the Sets $X_N$}
-        \State{Set $N = 0$}
+        \State{Set $k = 0$}
         \MRepeat
             \State{Take off an interval $I$ from the front of the queue}
 
-            \MForAll{\ $J \in \mathcal{B}(L_N)$ contained in $X_N$:}
-                \State{Order the intervals in $\mathcal{B}(L_{N+1})$ contained in $J$ as $J_0, J_1, \dots, J_M$}
+            \MForAll{\ $J \in \B(l_k, \RR^d)$ contained in $X_k$:}
+                \State{Order the intervals in $\B(l_{k+1}, \RR^d)$ contained in $J$ as $J_0, J_1, \dots, J_N$}
 
-                \State{{\bf If} $J \subset I$, add all intervals $J_i$ to $X_{N+1}$ with $i \equiv 0$ modulo 10}
+                \State{{\bf If} $J \subset I$, add all intervals $J_i$ to $X_{k+1}$ with $i \equiv 0$ modulo 10}
                 \State{{\bf Else} add all $J_i$ with $i \equiv 5$ modulo 10}
             \EndForAll
-            \State{Add all intervals in $\mathcal{B}(L_{N+1})$ to the end of the queue}
-            \State{Increase $N$ by 1}
+            \State{Add all intervals in $\mathcal{B}(l_{k+1})$ to the end of the queue}
+            \State{Increase $k$ by 1}
         \EndRepeat   
     \end{algorithmic}
 \end{algorithm}
 
-After each iteration of the algorithm, we obtain a new set $X_{N+1}$, and so leaving the algorithm to repeat infinitely produces a sequence of sets $X_1, X_2, \dots$ converging to a set $X$. We claim that with the appropriate choice of parameters, $X$ is a translate avoiding set.
-
-If $X$ is not translate avoiding, there is $x_1 < x_2 \leq x_3 < x_4$ with $x_2 - x_1 = x_4 - x_3$. Since $L_N \to 0$, there is $N$ such that $x_1$ is contained in an interval $I \in \mathcal{B}(L_N)$ that $x_2,x_3, x_4$ are not contained in. At stage $N$ of the algorithm, the interval $I$ is added to the end of the queue, and at a much later stage $M$, the interval $I$ is retrieved. Find the startpoints $x_1^\circ, x_2^\circ$, $x_3^\circ, x_4^\circ \in L_M \mathbf{Z}$ to the intervals in $\mathcal{B}(L_M)$ containing $x_1$, $x_2$, $x_3$, and $x_4$. Then we can find $n$ and $m$ such that $x_4^\circ - x_3^\circ = (10n)L_M$, and $x_2^\circ - x_1^\circ = (10m + 5)L_M$. In particular, this means that $|(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| \geq 5L_M$. But
-%
-\begin{align*}
-    |(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| &= |[(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)] - [(x_4 - x_3) - (x_2 - x_1)]|\\
-    &\leq |x_1^\circ - x_1| + \dots + |x_4^\circ - x_4| \leq 4 L_M
-\end{align*}
-%
-which gives a contradiction.
-
-The algorithm shows that $X_N$ contains $L_{N-1} / 10 L_N$ times the number of intervals that $X_{N-1}$ has, but they are at a length $L_N$ rather than $L_{N-1}$. This means that in total, $X_N$ contains $1/10^N L_N$ intervals, of length $L_N$. Since $L_N / 10^N L_N = o(1)$, this shows our set will have Lebesgue measure zero irrespective of our parameters. However, if $L_N$ decays suitably fast, then we might have $L_N^{1 - \varepsilon}/10^N L_N \gtrsim_\varepsilon 1$ for all $\varepsilon > 0$, which would imply that $X$ has positive $1 - \varepsilon$ dimensional Hausdorff measure for all $\varepsilon$, so $X$ still has Hausdorff dimension one. For this to be true, $L_N$ must decay superexponentially, i.e. the inequalities above are equivalent to $L_N \lesssim_B 1/B^N$ for all choices of $B$. Choosing an arbitrarily fast decaying sequence, such as $L_N = 1/N! \cdot 10^N$ or $L_N = 1/10^{10^N}$, suffices to obtain a Hausdorff dimension one set.
+Each iteration of the algorithm produces a new set $X_k$, and so leaving the algorithm to repeat infinitely produces a sequence $\{ X_k \}$ converging to a set $X$, which is translate avoiding.
 
 \begin{lemma}
-    If $L_N$ decays superexponentially, $X$ has Hausdorff dimension one.
+    The set $X$ is translate avoiding.
 \end{lemma}
 \begin{proof}
-%Recall Frostman's lemma, which says that the $s$ dimensional Hausdorff measure $H_s(X)$ of a Euclidean set $X$ is positive if and only if there is a finite positive Borel measure $\mu$ supported on $X$ with $\mu(B_r(x)) \lesssim r^s$, for a universal constant depending only on $\mu$. If such a measure can be constructed on a set $X$, it therefore follows that $\dim_{\mathbf{H}}(X) \geq s$. Thus to prove $X$ has dimension one, it suffices to construct a probability measure $\mu$ on $X$ with $\mu(B_r(x)) \lesssim_s r^s$, for each $s < 1$. We can construct such a measure using what is often called the {\it mass distribution principle}; we construct a probability measure $\mu_n$ supported on $X_n$ in such a way that a weak limit $\mu = \lim \mu_n$ exists, in which case $\mu$ is supported on $X$. To do this, we let $\mu_1$ be the uniform probability measure on $[0,1]$. Then, to construct $\mu_{n+1}$ from $\mu_n$, we divide the mass of each interval $J$ in $X_n$ uniformly over the intervals in $X_{n+1}$ contained in $J$. The distribution functions of these measures converge uniformly, and therefore the $\mu_n$ converge weakly to a measure $\mu$ supported on $X$.
-
-We use the mass distribution principle, as used in our note on calculating Hausdorff dimensions. It is easy to establish the bounds $\mu_N(I) \lesssim_\varepsilon L(I)^{1-\varepsilon}$ for $I \in \mathcal{B}(L_N)$, and since we can choose $L_N$ suitably slowly decreasing to use the epsilon of room technique, this gives the result. Alternatively, we can use the uniform distribution bounds with $L_N = R_N$, since if $J \in \mathcal{B}(L_{N+1})$, $I \in \mathcal{B}(L_N)$, $\mu(J) = 1/10^{N+1} L_{N+1}$, $\mu(I) = 1/10^N L_N$, and so $\mu(J) \lesssim (L_{N+1}/L_N) \mu(I)$. This gives the result if $L_N$ grows too fast.
+    If $X$ is not translate avoiding, there is $x_1 < x_2 \leq x_3 < x_4$ with $x_2 - x_1 = x_4 - x_3$. Since $l_k \to 0$, there is a suitably large integer $N$ such that $x_1$ is contained in an interval $I \in \mathcal{B}(l_N,\RR^d)$ not containing $x_2,x_3$, or $x_4$. At stage $N$ of the algorithm, the interval $I$ is added to the end of the queue, and at a much later stage $M$, the interval $I$ is retrieved. Find the startpoints $x_1^\circ, x_2^\circ$, $x_3^\circ, x_4^\circ \in l_M \mathbf{Z}$ to the intervals in $\mathcal{B}(l_M,\RR^d)$ containing $x_1$, $x_2$, $x_3$, and $x_4$. Then we can find $n$ and $m$ such that $x_4^\circ - x_3^\circ = (10n)l_M$, and $x_2^\circ - x_1^\circ = (10m + 5)l_M$. In particular, this means that $|(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| \geq 5L_M$. But
+    %
+    \begin{align*}
+        |(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| &= |[(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)] - [(x_4 - x_3) - (x_2 - x_1)]|\\
+        &\leq |x_1^\circ - x_1| + \dots + |x_4^\circ - x_4| \leq 4 L_M
+    \end{align*}
+    %
+    which gives a contradiction.
 \end{proof}
 
-%\begin{remark}
-%    Here's why we need the tighter bound $\mu(I) \lesssim_\varepsilon |I|^{1-\varepsilon}/(n!)^{\varepsilon/2}$ at the discrete scales to successively interpolate our bounds to all interval scales, rather than just the simpler bound $\mu(I) \lesssim_\varepsilon |I|^{1-\varepsilon}$. If $L_{N+1} \leq |I| \leq L_N$, and we cover $I$ by $|I|L_{N+1}^{-1}$ length $L_{N+1}$ intervals, then we obtain that
-    %
-%    \[ \mu(I) \lesssim_\varepsilon |I|L_{N+1}^{-1} L_{N+1}^{1-\varepsilon} = |I| L_{N+1}^{-\varepsilon} = \left( \frac{|I|}{L_{N+1}} \right)^\varepsilon |I|^{1-\varepsilon} \]
-    %
-%    Similarily, if we cover $I$ by a single length $L_N$ interval, then
-    %
-%    \[ \mu(I) \lesssim_\varepsilon L_N^{1-\varepsilon} = \left( \frac{L_N}{|I|} \right)^{1-\varepsilon} |I|^{1-\varepsilon} \]
-    %
-%    If we are to hope that these bounds give us a $\lesssim_\varepsilon |I|^{1-\varepsilon}$ bound for all $\varepsilon$, then we must have
-    %
-%    \[ \max_{L_{N+1} \leq |I| \leq L_N} \min \left( \left( \frac{|I|}{L_{N+1}} \right)^\varepsilon, \left( \frac{L_N}{|I|} \right)^{1-\varepsilon} \right) \lesssim_\varepsilon 1 \]
-    %
-%    The minimization is maximized when
-    %
-%    \[ \left( \frac{|I|}{L_{N+1}} \right)^\varepsilon = \left( \frac{L_N}{|I|} \right)^{1-\varepsilon} \]
-    %
-%    or when $|I| = L_N^{1-\varepsilon} L_{N+1}^\varepsilon$. Inputting this into the formula, we obtain that
-    %
-%    \[ \max_{L_{N+1} \leq |I| \leq L_N} \min \left( \left( \frac{|I|}{L_{N+1}} \right)^\varepsilon, \left( \frac{L_N}{|I|} \right)^{1-\varepsilon} \right) = \left( \frac{L_N}{L_{N+1}} \right)^{\varepsilon (1 - \varepsilon)} \]
-    %
-%    With the choice of parameters given, we have $L_N/L_{N+1} = 8(n+1)$, and we do not have $(8(n+1))^{\varepsilon(1-\varepsilon)} \lesssim_\varepsilon 1$. Thus, with the bounds we have used, there is no way to obtain a constant coefficient bound for all scales lying inbetween the discrete scales if we use the $\mu(I) \lesssim_\varepsilon |I|^{1-\varepsilon}$ bound for the discrete scales. However, the tighter bound $\mu(I) \lesssim_\varepsilon |I|^{1-\varepsilon}/(n!)^{\varepsilon/2}$ causes the $O(n)$ term for $L_N/L_{N+1}$ to be annihilated, which results in a constant term bound at the continuous range of scales.
-%\end{remark}
-
-\begin{remark}
-    Keleti briefly remarks that by replacing the 10 in the algorithm with a slowly increasing set of numbers, one can obtain a Hausdorff dimension one set which is linearly independant over the rational numbers. To see why this works, the condition of linear independence would fail if $\smash{a_1 x_1 + \dots + a_M x_M = 0}$, where $\smash{x_1 < x_2 < \dots < x_M}$, and $\smash{a_1, \dots, a_M}$ are integers with no common factor. One can again reduce this by picking intervals with indices congruent to a certain large modulus.
-
-%     Just as before, we find $x_n^\circ$ with $0 \leq x_n - x_n^\circ \leq L_N$. Provided that $2 (a_1 + \dots + a_M) L_N < M_M$, and the $x_n^\circ$ lie at integer multiples of $\varepsilon_N$, we conclude that $a_1 x_1^\circ + \dots + a_M x_M^\circ = 0$. If $K$ is an integer not dividing $a_1$, then for suitably large $N$ we assume that each $x_2^\circ, \dots, x_M^\circ$ lies at multiples of $K\Delta_N$. Shifting $x_1^\circ$ by a single multiple of $\Delta_N$ then breaks the equation from ever occuring in the first place. In order to guarantee this, we must first set $\varepsilon_n = A_n! L_n$ where $A_n$ is an increasing sequence with $A_n \to \infty$. We also guarantee that $x_2^\circ, \dots, x_M^\circ$ lies at multiples of $A_n! \Delta_n$. This can be guaranteed by induction if $A_{n+1}! \Delta_{n+1} \divides \Delta_n, \varepsilon_{n+1}$. Thus the parameters
-    %
-%    \[ \Delta_n = L_n\ \ \ \varepsilon_n = A_n! L_n\ \ \ L_{n+1} = \frac{L_n}{2N_{n+1}A_{n+1}!} \]
-    %
-%    give a linearly independant set. Assuming the $A_n$ grow incredibly slowly relative to the $N_n$, i.e.
-    %
-%    \[ N_n = n\ \ A_n = \log \log n + O(1)\ \ \ \ N_n = 2^n\ \ A_n = \log n + O(1)\ \ \ \ N_n = 2^{n^2}\ \ A_n = n \]
-    %
-%    then we obtain a set with Hausdorff dimension one.
-%Assuming the $A_n$ grow incredibly slowly, we can still hope for this set to have Hausdorff dimension one. fI we construct the probability measure $\mu$ as before, we find that for any length $l_n$ interval $J$
-    %
-%    \[ \mu(J) \leq \frac{2}{n!} = \frac{2}{n!l_n^{1-\varepsilon}} l_n^{1-\varepsilon} = \left( \frac{2}{(n!)^\varepsilon} \left( \prod A_m! \right)^{1-\varepsilon} \right) l_n^{1-\varepsilon} \]
-    %
-%    We can choose the $A_m$ to grow slowly enough that for any $\varepsilon > 0$,
-    %
-%    \[ \left( \prod A_m! \right)^{1-\varepsilon} \lesssim_\varepsilon (n!)^{\varepsilon/2} \]
-    %
-%    Testing this inequality leads to the fact that $A_{n+1}! \leq (n+1)^{\varepsilon/2(1-\varepsilon)}$ must eventually hold for $n$ large enough, so taking $A_n \to \infty$ but growing slower than any polynomial in $n$ satisfies the inequality, i.e. if $A_n!$ is the largest factorial smaller than $\log n$. Thus
-    %
-%    \[ \mu(J) \lesssim_\varepsilon \frac{l_n^{1-\varepsilon}}{(n!)^{\varepsilon/2}} \]
-    %
-%    and the interpolation bound as in the previous problem then guarantee $\mu(I) \lesssim_\varepsilon |I|^{1-\varepsilon}$ for all $I$, since $l_n/l_{n+1} = O(nA_n!) = O((n!)^{1/2})$.
-\end{remark}
-
-%\begin{remark}
-%    We attempted to obtain a squarefree subset of $[0,1]$ by combining Ruzsa's squarefree discrete strategy with Keleti's decomposition approach to find a high dimensional continuous squarefree set. However, using these techniques we were only able to obtain a dimension 1/2 set, which is only slightly better than a dimension 1/3 set which exists from the general results given by Math\'{e}'s result, or Pramanik and Fraser's result, and is much less than the dimension 1 set that Malabika expects.
-%\end{remark}
+The algorithm shows that
+%
+\[ \B(l_k,X_k) = (l_{k-1}/10l_k) \B(l_{k-1},X_{k-1}). \]
+%
+Thus closing the recursive definition shows
+%
+\[ \B(l_k,X_k) = \frac{1}{10^k l_k}. \]
+%
+In particular, this means $|X_k| = 1/10^k$, so $X$ has measure zero irrespective of our parameters. Nonetheless, the canonical measure $\mu$ on $X$ defined with respect to the decomposition $\{ X_k \}$ satisfies $\mu(I) = 10^k l_k$ for all $I \in \B(l_k,X)$. If $10^k l_k^\varepsilon \lesssim_\varepsilon 1$ for all $\varepsilon$, then we can establish the bounds $\mu(I) \lesssim_\varepsilon l_k^{1-\varepsilon}$ for all $\varepsilon$. In particular this is true if we set $l_k = 1/10^{\lfloor k \log k \rfloor}$. And because this sequence is not too fast increasing, we can apply Theorem \ref{easyCoverTheorem} to show $\mu$ is a Frostman measure of dimension $1-\varepsilon$ for each $\varepsilon > 0$, so $X$ has full Hausdorff dimension.
 
 
 
@@ -268,15 +88,15 @@ We use the mass distribution principle, as used in our note on calculating Hausd
 Inspired by Keleti's result, Pramanik and Fraser obtained a generalization of the queue method which allows one to find sets avoiding solutions to {\it any} smooth function satisfying suitably mild regularity conditions. To do this, rather than making a linear shift in one of the intervals we avoid as in Keleti's approach, one must use the smoothness properties of the function to find large segments of an interval avoiding solutions to another interval.
 
 \begin{theorem}
-    Suppose that $f: \mathbf{R}^{d+1} \to \mathbf{R}$ is a $C^1$ function, and there are sets $T_0, \dots, T_d \subset [0,1]$, with each $T_n$ a union of almost disjoint closed intervals of length $1/M$ such that $A \leq |\partial_0 f|$ and $|\nabla f| \leq B$ on $T_0 \times \dots \times T_d$. There there exists a rational constant $C$ and arbitrarily large integers $N \in M \mathbf{Z}$ for which there exist subsets $S_n \subset T_n$ such that
+    Let $f: \mathbf{R}^{d+1} \to \mathbf{R}$ be a $C^1$ function, and consider sets $T_0, \dots, T_d \subset [0,1]$, with each $T_n$ a union of intervals in $\B(1/M,[0,1])$, and such that $\partial_0 f$ is non-vanishing on $T_0 \times \dots \times T_d$. Then there exists a rational number $C$, and arbitrarily large integers $N \in M \mathbf{Z}$ for which there are $S_k \subset T_k$, each a union of cubes in $\B(C/N^d,T_k)$ with
     %
-    \begin{itemize}
-        \item[(i)] $f(x) \neq 0$ for $x \in S_0 \times \dots \times S_d$.
+    \begin{enumerate}
+        \item $f(x) \neq 0$ for $x \in S_0 \times \dots \times S_d$.
 
-        \item[(ii)] For $n \neq 0$, if we divide each interval $T_n$ into length $1/N$ intervals, then $S_n$ contains an interval of length $C/N^d$ of each of these intervals.
+        \item If $k \neq 0$, $S_k$ contains an interval in $\B(C/N^d,I)$ for each $I \in \B(1/N,T_k)$.
 
-        \item[(iii)] If $T_0$ is split into length $1/N$ intervals, then for a fraction $1 - 1/M$ of such intervals, $S_0$ is a union of length $C/N^d$ intervals with total length $C/N$.
-    \end{itemize}
+        \item For at least a fraction $1 - 1/M$ of the cubes $I \in \B(1/N,T_0)$, $|S_0 \cap I| \geq C/N$.
+    \end{enumerate}
 \end{theorem}
 \begin{proof}
     We begin by dividing the sets $T_1, \dots, T_d$ into length $1/N$ intervals, and let $S_n$ be defined by including a length $C_0/N^d$ segment, for some constant $C_0$ to be chosen later. Then once we fix $C_0$, the $S_n$ will satisfy property (ii) of the theorem. We define
