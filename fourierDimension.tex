@@ -7,12 +7,36 @@
 
 In the last few chapters, we have discovered that the presence of many configurations is not guaranteed by large Hausdorff dimension. We now turn to an analysis of a different dimensional quantity which in many cases gives much more structure than Hausdorff dimension. 
 
-in many problems involving arithmetic structure,
-
 
 
 
 \section{Schmerkin's Method}
+
+We now try and adapt Schmerkin's Method to our situation, introducing translations into the avoiding set. Let $K \subset \mathbf{Z}_N^n$. Our goal is to find $X \subset \mathbf{Z}_N$ such that if $x_1, \dots, x_n$ are distinct, then $(x_1, \dots, x_n) \not \in K$, such that if $f: \mathbf{Z}_N \to \mathbf{R}$ is the probability distribution which uniformly randomly chooses a point on $X$, such that the Fourier transform of $f$ has small $L^\infty$ norm.
+
+We consider an intermediary scale $M$, with $M \divides N$. Then we consider the set
+%
+\[ K' = \{ x \in \mathbf{Z}_N^n : \text{There is $y \in K$ with $x - y \in M \mathbf{Z}_N^n$} \}. \]
+%
+We construct $X$ such that if $x_1, \dots, x_n \in X$ are distinct, then $(x_1, \dots, x_n) \not \in Y$. In particular, this means that if we define, for each $x \in X$, a uniformly random selected integer $n_x \in M \mathbf{Z}_N$, then we can define $x' = x + n_x$, and $X' = \{ x' : x \in X \}$. Now if $I_x: \mathbf{Z}_N \to \mathbf{R}$ denotes the delta function at $x'$, then
+%
+\[ \widehat{I_x}(k) = (1/N) e(-kx'/N) = (1/N) e(-kx/N) e(-n_x). \]
+%
+And so
+%
+\begin{align*}
+	\mathbf{E}(\widehat{I_x}(k)) &= (M/N) e(-kx/N) \sum_{m = 1}^{N/M} e(-(kM/N)m).
+\end{align*}
+%
+If $kM/N \not \in \mathbf{Z}$, $\mathbf{E}(\widehat{I_x}(k)) = 0$. If $kM/N \in \mathbf{Z}$, then $\mathbf{E}(\widehat{I_x}(k)) = e(-kx/N)$. And
+%
+\[ |\widehat{I_x}(k)| \leq 1. \]
+%
+Since $I_x$ is independant, we can apply Hoeffding's inequality to conclude that
+%
+\[ \mathbf{P} \left( \widehat{f}(k) \geq t \right) \leq \exp \left( \frac{-t^2}{4|X|} \right) \]
+%
+so $\widehat{f}(k) \lesssim |X|^{1/2}$ with high probability. This should give the Fourier dimension bound we want? Except we do lose some dimension by introducing the parameter $M$. If we pick $N$ to be very large, but $M$ very small, then this shouldn't introduce many problems? What about if we pick $M$ randomly to prevent problems on the linear frequencies?
 
 
 
@@ -27,9 +51,9 @@ The aim of this section is to obtain tail bounds on the total number of intersec
 %
 Here, this is obtained by applying the statistical decoupling techniques of Bourgain and Tzafriri.
 
-To understand the distribution of this random variable, it will be convenient to simplify notation. We write the random variable $\mathbf{I}(I_J = I_0)$ as $X_{J,I_0}$. We then set
+To understand the distribution of this random variable, it will be convenient to simplify notation. We write $\mathbf{I}(I_J = I_0)$ as $X_{J,I_0}$. We then set
 %
-\[ Z = \# \mathcal{K}(U) = \sum_{J_1, \dots, J_n} \sum_K X_{J_i,K_i}, \]
+\[ Z = \# \mathcal{K}(U) = \sum_{J_1, \dots, J_n} \sum_K \left( \prod_{i = 1}^n X_{J_i,K_i} \right), \]
 %
 where $J_1, \dots, J_n$ ranges over all distinct choices of $n$ elements from $\B^d_l(E)$, and $K = K_1 \times \dots \times K_n$ ranges over all elements of $\B^{dn}_l(G) \cap \B^{dn}_s(J_1 \times \dots \times J_n)$. The random cubes $\{ I_J \}$ form an independant family, which should make the distribution easier to bound. But $Z$ is a multiplicative linear combination of this independant family. Random variables of this form as known as a \emph{chaos}.
 
@@ -86,7 +110,7 @@ where $X^1, \dots, X^n$ are independant and identically distributed copies of $X
 	%
 	\[ \EE(W^m) = \sum_{J_{j,i}} \sum_{K_1, \dots, K_m} \prod_{i = 1}^n \EE \left( \prod_{j = 1}^m X_{J_{j,i}, K_{j,i}}^i \right) \]
 	%
-	For any collection of cubes $K_1, \dots, K_m$, how many distinct parent cubes do they generate? At most $nm$, but as few as $n$. But how many are as few as $n$?
+	The inner expectation is zero except if $\pi(K_{j,i}) = J_{j,i}$ for all $j$ and $i$, and also, if $\pi(K_{j_0,i}) = \pi(K_{j_1,i})$, then $K_{j_0,i} = K_{j_1,i}$. And then the expectation is $\varepsilon^{\# \{ K_{1,i}, \dots, K_{m,i} \}}$.
 \end{proof}
 
 \section{Singular Value Decomposition of Tensors}

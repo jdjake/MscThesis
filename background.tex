@@ -6,7 +6,7 @@
 
 \section{Configuration Avoidance}
 
-This thesis discusses methods to form large sets avoiding patterns. First, we introduce notation in a general context. We consider an ambient set $\AAA$. It's \emph{$n$-point configuration space} is the set of distinct tuples of $n$ points in $\AAA$, i.e.
+We begin by introducing notation to discuss the problem of finding large sets avoiding patterns. We consider an ambient set $\AAA$. It's \emph{$n$-point configuration space} is the set of distinct tuples of $n$ points in $\AAA$, i.e.
 %
 \[ \Config^n(\AAA) = \{ (x_1, \dots, x_n) \in X^n: x_i \neq x_j\ \text{if $i \neq j$} \}. \]
 %
@@ -18,6 +18,14 @@ The general \emph{configuration space} of $\AAA$ is $\Config(\AAA) = \bigcup_{n 
 	\[ \C = \left\{ (x_1, x_2, x_3) \in \Config^3(\RR^2) : |x_1-x_2| = |x_1-x_3| \right\}. \]
 	%
 	Then $\C$ is a 3-point configuration, and a set $X \subset \RR^2$ avoids $\C$ if and only if it contains no vertices of an isoceles triangle. %Notice that $|x_1 - x_2| = |x_1 - x_3|$ holds if and only if $|x_1 - x_2|^2 = |x_1 - x_3|^2$, which is an algebraic equation in the coordinates of $x_1,x_2$, and $x_3$. Thus $\C$ is an algebraic hypersurface of degree two in $\RR^6$.
+\end{example}
+
+\begin{example}
+	Let $V$ be a vector space over a field $K$. We set
+	%
+	\[ \C = \bigcup_{n = 1}^\infty \{ (x_1, \dots, x_n) \in \C^n(V): \text{for any}\ a_1, \dots, a_n \in K,\ a_1x_1 + \dots + a_nx_n \neq 0 \}. \]
+	%
+	A subset $X \subset V$ avoids $\C$ if and only if $X$ is a linearly independant set over $X$. If $V$ is infinite dimensional, then it is integral to the configuration that infinitely many values of $n$ are considered. We will be interested in the case where $K = \QQ$, and $V = \RR$, in which case we will be looking for analytically large, linearly independant subsets of $V$.
 \end{example}
 
 %\begin{example}[General Position Configuration]
@@ -50,12 +58,13 @@ Our main focus in this thesis is on the {\it pattern avoidance problem}: Given a
 	\item If $\AAA = \RR^d$, but $\C$ is sufficiently discrete, then a satisfactory goal is to find a set $X$ with large Lebesgue measure avoiding $\C$.
 \end{itemize}
 %
-In this thesis, inspired by results in these three settings, we establish methods for avoiding non-discrete configurations $\C$ in $\RR^d$. Here, Lebesgue measure completely fails to measure the size of pattern avoiding solutions, as the next theorem shows, under the often true assumption that the configuration is \emph{translation invariant}, i.e. that if $(a_1, \dots, a_n) \in \C$ and $b \in \RR^d$, $(a_1 + b, \dots, a_n + b) \in \C$.
+In this thesis, inspired by results in these three settings, we establish methods for avoiding non-discrete configurations $\C$ in $\RR^d$. Here, Lebesgue measure completely fails to measure the size of pattern avoiding solutions, as the next theorem shows, under the often true assumption that $\C$ is \emph{translation invariant}, i.e. that if $(a_1, \dots, a_n) \in \C$ and $b \in \RR^d$, $(a_1 + b, \dots, a_n + b) \in \C$.
 
 \begin{theorem}
-	Let $\C$ be a translation-invariant $n$-point configuration on $\RR^d$. Suppose
+	Let $\C$ be a $n$-point configuration on $\RR^d$. Suppose
 	%
 	\begin{enumerate}
+		\item \label{translationinvariance} $\C$ is translation invariant.
 		\item \label{nonDiscreteConfig} For any $\varepsilon > 0$, there is $(a_1, \dots, a_n) \in \C$ with $\diam \{ a_1, \dots, a_n \} \leq \varepsilon$.
 	\end{enumerate}
 	%
@@ -74,7 +83,7 @@ In this thesis, inspired by results in these three settings, we establish method
 	%
 	\[ |X \cap I(x,r_0)| \geq (1 - \varepsilon)|I(x,r_0)|. \]
 	%
-	Applying Property \ref{nonDiscreteConfig}, we find $C = (a_1, \dots, a_n) \in \C$ with $\diam \{ a_1, \dots, a_n \} \leq \varepsilon r_0$. For each $p \in I(x,r_0)$, let $C(p) = (a_1(p), \dots, a_n(p))$, where $a_i(p) = p + (a_i - a_1)$. By translation invariance, $C(p) \in \C$ for each $p \in \RR^d$. A union bound gives
+	Applying Property \ref{nonDiscreteConfig}, we find $C = (a_1, \dots, a_n) \in \C$ with $\diam \{ a_1, \dots, a_n \} \leq \varepsilon r_0$. For each $p \in I(x,r_0)$, let $C(p) = (a_1(p), \dots, a_n(p))$, where $a_i(p) = p + (a_i - a_1)$. By Property \ref{translationinvariance}, $C(p) \in \C$ for each $p \in \RR^d$. A union bound gives
 	%
 	\begin{align*}
 		\left| \{ p \in I(x,r_0/2) : C(p) \not \in \C(X) \} \right| &= \left| \bigcup_{i = 1}^n \{ p \in I(x,r_0/2) : a_i(p) \not \in X \} \right|\\
@@ -89,13 +98,13 @@ In this thesis, inspired by results in these three settings, we establish method
 	%
 	\begin{align*}
 		\left|\left\{ p \in I(x,r_0/2): C(p) \in \Config(X) \right\}\right| &= |I(x,r_0/2)| - \left| \left\{ p \in I(x,r_0/2): C(p) \not \in \Config(X) \right\} \right|\\
-		&\geq \varepsilon \cdot n(2d + 1) (r_0/2)^d - (r_0/2)^d > 0.
+		&\geq (r_0/2)^d - \varepsilon \cdot n(2d + 1) (r_0/2)^d > 0.
 	\end{align*}
 	%
 	Thus there is $p \in I(x,r_0/2)$ such that $C(p) \in \Config(X)$, so $X$ does not avoid $\C$.
 \end{proof}
 
-Since no set of positive Lebesgue measure can avoid non-discrete configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets. Fortunately, there is a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set, introduced in the next section.
+Since no set of positive Lebesgue measure can avoid non-discrete configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets. Fortunately, there is a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set. We use three variants of fractional dimension in this thesis: Minkowski dimension, Hausdorff dimension. Both assign the same dimension to any smooth manifold, but vary over more singular sets. The main difference between the first two is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density simultaneously at a countable set of scales.
 
 
 
@@ -103,21 +112,19 @@ Since no set of positive Lebesgue measure can avoid non-discrete configurations,
 
 
 
-\section{Fractal Dimension}
-
-Intuitively, fractional dimension provides a measure of the local density of a set, and so we view a set which is more dense as `larger'. There are two main definitions of fractional dimension we use in this thesis: Minkowski dimension and Hausdorff dimension. The main difference between the first two is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at various scales. In this section, we indicate the subtle differences between the two dimensional quantities which are relavent to this thesis.
+\section{Minkowski Dimension}
 
 We begin by discussing the Minkowski dimension, which is the easiest of the two dimensions to define. Given a length $l$, and a bounded set $E \subset \RR^d$, we let $N(l,E)$ denote the length $l$ covering number of $E$, i.e. the minimum number of sidelength $l$ cubes required to cover $E$. We define the \emph{lower} and \emph{upper} Minkowski dimension as
 %
-\[ \lowminkdim(E) = \liminf_{l \to 0} \left( \frac{\log(N(l,E))}{\log(1/l)} \right)\ \ \ \ \ \upminkdim(E) = \limsup_{l \to 0} \left( \frac{\log(N(l,E))}{\log(1/l)} \right). \]
+\[ \lowminkdim(E) = \liminf_{l \to 0} \frac{\log(N(l,E))}{\log(1/l)} \quad \upminkdim(E) = \limsup_{l \to 0} \frac{\log(N(l,E))}{\log(1/l)}. \]
 %
-If $\upminkdim(E) = \lowminkdim(E)$, then we refer to this common quantity as the \emph{Minkowski dimension} of $E$, denoted $\dim_M(E)$. Intuitively, $\lowminkdim(E) < s$ if there {\it exists} a sequence of lengths $\{ l_k \}$ converging to zero with $N(l_k,E) \leq (1/l_k)^s$, and $\upminkdim(E) < s$ if $N(l,E) \leq (1/l)^s$ for \emph{all} sufficiently small lengths $l$.
+If $\upminkdim(E) = \lowminkdim(E)$, then we refer to this common quantity as the \emph{Minkowski dimension} of $E$, denoted $\minkdim(E)$. Thus $\lowminkdim(E) < s$ if there {\it exists} a sequence of lengths $\{ l_k \}$ converging to zero with $N(l_k,E) \leq (1/l_k)^s$, and $\upminkdim(E) < s$ if $N(l,E) \leq (1/l)^s$ for \emph{all} sufficiently small lengths $l$.
 
 %It is obvious that $|E| \leq N(l,E) l^d$. If $\upminkdim(E) < s < d$, then there is a sequence $\{ l_k \}$ such that $N(l,E) \leq (1/l_k)^s$ for all $k$, which gives $|E| \leq l_k^{d-s} \to 0$. Thus $E$ has Lebesgue measure zero. Taking contrapositives, we find every set with positive Lebesgue measure has Minkowski dimension $d$. This is why the Minkowski dimension provides a `second order' for comparing the size of sets with Lebesgue measure zero. Based on Theorem 2, it provides a perfect substitute of size for the pattern avoidance problem, at least once we show that there do exist sets with positive Minkowski dimension avoiding particular examples of non-discrete configurations.
 
-Later on, it will be helpful to further discretize the covering number of sets so that all the cubes in the cover lie on a grids. We let
+Throughout this thesis, it will be helpful to discretize the analysis involved, so that all cubes consider lie on grids of various sizes. Given $l > 0$, we let
 %
-\[ \B(l,\RR^d) = \left\{ [a_1,a_1 + l) \times \cdots \times [a_d,a_d + l): a_k \in l \cdot \ZZ \right\}. \]
+\[ \B(l,\RR^d) = \Big\{ [a_1,a_1 + l) \times \cdots \times [a_d,a_d + l): a_k \in l \cdot \ZZ \Big\}. \]
 %
 Given any $E \subset \RR^d$, we let
 %
@@ -134,27 +141,46 @@ Up to a constant factor, $\B(l,E)$ is an optimal covering of $E$ by cubes.
 	Since $\B(l,E)$ is a cover of $E$, and $N(l,E)$ is the size of a minimal cover, $N(l,E) \leq \#(\B(l,E))$. But if $I$ is an arbitrary sidelength $l$ cube, then it intersects at most $2^d$ cubes in $\B(l,E)$, so $\# \B(l,E) \leq 2^d N(l,E)$.
 \end{proof}
 
-It is also useful to work at a discrete sequence of `dyadic' scales. If we fix $M > 1$, and consider $1/M^{k+1} \leq l \leq 1/M^k$, then as $k \to \infty$, $\log(1/l) \sim \log(M^k)$. To determine the Minkowski dimension, it suffices to look at the scales $\{ 1/M^k \}$, which we can combine with the discretization of cubes.
+\begin{remark}
+	Lemma \ref{comparableCovers} shows that as $l \to 0$,
+	%
+	\[ \frac{\log(N(l,E))}{\log(1/l)} \sim \frac{\log(\# \B(l,E))}{\log(1/l)}. \]
+	%
+	Thus calculation of the Minkowski dimension can be done with respect to arbitrary covers, or just by counting the number of cubes on a grid intersecting the set. The covers $\B(l,E)$ are useful because they are guaranteed to consist of disjoint cubes. On the other hand, the monotonicity of $N(l,E)$ is useful. We can almost recover this for the values $\# \B(l,E)$; The condition that $\# \B(l_0,E) \geq \# \B(l_1,E)$ for $l_0 \leq l_1$ only holds if $l_1/l_0$ is an integer (in this case, a cube in $\B(l_0,E)$ is either contained in a cube of $\B(l_1,E)$, or completely disjoint from that cube). This is the reason why it is often useful to work on \emph{dyadic cubes}, given by lengths $l_k = 1/2^k$, or some subsequence of this sequence.
+\end{remark}
 
-\begin{corollary}
-	For any set $E$,
-	%
-	\[ \lowminkdim(E) = \liminf_{k \to \infty} \frac{\log_M(\# \B(1/M^k,E))}{k}\ \ \ \ \ \upminkdim(E) = \limsup_{k \to \infty} \frac{\log_M(\# \B(1/M^k,E))}{k}. \]
-\end{corollary}
+It is also often useful to work at a discrete sequence of scales, rather than having to establish limits for the continuous range of scales over which the limit is defined. We consider a decreasing of sequence of scales $\{ l_k \}$, and try to determine what conditions guarantee that
+%
+\[ \liminf_{l \to 0} \frac{\log(N(l,E))}{\log(1/l)} = \liminf_{k \to \infty} \frac{\log(N(l_k,E))}{\log(1/l_k)} \]
+%
+and
+%
+\[ \limsup_{l \to 0} \frac{\log(N(l,E))}{\log(1/l)} = \limsup_{k \to \infty} \frac{\log(N(l_k,E))}{\log(1/l_k)}. \]
+%
+If this is true, it suffices to restrict attention to a sequence of scales $\{ l_k \}$ to analyze the Minkowski dimension of sets, and we call the sequence a \emph{defining sequence} for the Minkowski dimension. Note that because of the last remark, a defining sequence also satisfies the above limits with $N(l,E)$ swapped with $\# \B(l,E)$, and $N(l_k,E)$ with $\# \B(l_k,E)$.
+
+\begin{lemma} \label{definingsequenceminkowski}
+	Suppose that $l_k = 2^{-\psi(k)}$, where $\psi(k+1)/\psi(k) \to 1$ as $k \to \infty$. Then $\{ l_k \}$ is a defining sequence for the Minkowski dimension.
+\end{lemma}
 \begin{proof}
-	Suppose $1/M^{k+1} \leq l \leq 1/M^k$. Then the upper bound of Lemma 1 implies
+	Given a length $l$, find $k$ with $l_{k+1} \leq l \leq l_k$. We then calculate
 	%
-	\[ \frac{\log(N(l,E))}{\log(1/l)} \sim \frac{\log_M(N(l,E))}{k+1} \leq \frac{\log_M(N(1/M^{k+1},E))}{k+1} \leq \frac{\log_M(\# \B(1/M^{k+1},E))}{k+1}. \]
+	\[ \frac{\log(N(l,E))}{\log(1/l)} \leq \frac{\log(1/l_{k+1})}{\log(1/l_k)} \frac{\log(N(l_{k+1},E))}{\log(1/l_{k+1})}. \]
 	%
-	Conversely, the lower bound of Lemma 1 implies that
+	Conversely,
 	%
-	\begin{align*}
-		\frac{\log(N(l,E))}{\log(1/l)} &\sim \frac{\log_M(N(l,E))}{k} \geq \frac{\log_M(N(1/M^k,E))}{k}\\
-		&\geq \frac{\log_M(2^d \# \B(1/M^k,E))}{k} = \frac{\log_M(\# \B(1/M^k,E))}{k} + o(1).
-	\end{align*}
+	\[ \frac{\log(N(l,E))}{\log(1/l)} \geq \frac{\log(1/l_k)}{\log(1/l_{k+1})} \frac{\log(N(l_k,E))}{\log(1/l_k)}. \]
 	%
-	Taking $l \to 0$, and correspondingly, $k \to \infty$, completes the proof.
+	Thus, provided that $\log(1/l_{k+1})/\log(1/l_k) \to 1$, we conclude that $\{ l_k \}$ is a defining sequence for the Minkowski dimension. But since $l_k = 2^{-\psi(k)}$, we conclude
+	%
+	\[ \frac{\log(1/l_{k+1})}{\log(1/l_k)} = \frac{\psi(k+1)}{\psi(k)} \to 1. \qedhere \]
 \end{proof}
+
+A classic example of a defining sequence for the Minkowski dimension is the dyadic sequence $\{ l_k \}$ obtained by setting $l_k = 2^{-k}$. Thus one really need only analyze at a dyadic range of scales, which is useful because for the dyadic sequence, the cubes $\bigcup_{k = 0}^\infty \B(l_k, \RR^d)$ are either disjoint, or nested withone one another. It is easy to establish that the dyadic sequence is a defining sequence from Lemma \ref{definingsequenceminkowski} by setting $\psi(k) = k$, where $\psi(k+1)/\psi(k) = 1 + 1/k$. But we can go much further. For instance, let $\eta(k)$ be any decreasing sequence of positive numbers tending to zero, such that $k \eta(k)$ is increasing and tends to $\infty$. Define $l_k = 2^{-\lfloor 2^{k \eta(k)} \rfloor}$. Thus if we let $\psi(k) = \lfloor 2^{k \eta(k)} \rfloor$, then the fact that
+%
+\[ (k+1) \eta(k+1) - k \eta(k) \leq (k+1) \eta(k+1) - k \eta(k+1) = \eta(k+1) \to 0, \]
+%
+implies $\psi(k+1)/\psi(k) \to 1$. Thus Lemma \ref{definingsequenceminkowski} applies, enabling up to extend our results to sequences which decrease much faster than dyadically. We will refer to any sequence of scales $\{ l_k \}$ such that $l_k = 2^{-2^{o(k)}}$ as a \emph{subhyperdyadic} sequence of lengths; a \emph{hyperdyadic} sequence of lengths is one of the form $2^{-\lfloor 2^{ak} \rfloor}$, for some fixed $a > 0$. Thus it is possible to analyze Minkowski dimensions by restricting attention to a subhyperdyadic sequence.
 
 %Note that if $E$ is a set with positive Lebesgue measure, which we may without loss of generality assume is contained in $[0,1]^d$, and we subdivide $[0,1]^d$ into $m^d$ sidelength $1/m$ cubes, then $E$ intersects at least $|E| m^d$ of these cubes, so as $m \to \infty$,
 %
@@ -230,11 +256,18 @@ It is also useful to work at a discrete sequence of `dyadic' scales. If we fix $
 %	Again, if $N_{2n}/N_{2n+1} = o(1)$, then $\lowminkdim(C) \leq 1/2$. One can fairly easily check that the values $r_n$ are the `worst case' scales, so that $\lowminkdim(C) = 1/2$. Thus the set $C$ `looks' half dimension between $l_n$ and $r_n$, for each $n$, but `looks' full dimensional between the scales $r_n$ and $l_{n+1}$. This actually impacts the Minkowski dimension of $C$ provided that the gaps between $l_n$ and $r_n$ are made inverse superexponential.
 %\end{example}
 
-Hausdorff dimension is a version of fractal dimension which is more stable under analytical operations, but is less easy to calculate. It is obtained by finding a canonical `$s$ dimensional measure' $H^s$ on $\RR^d$ for $s \in [0,\infty)$, which for $s = 1$, measures the `length' of a set, for $s = 2$, measure the `area', and so on and so forth. We then set the dimension of $E$ to be the supremum of the values $s$ such that $H^s(E) < \infty$. Given a cube $I$, we let $l(I)$ denote it's sidelength. For $E \subset \RR^d$, we define the \emph{Hausdorff content}
+
+
+
+\section{Hausdorff Dimension}
+
+Hausdorff dimension is a version of fractal dimension which is more stable under analytical operations, but is less easy to calculate. It is obtained by finding a canonical `$s$ dimensional measure' $H^s$ on $\RR^d$ for $s \in [0,\infty)$, which for $s = 1$, measures the `length' of a set, for $s = 2$, measure the `area', and so on and so forth. GIven this measure, we define the dimension of $E$ to be the supremum of the values $s$ such that $H^s(E) < \infty$.
+
+Given a cube $I$, we let $l(I)$ denote it's sidelength. For $E \subset \RR^d$ and $\delta > 0$, we define the \emph{Hausdorff content}
 %
 \[ H_\delta^s(E) = \inf \left\{ \sum_{k = 1}^\infty l(I_k)^s : E \subset \bigcup_{k = 1}^\infty I_k, l(I_k) \leq \delta \right\}. \]
 %
-We then define $H^s(E) = \lim_{\delta \to 0} H_\delta^s(E)$. It is easy to see $H^s$ is an exterior measure, and $H^s(E \cup F) = H^s(E) + H^s(F)$ if the Hausdorff distance $d(E,F)$ between $E$ and $F$ is positive. So $H^s$ is actually a metric exterior measure, and the Caratheodory extension theorem shows all Borel sets are measurable with respect to $H^s$.
+We then set $H^s(E) = \lim_{\delta \to 0} H_\delta^s(E)$. It is easy to see $H^s$ is an exterior measure, and $H^s(E \cup F) = H^s(E) + H^s(F)$ if the Hausdorff distance $d(E,F)$ between $E$ and $F$ is positive. So $H^s$ is actually a metric exterior measure, and the Caratheodory extension theorem shows all Borel sets are measurable with respect to $H^s$.
 
 %\begin{example}
 %	Let $s = 0$. Then $H_\delta^0(E)$ is the number of $\delta$ balls it takes to cover $E$, which tends to $\infty$ as $\delta \to 0$ unless $E$ is finite, and in the finite case, $H_\delta^0(E) \to \# E$. Thus $H^0$ is just the counting measure.
@@ -248,8 +281,13 @@ We then define $H^s(E) = \lim_{\delta \to 0} H_\delta^s(E)$. It is easy to see $
 %	Then we know $r_k < \varepsilon$, so $H^s_\varepsilon(E) < \varepsilon^d$. Letting $\varepsilon \to 0$, we conclude $H^d(E) = 0$. Thus $H^d$ is absolutely continuous with respect to the Lebesgue measure. The measure $H^d$ is translation invariant, so $H^d$ is actually a constant multiple of the Lebesgue measure.
 %\end{example}
 
-\begin{lemma}
-	If $t < s$ and $H^t(E) < \infty$, $H^s(E) = 0$, and if $H^s(E) \neq 0$, $H^t(E) = \infty$.
+\begin{lemma} \label{HausdorffBoundary}
+	Consider $t < s$, and a set $E$.
+	%
+	\begin{itemize}
+		\item If $H^t(E) < \infty$, then $H^s(E) = 0$.
+		\item If $H^s(E) \neq 0$, then $H^t(E) = \infty$.
+	\end{itemize}
 \end{lemma}
 \begin{proof}
 	If, for any cover of $E$ by intervals $I_k$, $\sum l(I_k)^t \leq A$, and $l(I_k) \leq \delta$, then
@@ -259,11 +297,11 @@ We then define $H^s(E) = \lim_{\delta \to 0} H_\delta^s(E)$. It is easy to see $
 	Thus $H^s_\delta(E) \leq \delta^{s-t} A$, and taking $\delta \to 0$, we conclude $H^s(E) = 0$. The latter point is just proved by taking contrapositives.
 \end{proof}
 
-\begin{example}
-	We note $H^1[-N,N]^d = (2N)^d$. If $s > d$, then Lemma 2 shows $H^s[-N,N]^d = 0$, and so by countable additivity, $H^s(\RR^d) = 0$. Thus $H^s$ is trivial if $s > d$.
-\end{example}
+\begin{remark}
+	We note $H^d[-N,N]^d = (2N)^d$. If $s > d$, Lemma \ref{HausdorffBoundary} shows $H^s[-N,N]^d = 0$, and so by countable additivity, taking $N \to \infty$ shows $H^s(\RR^d) = 0$. Thus $H^s(E) = 0$ for all $E$ if $s > d$.
+\end{remark}
 
-Given any Borel set $E$, the last example, combined with Lemma 2, implies there is a unique value $s_0 \in [0,d]$ such that $H^s(E) = 0$ for $s > s_0$, and $H^s(E) = \infty$ for $0 \leq s < s_0$, though it is possible for $H^{s_0}(E)$ to take any value in $[0,\infty]$. We refer to $s_0$ as the \emph{Hausdorff dimension} of $E$, denoted $\hausdim(E)$.
+Given any Borel set $E$, the last remark, combined with Lemma \ref{HausdorffBoundary}, implies there is a unique value $s_0 \in [0,d]$ such that $H^s(E) = 0$ for $s > s_0$, and $H^s(E) = \infty$ for $0 \leq s < s_0$, though it is possible for $H^{s_0}(E)$ to take any value in $[0,\infty]$. We refer to $s_0$ as the \emph{Hausdorff dimension} of $E$, denoted $\hausdim(E)$.
 
 \begin{theorem}
 	For any bounded set $E$, $\hausdim(E) \leq \lowminkdim(E) \leq \upminkdim(E)$.
@@ -276,13 +314,13 @@ Given any Borel set $E$, the last example, combined with Lemma 2, implies there 
 	Thus $\# \B(l_k,E) \leq (1/l_k)^{s - \varepsilon}$, so $H^s(E) \leq \lim \# \B(l_k,E) l_k^s = \lim l_k^\varepsilon = 0$. Taking $\varepsilon \to 0$ proves the claim.
 \end{proof}
 
-A simple intuition behind the two approaches to fractal dimension we have considered here is that Minkowski dimension measures the efficiency of covers of a set at a fixed scale, whereas Hausdorff dimension measures the efficiency of covers of a set at a simultaneous set of infinitely many scales, which explains both why in certain cases the Hausdorff dimension is smaller than the Minkowski dimension, and also why the Hausdorff dimension is more stable under analytical operations. For instance, given any sequence $\{ E_k \}$,
+A simple intuition behind the two approaches to fractal dimension we have considered here is that Minkowski dimension measures the efficiency of covers of a set at a fixed scale, whereas Hausdorff dimension measures the efficiency of covers of a set at a simultaneous set of infinitely many scales. This explains why in certain cases the Hausdorff dimension is smaller than the Minkowski dimension, and also why the Hausdorff dimension is more stable under analytical operations. For instance, given any sequence $\{ E_k \}$,
 %
-\[ \hausdim(\bigcup_{k = 1}^\infty E_k) = \sup \hausdim(E_k). \]
+\[ \hausdim \left(\bigcup_{k = 1}^\infty E_k \right) = \sup \hausdim(E_k). \]
 %
 This need not be true for the Minkowski dimension; a single point has Minkowski dimension zero, but the rational numbers, which are a countable union of points, have Minkowski dimension one.
 
-Just like with Minkowski dimension, we can also discretize Hausdorff dimension to cubes lying on a grid, and also lying on a set of dyadic scales.
+Just like with Minkowski dimension, we can also discretize Hausdorff dimension to cubes lying on a grid.
 
 \begin{lemma}
 	For a fixed $M$, let
@@ -303,7 +341,7 @@ Just like with Minkowski dimension, we can also discretize Hausdorff dimension t
 	Since the cover was arbitrary, we conclude that $H^{s,M}_N(E) \leq 3^d M^s H^s_{1/M^N}(E)$, and taking $N \to \infty$ gives $H^{s,M}(E) \leq 3^d M^s H^s(E)$. The lower bound $H^{s,M}(E) \geq H^s(E)$ is trivial.
 \end{proof}
 
-It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a probability measure which is suitably sparse. We say a measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and for any length $l$, if $I$ is a cube with sidelength $l$, then $\mu(I) \lesssim l^s$. The proof of Frostman's lemma will indicate an important technique, known as the \emph{mass distribution principle}.
+It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a probability measure which obeys a certain decay law on small sets. We say a measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and for any length $l$, if $I$ is a cube with sidelength $l$, then $\mu(I) \lesssim l^s$. The proof of Frostman's lemma will use a technique often useful to us, known as the \emph{mass distribution principle}.
 
 \begin{lemma}[Mass Distribution Principle]
 	Let $\{ l_k \}$ be a decreasing sequence of lengths, and let $\B = \bigcup_{k = 1}^\infty \B(l_k,\RR^d)$. Suppose $\mu$ is a function from $\B$ to $[0,\infty)$ such that for each $k$, and for any $I \in \B(l_k,\RR^d)$,
@@ -321,11 +359,11 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\[ \int f(x) dE_k(\nu) = \sum \left\{ \nu(I) \int_I f(x) : I \in \B(l_k,\RR^d) \right\}. \]
 	%
-	The main condition of the theorem then says that $E_j(\mu_k) = \mu_j$ if $j \leq k$. Note that the operators $E_k$ are each continuous with respect to the weak topology; If $\nu_i \to \nu$ weakly, then $\nu_i(I) \to \nu(I)$ for each fixed $I \in \B(l_k,\RR^d)$. Thus if $f \in C_c(\RR^d)$, then the support of $f$ intersects only finitely many intervals in $\B(l_k,\RR^d)$, so
+	The main condition of the theorem then says that $E_j(\mu_k) = \mu_j$ if $j \leq k$. Note that the operators $E_k$ are each continuous with respect to the weak topology; If $\nu_i \to \nu$ weakly, then $\nu_i(I) \to \nu(I)$ for each fixed $I \in \B(l_k,\RR^d)$. Thus if $f \in C_c(\RR^d)$, then the support of $f$ intersects only finitely many intervals in $\B(l_k,\RR^d)$, and this implies
 	%
 	\[ \int f(x) dE_k(\nu_i) = \sum \nu_i(I) \int_I f\; dx \to \sum \nu(I) \int_I f\; dx = \int f dE_k(\nu). \]
 	%
-	Now fix an interval $I \in \B(l_0,\RR^d)$. The measures $\{ \mu_k|_I \}$, restricted to $I$, are uniformly bounded by $\mu(I)$. Thus the Banach-Alaoglu theorem implies that is a subsequence $\mu_{k_i}$ converging weakly on $I$ to some measure $\mu_I$. By continuity,
+	Now fix an interval $I \in \B(l_0,\RR^d)$. The measures $\{ \mu_k|_I \}$, restricted to $I$, all have total mass $\mu(I)$. Thus the Banach-Alaoglu theorem implies that is a subsequence $\mu_{k_i}$ converging weakly on $I$ to some measure $\mu_I$. By continuity,
 	%
 	\[ E_j(\mu_I) = \lim E_j(\mu_{k_i}|_I) = \lim E_j(\mu_{k_i})|_I = \mu_j|_I. \]
 	%
@@ -367,7 +405,7 @@ Thus $\mu$ is a Frostman measure.
 	%
 	Taking $\varepsilon \to 0$, we conclude $\mu(F) = 0$, so $\mu$ is absolutely continuous with respect to $H^s$. But since $\mu(E) > 0$, this means that $H^s(E) > 0$.
 
-	Conversely, suppose $H^s(E) > 0$. Then by translating, we may assume that $H^s(E \cap [0,1)^d) > 0$, and so without loss of generality we may assume that $E \subset [0,1)^d$. Fix $M$, and for each $I \in \B(1/M^k,\RR^d)$, define
+	Conversely, suppose $H^s(E) > 0$. Then by translating, we may assume that $H^s(E \cap [0,1)^d) > 0$, and so without loss of generality we may assume $E \subset [0,1)^d$. Fix $M$, and for each $I \in \B(1/M^k,\RR^d)$, define
 	%
 	\[ \mu^+(I) = H^{s,M}_{1/M^k}(E \cap I) \]
 	%
@@ -377,6 +415,8 @@ Thus $\mu$ is a Frostman measure.
 	%
 	This is feasible to do because $\sum_{i = 1}^M \mu^+(J_i) \geq \mu^+(I) \geq \mu(I)$. We then define $\mu(J_i) = A_i$. The recursive constraint is satisfied, so $\mu$ is well defined. The mass distribution principle then implies that $\mu$ extends to a full measure, which satisfies $\mu(I) \leq \mu^+(I) \leq 1/M^{ks}$ for each $I \in \B(1/M^k,\RR^d)$, so it is a Frostman measure with dimension $s$.
 \end{proof}
+
+Frostman's lemma implies that to study the Hausdorff dimension of the set, it suffices to understand the class of measures which can be supported on that set. The next section establishes techniques for understanding the properties of these measures.
 
 
 
@@ -388,14 +428,14 @@ Thus $\mu$ is a Frostman measure.
 
 A \emph{Cantor-type} decomposition of a set $E$ is a decreasing sequence of sets $\{ E_k \}$, together with a decreasing sequence of lengths $\{ l_k \}$, such that each $E_k$ is a finite union of cubes in $\B(l_k,\RR^d)$, and $E = \lim_{k \to \infty} E_k$. For simplicity, we assume $E \subset [0,1]^d$, and $l_0 = 1$. If a sequence of lengths $\{ l_k \}$ is fixed, then given a cube $I \in \B(l_{k+1},\RR^d)$, we let $I^* \in \B(l_k,\RR^k)$ denote the unique \emph{parent cube} of $I$, i.e. the unique cube with $I \subset I^*$.
 
-In this thesis, Cantor-type decompositions naturally arise from the constructions of sets we produce. One advantage of the decomposition is the ability to construct Frostman measures. For instance, a natural choice is obtained by recursively defining a function $\mu$ by setting $\mu[0,1]^d = 1$, and setting, for each $I \in \B(l_{k+1},\RR^d)$,
+In this thesis, Cantor-type decompositions naturally arise from the nature of the constructions of sets. One advantage of the decomposition is the ease at which we can construct Frostman measures. For instance, a natural choice is obtained by recursively defining a function $\mu$ by setting $\mu[0,1]^d = 1$, and, for each $I \in \B(l_{k+1},\RR^d)$,
 %
-\[ \mu(I) = \frac{\mu(I^*)}{\# \B(l_k,E_k \cap I^*)} \]
+\[ \mu(I) = \frac{\mu(I^*)}{\# \B(l_k,E_k \cap I^*)}\quad \text{if}\ I \in \B(l_{k+1},E_k), \]
 %
-if $I \in \B(l_{k+1},E_k)$, and $\mu(I) = 0$ otherwise. The mass distribution principle then extends $\mu$ to a probability measure. We will refer to this as the \emph{canonical construction}. Simple combinatorial reasoning related to the construction of the set $E$ often enables one to establish bounds of the form $\mu(I) \lesssim l_k^s$ for $I \in \B(l_k,\RR^k)$. If the lengths $\{ l_k \}$ are dyadic, we have already shown this is sufficient to show $\mu$ is a Frostman measure of dimension $s$. But if we weaken the condition to being a Frostman measure of dimension $s - \varepsilon$ for all $\varepsilon > 0$, we can allow the lengths to decrease at a much faster rate, even up to where the lengths are \emph{hyperdyadic}.
+and $\mu(I) = 0$ otherwise. The mass distribution principle then extends $\mu$ to a probability measure. We will refer to this as the \emph{canonical measure} associated with the cantor decomposition $\{ E_k \}$. Simple combinatorial reasoning related to the construction of the set $E$ often enables one to establish bounds of the form $\mu(I) \lesssim l_k^s$ for $I \in \B(l_k,\RR^k)$. If the lengths $\{ l_k \}$ are dyadic, we have already shown this is sufficient to show $\mu$ is a Frostman measure of dimension $s$. But if we weaken the condition to being a Frostman measure of dimension $s - \varepsilon$ for all $\varepsilon > 0$, we can allow the lengths to decrease at a much faster rate, even up to where the lengths are \emph{subhyperdyadic}.
 
 \begin{theorem} \label{easyCoverTheorem}
-	Let $l_k = 2^{-a_k}$, and suppose $a_{k+1} - a_k = o(a_k)$. If $\mu$ is a Borel measure such that $\mu(I) \lesssim l_k^s$ for each $I \in \B(l_k,\RR^d)$, then $\mu$ is a Frostman measure of dimension $s - \varepsilon$ for each $\varepsilon > 0$.
+	Let $l_k = 2^{-\psi(k)}$, and suppose $\psi(k+1)/\psi(k) \to 1$ as $k \to \infty$. If $\mu$ is a Borel measure such that $\mu(I) \lesssim l_k^s$ for each $I \in \B(l_k,\RR^d)$, then $\mu$ is a Frostman measure of dimension $s - \varepsilon$ for each $\varepsilon > 0$.
 \end{theorem}
 \begin{proof}
 	The idea of the argument, which has been implicit in most of our other discretization approaches, is a covering argument. Given a cube $I$ with sidelength $l$, find $k$ such that $l_{k+1} \leq l \leq l_k$. Then we can cover $I$ by $O(1)$ cubes in $\B(l_k,\RR^d)$, which shows
@@ -404,39 +444,39 @@ if $I \in \B(l_{k+1},E_k)$, and $\mu(I) = 0$ otherwise. The mass distribution pr
 	%
 	The proof is completed by noticing
 	%
-	\[ (l_k/l)^s l^\varepsilon \leq (l_k/l_{k+1})^s l^\varepsilon \leq \exp(s(a_{k+1} - a_k) - \varepsilon a_k) \lesssim_\varepsilon 1, \]
+	\begin{align*}
+		(l_k/l)^s l^\varepsilon &\leq (l_k/l_{k+1})^s l^\varepsilon\\
+		&\leq \exp(s(\psi(k+1) - \psi(k)) - \varepsilon \psi(k))\\
+		&= \exp(\psi(k)(s \cdot o(1) - \varepsilon)) \lesssim_\varepsilon 1,
+	\end{align*}
 	%
 	so $\mu(I) \lesssim_\varepsilon l^{s-\varepsilon}$.
 \end{proof}
 
-This result applies, for instance, in the case where $l_k = 2^{-k^n}$ for some fixed integer $n$, since then $(k+1)^n - k^n = O(k^{n-1}) = o(k^n)$. We can even get `just' over polynomial powers of $n$. Let $l_k = 1/2^{2^{\psi(k) k}}$, where $\psi$ is a decreasing function of $k$, which tends to zero as $k \to \infty$, but for which $\psi(k) k$ is an increasing function which tends to $\infty$. Such a sequence is often called \emph{hyperdyadic}. It is simple to calculate that
-%
-\[ 2^{\psi(k+1) (k+1)} - 2^{\psi(k)k} \leq 2^{\psi(k)k}(2^{\psi(k)} - 1) = o(2^{\psi(k)k}). \]
-%
-thus it suffices to analyze Frostman measures at a hyperdyadic set of lengths. But it is of course easy to construct superexponential examples of $l_k$ where we cannot use this technique. And the next example shows we shouldn't be too hopeful in this scenario.
+Thus, just like with Minkowski dimension, it suffices to perform an analysis at a hyperdyadic sequence of lengths. This is the fastest decaying sequence of lengths that we can use, in general.
 
 \begin{example}
-	Let $l_k = 1/2^{a_k}$, where $a_{k+1} \geq 2a_k$ for each $k$. Form a set $E = \lim_{k \to \infty} E_k$, where $E_0 = [0,1]$, each $E_k$ is a union of sidelength $l_k^2$ cubes, and $E_{k+1}$ is obtained by selecting a single cube in $\B(l_{k+1}^2,I)$ from each element $I \in \B(l_{k+1}, E_k)$. For each $k$, $E$ is covered by at most $1/l_k$ sidelength $l_k^2$ cubes, so $E$ has lower Minkowski dimension at most $1/2$, and thus Hausdorff dimension at most $1/2$. Nonetheless, if we define the canonical measure $\mu$ from the Cantor-type decomposition $\{ E_k \}$, then one verifies that $\mu$ assigns the same amount of mass to each cube in $\B(l_k,E)$, and
+	Let $l_k = 2^{-\psi(k)}$, where $\psi(k+1) \geq 2\psi(k)$ for each $k$. Form a set $E = \lim_{k \to \infty} E_k$, where $E_0 = [0,1]$, each $E_k$ is a union of sidelength $l_k^2$ cubes, and $E_{k+1}$ is obtained by selecting a single cube in $\B(l_{k+1}^2,I)$ from each element $I \in \B(l_{k+1}, E_k)$. For each $k$, $E$ is covered by at most $1/l_k$ sidelength $l_k^2$ cubes, so $E$ has lower Minkowski dimension at most $1/2$, and thus Hausdorff dimension at most $1/2$. Nonetheless, if we define the canonical measure $\mu$ with respect to the Cantor-type decomposition $\{ E_k \}$, then one verifies that $\mu$ assigns the same amount of mass to each cube in $\B(l_k,E)$, and
 	%
 	\[ \# \B(l_k,E) = \# \B(l_{k-1},E) (l_{k-1}^2/l_k). \]
 	%
 	Thus as $k \to \infty$,
 	%
-	\[ \# \B(l_k,E) = \frac{l_{k-1}^2 \dots l_1^2}{l_k \dots l_1} = \frac{l_{k-1} \dots l_1}{l_k}. \]
+	\[ \# \B(l_k,E) = \frac{l_{k-1}^2 \dots l_1^2}{l_k \dots l_1} = \frac{l_{k-1} \dots l_1}{l_k} = 2^{\psi(k) - \psi(1) - \dots - \psi(k-1)}. \]
 	%
-	Provided $a_1 + \dots + a_{k-1} = o(a_k)$, this implies that $\# \B(l_k,E) \gtrsim l_k^{1 - o(1)}$, so if $I \in \B(l_k,E)$, $\mu(I) \lesssim l_k^{1 - o(1)}$. Thus at the scales $\{ l_k \}$, $\mu$ looks like a Frostman measure of full dimension, which cannot be the case. This example works if $a_k = 2^{k^{1 + \varepsilon}}$, for which the lengths $\{ l_k \}$ are \emph{just} past the point of being hyperdyadic.
+	Provided $\psi(1) + \dots + \psi(k-1) = o(\psi(k))$, this implies that $\# \B(l_k,E) \gtrsim l_k^{-(1 + o(1))}$, so if $I \in \B(l_k,E)$, $\mu(I) \lesssim l_k^{1 - o(1)}$. Thus at the scales $\{ l_k \}$, $\mu$ looks like a Frostman measure of full dimension, which cannot be the case. This example works, for instance, if $\psi(k) = \lfloor 2^{k \log k} \rfloor$, for which the lengths $\{ l_k \}$ are \emph{just} past the point of being hyperdyadic.
 \end{example}
 
-Thus, if we are to use a faster decreasing sequence of lengths $\{ l_k \}$ than hyperdyadic, we must have to exploit some extra property of the decomposition which is not always present. Here, we rely on some kind of \emph{uniformity} between scales. Given the uniformity assumption, the lengths can decrease as fast as desired.
+If we are to use a faster decreasing sequence of lengths $\{ l_k \}$, we therefore must have to exploit some extra property of the decomposition which is not always present. Here, we rely on some kind of \emph{uniform mass distribution} between scales. Given the uniformity assumption, the lengths can, in some sense, decrease as fast as desired.
 
 %Our final method for interpolating requires extra knowledge of the dissection process, but enables us to choose the $l_k$ arbitrarily rapidly. The idea behind this is that there is an additional sequence of lengths $r_k$ with $l_k \leq r_k \leq l_{k-1}$. The difference between $r_k$ and $l_{k-1}$ is allowed to be arbitrary, but the decay rate between $l_k$ and $r_k$ is of polynomial-type, which enables us to use the covering methods of the previous section. In addition, we rely on a `uniform mass bound' between $r_k$ and $l_k$ to cover the remaining classes of intervals. Because we can take $r_k$ arbitrarily large relative to $l_k$, this renders any constants that occur in the construction to become immediately negligible. For two quantities $A$ and $B$, we will let $A \precsim_k B$ stand for an inequality with a hidden constant depending only on parameters with index smaller than $k$, i.e. $A \leq C(l_1, \dots, l_k, r_1,\dots,r_k) B$ for some constant $C(l_1, \dots, l_k, r_1, \dots, r_k)$ depending only on parameters with indices up to $k$.
 
 \begin{theorem} \label{uniformHausdorffResult}
-    Let $\mu$ be a measure supported on a set $E$, and $\{ l_k \}$ and $\{ r_k \}$ two decreasing sequences of lengths, with $l_{k+1} \leq r_{k+1} \leq l_k$ for each $k$. Write $l_k = 2^{-a_k}$ and $r_k = 2^{-b_k}$. Suppose that
+    Let $\mu$ be a measure supported on a set $E$, and $\{ l_k \}$ and $\{ r_k \}$ two decreasing sequences of lengths, with $l_{k+1} \leq r_{k+1} \leq l_k$ for each $k$. Write $l_k = 2^{-\psi(k)}$ and $r_k = 2^{-\eta(k)}$. Suppose that
     %
     \begin{enumerate}
     	\item \label{discreteBound} \emph{(Discrete Bound)}: For any $I \in \B(l_k,\RR^d)$, $\mu(I) \lesssim l_k^s$.
-    	\item \label{controlledScale} \emph{(Hyperdyadic Scale Change)}: $b_k - a_k = o(a_k)$.
+    	\item \label{controlledScale} \emph{(Hyperdyadic Scale Change)}: $\eta(k)/\psi(k) \to 1$.
     	\item \label{uniformDist} \emph{(Uniform Mass Distribution)}: For any $I \in \B(l_k,\RR^d)$, and $J \in \B(r_{k+1},I)$,
     	%
     	\[ \mu(J) \lesssim (r_{k+1}/l_k)^d \mu(I). \]
@@ -453,8 +493,17 @@ Thus, if we are to use a faster decreasing sequence of lengths $\{ l_k \}$ than 
     %
     \[ \mu(I) \lesssim r_k^s \leq [(r_k/l_k)^s l^\varepsilon] l^{s-\varepsilon}. \]
     %
-    Property \ref{controlledScale} shows $(r_k/l_k)^s l^\varepsilon \lesssim_\varepsilon 1$, so $\mu(I) \lesssim_\varepsilon l^{s-\varepsilon}$ for each $\varepsilon > 0$. This covers all possible cases, so $\mu$ is a Frostman measure of dimension $s-\varepsilon$ for each $\varepsilon > 0$.
+    Property \ref{controlledScale} shows $\psi(k) - \eta(k) = o(\eta(k))$, so
+    %
+    \[ (r_k/l_k)^s l^\varepsilon \leq r_k^{s+\varepsilon} / l_k^s \leq 2^{s \psi(k) -(s+\varepsilon) \eta(k)} = 2^{(- \varepsilon + o(1)) \eta(k)} \lesssim_\varepsilon 1, \]
+    %
+    so $\mu(I) \lesssim_\varepsilon l^{s-\varepsilon}$ for each $\varepsilon > 0$. This covers all possible cases, so $\mu$ is a Frostman measure of dimension $s-\varepsilon$ for each $\varepsilon > 0$.
 \end{proof}
+
+\begin{remark}
+	Let us dwell on the choice of scales. The sequence of scales $\{ l_k \}$ can decrease to zero as rapidly as desired. On the other hand, the sequence $\{ l_k/r_k \}$ must be a hyperdyadic sequence. One can visualize this as allowing the gap between $l_k$ and $r_{k+1}$ to be as large as desired, between which $\mu$ has effectively a full dimensional behaviour \footnote{Technically, we only obtain an explicit bound $\mu(I) \lesssim l^{1 - \varepsilon}$ for all $I \in \B(l,E)$ for all lengths $l$ for which there is $k$ with $r_{k+1} \leq l \leq l_k$ only if the lengths decrease rapidly enough and $l$ is significantly closer to $r_{k+1}$ rather than $l_k$.}, but placing a bound on the gap between $r_{k+1}$ and $l_{k+1}$, where the measure behaves $s$ dimensionally. This is visualized in the diagram below.
+	% TODO: Draw diagram.
+\end{remark}
 
 %\begin{remark}
 %    The condition $\mu_\beta(J) \lesssim_{N-1} (r_N/l_N) \mu_\beta(I)$ essentially means that the probability mass on a length $l_N$ interval $I$ is uniformly distributed over the length $r_N$ intervals it contains. This is what enables us to remove the discussion of the growth of the sequence $\beta$ over time from discussion.
@@ -462,9 +511,7 @@ Thus, if we are to use a faster decreasing sequence of lengths $\{ l_k \}$ than 
 
 %Since the construction is obtained as a limit of intervals, it is often possible to construct such a $\mu$ by the {\it mass distribution principle}. That is, we let $\mu$ denote the weak limit of the probability masses $\mu_n$, where $\mu_0$ is a uniform distribution over $\mu_0$, and $\mu_{n+1}$ is obtained from $\mu_n$ by distributing the mass $\mu_n(I)$ of each length $l_n$ interval $I$ contained in $X_n$ over the portion of $I$ that remains in $X_{n+1}$. The cumulative distribution functions of the $\mu_n$ uniformly converge, hence the $\mu_n$ converge weakly to some $\mu$, which satisfy $\mu(I) = \mu_n(I)$ for each interval $I$ as above. Because of this discreteness, it is most easy to establish a bound $\mu(I) \lesssim l_n^\alpha$ when $I \subset X_n$ is a length $l_n$ interval. Since any interval $I$ of length $l_n$ is contained within at least two such intervals (or is contained in other length $l_n$ intervals that $\mu$ assigns no mass to), we have the general bound $\mu(I) \lesssim l_n^\alpha$ for all intervals $I$ of length $l_n$. Hausdorff dimension is a local property of a set\footnote{If we define $\dim_{\mathbf{H}}(x) = \lim_{r \downarrow 0} \dim_{\mathbf{H}}(B_r(x) \cap X)$ then $\dim_{\mathbf{H}}(X) = \sup_{x \in X} \dim_{\mathbf{H}}(x)$.}, so it is natural to expect that we can obtain a general bound $\mu(I) \lesssim_\alpha|I|^\alpha$ given that one has established precisely the same estimate, but restricted to intervals $I$ with $|I| = l_N$. This section concerns itself with ways that we can establish this general bound, and thus prove that $\dim_{\mathbf{H}}(X) \geq \alpha$.
 
-\endinput
-
-
+\section{Extras: Should we Include?}
 
 
 
@@ -513,7 +560,7 @@ The hypothesis of Lemma 7 is certainly satisfied if $\mu(I) \lesssim_\varepsilon
 	so $A_m \leq c_\varepsilon M^{(s - \varepsilon) \alpha^{m+1}}$. Thus if we define $E_m$ as in the last proof, then $\mu(E_m) \lesssim 1/k^2$.
 \end{proof}
 
-The requirement of this lemma is satisfied if we are able to prove $\mu(I) \lesssim_\varepsilon l_k^{s - \varepsilon}/k^2$ where $l_k = M^{- \alpha^k}$. These are \emph{hyperdyadic} numbers.
+The requirement of this lemma is satisfied if we are able to prove $\mu(I) \lesssim_\varepsilon l_k^{s - \varepsilon}/k^2$, where $l_k = M^{- \alpha^k}$, for all $\varepsilon > 0$. These are \emph{hyperdyadic} numbers.
 
 \begin{proof}
 	Suppose that $H^{s-\varepsilon}(E) = 0$. Then for any $M$ and $c_\varepsilon$, $E$ is covered by cubes $\{ I_k \}$ with sidelengths $\{ r_k \}$ such that $I_k \in \B(r_k,\RR^d)$, $r_k \leq l_M$ for each $k$, and $\sum r_k^{s - \varepsilon} \leq c_\varepsilon$. For each $k$, let $A_m = \# \{ k: l_{m+1} \leq r_k \leq l_m \}$. Then
@@ -568,18 +615,93 @@ For a fixed $0 < \varepsilon \ll 1$, a \emph{hyperdyadic number} is a number of 
 	\[ H^s_{C_\varepsilon h_k^{1 - C\varepsilon}} \]
 \end{proof}
 
-\section{Hyperdyadic Covers}
 
-Recall the definition of the Hausdorff measure $H^\alpha(E) = \lim_{\delta \to 0} H^\alpha_\delta(E)$, where $H^\alpha_\delta(E)$ is the greatest lower bound of $\sum r_n^\alpha$, over all choices of covers of $E$ by cubes $I_1, I_2, \dots$, where $I_n$ has sidelengths $r_n$. We then define the Hausdorff dimension of $E$ to be the least upper bound of the scalars $\alpha$ such that $H^\alpha(E) = 0$, or alternatively, the greatest lower bound of $\alpha$ such that $H^\alpha(E) = \infty$.
 
-To determine the Hausdorff dimension of $E$, it suffices to consider only dyadic cubes in the cover of $E$. Define $H^\alpha(E) = \lim_{\delta \to 0} H^\alpha_{D,\varepsilon}(E)$, where $H^\alpha_{D,\varepsilon}(E)$ is the greatest lower bound of $\sum r_n^\alpha$ over \emph{dyadic} covers $I_1, I_2, \dots$, with $I_n \in \mathcal{B}(r_n)$. Then $H^\alpha_D$ is comparable with $H^\alpha$.
+
+
+
+
+
+
+
+\section{Hyperdyadic Covers Take 3}
+
+Fix two parameters $\delta > 0$ and $\varepsilon > 0$. Given two numbers $A = A_{\delta \varepsilon}$ and $B = B_{\delta \varepsilon}$, we say $A \lessapprox B$ if there exists constants $C_\varepsilon$, and $C$ such that $A \leq C_\varepsilon \delta^{-C\varepsilon} B$. We say $A \approx B$ if $A \lessapprox B$ and $B \lessapprox A$. We say a set $E$ is \emph{$\delta$ discretized} if it is a union of dyadic cubes with sidelength $\approx \delta$. We say a set $E$ is a \emph{$(\delta,\alpha)$ set} if it is $\delta$ discretized, and for any dyadic cube $I$ with $\delta \leq l(I) \leq 1$, $|E \cap I| \lessapprox \delta^{d-\alpha} l(I)^\alpha$. Thus $E$ is \emph{roughly} a $\delta$ thickening of an $\alpha$ dimensional set. A set $E$ is \emph{strongly covered} by a family of sets $\{ U_i \}$ if $E \subset \limsup_{i \to \infty} U_i$. We consider a fixed hyperdyadic sequence $l_k = 2^{- \lfloor (1 + \varepsilon)^k \rfloor}$.
+
+\begin{lemma}
+	If $C$ is sufficiently large, and for each $\varepsilon$, there is a $(\delta, \alpha - C \varepsilon)$ set $X_\delta$ for each hyperdyadic $\delta$ such that the $X_\delta$ strongly cover $X$, then $\dim(X) \leq \alpha$.
+\end{lemma}
+\begin{proof}
+	Let $X_\delta = \bigcup I_i$, where $\{ I_i \}$ are disjoint dyadic cubes such that $l(I_i) \approx \delta$, and with $|X_\delta| \lessapprox \delta^{d-\alpha + C\varepsilon}$. Then
+	%
+	\[ |X_\delta(\delta/2)| \leq \sum (l(I_i) + \delta/2)^d \lessapprox \sum l(I_i)^d = |X_\delta| \lessapprox \delta^{d - \alpha + C\varepsilon}. \]
+	%
+	A volumetric argument then guarantees that $N(X_\delta,\delta) \lessapprox \delta^{-\alpha + C\varepsilon}$, and so
+	%
+	\[ H^\alpha_\infty(X_\delta) \leq N(X_\delta,\delta) \delta^\alpha \lessapprox \delta^{C\varepsilon}. \]
+	%
+	Thus there is $C_\varepsilon$ and $C_0$ such that $H^\alpha_\delta(X_\delta) \leq C_\varepsilon \delta^{(C - C_0) \varepsilon}$. Since $C_0$ does not depend on $C$, if we set $C > C_0$, then
+	%
+	\[ \sum_{i = 1}^\infty H^\alpha_\infty(X_\delta) < \infty, \]
+	%
+	and so $H^\alpha_\infty(X) = 0$.
+\end{proof}
 
 \begin{theorem}
-    For any set $E$, $H^\alpha(E) \leq H^\alpha_D(E) \leq 2^{d + \alpha} H^\alpha(E)$.
+	Suppose $X$ is a set with $\dim(X) \leq \alpha$. Then there exists a strong cover of $X$ by sets $X_\delta$, where $X_k$ is a union of $O((1 + \varepsilon)^{2k} l_k^{-\alpha})$ hyperdyadic cubes of sidelength $l_k$.
+\end{theorem}
+
+\begin{theorem}
+	If $\dim(X) \leq \alpha$, then for each hyperdyadic $\delta$, we can associate a $(\delta,\alpha)$ set $X_\delta$ such that $\{ X_\delta \}$ strongly covers $X$.
 \end{theorem}
 \begin{proof}
-    Given any not necessarily dyadic cover $I_1, I_2, \dots$, we can replace each sidelength $r_n$ cube $I_n$ with at most $2^d$ dyadic cubes with radius at most $2r_n$, which gives $H^\alpha_{D,\varepsilon}(E) \leq 2^{1 + \alpha} H^\alpha_\varepsilon(E)$, and taking the limit as $\varepsilon \to 0$ then gives the required upper bound for $H^\alpha_D$.
+	For each hyperdyadic number $l_k$, we can find a collection of dyadic cubes $\{ I_{k,i} \}$ covering $X$ with $l(I_{k,i}) \leq l_k$ for all $i$, and
+	%
+	\[ \sum_{i = 1}^\infty l(I_{k,i})^{\alpha + C\varepsilon} \lesssim 1. \]
+	%
+	For each $k$ and $i$, we can find $j_{k,i}$ such that $l_{j_{k,i} + 1} \leq l(I_{k,i}) \leq l_{j_{k,i}}$. Note that $l_{j_{k,i} + 1} \lesssim l_{j_{k,i}}^{1 + \varepsilon}$, and so
+	%
+	\begin{align*}
+		\sum_{i = 1}^\infty \# \B(l_{j_{k,i}}, I_{k,i}) \cdot l_{j_{k,i}}^{\alpha + C\varepsilon} &\lesssim \sum_{i = 1}^\infty l(I_{k,i})^{\alpha + C \varepsilon} (l_{j_{k,i}} / l(I_{k,i}))^{\alpha + C\varepsilon}\\
+		&\lesssim \sum_{i = 1}^\infty l(I_{k,i})^{\alpha + C\varepsilon} l_{j_{k,i}}^{-\varepsilon(\alpha + C\varepsilon)}\\
+		&\lesssim \sum_{i = 1}^\infty l(I_{k,i})^{\alpha + (C - \alpha + \varepsilon) \varepsilon}
+	\end{align*}
+	%
+	Thus, replacing $C$ with a slightly smaller constant, and replacing $I_{k,i}$ with the collection of cubes $\B(l_{j_{k,i}}, I_{k,i})$, we may assume all cubes in the decomposition are hyperdyadic. We let $Y_{k_1,k_2}$ to be the union of all cubes in the decomposition $\{ I_{k_1,i} \}$ with hyperdyadic length $l_{k_2}$. Note that $Y_{k_1,k_2}$ is the union of $O((1/l_{k_2})^{\alpha + C\varepsilon})$ cubes. We let $\mathbf{Q}_{k_1,k_2}$ be the collection of cubes covering $Y_{k_1,k_2}$ which minimize the quantity
+	%
+	\[ \sum_{Q \in \mathbf{Q}_{k_1,k_2}} l(Q)^\alpha \]
+	%
+	and such that $l(Q) \geq l_{k_2}$ for each $Q$. Then clearly
+	%
+	\[ \sum_{Q \in \mathbf{Q}_{k_1,k_2}} l(Q)^\alpha \lesssim l_{k_2}^{- C\varepsilon}. \]
+	%
+	In particular, this means $l(Q) \lesssim l_{k_2}^{-C\varepsilon/\alpha}$. Furthermore, for each $I$ with $l(I) \geq l_{k_2}$,
+	%
+	\[ \sum_{Q \subset I} l(Q)^\alpha \leq l(I)^\alpha. \]
+	%
+	Now we define $X_k$ by collection all cubes in the sets $\mathbf{Q}_{k_1,k_2}$ which have sidelength $l_k$. Then clearly $X_k$ is $l_k$ discretized. Since $X_k$ only contains cubes from $\mathbf{Q}_{k_1,k_2}$ where $k_2 \geq k_1$, and $l_k \lesssim l_{k_2}^{-C\varepsilon/\alpha}$, this means that there are only $O(\log(1/l_k)^2)$ such choices of $(k_1,k_2)$. But this means that for $Q \in \mathbf{Q}_{k_1,k_2}$
+	%
+	\[ \sum_{Q \subset I} l(Q)^\alpha \lesssim \log(1/l_k)^2 l(I)^\alpha \]
+	%
+	In particular,
+	%
+	\[ |X_k| \leq \sum l(Q)^d = l_k^{d - \alpha} \sum l(Q)^\alpha \lesssim \log(1/l_k)^2 l_k^{d-\alpha} \]
+
+	%(1 + \varepsilon)^{2k}
+
+	$|X_k| \leq \log(1/l_k)^2$
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Hyperdyadic Covers}
 
 If we are restricting ourselves to cubes lying at a series of discrete scales, it seems as if the dyadic sequence is about as fast as we can use so that the resultant Hausdorff measure is comparable to the usual Hausdorff measure. Nonetheless, using a weak type bound we can get results for a faster decreasing family of scales. This is necessary for our calculations. We fix a positive $\delta$, and consider a sequence of {\bf hyperdyadic scales} $H_N = 2^{- \lfloor (1 + \delta)^N \rfloor}$. A {\bf hyperdyadic cube} is then a cube in $\mathcal{B}(H_N)$ for some $N$.
 

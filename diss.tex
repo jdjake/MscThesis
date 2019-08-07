@@ -41,11 +41,11 @@
 
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
 \newtheorem*{example}{Example}
 \newtheorem*{fact}{Fact}
-\newtheorem*{corollary}{Corollary}
-\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem*{remark}{Remark}
 
 \usepackage{algorithm}
@@ -226,8 +226,8 @@
 % Dimensions
 \DeclareMathOperator{\minkdim}{\dim_{\mathbf{M}}}
 \DeclareMathOperator{\hausdim}{\dim_{\mathbf{H}}}
-\DeclareMathOperator{\lowminkdim}{\underline{\dim}_{\mathbf{M}}}
-\DeclareMathOperator{\upminkdim}{\overline{\dim}_{\mathbf{M}}}
+\DeclareMathOperator{\lowminkdim}{\dim_{\underline{\mathbf{M}}}}
+\DeclareMathOperator{\upminkdim}{\dim_{\overline{\mathbf{M}}}}
 
 \DeclareMathOperator{\lhdim}{\underline{\dim}_{\mathbf{M}}}
 \DeclareMathOperator{\lmbdim}{\underline{\dim}_{\mathbf{MB}}}
