@@ -39,6 +39,9 @@
 
 \usepackage{amsmath, amsfonts, amssymb, accents, mdwlist}
 
+% Change mathcal to original
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
 \usepackage{amsthm}
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -229,8 +232,8 @@
 \DeclareMathOperator{\lowminkdim}{\dim_{\underline{\mathbf{M}}}}
 \DeclareMathOperator{\upminkdim}{\dim_{\overline{\mathbf{M}}}}
 
-\DeclareMathOperator{\lhdim}{\underline{\dim}_{\mathbf{M}}}
-\DeclareMathOperator{\lmbdim}{\underline{\dim}_{\mathbf{MB}}}
+\DeclareMathOperator{\lmbdim}{\dim_{\underline{\mathbf{MB}}}}
+\DeclareMathOperator{\umbdim}{\dim_{\overline{\mathbf{MB}}}}
 
 % Indicator Functions
 \DeclareMathOperator{\ind}{\mathbf{I}}
@@ -244,13 +247,18 @@
 % Probability Operators
 \DeclareMathOperator{\EE}{\mathbf{E}}
 \DeclareMathOperator{\PP}{\mathbf{P}}
-
-\DeclareMathOperator{\AAA}{\mathbf{A}}
 \DeclareMathOperator{\Prob}{\mathbf{P}}
 \DeclareMathOperator{\Expect}{\mathbf{E}}
 
+\DeclareMathOperator{\AAA}{\mathbf{A}}
+
 \DeclareMathOperator{\B}{\mathcal{B}}
 \DeclareMathOperator{\C}{\mathcal{C}}
+
+% Dyadic classes
+\DeclareMathOperator{\DQ}{\mathcal{Q}}
+\DeclareMathOperator{\DB}{\mathcal{B}}
+\DeclareMathOperator{\DD}{\mathcal{D}}
 
 \DeclareMathOperator{\Config}{\mathcal{C}}
 \DeclareMathOperator{\diam}{\text{diam}}
