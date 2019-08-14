@@ -5,7 +5,68 @@
 \label{ch:RoughSets}
 
 
-In the last few chapters, we have discovered that the presence of many configurations is not guaranteed by large Hausdorff dimension. We now turn to an analysis of a different dimensional quantity which in many cases gives much more structure than Hausdorff dimension. 
+In the last few chapters, we have discovered that the presence of many configurations is not guaranteed by large Hausdorff dimension. We now turn to an analysis of a different dimensional quantity which in many cases gives much more structure than Hausdorff dimension. We construct a set $E$
+
+\begin{proof}
+	Let $S_0 = \{ 0 \}$. Then, given $S_k$, let $N^s$
+	%
+	\[ S_{k+1} = \left\{ (j, mN_{k+1}^{1-\alpha} + X_{jk}) : j \in S_k, 0 \leq m < N_{k+1}^\alpha \right\} \]
+	% N_k = M_k^{1/\alpha}
+	where $X_{jk}$ is chosen uniformly randomly from all integers in $[0,N_k^\alpha)$. Write $E_k = \{ \bigcup Q_j : j \in S_k \}$. Then $\#(S_{k+1}) = N_{k+1}^\alpha \#(S_k)$, and since $\#(S_0) = 1$, we find $\#(S_k) = (N_1 \dots N_k)^\alpha$. Now define $E_k = \{ \bigcup Q_j : j \in S_k \}$, and probability measures
+	%
+	\[ f_k = (N_1 \dots N_k)^{1 - \alpha} \mathbf{I}_{E_k}. \]
+	%
+	Then $\widehat{f_{k+1}}(m) - \widehat{f_k}(m) = \sum_{j \in S_k} Y_j(m)$, where
+	%
+	\[ Y_j(m) = \int_{I_j} (f_{k+1}(x) - f_k(x)) e(mx)\; dx \]
+	%
+	Note that $\mathbf{E}[f_{k+1}(x)] = \mathbf{E}[f_k(x)]$ for each $x$, so that $\mathbf{E}[Y_j(m)] = 0$. Note also that
+	%
+	\[ |Y_j(m)| \leq 2l_k / l_{k+1}^{1-\alpha} = \frac{2 N_{k+1}^{1-\alpha}}{(N_1 \dots N_k)^\alpha}. \]
+	%
+	Thus Hoeffding's inequality implies
+	%
+	\begin{align*}
+		\mathbf{P} \left( |\widehat{f_{k+1}}(m) - \widehat{f_k}(m)| \geq t \right) &\leq 4 \exp \left( - \left( t \frac{(N_1 \dots N_k)^\alpha}{4 N_{k+1}^{1-\alpha} \#(S_k)^{1/2}} \right)^2 \right)\\
+		&\leq 4 \exp \left( - \left( t \frac{(N_1 \dots N_k)^{\alpha/2}}{2 N_{k+1}^{1-\alpha}} \right)^2 \right)
+	\end{align*}
+	%
+	Thus we can guarantee with high probability that for all $m$,
+	%
+	\[ |\widehat{f_{k+1}}(m) - \widehat{f_k}(m)| \lessapprox \frac{N_{k+1}^{1-\alpha}}{(N_1 \dots N_k)^{\alpha/2}} \]
+	%
+	So if $N_{k+1} \lesssim (N_1 \dots N_k)^\varepsilon$ for all $\varepsilon > 0$, we obtain the right bound. But we need something deeper.
+
+	Take 2: Write
+	%
+	\[ f_{k+1}(x) = (N_1 \dots N_{k+1})^{1-\alpha} \sum_{j \in S_k} \sum_{m = 0}^{N_{k+1}^{1-\alpha}} Y_{jm} \]
+	%
+	where $Y_{jm}$ is the indicator function of
+	%
+	\[ \left[ \frac{j}{N_1 \dots N_k} + \frac{m}{N_1 \dots N_{k+1}^\alpha} + \frac{X_{jk}}{N_1 \dots N_{k+1}}, \frac{j}{N_1 \dots N_k} + \frac{m}{N_1 \dots N_{k+1}^\alpha} + \frac{X_{jk} + 1}{N_1 \dots N_{k+1}} \right] \]
+	%
+	Note that
+	%
+	\[ \widehat{Y_{jm}}(n) = \frac{1}{2 \pi i n} e \left( \frac{j n}{N_1 \dots N_k} + \frac{m n}{N_1 \dots N_{k+1}^\alpha} + \frac{X_{jk} n}{N_1 \dots N_{k+1}} \right) \left( e \left( \frac{n}{N_1 \dots N_{k+1}} \right) - 1 \right), \]
+	%
+	and
+	%
+	\begin{align*}
+		\mathbf{E} \left(\widehat{Y_{jm}}(n) \right) &= \frac{1}{2 \pi i n N_{k+1}^\alpha} e \left( \frac{jn}{N_1 \dots N_k} + \frac{mn}{N_1 \dots N_{k+1}^\alpha} \right) \left( e \left( \frac{ N_{k+1}^\alpha n}{N_1 \dots N_{k+1}} \right) - 1 \right).
+	\end{align*}
+	%
+	and $|\widehat{Y_{jm}}| \leq 1/(N_1 \dots N_{k+1})$. Thus Hoeffding's inequality implies, if we ignore the expectation,
+	%
+	%
+	\begin{align*}
+		\mathbf{P} \left( |\widehat{f_{k+1}}(n)| \geq t (N_1 \dots N_{k+1})^{1-\alpha} \right) &\leq 4 \exp \left( \frac{-t^2 (N_1 \dots N_{k+1})^2}{4(N_1 \dots N_{k+1})^\alpha} \right)\\
+		&\leq 4 \exp \left( - \left( t (N_1 \dots N_{k+1})^{1 - \alpha/2} / 2 \right)^2 \right).
+	\end{align*}
+	%
+	Thus with high probability, for all $|n| \leq N_1 \dots N_{k+1}$,
+	%
+	\[ |\widehat{f_{k+1}}(n)| \lessapprox \frac{1}{(N_1 \dots N_{k+1})^{\alpha/2}}. \]
+\end{proof}
 
 
 
