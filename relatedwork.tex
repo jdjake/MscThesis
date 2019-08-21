@@ -4,9 +4,13 @@
 \chapter{Related Work}
 \label{ch:RelatedWork}
 
+Here, we discuss the main papers which influenced our results. In particular, the work of Keleti on translate avoiding sets, Fraser and Pramanik's work on sets avoiding smooth configurations, Math\'{e}'s result on sets avoiding algebraic varieties, and Schmerkin's result on sets with large Fourier dimension avoiding smooth configurations.
+
 \section{Keleti: A Translate Avoiding Set}
 
-Keleti's two page paper constructs a full dimensional subset $X$ of $[0,1]$ such that $X$ intersects $t + X$ in at most one place for each nonzero real number $t$. If this is true, we say that $X$ \emph{avoids translates}. This paper contains the core idea behind the interval dissection method we adapt in our proof, which makes this paper of interest. In this section, and in the sequel, we shall find it is most convenient to avoid certain configurations by expressing them in terms of an equation, whose properties we can then exploit. One feature of translation avoidance is that the problem is specified in terms of a linear equation.
+Keleti's two page paper constructs a full dimensional set $X \subset [0,1]$ such that for each $t \neq 0$, $X$ intersects $t + X$ in at most one place. The set $X$ is then said to \emph{avoid translates}. This paper contains the core idea behind the \emph{interval dissection} method adapted in Fraser and Pramanik's paper. We also adapt this technique in our paper, which makes the result of interest.
+
+It is often convenient to avoid certain configurations when they are expressed in terms of an equation, which is exploited in Fraser and Pramanik, 
 
 \begin{lemma}
     Let $X$ be a set. Then $X$ avoids translates if and only if there do not exists values $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = x_4 - x_3$.
@@ -30,7 +34,7 @@ Keleti's two page paper constructs a full dimensional subset $X$ of $[0,1]$ such
 
 %\footnote{We always assume $L_n/L_{n+1}$ is an integer so that intervals in $\mathcal{B}(L_n)$ are either almost disjoint from intervals in $\mathcal{B}(L_{n+1})$ or contained completely within such an interval}
 
-The basic, but fundamental idea to Keleti's technique is to introduce memory into Cantor set constructions. Keleti constructs a nested family of discrete sets $X_0 \supset X_1 \supset \dots$ converging to $X$, with each $X_k$ a union of disjoint intervals in $\DQ_k^d$, where the branching factors $\{ N_k \}$ will be chosen later, but a multiple of 10. We initialize $X_0 = [0,1]$, and $l_0 = 1$. Furthermore, we consider a queue of intervals, initially just containining $[0,1]$. To construct the sequence $\{ X_k \}$, Keleti iteratively performs the following procedure:
+The basic, but fundamental idea to Keleti's technique is to introduce memory into Cantor set constructions. Keleti constructs a nested family of discrete sets $X_0 \supset X_1 \supset \dots$ converging to $X$, with each $X_k$ a union of disjoint intervals in $\DQ_k^d$, where the sequence $\{ N_k \}$ will be chosen later, but a multiple of 10. We initialize $X_0 = [0,1]$, and $l_0 = 1$. Furthermore, we consider a queue of intervals, initially just containining $[0,1]$. To construct the sequence $\{ X_k \}$, Keleti iteratively performs the following procedure:
 %
 \begin{algorithm}[H]
     \begin{algorithmic}%[1]
@@ -39,8 +43,8 @@ The basic, but fundamental idea to Keleti's technique is to introduce memory int
         \MRepeat
             \State{Take off an interval $I$ from the front of the queue.}
 
-            \MForAll{\ $J \in \DQ_k^1$ contained in $X_k$:}
-                \State{Order the intervals in $\DQ_k^1(J)$ as $J_0, J_1, \dots, J_N$.}
+            \MForAll{\ $J \in \DQ_k(X_k)$:}
+                \State{Order the intervals in $\DQ_{k+1}(J)$ as $J_0, J_1, \dots, J_N$.}
 
                 \State{{\bf If} $J \subset I$, add all intervals $J_i$ to $X_{k+1}$ with $i \equiv 0$ modulo 10.}
                 \State{{\bf Else} add all $J_i$ with $i \equiv 5$ modulo 10.}
@@ -51,13 +55,13 @@ The basic, but fundamental idea to Keleti's technique is to introduce memory int
     \end{algorithmic}
 \end{algorithm}
 
-Each iteration of the algorithm produces a new set $X_k$, and so leaving the algorithm to repeat infinitely produces a decreasing sequence $\{ X_k \}$ whose intersection is $X$.
+Each iteration of the algorithm produces a new set $X_k$, and so leaving the algorithm to repeat infinitely produces a sequence $\{ X_k \}$ whose intersection is $X$.
 
 \begin{lemma}
     The set $X$ is translate avoiding.
 \end{lemma}
 \begin{proof}
-    If $X$ is not translate avoiding, there is $x_1 < x_2 \leq x_3 < x_4$ with $x_2 - x_1 = x_4 - x_3$. Since $l_k \to 0$, there is a suitably large integer $N$ such that $x_1$ is contained in an interval $I \in \DQ_N^1$ not containing $x_2,x_3$, or $x_4$. At stage $N$ of the algorithm, the interval $I$ is added to the end of the queue, and at a much later stage $M$, the interval $I$ is retrieved. Find the startpoints $x_1^\circ, x_2^\circ$, $x_3^\circ, x_4^\circ \in l_M \mathbf{Z}$ to the intervals in $\DQ_M^1$ containing $x_1$, $x_2$, $x_3$, and $x_4$. Then we can find $n$ and $m$ such that $x_4^\circ - x_3^\circ = (10n)l_M$, and $x_2^\circ - x_1^\circ = (10m + 5)l_M$. In particular, this means that $|(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| \geq 5L_M$. But
+    If $X$ is not translate avoiding, there is $x_1 < x_2 \leq x_3 < x_4$ with $x_2 - x_1 = x_4 - x_3$. Since $l_k \to 0$, there is a suitably large integer $N$ such that $x_1$ is contained in an interval $I \in \DQ_N$ not containing $x_2,x_3$, or $x_4$. At stage $N$ of the algorithm, the interval $I$ is added to the end of the queue, and at a much later stage $M$, the interval $I$ is retrieved. Find the startpoints $x_1^\circ, x_2^\circ$, $x_3^\circ, x_4^\circ \in l_M \mathbf{Z}$ to the intervals in $\DQ_M$ containing $x_1$, $x_2$, $x_3$, and $x_4$. Then we can find $n$ and $m$ such that $x_4^\circ - x_3^\circ = (10n)l_M$, and $x_2^\circ - x_1^\circ = (10m + 5)l_M$. In particular, this means that $|(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| \geq 5L_M$. But
     %
     \begin{align*}
         |(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)| &= |[(x_4^\circ - x_3^\circ) - (x_2^\circ - x_1^\circ)] - [(x_4 - x_3) - (x_2 - x_1)]|\\
@@ -69,13 +73,39 @@ Each iteration of the algorithm produces a new set $X_k$, and so leaving the alg
 
 It is easy to see from the definition of the algorithm that
 %
-\[ \# (\DQ_k^1(X_k)) = (l_{k-1}/10l_k) \#(\DQ_{k-1}^1(X_{k-1})). \]
+\[ \# (\DQ_k(X_k)) = (l_{k-1}/10l_k) \#(\DQ_{k-1}(X_{k-1})). \]
 %
 Thus closing the recursive definition shows
 %
-\[ \#(\DQ_k^1(X_k)) = \frac{1}{10^k l_k}. \]
+\[ \#(\DQ_k(X_k)) = \frac{1}{10^k l_k}. \]
 %
-In particular, this means $|X_k| = 1/10^k$, so $X$ has measure zero irrespective of our parameters. Nonetheless, the canonical measure $\mu$ on $X$ defined with respect to the decomposition $\{ X_k \}$ satisfies $\mu(I) = 10^k l_k$ for all $I \in \B(l_k,X)$. If $10^k l_k^\varepsilon \lesssim_\varepsilon 1$ for all $\varepsilon$, then we can establish the bounds $\mu(I) \lesssim_\varepsilon l_k^{1-\varepsilon}$ for all $\varepsilon$. In particular this is true if we set $l_k = 1/10^{\lfloor k \log k \rfloor}$. And because this sequence does not rapidly decrease too fast, we can apply Lemma \ref{easyCoverTheorem} to show $\mu$ is a Frostman measure of dimension $1-\varepsilon$ for each $\varepsilon > 0$, so $X$ has full Hausdorff dimension.
+In particular, this means $|X_k| = 1/10^k$, so $X$ has measure zero irrespective of our parameters. Nonetheless, the canonical measure $\mu$ on $X$ defined with respect to the decomposition $\{ X_k \}$ satisfies $\mu(I) = 10^k l_k$ for all $I \in \B(l_k,X)$. If $10^k l_k^\varepsilon \lesssim_\varepsilon 1$ for all $\varepsilon$, then we can establish the bounds $\mu(I) \lesssim_\varepsilon l_k^{1-\varepsilon}$ for all $\varepsilon$. In particular, this is true if $N_k = 10^{\lfloor \log(k + 2) \rfloor}$. And because this sequence does not rapidly decrease too fast, we can apply Lemma \ref{easyCoverTheorem} to show $\mu$ is a Frostman measure of dimension $1-\varepsilon$ for each $\varepsilon > 0$, so $X$ has full Hausdorff dimension.
+
+
+
+\section{Generalizing Keleti's Argument}
+
+Before we move onto other methods which developed Keleti's argument work, it is useful to dwell on what general properties this argument has:
+%
+\begin{itemize}
+    \item \emph{Simplification to a Discrete Problem}: A major part of Keleti's argument is solving a discrete version of the configuration argument. We could summarize the result of Keleti's discrete argument in a lemma.
+    %
+    \begin{lemma} \label{KeletiDiscreteLemma}
+        Let $T_1, T_2$ be disjoint, $\DQ_k$ discretized sets. Then we can find $S_1 \subset T_1$ and $S_2 \subset T_2$ such that
+        %
+        \begin{enumerate}
+            \item[(i)] For each $k$, $S_k$ is a $\DQ_{k+1}$ discretized subset of $T_k$.
+            \item[(ii)] If $x_1 \in S_1$ and $x_2,x_3,x_4 \in S_2$, then $x_2 - x_1 \neq x_4 - x_3$.
+            \item[(iii)] For each cube $Q \in \DQ_k$ with $Q \subset T_k$,
+            %
+            \[ \#(\DQ_{k+1}(Q \cap S_k)) \geq (1/10) \cdot \#(\DQ_{k+1}(Q)). \]
+        \end{enumerate}
+    \end{lemma}
+
+    \item \emph{Iterative Application of Discrete Solution}: Keleti then repeatedly applies his argument iteratively. In particular, Property (i) of Lemma \ref{KeletiDiscreteLemma} allows him to apply his argument iteratively. The reason why Keleti obtains a configuration avoiding set in the limit is because of Property (ii). Most importantly the reason why Keleti obtains a set with full Hausdorff dimension, if the sequence $\{ N_k \}$ decreases rapidly enough, is because of Property (iii).
+\end{itemize}
+
+Of course, it is not possible to extend the discrete solution of the configuration argument to general configurations; this part of Keleti's method strongly depends on the arithmetic structure of the configuration. The iterative application of a discrete solution, however, can be applied in generality.
 
 
 
@@ -85,143 +115,218 @@ In particular, this means $|X_k| = 1/10^k$, so $X$ has measure zero irrespective
 
 \section{Fraser/Pramanik: Smooth Configurations}
 
-Inspired by Keleti's result, Pramanik and Fraser obtained a generalization of the queue method which allows one to find sets avoiding $d+1$ point configurations given by the zero sets of smooth functions, i.e.
+Inspired by Keleti's result, Pramanik and Fraser obtained a generalization of the queue method which allows one to find sets avoiding $n+1$ point configurations given by the zero sets of smooth functions, i.e.
 %
-\[ \C = \{ (x_0, \dots, x_n) : f(x_0, \dots, x_n) = 0 \}, \]
+\[ \C = \{ (x_0, \dots, x_n) \in \RR^{dn} : f(x_0, \dots, x_n) = 0 \}, \]
 %
-under mild regularity conditions on the function $f$. To obtain this result, rather than making a linear shift in one of the intervals we avoid as in Keleti's approach, one must use the smoothness properties of the function to find large segments of an interval avoiding solutions to another interval.
+under mild regularity conditions on the function $f: [0,1]^{dn} \to [0,1]^m$.
 
-\begin{lemma}
-    Let $T \subset [0,1]^d$, and $T' \subset [0,1]^{kd}$ be unions of cubes in $\B(l,\RR^d)$ and $\B(l,\RR^{kd})$. Fix three lengths, $l$, $r$, and $s$. Fix $B \subset T \times T'$, which is a union of cubes in $\B(s,\RR^d)$. Then there exists a set $S \subset T$, which is a union of cubes in $\B(s,\RR^d)$, and a set $B' \subset T'$, which is a union of cubes in $\B(s,\RR^{kd})$ such that
+\begin{theorem}[Pramanik and Fraser]
+    Consider a countable family of functions $\{ f_k : [0,1]^{dn} \to [0,1]^m \}$ each of which being $C^2$, and such that $Df_k$ has full rank at any $(x_1, \dots, x_n)$ with $f(x_1, \dots, x_n) = 0$, where the $(x_1, \dots, x_n)$ are distinct. Then there exists a set $X \subset \RR^d$ with Hausdorff dimension $m/(n-1)$ such that $X$ avoids the configuration
+    %
+    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^n(\RR^d): f(x_1, \dots, x_n) = 0 \}. \]
+\end{theorem}
+
+\begin{remark}
+    For simplicity, we only prove the result for a single function, rather than a countable family.
+\end{remark}
+
+Pramanik and Fraser also simplify to a discrete version of their problem, which they then iteratively apply. In the discrete setting, rather than making a linear shift in one of the intervals we avoid as in Keleti's approach, one must use the smoothness properties of the function to find large segments of an interval avoiding. Corollary \ref{PramanikFraserBuildingBlockLemma} gives the discrete solution that Pramanik and Fraser utilizes.
+
+\begin{lemma} \label{Lemma315091513}
+    Fix $n > 1$. Let $T \subset [0,1]^d$ be $\DQ_k$ discretized, and $T' \subset [0,1]^{(n-1)d}$ be $\DQ_k$ discretized. Let $B \subset T \times T'$ be $\DQ_{k+1}$ discretized. Then there exists a $\DQ_{k+1}$ discretized set $S \subset T$, and a $\DQ_{k+1}$ discretized set $B' \subset T'$, such that
     %
     \begin{enumerate}
-        \item \label{bigProperty} For every $I \in \B(l,T)$, and for at least a fraction $1 - l$ of the cubes $J$ in $\B(r,I)$, $S$ contains a single cube in $\B(s,J)$, whereas $J \cap S = \emptyset$ otherwise.
+        \item \label{dimensionReductionProperty} $(S \times T') \cap B \subset S \times B'$.
 
-        \item \label{BBoundProperty} $\#(\B(s,B')) \leq (1/l)^{d+1} (1/r)^d s^d \#(\B(s,B))$.
+        \item \label{bigProperty} For every $Q \in \DQ_k^d$, there exists $\mathcal{R}(Q) \subset \DR_{k+1}^d(Q)$, such that
+        %
+        \[ \#(\mathcal{R}(Q)) \geq (1/2) \cdot \#(\DR_{k+1}^d(Q)). \]
+        %
+        and for each $R \in \DR_{k+1}^d(Q)$,
+        %
+        \[ \#(\DQ_{k+1}(R)) = \begin{cases} 1 &: R \in \mathcal{R}(Q,) \\ 0 &: R \not \in \mathcal{R}(Q). \end{cases} \]
 
-        \item \label{dimensionReductionProperty} $(S \times T') \cap B \subset S \cap B'$.
+        \item \label{BBoundProperty} $\#(\DQ_{k+1}(B')) \leq 2 (N_1 \dots N_k)^d \left( M_{k+1}/N_{k+1} \right)^d \cdot \#(\DQ_{k+1}(B))$.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    Fix $I \in \B(l,T)$. For each $J \in \B(r,I)$, define a \emph{slab} to be
+    Fix $Q_0 \in \DQ_k(T)$. For each $R \in \DR_{k+1}(Q_0)$, define a \emph{slab} $S[R] = R \times T'$, and for each $Q \in \DQ_{k+1}(Q_0)$, define a \emph{wafer} $W[Q] = Q \times T'$. We say a wafer $W[Q]$ is \emph{good} if
     %
-    \[ S[J] = \bigcup J \times \B(r,T'). \]
+    \begin{equation} \label{equation10291095429062}
+        \#(\DQ_{k+1}(W[Q] \cap B)) \leq (2/N_{k+1}^d) \cdot \#(\DQ_{k+1}(B)),
+    \end{equation}
     %
-    Given any $K \in \B(s,\RR^d)$, we define a \emph{wafer} to be
+    Then at most $N_{k+1}^d/2$ wafers are bad. We call a slab \emph{good} if it contains a wafer which is good. Since a slab is the union of $(N_{k+1}/M_{k+1})^d$ wafers, at most $M_{k+1}^d /2 = (1/2) \cdot \#(\DR_{k+1}(Q_0))$ slabs are bad. Thus if we set
     %
-    \[ W[K] = \bigcup K \times \B(s,T'). \]
+    \[ \mathcal{R}(Q_0) = \{ R \in \DR_{k+1}(Q_0) : S[R]\ \text{is good} \}, \]
     %
-    Note that a slab is the union of at most $(r/s)^d$ wafers, and $I$ supports $(l/s)^d$ wafers. In particular, if we say a wafer $W[K]$ is \emph{good} if
+    then
     %
-    \[ \B(s,W[K] \cap B) \leq (s^d/l^{d+1}) \B(s,B), \]
+    \begin{equation} \label{equation24016590369046}
+        \#(\mathcal{R}(Q_0)) \geq (1/2) \cdot \#(\DR_{k+1}(Q_0)).
+    \end{equation}
     %
-    then at most $l^{d+1}/s^d$ wafers are bad, which is a fraction $l$ of all wafers in $I$. We call a slab good if it contains a good wafer. Then at most $l$ of all slabs are bad. For each $J$ such that $S[J]$ is good, we select a single $K_J \in \B(s,J)$ such that $W[K]$ is good. We then define
+    For each $R \in \mathcal{R}(Q_0)$, we pick $Q_R \in \DQ_{k+1}(R)$ such that $W[Q_R]$ is good, and define
     %
-    \[ S = \bigcup_{I \in \B(l,T)} \left( \bigcup\ \{ K_J : S[J]\ \text{is good} \} \right). \]
+    \[ S = \bigcup \{ Q_R : R \in \mathcal{R}(Q_0) \}. \]
     %
-    Then $S$ satisfies Property \ref{bigProperty}.
+    Equation \eqref{equation24016590369046} implies $S$ satisfies Property \ref{bigProperty}.
 
-    Let $B'$ be the union of all cubes $Q \in \B(s,T')$ such that there is $K \in \B(s,S)$ with $K \times Q \in \B(s,B)$. Then by definition, Property \ref{dimensionReductionProperty} is satisfied. The choice of $S$ implies that for each $K \in \B(s,S)$,
+    Let $B'$ be the union of all cubes $Q' \in \DQ_{k+1}(T')$ such that there is $Q \in \DQ_{k+1}(S)$ with $Q \times Q' \in \DQ_{k+1}(B)$. By definition, Property \ref{dimensionReductionProperty} is then satisfied. For each $Q \in \DQ_{k+1}(S)$, $W[Q]$ is good, so \eqref{equation10291095429062} implies
     %
-    \[ \# \{ Q : K \times Q \in \B(s,B) \} \leq (s^d/l^{d+1}) \B(s,B) \]
+    \[ \# \{ Q' : Q \times Q' \in \DQ_{k+1}(B) \} \leq (2/N_{k+1}^d) \cdot \#(\DQ_{k+1}(B)). \]
     %
-    But $\# \B(s,S) \leq \B(r,T) \leq (1/r)^d$, so
+    But $\#(\DQ_{k+1}(S)) \leq \#(\DR_{k+1}(T)) \leq (1/r_{k+1})^d = (N_1 \dots N_k)^d M_{k+1}^d$, so
     %
-    \[ \# \B(s,B') \leq \# \B(s,S) (s^d/l^{d+1}) \B(s,B) \leq s^d (1/r)^d (1/l^{d+1}) \B(s,B). \]
+    \begin{align*}
+        \#(\DQ_{k+1}(B')) &\leq \#(\DQ_{k+1}(S))[(2/N_{k+1}^d) \cdot \#(\DQ_{k+1}(B))]\\
+        &\leq 2(N_1 \dots N_k)^d (M_{k+1}/N_{k+1})^d \#(\DQ_{k+1}(B)),
+    \end{align*}
     %
     which establishes Property \ref{BBoundProperty}.
 \end{proof}
 
-We will use this lemma to continually reduce the dimensionality of the avoidance problem we are considering. Once we reach one dimension, we are in need of another lemma to complete the avoidance process.
+We apply the lemma recursively $n-1$ times to continually reduce the dimensionality of the avoidance problem we are considering. Eventually, we obtain the case where $n = 0$, and we are in need of a final technique.
 
-\begin{lemma}
-    Let $T$ be a union of cubes in $\B(l,\RR^d)$. Let $B \subset T$ be a union of cubes in $\B(s,T)$. Suppose
+\begin{lemma} \label{Lemma1209410535}
+    Fix $n > 1$. Let $T \subset [0,1]^d$ be $\DQ_k$ discretized, and let $B \subset T$ be $\DQ_{k+1}$ discretized. Suppose
     %
-    \[ \# \B(s,B) \leq C (1/l)^{(d+1)(k-1)} (1/r)^{d(k-1)} s^{m-n} \]
+    \[ \# \DQ_{k+1}(B) \leq \left[ C \cdot 2^{n-1} (N_1 \dots N_k)^{d(n-1)} (M_{k+1}/N_{k+1})^{d(n-1)} \right] (1/l_{k+1})^{dn - m}. \]
     %
     and
     %
-    \[ s \leq C^{-1/m} l^{(1/m)((d+1)k + 1)} r^{n(k-1)/m}. \]
+    \begin{equation} \label{equation903103513095}
+        N_{k+1} > \left[ C \cdot (1 + 2^d) 2^n (N_1 \dots N_k)^{2dn} \right]^{1/m} M_{k+1}^{d(n-1)/m}
+    \end{equation}
     %
-    Then there exists $S \subset T$, which is a union of cubes in $\B(s,T)$ such that
+    Then there exists a $\DQ_{k+1}$ discretized set $S \subset T$ such that
     %
     \begin{enumerate}
         \item $S \cap B = \emptyset$.
-        \item For all but a fraction $l$ of the cubes $I \in \B(r,T)$, $|S \cap I| \geq (1 - l) s^n$.
+        \item \label{badsetproperty5} For each $Q_0 \in \DQ_k(T)$, there is $\mathcal{R}(Q_0) \subset \DR_{k+1}(Q_0)$ with
+        %
+        \[ \#(\mathcal{R}(Q_0)) \geq (1/2) \#(\DR_{k+1}(Q_0)), \]
+        %
+        such that for each $R \in \DR_{k+1}(Q_0)$,
+        %
+        \[ \#(\mathcal{Q}_{k+1}(R \cap S)) = \begin{cases} 1 &: R \in \mathcal{R}(Q_0), \\ 0 &: R \not \in \mathcal{R}(Q_0). \end{cases} \]
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    By pidgeonholing, it suffices to focus on the cubes $J \in \B(r,\RR^d)$ for which
+    For each $Q_0 \in \DQ_k(T)$, we set
     %
-    \[ \# \B(s,J \cap B) \leq l^{d+1} r^{-d} \# \B(r,B) \]
+    \[ \mathcal{R}(Q_0) = \{ R \in \DR_{k+1}(Q_0) : \#(\DQ_{k+1}(R \cap B)) \leq (2/M_{k+1}^d) \cdot \#(\DQ_{k+1}(B)) \}. \]
     %
-    We then define $J$ to be equal to the union of all $J - B$, over the cubes $J$ satisfying the inequality above.
+    Since $\DR_{k+1}(Q_0) = M_{k+1}^d$,
+    %
+    \[ \#(\mathcal{R}(Q_0)) \geq \#(\DR_{k+1}(Q_0)) - (M_{k+1}^d/2) \geq (1/2) \cdot \#(\DR_{k+1}(T)). \]
+    %
+    Now \eqref{equation903103513095} implies that for each $R \in \mathcal{R}(Q_0)$,
+    %
+    \begin{align*}
+        \#(\DQ_{k+1}(R \cap B)) &\leq (2/M_{k+1}^d) \cdot \#(\DQ_{k+1}(B))\\
+        &\leq (2/M_{k+1}^d) \left(C \cdot 2^{n-1} (N_1 \dots N_k)^{2dn} (M_{k+1}/N_{k+1})^{d(n-1)} \right).\\
+        &= \left[ 2^n C (N_1 \dots N_k)^{2dn} \right] \left( M_{k+1}^{d(n-2)} / N_{k+1}^{m-d} \right)\\
+        &< \left( \frac{1}{1 + 2^d} \right) (N_{k+1}/M_{k+1})^d\\
+        &= \left( \frac{1}{1 + 2^d} \right) \DQ_{k+1}(R)
+    \end{align*}
+    %
+    Thus for each $R \in \mathcal{R}(Q_0)$, we can find $Q_R \in \DQ_{k+1}(R)$ such that $Q_R \cap B = \emptyset$. And so if we set
+    %
+    \[ S = \bigcup \{ Q_R : R \in \mathcal{R}(Q_0), Q_0 \in \DQ_k(T) \}, \]
+    %
+    Then (A) and (B) are satisfied.
 \end{proof}
 
-We again use a queuing process to a Cantor set construction. We construct a nested family of discrete sets $X_0 \supset X_1 \supset \dots$ converging to $X$, with each $X_k$ a union of disjoint intervals in $\DQ_k^d$, for a decreasing sequence of lengths $\{ l_k \}$ converging to zero, to be chosen during the algorithm. We initialize $X_0 = [0,1]$, and $l_0 = 1/(d+1)$. Our queue shall consist of $d+1$ tuples of disjoint intervals $(T_0, \dots, T_d)$, all of the same length, which initially consists of all possible rearrangements of the intervals $\{ [0,1/(d+1)), [1/(d+1),2/(d+1)), \dots, [d/(d+1, 1) \}$. To construct the sequence $\{ X_k \}$, we perform the following iterative procedure:
+\begin{corollary} \label{PramanikFraserBuildingBlockLemma}
+    Let $f: [0,1]^{dn} \to [0,1]^m$ be $C^2$, and have full rank at every point $(x_1, \dots, x_n)$ with all $x_1, \dots, x_n$ distinct, and $f(x_1, \dots, x_n) = 0$. Then there exists a universal constant $C$ depending only on $f$ such that, if \eqref{equation903103513095} is satisfied, then for any disjoint, $\DQ_k$ discretized sets $T_1, \dots, T_n \subset [0,1]^d$, we can find $\DQ_{k+1}$ discretized sets $S_1 \subset T_1, \dots, S_n \subset T_n$ such that
+    %
+    \begin{enumerate}
+        \item If $x_1 \in S_1, \dots, x_n \in S_n$, then $f(x_1, \dots, x_n) \neq 0$.
+        \item For each $k$, and for each $Q_0 \in \DQ_k(T_k)$, there is $\mathcal{R}(Q_0) \subset \mathcal{R}_{k+1}(Q_0)$ with
+        %
+        \[ \#(\mathcal{R}(Q_0)) \geq (1/2) \cdot \#(\mathcal{R}_{k+1}(Q_0)), \]
+        %
+        and for each $R \in \DR_{k+1}(Q_0)$,
+        %
+        \[ \#(\mathcal{Q}_{k+1}(R \cap S)) = \begin{cases} 1 &: R \in \mathcal{R}(Q_0), \\ 0 &: R \not \in \mathcal{R}(Q_0). \end{cases} \]
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    Since $f$ is $C^2$ and has full rank on the set
+    %
+    \[ V(f) = \{ (x_1, \dots, x_n) \in \C^n(\RR^d) : f(x_1, \dots, x_n) = 0 \}, \]
+    %
+    the implicit function theorem implies $V(f)$ is a smooth manifold of dimension $nd - m$ in $\RR^{dn}$, and the coarea formula implies the existence of a constant $C$ such that for each $k$,
+    %
+    \[ \# \{ Q \in \DQ_k^{dn} : Q \cap V(f) \neq \emptyset \} \leq C/l_k^{dn-m}. \]
+    %
+    To apply Lemma \ref{Lemma315091513} and \ref{Lemma1209410535}, we set
+    %
+    \[ B = \# \{ Q \in \DQ_k^{dn} : Q \cap V(f) \neq \emptyset \}. \]
+    %
+    Applying Lemma \ref{Lemma315091513} iteratively $n-1$ times then finishing with Lemma $\ref{Lemma1209410535}$, constructs the sets $S_1, \dots, S_n$.
+\end{proof}
+
+Just like in Keleti's proof, Pramanik and Fraser's technique applies a discrete result, Corollary \ref{PramanikFraserBuildingBlockLemma}, iteratively at many scales to obtain a high dimensional set avoiding the zeroes of a function. We construct a nested family $\{ X_k : k \geq 0 \}$ of $\DQ_k$ discretized sets, converging to a set $X$, which we will show is translate avoiding. We intiailize $X_0 = [0,1]$. Our queue shall consist of $n$ tuples of disjoint intervals $(T_1, \dots, T_n)$, all of the same length, which initially consists of all possible tuples of intervals in $\DQ_1^d([0,1]^d)$. To construct the sequence $\{ X_k \}$, we perform the following iterative procedure:
 %
 \begin{algorithm}[H]
     \begin{algorithmic}
         \caption{Construction of the Sets $\{ X_k \}$}
         \State{Set $k = 0$}
         \MRepeat
-            \State{Take off a $d+1$ tuple $(T_0', \dots, T_d')$ from the front of the queue}
+            \State{Take off an $n$ tuple $(T_1', \dots, T_n')$ from the front of the queue}
             \State{Set $T_i = T_i' \cap X_k$ for each $i$}
-            \State{Apply Theorem \ref{pramanikfraserbuildingblock} to the sets $T_0, \dots, T_d$, with $M = 1/l_k$ and with an appropriately large integer $N_k \in M \mathbf{Z}$, to obtain a rational constant $C_k$, not depending on $N_k$, and sets $S_0, \dots, S_d$, each unions of length $C_k/N_k^d$ intervals, satisfying Property \ref{avoidanceProperty}, \ref{constantSelection}, and \ref{minkowskiOneProperty}.}
-            \State{Set $l_{k+1} = C_k/N_k^d$.}
-            \State{Set $X_{k+1} = X_k - \bigcup_{i = 0}^d (T_i - S_i)$.}
-            \State{Add all $d+1$ tuples of disjoint intervals $(T_0', \dots, T_d')$ in $\B(l_{k+1},X_{k+1})$ to the back of the queue.}
+            \State{Apply Corollary \ref{PramanikFraserBuildingBlockLemma} to the sets $T_0, \dots, T_d$, obtaining $\DQ_{k+1}$ discretized sets $S_1, \dots, S_n$ satisfying Properties (A), (B), and (C) of that Lemma.}
+            \State{Set $X_{k+1} = X_k - \bigcup_{i = 1}^n T_i - S_i$.}
+            \State{Add all $n$ tuples of disjoint cubes $(T_1', \dots, T_n')$ in $\DQ_{k+1}^d(X_{k+1})$ to the back of the queue.}
             \State{Increase $k$ by 1.}
         \EndRepeat   
     \end{algorithmic}
 \end{algorithm}
 
-Suppose that $x_0, \dots, x_d \in X$ are distinct. Then at some stage $k$, $x_0, \dots, x_d$ lie in distinct intervals $T_0', \dots, T_d' \in \B(l_k,X_k)$. At this stage, $(T_0', \dots, T_d')$ is added to the back of the queue, and therefore, at some much later stage $N$, is taken off the front. Sets $S_0 \subset T_0', \dots, S_d \subset T_d'$ are constructed satisfying Property \ref{avoidanceProperty}, and since $x_i \in S_i$ for each $i$, $f(x_0, \dots, x_d) \neq 0$. Thus $X$ avoids the configuration $\C$.
-
-What remains is to bound the Hausdorff dimension of $X$. First, we construct the canonical measure $\mu$ on $X$ with respect to the Cantor-type decomposition $\{ X_k \}$. We have $l_k = 1/M_k$, and $l_{k+1} = C_k/N_k^d$. We let $r_{k+1} = 1/N_k$. Let $K \in \B(l_{k+1},X)$, $J \in \B(r_k,X)$, and $I \in \B(l_k,X)$. To calculate a bound on the mass of $K$, we consider the various decompositions considered in the algorithm:
-%
-\begin{itemize}
-        \item If $I$ is subdivided in the non-specialized manner, then every length $r_k$ interval recieves the same mass, which is allocated to a single length $l_{k+1}$ interval it contains. Thus
-        %
-        \[ \mu(K) = \mu(J) \leq (r_k/l_k) \mu(I). \]
-        \item In $I$ is subdivided in the specialized manner, at least a fraction $1 - 1/M_k$ of the length $1/N_k$ intervals are assigned mass. Since $M_k \geq 2$,
-        %
-        \[ \mu(J) \leq (r_k/l_k)(1 - 1/M_k)^{-1} \leq (2r_k/l_k) \mu(I). \]
-        %
-        The set $X_{k+1}$ contains more than $C_k/N_k$ of the interval $J$, so
-        %
-        \[ \mu(K) \leq \left( \frac{N_k}{C_k} l_{k+1} \right) \mu(J) \leq \frac{2 l_{k+1}}{l_k C_k} \mu(I). \]
-
-        $(2/C_k) l_{k+1}$ vs. $l_{k+1}^{1/d}$
-\end{itemize}
-%
-Thus in both cases, we find
-%
-\begin{itemize}
-    \item Carrying out the recursion based on the relationship
+\begin{lemma}
+    The set $X$ constructed by the procedure avoids the configuration
     %
-    \[ \mu(K) \leq (2l_{k+1}/l_k C_k) \mu(I), \]
-    %
-    we find that if $I \in \B(l_k,X)$, then
-    %
-    \[ \mu(I) \leq \frac{2^k}{C_1 \dots C_{k-1}} l_k \]
-    %
-    Thus if there are $\psi(k) \to \infty$ such that
-    %
-    \[ l_k \leq \left( \frac{C_1 \dots C_{k-1}}{2^k} \right)^{\psi(k)}, \]
-    %
-    we conclude $\mu(I) \lesssim_\varepsilon l_k^{1 - \varepsilon}$ for all $\varepsilon > 0$. Thus Property \ref{discreteBound} is satisfied.
+    \[ \C = \{ (x_1, \dots, x_n) \in \C^n(\RR^d) : f(x_1, \dots, x_n) = 0 \}. \]
+\end{lemma}
+\begin{proof}
+Suppose $x_1, \dots, x_n \in X$ are distinct. Then at some stage $k$, $x_1, \dots, x_n$ lie in disjoint cubes $T_1', \dots, T_n' \in \DQ_k^d(X_k)$, for some large $k$. At this stage, $(T_1', \dots, T_n')$ is added to the back of the queue, and therefore, at some much later stage $N$, the tuple $(T_1', \dots, T_n')$ is taken off the front. Sets $S_1 \subset T_1', \dots, S_n \subset T_n'$ are constructed satisfying Property (A) of Corollary \ref{PramanikFraserBuildingBlockLemma}. Since $x_1, \dots, x_n \in X$, we must have $x_i \in S_i$ for each $i$, so $f(x_1, \dots, x_n) \neq 0$.
+\end{proof}
 
-    \item $\log(1/l_{k+1})/\log(1/r_{k+1}) = d - \log(C_k)/\log(N_k) \to d$.
+What remains is to bound the Hausdorff dimension of $X$.
 
-    \item $\mu(J) \lesssim (r_k/l_k) \mu(I)$, so Property \ref{uniformDist} of Theorem \ref{uniformHausdorffResult} is satisfied.
-\end{itemize}
-%
-Thus Theorem \ref{uniformHausdorffResult} shows that $\mu$ is a Frostman measure of dimension $1/(d-1) - \varepsilon$ for each $\varepsilon > 0$, and so $X$ is a set with Hausdorff dimension at least $1/(d-1)$.
+\begin{theorem}
+    If $M_k = 2^{2^{C_0 k }}$, for a constant $C_0$ suitably large, depending only on $f$, the set $X$ has Hausdorff dimension exceeding $m/(n-1)$.
+\end{theorem}
+\begin{proof}
+    First, we construct the canonical measure $\mu$ on $X$. Property (B) of Corollary \ref{PramanikFraserBuildingBlockLemma} implies that for each $Q \in \DQ_{k+1}^d$, $\mu(Q) \leq 2/M_{k+1}^d \mu(Q^*)$, which implies that for $Q \in \DQ_k^d$, $\mu(Q) \leq 2^k / (M_k \dots M_1)^d$. By Lemma \ref{uniformMassFrostman}, it suffices to show that for each $\varepsilon > 0$,
+    %
+    \begin{equation}\label{inequality7} \frac{2^k}{(M_{k+1} \dots M_1)^d} \lesssim_\varepsilon \frac{1}{(N_1 \dots N_{k+1})^{m/(n-1)(1 - \varepsilon)}} \end{equation}
+    %
+    Set
+    %
+    \[ N_{k+1} = A (N_1 \dots N_k)^{2dn/m} M_{k+1}^{d(n-1)/m}, \]
+    %
+    where $A$ is an arbitrary constant not depending on $k$ so that $\eqref{equation903103513095}$ holds. Then inequality \eqref{inequality7} is then implied if
+    %
+    \[ M_{k+1} \gtrsim_\varepsilon \left( (N_1 \dots N_k)^{6dn} [2^k A^d] \right)^{1/\varepsilon}. \]
+    %
+    This equation is satisfied, if $M_k = 2^{2^{C_0k}}$, where $C_0$ is a suitably large.
+\end{proof}
 
-\section{Math\'{e}s Result}
+\section{Math\'{e}: Polynomial Configurations}
 
-Math\'{e}'s result can be reconfigured in terms of a building block strategy for implementation in our algorithm.
+Math\'{e}'s result constructs sets avoiding configurations specifiable as algebraic varieties.
+
+\begin{theorem}[Math\'{e}]
+    Let $\{ f_k: \RR^{nd} \to \mathbf{R} \}$ be a countable family of rational coefficient polynomials with degree at most $m$. Then there exists a set $X \subset [0,1]^d$ with Hausdorff dimension $d/m$ which avoids the configurations
+    %
+    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \RR^{nd} : f(x_1, \dots, x_n) = 0 \}. \]
+\end{theorem}
+
+Originally, Math\'{e}'s result does not explicitly use a discretization method analogous to Keleti and Pramanik and Fraser, but his proof strategy can be reconfigured to work in this setting. For the purpose of brevity, we do not carry out the complete argument, merely giving the discretization method below.
 
 \begin{theorem}
     Let $f$ be a polynomial of degree $m$, and consider unions of length $1/M$ intervals $T_0, \dots, T_d \subset [0,1]$, with rational start-points. If $\partial_0 f$ is non-vanishing on $T_0 \times \dots \times T_d$, then there exists arbitrarily large integers $N$ and a constant $C$ not depending on $N$ and sets $S_n \subset T_n$ such that
@@ -246,5 +351,9 @@ Math\'{e}'s result can be reconfigured in terms of a building block strategy for
     %
     Thus $d(f(\mathbf{A} + \delta_0 e_0), \mathbf{Z}/N^m) \geq 1/KN^m$. Thus if we thicken the coordinates of $\mathbf{A} + \delta_0$ to intervals of length $O(1/N^m)$, then we obtain sets $S_0, \dots, S_n$ avoiding solutions.
 \end{proof}
+
+\section{Schmerkin: Salem Sets Avoiding Arithmetic Progressions}
+
+Schmerkin constructs sets with full Fourier dimension
 
 \endinput
