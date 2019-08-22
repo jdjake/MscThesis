@@ -34,7 +34,7 @@ It is often convenient to avoid certain configurations when they are expressed i
 
 %\footnote{We always assume $L_n/L_{n+1}$ is an integer so that intervals in $\mathcal{B}(L_n)$ are either almost disjoint from intervals in $\mathcal{B}(L_{n+1})$ or contained completely within such an interval}
 
-The basic, but fundamental idea to Keleti's technique is to introduce memory into Cantor set constructions. Keleti constructs a nested family of discrete sets $X_0 \supset X_1 \supset \dots$ converging to $X$, with each $X_k$ a union of disjoint intervals in $\DQ_k^d$, where the sequence $\{ N_k \}$ will be chosen later, but a multiple of 10. We initialize $X_0 = [0,1]$, and $l_0 = 1$. Furthermore, we consider a queue of intervals, initially just containing $[0,1]$. To construct the sequence $\{ X_k \}$, Keleti iteratively performs the following procedure:
+The basic, but fundamental idea of the interval dissection technique is to introduce memory into Cantor set constructions. Keleti constructs a nested family of discrete sets $\{ X_k \}$, with $X_k$ a $\DQ_k$ discretized set, and with $X = \bigcap X_k$. The sequence $\{ N_k \}$ will be specified later, but each $N_k$ will be a multiple of 10. We initialize $X_0 = [0,1]$. The novel feature of the argument is to add a queue of intervals to the construction, initially just containing $[0,1]$. To construct the sequence $\{ X_k \}$, Keleti iteratively performs the following procedure:
 %
 \begin{algorithm}[H]
     \begin{algorithmic}%[1]
@@ -44,7 +44,7 @@ The basic, but fundamental idea to Keleti's technique is to introduce memory int
             \State{Take off an interval $I$ from the front of the queue.}
 
             \MForAll{\ $J \in \DQ_k(X_k)$:}
-                \State{Order the intervals in $\DQ_{k+1}(J)$ as $J_0, J_1, \dots, J_N$.}
+                \State{Order the intervals in $\DQ_{k+1}(J)$ as $J_1, \dots, J_N$.}
 
                 \State{{\bf If} $J \subset I$, add all intervals $J_i$ to $X_{k+1}$ with $i \equiv 0$ modulo 10.}
                 \State{{\bf Else} add all $J_i$ with $i \equiv 5$ modulo 10.}
@@ -71,11 +71,11 @@ Each iteration of the algorithm produces a new set $X_k$, and so leaving the alg
     which gives a contradiction.
 \end{proof}
 
-It is easy to see from the definition of the algorithm that
+It is easy to see from the algorithm that
 %
-\[ \# (\DQ_k(X_k)) = (l_{k-1}/10l_k) \#(\DQ_{k-1}(X_{k-1})). \]
+\[ \# (\DQ_k(X_k)) = (l_{k-1}/10l_k) \cdot \#(\DQ_{k-1}(X_{k-1})). \]
 %
-Thus closing the recursive definition shows
+Closing the recursive definition shows
 %
 \[ \#(\DQ_k(X_k)) = \frac{1}{10^k l_k}. \]
 %
