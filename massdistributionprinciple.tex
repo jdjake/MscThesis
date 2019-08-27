@@ -1,0 +1,198 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsfonts, amssymb, accents, mdwlist}
+
+
+% Dimensions
+\DeclareMathOperator{\minkdim}{\dim_{\mathbf{M}}}
+\DeclareMathOperator{\hausdim}{\dim_{\mathbf{H}}}
+\DeclareMathOperator{\lowminkdim}{\dim_{\underline{\mathbf{M}}}}
+\DeclareMathOperator{\upminkdim}{\dim_{\overline{\mathbf{M}}}}
+\DeclareMathOperator{\fordim}{\dim_{\mathbf{F}}}
+
+\DeclareMathOperator{\lmbdim}{\dim_{\underline{\mathbf{MM}}}}
+\DeclareMathOperator{\umbdim}{\dim_{\overline{\mathbf{MM}}}}
+
+% Indicator Functions
+\DeclareMathOperator{\ind}{\mathbf{I}}
+
+% Number Systems
+\DeclareMathOperator{\RR}{\mathbf{R}}
+\DeclareMathOperator{\ZZ}{\mathbf{Z}}
+\DeclareMathOperator{\CC}{\mathbf{C}}
+\DeclareMathOperator{\QQ}{\mathbf{Q}}
+
+% Probability Operators
+\DeclareMathOperator{\EE}{\mathbf{E}}
+\DeclareMathOperator{\PP}{\mathbf{P}}
+\DeclareMathOperator{\prob}{\Prob}
+\DeclareMathOperator{\Prob}{\mathbf{P}}
+\DeclareMathOperator{\expect}{\Expect}
+\DeclareMathOperator{\Expect}{\mathbf{E}}
+
+\DeclareMathOperator{\AAA}{\mathbf{A}}
+
+\DeclareMathOperator{\B}{\mathcal{B}}
+\DeclareMathOperator{\C}{\mathcal{C}}
+
+% Dyadic classes
+\DeclareMathOperator{\DQ}{\mathcal{Q}}
+\DeclareMathOperator{\DB}{\mathcal{B}}
+\DeclareMathOperator{\DD}{\mathcal{D}}
+\DeclareMathOperator{\DR}{\mathcal{R}}
+
+\DeclareMathOperator{\Config}{\mathcal{C}}
+\DeclareMathOperator{\diam}{\text{diam}}
+\DeclareMathOperator{\divides}{\mid}
+
+\DeclareMathOperator{\setcolon}{\colon}
+
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{fact}{Fact}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{remark}{Remark}
+\newtheorem*{remarks}{Remarks}
+
+\begin{document}
+
+\begin{lemma}
+    For each $k \geq 0$, let $\mathcal{E}_k$ be a finite collection of non-empty, bounded Borel subsets of $\RR^d$, such that
+    %
+    \begin{itemize}
+        \item \emph{Separation}: For each $k$, the collection
+        %
+        \[ \left\{ \overline{A} : A \in \mathcal{E}_k \right\}
+        %
+        is disjoint.
+
+        \item \emph{Nesting}: For each $A \in \mathcal{E}_{k+1}$, there is a unique $A^* \in \mathcal{E}_k$ such that $A \subset A^*$, and for any $A^* \in \mathcal{E}_k$, there is at least one $A \in \mathcal{E}_{k+1}$ with $A \subset A^*$.
+    \end{itemize}
+    %
+    Let $E_k = \bigcup \mathcal{E}_k$, and let $E_\infty = \bigcap E_k$. Recursively define a function $\mu: \bigcup_{k \geq 0} \mathcal{E}_k \to [0,\infty)$ by setting $\mu(A) = 1$ if $A \in \mathcal{E}_0$, and for each $A \in \mathcal{E}_{k+1}$, setting
+    %
+    \[ \mu(A) = \frac{\mu(A^*)}{\# \{ A' \in \mathcal{E}_{k+1}: A' \subset A^* \}}. \]
+    %
+    Then $\mu$ extends to a finite Borel measure on $\RR^d$ supported on $E_\infty$.
+\end{lemma}
+\begin{proof}
+    Let $\mathcal{E} = \bigcup_{k \geq 0} \mathcal{E}_k \cup 2^{\RR^d - E_k}$. Then $\mathcal{E}$ is a \emph{semi-ring} of sets:
+    %
+    \begin{itemize}
+        \item \emph{$\mathcal{E}$ is closed under intersections}: Let $A, B \in \mathcal{E}$. Then without loss of generality, swapping $A$ and $B$ if necessary, there exists $i \leq j$ such that $A \in \mathcal{E}_i$ or $A \subset \RR^d - E_i$, and $B \in \mathcal{E}_j$ or $B \subset \RR^d - E_j$.
+
+        If $A \in \mathcal{E}_i$, and $B \in \mathcal{E}_j$, then either $A \cap B = \emptyset$, or $B \subset A$, and $A \cap B = B$. In either case, $A \cap B \in \mathcal{E}$.
+
+        If $A \subset \RR^d - E_i$, then $A \cap B \subset A \subset \RR^d - E_i$, so $A \cap B \in \mathcal{E}$. Similarily, if $B \subset \RR^d - E_j$, then $A \cap B \subset \RR^d - E_j$, so $A \cap B \in \mathcal{E}$.
+
+        This addresses all cases.
+
+        \item \emph{$\mathcal{E}$ is closed under relative complements}: Let $A,B \in \mathcal{E}$. Then there exists $i,j$ such that $A \in \mathcal{E}_i$ or $A \subset \RR^d - E_i$, and $B \in \mathcal{E}_j$ or $B \subset \RR^d - E_j$.
+
+        Suppose $A \in \mathcal{E}_i$ and $B \in \mathcal{E}_j$. If $i \geq j$, then either $A \cap B = \emptyset$, or $A \subset B$. In either case, $A - B = \emptyset \in \mathcal{E}$. If $i \leq j$, then either $A \cap B = \emptyset$, or $B \subset A$. In the latter case,
+        %
+        \[ A - B = \bigcup \{ B_i : B_i \in \mathcal{E}_j, B_i \neq B, B_i \subset A \} \cup \{ A - E_j \}. \]
+        %
+        Note that this union is disjoint, and each set in the union is an element of $\mathcal{E}$.
+
+        Suppose $A \in \mathcal{E}_i$, and $B \subset \RR^d - E_j$. If $i \geq j$, then $A \subset E_i \subset E_j$, so $A - B = A$. If $i \leq j$, then
+        %
+        \[ A - B = (A \cap E_j) \cup (A \cap (\RR^d - B)). \]
+        %
+        The former set can be written as $\bigcup_{A' \in \mathcal{E}_j} : A' \subset A$, and the latter set is a subset of $\RR^d - E_j$. This gives $A - B$ as a disjoint union of elements of $\mathcal{E}$.
+
+        If $A \subset \RR^d - E_i$, then $A - B \subset \RR^d - E_i$, so $A - B \in \mathcal{E}$.
+    \end{itemize}
+    %
+    The function $\mu$ extends to a function on $\mathcal{E}$ by setting $\mu(E) = 0$ if $E \subset \RR^d - E_k$ for some $k$. This does not conflict with our previous definition, since if $A \in \mathcal{E}_i$, then $A \cap E_j \neq \emptyset$ for all $j \geq 0$. We claim that $\mu$ is then a \emph{pre-measure} on the semi-ring:
+    %
+    \begin{itemize}
+        \item It is certainly true that $\mu(\emptyset) = 0$.
+
+        \item Let $A \in \mathcal{E}$, and suppose $A = \bigcup_i A_i$, where $\{ A_i \}$ is an at most countable subcollection of disjoint sets from $\mathcal{E}$. We fix $k$ such that $A \in \mathcal{E}_k$, or $A \subset \RR^d - E_k$, and for each $i$, fix $k_i$ such that $A_i \in \mathcal{E}_{k_i}$, or $A \subset \RR^d - E_{k_i}$.
+
+        If $A \in \RR^d - E_k$ for some $k$, then $A_i \in \RR^d - E_k$ for each $i$, and thus $\mu(A_i) = 0$ for all $i$. Since $\mu(A) = 0$, this means $\mu(A) = \sum \mu(A_i)$.
+
+        Suppose $A \in \mathcal{E}_k$. If there are only \emph{finitely many} sets $A_j$ with $A_j \in \mathcal{E}_k$, then the claim is obvious. Thus it suffices to show this is the only case. Let $\{ A_j \}$ be the family of sets with $A_j \in \mathcal{E}_{k_j}$. Then we may find a disjoint family of open sets $\{ U_j \}$ with $\overline{A_j} \subset U_j$ for each $j$. Define
+        %
+        \[ A_\infty = \bigcup \overline{A_j} \]
+        %
+        Then $\{ U_j \}$ is a cover of $A_\infty$. The set $A_\infty$ is compact, since it is bounded and closed by the separability criterion. Since the sets $U_j$ are disjoint, and $U_j \cap A_\infty \neq \emptyset$ for any $j$, this implies the set of $\{ U_j \}$ is finite, and thus the set $\{ A_j \}$ is finite.
+    \end{itemize}
+    %
+    The Caratheodory extension theorem then guarantees that $\mu$ extends to a measure on the $\sigma$ algebra generated by $\mathcal{E}$. Since
+    %
+    \[ \lim_{k \to \infty} \left( \max_{A \in \mathcal{E}_k} \diam(A) \right) = 0, \]
+    %
+    this $\sigma$ algebra contains all Borel sets.
+\end{proof}
+
+For the next lemma, let $\DQ^d$ denote the collection of all dyadic cubes in $\RR^d$, let $\DQ^d_k$ denote the dyadic cubes of length $1/2^k$, and let $Q^* \in \DQ^d_k$ denote the parent cube of any $Q \in \DQ^d_{k+1}$.
+
+\begin{lemma}[Mass Distribution Principle] \label{massdistributionprinciplelem}
+    Let $f: \DQ^d \to [0,\infty)$ be a function such that for any $Q_0 \in \DQ^d$,
+    %
+    \begin{equation} \label{equation73234091} \sum_{Q^* = Q_0} f(Q) = f(Q_0), \end{equation}
+    %
+    Then there exists a regular Borel measure $\mu$ supported on
+    %
+    \[ \bigcap_{k = 1}^\infty \left[ \bigcup \{ Q \in \DQ_k^d : f(Q) > 0 \} \right] \]
+    %
+    such that for each $Q \in \DQ^d$,
+    %
+    \begin{equation} \label{massdissupperbound} \mu(Q) \geq f(Q), \end{equation}
+    %
+    and for any set $E$ and $k \geq 0$,
+    %
+    \begin{equation} \label{massdisslowerbound} \mu(E) \leq \sum f(Q), \end{equation}
+    %
+    where $Q$ ranges over all cubes in $\DQ^d_k(E(l_k))$.
+\end{lemma}
+\begin{proof}
+    For each $i$, define a regular Borel measure $\mu_i$ such that for each $f \in C_c(\RR^d)$,
+    %
+    \[ \int f d\mu_i = \sum_{Q \in \DQ_i^d} \frac{f(Q)}{|Q|} \int_Q f\; dx \]
+    %
+    Then, for each $j \leq i$, $\mu_i(Q) = f(Q)$.
+
+    We claim that $\{ \mu_i \}$ is a Cauchy sequence in the space of all regular Borel measures on $\RR^d$, viewing the space as a locally convex space under the weak topology. Fix $\varphi \in C_c(\RR^d)$, and choose some $N$ such that $\varphi$ is supported on $[-N,N]^d$. Set $Q_0 = [-N,N]^d$. Since $\varphi$ is compactly supported, $\varphi$ is \emph{uniformly continuous}, so for each $\varepsilon > 0$, if $i$ is suitably large, there is a sequence of values $\{ a_Q : Q \in \DQ_i^d(Q_0) \}$ such that if $x \in Q$, $|\varphi(x) - a_Q| \leq \varepsilon$. But this means that
+    %
+    \[ \sum (a_Q - \varepsilon) \mathbf{I}_Q \leq \varphi \leq \sum (a_Q + \varepsilon) \mathbf{I}_Q, \]
+    %
+    where $Q$ ranges over cubes in $\DQ_i^d(Q_0)$. Thus for any $j \geq i$,
+    %
+    \[ \int \varphi\; d\mu_j\leq \sum (a_Q + \varepsilon) \mu_j(Q) = \sum (a_Q + \varepsilon) f(Q) \]
+    %
+    and
+    %
+    \[ \int \varphi\; d\mu_j \geq \sum (a_Q - \varepsilon) \mu_j(Q) = \sum (a_Q - \varepsilon) f(Q). \]
+    %
+    In particular, if $j,j' \geq i$,
+    %
+    \[ \left| \int \varphi d\mu_j - \int \varphi d\mu_{j'} \right| \leq 2 \varepsilon \sum_{Q \in \DQ_i(Q_0)} f(Q) = 2\varepsilon \sum_{Q \in \DQ_0(Q_0)} f(Q). \]
+    %
+    Since $\varepsilon$ and $\varphi$ were arbitrary, this shows $\{ \mu_i \}$ is Cauchy.
+
+    Since the space of all regular Borel measures on $\RR^d$ is \emph{complete}, the last paragraph implies there exists a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly. For any $Q \in \DQ^d$, since $Q$ is a closed set,
+    %
+    \[ \mu(Q) \geq \limsup_{i \to \infty} \mu_i(Q) = f(Q). \]
+    %
+    Conversely, if $E$ is an arbitrary set, then $E \subset E(l_i)^\circ$ for any $i$, so
+    %
+    \[ \mu(E) \leq \liminf_{i \to \infty} \mu_i(E(l_i)^\circ) \leq \liminf_{i \to \infty} \mu_i(E(l_i)) = \sum f(Q), \]
+    %
+    where $Q$ ranges over the cubes in $\DQ_i^d(E(l_k))$.
+\end{proof}
+
+\begin{remark}
+    Common approaches to the mass distribution principle consider
+    %
+    \[ \mu(E) = \inf \left\{ \sum_{i = 1}^\infty f(Q_i) : Q_i \in \DQ^d, E \subset \bigcup Q_i \right\}. \]
+    %
+    If $d(E,F) > 0$, then \eqref{equation73234091} implies that $\mu(E + F) = \mu(E) + \mu(F)$, so $\mu$ is a metric exterior measure, and so all Borel sets are measurable with respect to $\mu$. However, given the conditions of this theorem, it is \emph{not} necessarily true that $\mu$ is even a non-zero measure, let alone that it reflects the values of the functions $f$.
+\end{remark}
+
+\end{document}

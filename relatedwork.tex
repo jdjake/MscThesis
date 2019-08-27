@@ -197,7 +197,7 @@ We apply the lemma recursively $n-1$ times to continually reduce the dimensional
     and
     %
     \begin{equation} \label{equation903103513095}
-        N_{k+1} > \left[ C \cdot (1 + 2^d) 2^n (N_1 \dots N_k)^{2dn} \right]^{1/m} M_{k+1}^{d(n-1)/m}
+        N_{k+1} > \left[ C \cdot 2^n (N_1 \dots N_k)^{2dn} \right]^{1/m} M_{k+1}^{d(n-1)/m}
     \end{equation}
     %
     Then there exists a $\DQ_{k+1}$ discretized set $S \subset T$ such that
@@ -228,15 +228,15 @@ We apply the lemma recursively $n-1$ times to continually reduce the dimensional
         \#(\DQ_{k+1}(R \cap B)) &\leq (2/M_{k+1}^d) \cdot \#(\DQ_{k+1}(B))\\
         &\leq (2/M_{k+1}^d) \left(C \cdot 2^{n-1} (N_1 \dots N_k)^{2dn} (M_{k+1}/N_{k+1})^{d(n-1)} \right).\\
         &= \left[ 2^n C (N_1 \dots N_k)^{2dn} \right] \left( M_{k+1}^{d(n-2)} / N_{k+1}^{m-d} \right)\\
-        &< \left( \frac{1}{1 + 2^d} \right) (N_{k+1}/M_{k+1})^d\\
-        &= \left( \frac{1}{1 + 2^d} \right) \DQ_{k+1}(R)
+        &< (N_{k+1}/M_{k+1})^d\\
+        &= \DQ_{k+1}(R)
     \end{align*}
     %
     Thus for each $R \in \mathcal{R}(Q_0)$, we can find $Q_R \in \DQ_{k+1}(R)$ such that $Q_R \cap B = \emptyset$. And so if we set
     %
     \[ S = \bigcup \{ Q_R : R \in \mathcal{R}(Q_0), Q_0 \in \DQ_k(T) \}, \]
     %
-    Then (A) and (B) are satisfied.
+    then (A) and (B) are satisfied.
 \end{proof}
 
 \begin{corollary} \label{PramanikFraserBuildingBlockLemma}
@@ -282,7 +282,7 @@ Just like in Keleti's proof, Pramanik and Fraser's technique applies a discrete 
         \MRepeat
             \State{Take off an $n$ tuple $(T_1', \dots, T_n')$ from the front of the queue}
             \State{Set $T_i = T_i' \cap X_k$ for each $i$}
-            \State{Apply Corollary \ref{PramanikFraserBuildingBlockLemma} to the sets $T_0, \dots, T_d$, obtaining $\DQ_{k+1}$ discretized sets $S_1, \dots, S_n$ satisfying Properties (A), (B), and (C) of that Lemma.}
+            \State{Apply Corollary \ref{PramanikFraserBuildingBlockLemma} to the sets $T_1, \dots, T_d$, obtaining $\DQ_{k+1}$ discretized sets $S_1, \dots, S_n$ satisfying Properties (A), (B), and (C) of that Lemma.}
             \State{Set $X_{k+1} = X_k - \bigcup_{i = 1}^n T_i - S_i$.}
             \State{Add all $n$ tuples of disjoint cubes $(T_1', \dots, T_n')$ in $\DQ_{k+1}^d(X_{k+1})$ to the back of the queue.}
             \State{Increase $k$ by 1.}
@@ -299,10 +299,10 @@ Just like in Keleti's proof, Pramanik and Fraser's technique applies a discrete 
 Suppose $x_1, \dots, x_n \in X$ are distinct. Then at some stage $k$, $x_1, \dots, x_n$ lie in disjoint cubes $T_1', \dots, T_n' \in \DQ_k^d(X_k)$, for some large $k$. At this stage, $(T_1', \dots, T_n')$ is added to the back of the queue, and therefore, at some much later stage $N$, the tuple $(T_1', \dots, T_n')$ is taken off the front. Sets $S_1 \subset T_1', \dots, S_n \subset T_n'$ are constructed satisfying Property (A) of Corollary \ref{PramanikFraserBuildingBlockLemma}. Since $x_1, \dots, x_n \in X$, we must have $x_i \in S_i$ for each $i$, so $f(x_1, \dots, x_n) \neq 0$.
 \end{proof}
 
-What remains is to bound the Hausdorff dimension of $X$.
+What remains is to bound the Hausdorff dimension of $X$. For this, one must use a sequence of factors $\{ N_k \}$ which is \emph{just} faster than a hyperdyadic sequence of factors.
 
 \begin{theorem}
-    If $M_k = 2^{2^{k^2}}$, $X$ has Hausdorff dimension exceeding $m/(n-1)$.
+    If $M_k = 2^{2^{k \log k}}$, $X$ has Hausdorff dimension exceeding $m/(n-1)$.
 \end{theorem}
 \begin{proof}
     First, we construct the canonical measure $\mu$ on $X$. Property (B) of Corollary \ref{PramanikFraserBuildingBlockLemma} implies that for each $Q \in \DQ_{k+1}^d$, $\mu(Q) \leq 2/M_{k+1}^d \mu(Q^*)$, which implies that for $Q \in \DQ_k^d$, $\mu(Q) \leq 2^k / (M_k \dots M_1)^d$. By Lemma \ref{uniformMassFrostman}, it suffices to show that for each $\varepsilon > 0$,
@@ -320,24 +320,26 @@ What remains is to bound the Hausdorff dimension of $X$.
     This equation is satisfied if $M_k = 2^{2^{k^2}}$.
 \end{proof}
 
+\begin{comment}
+
 \section{Math\'{e}: Polynomial Configurations}
 
 Math\'{e}'s result constructs sets avoiding algebraic varieties.
 
 \begin{theorem}[Math\'{e}]
-    Let $\{ f_k: \RR^{nd} \to \mathbf{R} \}$ be a countable family of rational coefficient polynomials with degree at most $m$. Then there exists a set $X \subset [0,1]^d$ with Hausdorff dimension $d/m$ which avoids the configurations
+    Let $\{ f_k: \RR^{nd} \to \mathbf{R} \}$ be a countable family of rational coefficient polynomials with degree at most $m$. Then there exists a set $X \subset [0,1]^d$ with Hausdorff dimension $d/m$ which avoids the configuration
     %
-    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \RR^{nd} : f(x_1, \dots, x_n) = 0 \}. \]
+    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^n(\RR^d) : f_k(x_1, \dots, x_n) = 0 \}. \]
 \end{theorem}
 
-Originally, Math\'{e}'s result does not explicitly use a discretization method analogous to Keleti and Pramanik and Fraser, but his proof strategy can be reconfigured to work in this setting. For the purpose of brevity, we do not carry out the complete argument, merely giving the discretization method below. By first trying to avoid the zero sets of the derivatives of the function $f$, one can reduce to the case where a partial derivative of $f$ is non-vanishing on the $\DQ_k$ discretized sets we start with. The key technique is that $f$ maps discrete lattices of points to a discrete, `one dimensional lattice' in $\RR^d$, and the degree of the polynomial gives us the difference in lengths between the two lattices. We revisit this idea in Chapter BLAH.
+Originally, Math\'{e}'s result does not explicitly use a discretization method analogous to Keleti and Pramanik and Fraser, but his proof strategy can be reconfigured to work in this setting. For the purpose of brevity, we do not carry out the complete argument, merely giving the discretization method below. By first trying to avoid the zero sets of the partial derivatives of the function $f$, one can reduce to the case where a partial derivative of $f$ is non-vanishing on the $\DQ_k$ discretized sets we start with. The key technique is that $f$ maps discrete lattices of points to a discrete, `one dimensional lattice' in $\RR^d$, and the degree of the polynomial gives us the difference in lengths between the two lattices. This idea was present in Keleti's work, and one can view Math\'{e}'s result as a generalization along these lines. We revisit this idea in Chapter BLAH.
 
 \begin{theorem}
-    Let $f: [0,1]^{dn} \to \RR$ be a rational coefficient polynomial of degree $m$, and disjoint, $\DQ_k$ discretized sets $T_1, \dots, T_n \subset [0,1]^d$, such that $|\partial_1 f| \neq 0$ on $T_1 \times \dots \times T_n$. Then there exists constants $C_0$ and $C_1$, depending only on $f$ and $T_1, \dots, T_n$, such that if
+    Let $f: [0,1]^{dn} \to \RR$ be a rational coefficient polynomial of degree $m$, and disjoint, $\DQ_k$ discretized sets $T_1, \dots, T_n \subset [0,1]^d$, such that $\inf |\partial_1 f| \neq 0$ on $T_1 \times \dots \times T_n$. Then there exists a constant $C$, depending only on $f$, such that if
     %
-    \begin{equation} \label{equation124426034990370935} N_{k+1} \geq \max(4C_1 \sqrt{nd}, 2C_0) \cdot (N_1 \dots N_k)^{m-1} \cdot M_{k+1}^m. \end{equation}
+    \begin{equation} \label{equation124426034990370935} N_{k+1} \geq C \cdot (N_1 \dots N_k)^{m-1} \cdot M_{k+1}^m, \end{equation}
     %
-    Then there exists $\DQ_{k+1}$ discretized sets $S_1 \subset T_1, \dots, S_n \subset T_n$ such that
+    then there exists $\DQ_{k+1}$ discretized sets $S_1 \subset T_1, \dots, S_n \subset T_n$ such that
     %
     \begin{enumerate}
         \item $f(x) \neq 0$ for $x \in S_1 \times \dots \times S_n$.
@@ -345,41 +347,139 @@ Originally, Math\'{e}'s result does not explicitly use a discretization method a
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    Without loss of generality, by considering an appropriate integer multiple of $f$, we may assume $f$ has integer coefficients. Let $\mathbf{A} \subset (r_{k+1} \cdot \mathbf{Z})^d$. Since $f$ has degree $m$, $f(\mathbf{A}) \subset r_{k+1}^m \cdot \mathbf{Z}$. Suppose that $|\partial_1 f| \geq C_0$ on $T_1 \times \dots \times T_n$, and $\| \nabla f \|_{L^\infty[0,1]^{nd}} \leq C_1$. Then the mean value theorem guarantees that if $\delta \leq r_{k+1}$, then
+    Without loss of generality, by considering an appropriate integer multiple of $f$, we may assume $f$ has integer coefficients. Let $\mathbf{A} \subset (r_{k+1} \cdot \mathbf{Z})^d$. Since $f$ has degree $m$, $f(\mathbf{A}) \subset r_{k+1}^m \cdot \mathbf{Z}$. Suppose that $c_0 \leq |\partial_1 f| \leq C_0$ on $T_1 \times \dots \times T_n$. Then the mean value theorem guarantees that if $\delta \leq r_{k+1}$, then
     %
-    \[ |f(a + \delta e_1) - f(a)| \geq C_0 \delta. \]
+    \[ c_0 \delta \leq |f(a + \delta e_1) - f(a)| \leq C_0 \delta. \]
     %
-    If $C_0 \delta \leq r_{k+1}^m/2$, then this implies
+    Pick $\varepsilon \in (0,1)$ small enough that $\varepsilon/c_0 < (1 - \varepsilon)/C_0$. If
     %
-    \[ d(f(a + \delta e_1), (r_{k+1}^m \cdot \ZZ)) \geq C_0 \delta. \]
+    \begin{equation} \label{equation920340923}
+        l_{k+1} \leq [(1-\varepsilon)/C_0 - \varepsilon/c_0] r_{k+1}^m
+    \end{equation}
     %
-    In particular, we set $\delta = r_{k+1}^m/2C_0$, then
+    we can find $\delta \in l_{k+1} \cdot \mathbf{Z}$ is such that
     %
-    \[ d(f(a + \delta e_1), r_{k+1}^m \cdot \ZZ) \geq r_{k+1}^m/2. \]
+    \[ [\varepsilon/c_0] r_{k+1}^m \leq \delta \leq [(1 - \varepsilon)/C_0] r_{k+1}^m. \]
     %
-    Define
+    Equation \eqref{equation920340923} is guaranteed by \eqref{equation124426034990370935} for a sufficiently large constant $C$. We then find $d(f(\mathbf{A} + \delta e_1), r_{k+1}^m \cdot \ZZ) \geq \varepsilon r_{k+1}^m$. For $i > 1$, define
     %
-    \[ S_i = \begin{cases} \bigcup [a_1, a_1 + l_{k+1}] \times \dots \times [a_d, a_d + l_{k+1}] &: i > 1 \\ \bigcup [a_1 + \delta e_1, a_1 + \delta e_1 + s] \times [a_2, a_2 + l_{k+1}] \times \dots \times [a_d, a_d + l_{k+1}] &: i = 1. \end{cases} \]
+    \[ S_i = \bigcup [a_1, a_1 + l_{k+1}] \times \dots \times [a_d, a_d + l_{k+1}], \]
     %
-    where $a$ ranges over all startpoints to intervals $[a_1,b_1] \times \dots \times [a_d,b_d] \in \DR_{k+1}^d(T_i)$. Then \eqref{equation124426034990370935} implies that
+    where $a = (a_1, \dots, a_d)$ ranges over all startpoints to intervals
     %
-    \[ d(f(S_1 \times \dots \times S_n), r_{k+1}^m \cdot \ZZ) \geq r_{k+1}^m/2 - C_1 \sqrt{nd} l_{k+1} \geq r_{k+1}^m/4. \]
+    \[ [a_1,a_1 + r_{k+1}] \times \dots \times [a_d,a_d + r_{k+1}] \in \DR_{k+1}^d(T_i). \]
+    %
+    Similarily, define
+    %
+    \[ S_1 = \bigcup [a_1 + \delta e_1, a_1 + \delta e_1 + s] \times [a_2, a_2 + l_{k+1}] \times \dots \times [a_d, a_d + l_{k+1}], \]
+    %
+    where $a$ ranges over all startpoints to intervals
+    %
+    \[ [a_1,a_1 + r_{k+1}] \times \dots \times [a_d,a_d + r_{k+1}] \in \DR_{k+1}^d(T_1). \]
+    %
+    %     % [(1 - \varepsilon)/C_1 - \varepsilon/C_0] r_{k+1}^m > l_{k+1}
+    %
+    Because $f$ is $C^1$, we can find $C_2$ such that if $x, y \in \RR^d$ satisfy $|x_i - y_i| \leq t$ for all $i$, then $|f(x) - f(y)| \leq C_2 t$. But then \eqref{equation124426034990370935}, for a sufficiently large constant $C$, implies that
+    %
+    \[ d(f(S_1 \times \dots \times S_n), r_{k+1}^m \cdot \ZZ) \geq \varepsilon r_{k+1}^m - C_2 l_{k+1} \geq (\varepsilon/2) r_{k+1}^m. \]
     %
     In particular, this implies Property (A).
 \end{proof}
 
+\begin{remark}
+    As in Pramanik and Fraser's result, the dimension $d/m$ of the resultant set obtained from applying this interval disection argument can be read off from the power of $M_{k+1}$ in \eqref{equation124426034990370935}.
+\end{remark}
+
+\end{comment}
+
+\begin{comment}
+
 \section{Schmerkin: Salem Sets Avoiding APs}
 
-Schmerkin is the first of the papers to obtain a result involving Fourier dimension.
+Schmerkin is the first of the papers we mention to construct \emph{Salem sets} avoiding configurations.
 
 \begin{theorem}
     There exists a set $X \subset [0,1]$ with $\fordim(X) = 1$, which avoids
     %
-    \[ \C = \{ (x,y,z) \in \C^3 : x < y < z, z - y = y - x \}. \]
+    \[ \C = \{ (x,y,z) \in \C^3 : x < y < z,\; z - y = y - x \}. \]
     %
     In other words, $X$ contains no nontrivial three term arithmetic progressions.
 \end{theorem}
 
-Schmerkin implements two main ideas. First, working modulo $m$, Behrend's construction of subsets of $\mathbf{Z}/m\mathbf{Z}$ of cardinality $m^{1-\varepsilon}$ avoiding arithmetic progressions is exploited to find subsets of $\mathbf{Z}$.
+\begin{remark}
+    For simplicity we prove here that one can find $X$ with $\fordim(X) = 1 - \varepsilon$, for each $\varepsilon > 0$. The dimension one case can be obtained from the proof we give by a careful manipulation of parameters at each step of the construction.
+\end{remark}
+
+Schmerkin implements two main ideas. First, he works with a discretization modulo $m$, exploiting Behrend's construction of subsets $K \subset \{ 1, \dots, m \}$ of cardinality $M^{1-o(1)}$ avoiding arithmetic progressions modulo $M$. Then, for any integers $n_k$, the set $\{ k + n_k M : k \in K \}$ also avoids arithmetic progressions. In particular, if each $n_k$ is chosen at random, then this induces enough random translations into the set construction to get a Salem set.
+
+\begin{lemma} \label{SchmerkinLemma}
+    Let $X_k \subset [0,1]$ be $\DQ_k$ discretized, such that for any non-trivial three term arithmetic progression $x_1,x_2,x_3 \in X_k$, the values $x_1,x_2,x_3$ occur in a common interval in $\DQ_k(X_k)$. Then there exists a constant $C$, depending only on $\varepsilon$, such that if $N_{k+1}$ is even, and $N_{k+1} \geq C$, then there exists a $\DQ_{k+1}$ discretized set $X_{k+1}$ such that
+    %
+    \begin{enumerate}
+        \item If $x_1, x_2, x_3 \in X_{k+1}$ form an arithmetic progression, then $x_1, x_2, x_3$ occur in a common interval in $\DQ_{k+1}(X_{k+1})$.
+
+        \item If $\mu_{k+1}$ is the probability measure on $X_{k+1}$ equal to a constant multiple of $dx|_{X_{k+1}}$, and $\mu_k$ the probability measure on $X_k$ equal to a constant multiple of $dx|_{X_k}$, then with probability $1 - 8 N_{k+1} \exp(-\log(N_{k+1})^2/16)$, for all $|m| \leq N_{k+1}$,
+        %
+        \[ \left| \widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m) \right| \leq \frac{\log(N_{k+1})}{[\#(\DQ_k(X_k))]^{1/2}}. \]
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Set $M = N_{k+1}/2$. If $N_{k+1}$ is sufficently large, Behrend's construction allows us to find $K_0 \subset \mathbf{Z}/M\mathbf{Z}$ with $|K| \geq N_{k+1}^{1-\varepsilon}$ which avoids arithmetic progressions modulo $M$. Then, for each integer $n \in \{ 1, \dots, M \}$, the set
+    %
+    \[ K(n) = \{ 2m \in \{ 0, \dots, N_{k+1} \} : m \in \{ 0, \dots, M-1 \}, m + M \mathbf{Z} \in 2K_0 + n \} \]
+    %
+    avoids arithmetic progressions. For each $I = [a_I, a_I + l_k] \in \DQ_k(X_k)$, pick $n_I \in \{ 1, \dots, N_{k+1} \}$ uniformly at random, and define
+    %
+    \[ X_{k+1} = \bigcup_{I \in \DQ_k(X_k)} \bigcup_{2m \in K(n_I)}\; [a_I + 2m l_{k+1}, a_I + (2m + 1) l_{k+1}) \]
+    %
+    Suppose $x_1,x_2,x_3 \in X_{k+1}$ form an arithmetic progression, i.e. $x_2 = (x_1 + x_3)/2$. Then by assumption, there is $I \in \DQ_k(X_k)$ such that $x_1,x_2,x_3 \in I$. We can find integers $2m_1, 2m_2, 2m_3 \in K(n_I)$ such that $x_i = a_I + 2m_i l_{k+1} + \delta_i$, where $0 \leq \delta_i < l_{k+1}$. But this means that
+    %
+    \[ \left| 2m_2 - (m_1 + m_3) \right| = \left| \frac{\delta_1 + \delta_3}{2 l_{k+1}} - \frac{\delta_2}{l_{k+1}} \right| < 1. \]
+    %
+    Since $m_1, m_2$, and $m_3$ are integers, this implies $m_2 = (m_1 + m_3)/2$, which implies $m_1 = m_2 = m_3$. Thus Property (A) is satisfied. 
+
+    For each $I \in \DQ_k(X_k)$, we let $\nu_I = \mu_{k+1}|_I$, and $\eta_I = \mu_k|_I$. Then, pointwise, we have $\mathbf{E}[\nu_I(x)] = \eta_I(x)$, and this implies that for each integer $m$,
+    %
+    \[ \mathbf{E}[\widehat{\nu_I}(m)] = \mathbf{E} \left( \int \nu_I(x) e^{-2 \pi i xm} \right) = \int \mathbf{E}[\nu_I(x)] e^{-2 \pi i xm} =  \widehat{\eta_I}(m). \]
+    %
+    Moreover,
+    %
+    \[ |\widehat{\nu_I}(m) - \widehat{\eta_I}(m)| \leq \| \nu_I - \mu_I \| \leq \frac{2}{\#(\DQ_k(X_k))}. \]
+    %
+    Applying Hoeffding's inequality, since
+    %
+    \[ \sum_I \widehat{\nu_I}(m) - \widehat{\mu_I}(m) = \widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m), \]
+    %
+    we conclude that
+    %
+    \[ \mathbf{P} \left( \left| \widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m) \right| \geq t \right) \leq 4 \exp \left( \frac{- \# (\DQ_k(X_k)) t^2}{16} \right). \]
+    %
+    Setting $t = \log(N_{k+1}) / ( \#(\DQ_k(X_k)))^{1/2}$, and applying a union bound, we conclude that with probability $1 - 8 N_{k+1} \exp(-\log(N_{k+1})^2/16)$, for all $|m| \leq N_{k+1}$,
+    %
+    \[ \left| \widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m) \right| \leq \frac{\log(N_{k+1})}{[\#(\DQ_k(X_k))]^{1/2}}. \]
+    %
+    This gives Property (B).
+\end{proof}
+
+\begin{theorem}
+    If $N_k = 2Ck$, where $C$ is as in Lemma \ref{SchmerkinLemma}, then almost surely, the set $X$ is a Salem set of dimension $1 - \varepsilon$.
+\end{theorem}
+\begin{proof}
+    It is easy to verify that
+    %
+    \begin{align*}
+        \sum_{k = 1}^\infty 8N_k \exp(- \log(N_k)^2/16) < \infty.
+    \end{align*}
+    %
+    The Borel Cantelli lemma therefore implies that, almost surely, for sufficiently large $k$, and for all $|m| \leq N_{k+1}$, we have
+    %
+    \[ \left| \widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m) \right| \leq \frac{\log(N_{k+1})}{[\#(\DQ_k(X_k))]^{1/2}}. \]
+    %
+    Now for each $k$, we know $\#(\DQ_{k+1}(X_{k+1})) \geq N_{k+1}^{1-\varepsilon} \#(\DQ_k(X_k))$, which gives that $\#(\DQ_k(X_k)) \geq N_1^{1-\varepsilon} \dots N_k^{1-\varepsilon}$. Thus
+    %
+    \[ \left| \widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m) \right| \leq \frac{\log(N_{k+1})}{N_{k+1}^{1-\varepsilon} \dots N_1^{1-\varepsilon}} \]
+\end{proof}
+
+\end{comment}
 
 \endinput
