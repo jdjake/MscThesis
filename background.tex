@@ -25,9 +25,9 @@ Our main focus in this thesis is the \emph{pattern avoidance problem}. For a fix
 \begin{example}[Linear Independence Configuration]
 	Let $V$ be a vector space over a field $K$. We set
 	%
-	\[ \C = \bigcup_{n = 1}^\infty \{ (x_1, \dots, x_n) \in \C^n(V): \text{for any}\ a_1, \dots, a_n \in K,\ a_1x_1 + \dots + a_nx_n = 0 \}. \]
+	\[ \C = \bigcup_{n = 1}^\infty \{ (x_1, \dots, x_n) \in \C^n(V): \text{there is}\ a_1, \dots, a_n \in K\ \text{s.t.}\ a_1x_1 + \dots + a_nx_n = 0 \}. \]
 	%
-	A subset $X \subset V$ avoids $\C$ if and only if $X$ is a linearly independent subset of $X$. Note that if $V$ is infinite dimensional, then $\C$ cannot be replaced by a $n$ point configuration for any $n$; arbitrarily large tuples must be considered. We will be interested in the case where $K = \QQ$, and $V = \RR$. Our interest here is to find analytically large linearly independant subsets of $V$.
+	A set $X \subset V$ avoids $\C$ if and only if $X$ is a linearly independent subset of $X$. Note that if $V$ is infinite dimensional, then $\C$ cannot be replaced by a $n$ point configuration for any $n$; arbitrarily large tuples must be considered. We will be interested in the case where $K = \QQ$, and $V = \RR$. Our interest here is to find analytically large linearly independant subsets of $V$.
 \end{example}
 
 %\begin{example}[General Position Configuration]
@@ -49,7 +49,7 @@ Even though our problem formulation assumes configurations are formed by distinc
 	%
 	\[ \C^1 = \{ g \in \Config^1(G): g + g \in Y \} \quad \text{and} \quad \C^2 = \{ (g_1,g_2) \in \Config^2(G): g_1 + g_2 \in Y \}. \]
 	%
-	Then set $\C = \C^1 \cup \C^2$. A set $X \subset G$ avoids $\C$ if and only if $(X + X) \cap Y = \emptyset$.
+	Then define $\C = \C^1 \cup \C^2$. A set $X \subset G$ avoids $\C$ if and only if $(X + X) \cap Y = \emptyset$.
 \end{example}
 
 Depending on the structure of the ambient space $\AAA$ and the configuration $\C$, there are various ways of measuring the size of sets $X \subset \AAA$ for the purpose of the pattern avoidance problem:
@@ -103,9 +103,10 @@ In this thesis, inspired by results in these three settings, we establish method
 	Provided $\varepsilon d < 1$, this means there is $p \in Q_0$ with $C(p) \in \C(X)$. But this means $X$ does not avoid $\C$.
 \end{proof}
 
-Since no set of positive Lebesgue measure can avoid non-discrete configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets for many non-discrete configurations. Fortunately, there is a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set.
+Since no set of positive Lebesgue measure can avoid non-discrete configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets for many non-discrete configurations. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set.
 
-There are many variants of fractional dimension. Here we choose to use the Minkowski dimension, the Hausdorff dimension, and the Fourier dimension. They assign the same dimension to any smooth manifold with non-vanishing curvature, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales. The Fourier dimension is a refinement of the Hausdorff dimension which gives greater control on the set when viewed `in the frequency domain', and therefore gives additional structural information on sets.
+There are many variants of fractional dimension. Here we choose to use the Minkowski dimension and the Hausdorff dimension. They assign the same dimension to any smooth manifold with non-vanishing curvature, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
+%The Fourier dimension is a refinement of the Hausdorff dimension which gives greater control on the set when viewed `in the frequency domain', and therefore gives additional structural information on sets.
 
 
 
@@ -187,7 +188,7 @@ Given any Borel set $E$, Corollary \ref{corollaryhausdorffzero}, combined with L
 	If $\hausdim(E) < d$, then $|E| = H^d(E) = 0$. Thus any set with fractional dimension less than $d$ must have measure zero. This means we can use the dimension as a way of distinguishing between sets of measure zero, which is precisely what we need to study configuration avoidance problem for non-discrete configurations.
 \end{remark}
 
-The fact that Hausdorff dimension is defined over simultaneously multiple scales makes it more stable under analytical operations. In particular,
+The fact that Hausdorff dimension is defined over multiple scales simultaneously makes it more stable under analytical operations. In particular, for any family of at most countably many sets $\{ E_k \}$,
 %
 \[ \hausdim \left\{ \bigcup E_k \right\} = \sup \left\{ \hausdim(E_k) \right\}. \]
 %
@@ -219,7 +220,7 @@ Fix an integer $N$. The classic family of dyadic cubes with \emph{branching fact
 %
 \[ \DD_k^d = \left\{ \prod_{i = 1}^d \left[ \frac{n_i}{N^k}, \frac{n_i + 1}{N^k} \right] : n \in \ZZ^d \right\}, \]
 %
-and then setting $\DD = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD$ are known as \emph{dyadic cubes}, and elements of $\DD_k^d$ are known as \emph{dyadic cubes of generation $k$}. The most important properties of the dyadic cubes is that for each $k$, $\DD_k^d$ is a cover of $\RR^d$ by cubes of sidelength $1/M^k$, and for any two cubes $Q,R \in \DD$, either their interiors are disjoint, or one cube is nested in the other. We also introduce some further terminology and notation:
+and then setting $\DD = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD$ are known as \emph{dyadic cubes}, and elements of $\DD_k^d$ are known as \emph{dyadic cubes of generation $k$}. The most important properties of the dyadic cubes is that for each $k$, $\DD_k^d$ is a cover of $\RR^d$ by cubes of sidelength $1/N^k$, and for any two cubes $Q,R \in \DD$, either their interiors are disjoint, or one cube is nested in the other.
 %
 \begin{itemize}
 	\item For each cube $Q \in \DD_{k+1}^d$, there is a unique cube $R \in \DD_k^d$ such that $Q \subset R$. We refer to $R$ as the \emph{parent} of $Q$, and $Q$ as a \emph{child} of $R$. Each cube in $\DD$ has exactly $N^d$ children. For $Q \in \DD_{k+1}^d$, we let $Q^* \in \DD_k^d$ denote it's parent.
@@ -238,12 +239,12 @@ and then setting $\DD = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD$ are known
 	%
 	\[ \{ x \in \RR^d : d(x,E) < 1/N^k \}. \]
 	%
-	We have no need for this type of thickening in this thesis.
+	We have no need for the standard thickening in this thesis, so there is no notational conflict.
 \end{itemize}
 %
-Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidelength, from the perspective of measure theory, working with dyadic cubes is normally sufficient. For instance,
+Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidelength, from the perspective of geometric measure theory, working with dyadic cubes is normally equivalent to working with the class of all cubes.
 
-Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by repeatedly performing a simple, recursive procedure. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
+Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by application of a simple procedure applied recursively. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
 
 \begin{example}
 	A classic fractal-type set is the Cantor set $C$. We form $C$ from the family of dyadic cubes with branching factor $M = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are listed in order. We set
@@ -328,22 +329,14 @@ The cubes in $\DR_k^d$ are coarser than those in $\DQ_k^d$, but finer than those
 It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a probability measure which obeys a certain decay law on small sets. We say a Borel probability measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and there exists $C > 0$ such that for any cube $Q$, $\mu(Q) \leq C \cdot l(Q)^s$. The proof of Frostman's lemma will utilize a technique often useful, known as the \emph{mass distribution principle}. Such a principle was stated in BLAH.
 
 \begin{lemma}
-	For each $k \geq 0$, let $\mathcal{E}_k$ be a finite collection of non-empty, bounded Borel subsets of $\RR^d$, such that
+	For each $k \geq 0$, let $\mathcal{E}_k$ be a finite collection of non-empty, compact, disjoint subsets of $\RR^d$, such that for each $A \in \mathcal{E}_{k+1}$, there is a unique $A^* \in \mathcal{E}_k$ such that $A \subset A^*$, and for any $A^* \in \mathcal{E}_k$, there is at least one $A \in \mathcal{E}_{k+1}$ with $A \subset A^*$. Let $E_k = \bigcup \mathcal{E}_k$, and let $E_\infty = \bigcap E_k$. Let $\mu: \bigcup_{k \geq 0} \mathcal{E}_k \to [0,\infty)$ be a function such that for any $i$, and for any $A \in \mathcal{E}_i$,
 	%
-	\begin{itemize}
-		\item \emph{Separation}: For each $k$, the collection $\{ \overline{A} : A \in \mathcal{E}_k \}$ is disjoint.
-
-		\item \emph{Nesting}: For each $A \in \mathcal{E}_{k+1}$, there is a unique $A^* \in \mathcal{E}_k$ such that $A \subset A^*$, and for any $A^* \in \mathcal{E}_k$, there is at least one $A \in \mathcal{E}_{k+1}$ with $A \subset A^*$.
-	\end{itemize}
-	%
-	Let $E_k = \bigcup \mathcal{E}_k$, and let $E_\infty = \bigcap E_k$. Recursively define a function $\mu: \bigcup_{k \geq 0} \mathcal{E}_k \to [0,\infty)$ by setting $\mu(A) = 1$ if $A \in \mathcal{E}_0$, and for each $A \in \mathcal{E}_{k+1}$, setting
-	%
-	\[ \mu(A) = \frac{\mu(A^*)}{\# \{ A' \in \mathcal{E}_{k+1}: A' \subset A^* \}}. \]
+	\begin{equation} \label{equation124069350740597} \mu(A) = \sum \{ \mu(B) : B \in \mathcal{E}_{i+1}, B \subset A \}. \end{equation}
 	%
 	Then $\mu$ extends to a finite Borel measure on $\RR^d$ supported on $E_\infty$.
 \end{lemma}
 \begin{proof}
-	Let $\mathcal{E} = \bigcup_{k \geq 0} \mathcal{E}_k \cup 2^{\RR^d - E_k}$. Then $\mathcal{E}$ is a \emph{semi-ring} of sets:
+	Let $\mathcal{E} = \bigcup_{k \geq 0} \mathcal{E}_k \cup \mathcal{P}(\RR^d - E_k)$. Then $\mathcal{E}$ is a \emph{semi-ring} of sets:
 	%
 	\begin{itemize}
 		\item \emph{$\mathcal{E}$ is closed under intersections}: Let $A, B \in \mathcal{E}$. Then without loss of generality, swapping $A$ and $B$ if necessary, there exists $i \leq j$ such that $A \in \mathcal{E}_i$ or $A \subset \RR^d - E_i$, and $B \in \mathcal{E}_j$ or $B \subset \RR^d - E_j$.
@@ -358,17 +351,19 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 
 		Suppose $A \in \mathcal{E}_i$ and $B \in \mathcal{E}_j$. If $i \geq j$, then either $A \cap B = \emptyset$, or $A \subset B$. In either case, $A - B = \emptyset \in \mathcal{E}$. If $i \leq j$, then either $A \cap B = \emptyset$, or $B \subset A$. In the latter case,
 		%
-		\[ A - B = \bigcup \{ B_i : B_i \in \mathcal{E}_j, B_i \neq B, B_i \subset A \} \cup \{ A - E_j \}. \]
+		\[ A - B = \left( \bigcup \{ C : C \in \mathcal{E}_j, C \neq B, C \subset A \} \right) \cup \{ A - E_j \}. \]
 		%
-		Note that this union is disjoint, and each set in the union is an element of $\mathcal{E}$.
+		This gives $A - B$ as a disjoint union of elements of $\mathcal{E}$.
 
 		Suppose $A \in \mathcal{E}_i$, and $B \subset \RR^d - E_j$. If $i \geq j$, then $A \subset E_i \subset E_j$, so $A - B = A$. If $i \leq j$, then
 		%
 		\[ A - B = (A \cap E_j) \cup (A \cap (\RR^d - B)). \]
 		%
-		The former set can be written as $\bigcup_{A' \in \mathcal{E}_j} : A' \subset A$, and the latter set is a subset of $\RR^d - E_j$. This gives $A - B$ as a disjoint union of elements of $\mathcal{E}$.
+		The former set can be written as $\bigcup \{ A' \in \mathcal{E}_j : A' \subset A \}$, and the latter set is a subset of $\RR^d - E_j$. This gives $A - B$ as a disjoint union of elements of $\mathcal{E}$.
 
 		If $A \subset \RR^d - E_i$, then $A - B \subset \RR^d - E_i$, so $A - B \in \mathcal{E}$.
+
+		This addresses all cases.
 	\end{itemize}
 	%
 	The function $\mu$ extends to a function on $\mathcal{E}$ by setting $\mu(E) = 0$ if $E \subset \RR^d - E_k$ for some $k$. This does not conflict with our previous definition, since if $A \in \mathcal{E}_i$, then $A \cap E_j \neq \emptyset$ for all $j \geq 0$. We claim that $\mu$ is then a \emph{pre-measure} on the semi-ring:
@@ -380,18 +375,53 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 
 		If $A \in \RR^d - E_k$ for some $k$, then $A_i \in \RR^d - E_k$ for each $i$, and thus $\mu(A_i) = 0$ for all $i$. Since $\mu(A) = 0$, this means $\mu(A) = \sum \mu(A_i)$.
 
-		Suppose $A \in \mathcal{E}_k$. If there are only \emph{finitely many} sets $A_j$ with $A_j \in \mathcal{E}_k$, then the claim is obvious. Thus it suffices to show this is the only case. Let $\{ A_j \}$ be the family of sets with $A_j \in \mathcal{E}_{k_j}$. Then we may find a disjoint family of open sets $\{ U_j \}$ with $\overline{A_j} \subset U_j$ for each $j$. Define
-		%
-		\[ A_\infty = \bigcup \overline{A_j} \]
-		%
-		Then $\{ U_j \}$ is a cover of $A_\infty$. The set $A_\infty$ is compact, since it is bounded and closed by the separability criterion. Since the sets $U_j$ are disjoint, and $U_j \cap A_\infty \neq \emptyset$ for any $j$, this implies the set of $\{ U_j \}$ is finite, and thus the set $\{ A_j \}$ is finite.
+		Suppose $A \in \mathcal{E}_k$, and let $A_\infty = A \cap E_\infty$. If $B \in \mathcal{E}_k$ for any $k$, then $B \cap A_\infty$ is \emph{relatively open} in $A_\infty$ because the sets in $\mathcal{E}_k$ cover $A_\infty$ and are separated. Note that $A_\infty \cap (\RR^d - E_k) = \emptyset$ for all $k$. Thus the family of sets $\{ A_i : A_i \in \mathcal{E}_{k_i} \}$ is a relatively open cover of $A_\infty$. Since $A_\infty$ is compact, it must have a finite subcover. But applying compactness, $A_i \cap A_\infty \neq \emptyset$ for all $i$ with $A_i \in \mathcal{E}_{k_i}$, so we conclude the set $\{ A_i : A_i \in \mathcal{E}_{k_i} \}$ is finite.
+
+		Since the family of $A_i$ with $A_i \in \mathcal{E}_{k_i}$ is finite, we can repeatedly apply \eqref{equation124069350740597} so that, without loss of generality, we may assume there is a common integer $N$ such that $A_i \in \mathcal{E}_N$ for all $i$ with $\mu(A_i) > 0$. To prove that $\mu(A) = \sum \mu(A_i)$, it now suffices to show that for each $B \in \mathcal{E}_N$ with $B \subset A$, $B = A_i$ for some $i$. But this is obvious, since $\{ A_i : A_i \in \mathcal{E}_N \}$ covers $A_\infty$, and every such $B$ satisfies $B \cap A_\infty \neq \emptyset$.
 	\end{itemize}
 	%
-	The Caratheodory extension theorem then guarantees that $\mu$ extends to a measure on the $\sigma$ algebra generated by $\mathcal{E}$. Since
+	The Caratheodory extension theorem guarantees that $\mu$ extends to a measure on the $\sigma$ algebra generated by $\mathcal{E}$, denoted $\sigma(\mathcal{E})$. We claim this $\sigma$ algebra contains all Borel sets. Let $F$ be a closed set. Then
 	%
-	\[ \lim_{k \to \infty} \left( \max_{A \in \mathcal{E}_k} \diam(A) \right) = 0, \]
+	\[ F \cap E_\infty = \bigcap_k \left[ \bigcup \{ A : A \in \mathcal{E}_k, A \cap F \neq \emptyset \} \right] = \bigcap_k \left[ G_k \right]. \]
 	%
-	this $\sigma$ algebra contains all Borel sets.
+	Each of the sets $G_k$ is a finite union of elements in $\mathcal{E}_k$, hence $G_k \in \sigma(\mathcal{E})$, and so $F \cap E_\infty = \bigcap_k G_k \in \sigma(\mathcal{E})$. We also find
+	%
+	\[ F \cap E_\infty^c = \bigcup_k F \cap (\RR^d - E_k) = \bigcup_k G_k'. \]
+	%
+	Since $G_k' \in \mathcal{E}$ for all $k$, we conclude $F \cap E_\infty^c \in \sigma(\mathcal{E})$. Thus
+	%
+	\[ F = (F \cap E_\infty) \cup (F \cap E_\infty^c) \in \sigma(\mathcal{E}). \]
+	%
+	Since $F$ was an arbitrary closed set, this implies all Borel sets are measurable with respect to $\sigma(\mathcal{E})$.
+\end{proof}
+
+An alternative approach, leading to a more general theorem, is given by employing weak convergence.
+
+\begin{lemma} \label{weakstarcompleteness}
+	A Cauchy sequence of non-negative Borel measures on $\RR^d$ is convergent with respect to the weak $*$ topology.
+\end{lemma}
+\begin{proof}
+	Let $\{ \mu_i \}$ be a Cauchy sequence of non-negative, regular Borel measures. This means that for each $f \in C_c(\RR^d)$, the sequence of numbers
+	%
+	\[ \left\{ \int f d\mu_i \right\} \]
+	%
+	is Cauchy. Fix a compact set $K$. then we can find a function $\varphi \in C_c(\RR^d)$ such that $\mathbf{I}_K \leq \varphi$. This means that
+	%
+	\[ \mu_i(K) = \int \mathbf{I}_K d\mu_i \leq \int \varphi d\mu_i. \]
+	%
+	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, it is uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Thus the measures $\mu_i|_K$ are uniformly finite, and we can apply the Banach Alaoglu theorem to find a regular Borel measure $\mu^K$ such that $\mu_i|_K \to \mu^K$ weakly. Note that if $f \in C_c(\RR^d)$ is supported on $K_1 \cap K_2$ for two compact sets $K_1$ and $K_2$, then
+	%
+	\[ \int f d\mu^{K_1} = \lim_{i \to \infty} \int_{K_1} f d\mu_i = \lim_{i \to \infty} \int_{K_2} f d \mu_i = \int f d\mu^{K_2}. \]
+	%
+	Thus we can define a measure $\mu$ such that
+	%
+	\[ \int f d\mu = \lim_{K \to \infty} \int f d\mu^K. \]
+	%
+	For any $f \in C_c(\RR^d)$ supported on a compact set $K$,
+	%
+	\[ \int f d\mu = \int f d\mu^K = \lim_{i \to \infty} \int_K f d\mu_i = \lim_{i \to \infty} \int f d\mu_i. \]
+	%
+	Since $f$ was arbitrary, $\mu_i \to \mu$ weakly.
 \end{proof}
 
 \begin{lemma}[Mass Distribution Principle] \label{massdistributionprinciplelem}
@@ -414,12 +444,10 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	where $Q$ ranges over all cubes in $\DQ^d_k(E(l_k))$.
 \end{lemma}
 \begin{proof}
-	For each $i$, define a regular Borel measure $\mu_i$ such that for each $f \in C_c(\RR^d)$,
+	For each $i$, let $\mu_i$ be a regular Borel measure such that for each $j \leq i$, and $Q \in \DQ_j^d$, $\mu_i(Q) = f(Q)$. One such choice is given, for each $f \in C_c(\RR^d)$, by the equation
 	%
-	\[ \int f d\mu_i = \sum_{Q \in \DQ_i^d} \frac{f(Q)}{|Q|} \int_Q f\; dx \]
+	\[ \int f d\mu_i = \sum_{Q \in \DQ_i^d} \frac{f(Q)}{|Q|} \int_Q f\; dx. \]
 	%
-	Then, for each $j \leq i$, $\mu_i(Q) = f(Q)$.
-
 	We claim that $\{ \mu_i \}$ is a Cauchy sequence in the space of all regular Borel measures on $\RR^d$, viewing the space as a locally convex space under the weak topology. Fix $\varphi \in C_c(\RR^d)$, and choose some $N$ such that $\varphi$ is supported on $[-N,N]^d$. Set $Q_0 = [-N,N]^d$. Since $\varphi$ is compactly supported, $\varphi$ is \emph{uniformly continuous}, so for each $\varepsilon > 0$, if $i$ is suitably large, there is a sequence of values $\{ a_Q : Q \in \DQ_i^d(Q_0) \}$ such that if $x \in Q$, $|\varphi(x) - a_Q| \leq \varepsilon$. But this means that
 	%
 	\[ \sum (a_Q - \varepsilon) \mathbf{I}_Q \leq \varphi \leq \sum (a_Q + \varepsilon) \mathbf{I}_Q, \]
@@ -438,7 +466,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	Since $\varepsilon$ and $\varphi$ were arbitrary, this shows $\{ \mu_i \}$ is Cauchy.
 
-	Since the space of all regular Borel measures on $\RR^d$ is \emph{complete}, the last paragraph implies there exists a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly. For any $Q \in \DQ^d$, since $Q$ is a closed set,
+	Applying Lemma \ref{weakstarcompleteness}, there exists a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly. For any $Q \in \DQ^d$, since $Q$ is a closed set,
 	%
 	\[ \mu(Q) \geq \limsup_{i \to \infty} \mu_i(Q) = f(Q). \]
 	%
@@ -448,14 +476,6 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	where $Q$ ranges over the cubes in $\DQ_i^d(E(l_k))$.
 \end{proof}
-
-\begin{remark}
-	Common approaches to the mass distribution principle consider
-	%
-	\[ \mu(E) = \inf \left\{ \sum_{i = 1}^\infty f(Q_i) : Q_i \in \DQ^d, E \subset \bigcup Q_i \right\}. \]
-	%
-	If $d(E,F) > 0$, then \eqref{equation73234091} implies that $\mu(E + F) = \mu(E) + \mu(F)$, so $\mu$ is a metric exterior measure, and so all Borel sets are measurable with respect to $\mu$. However, given the conditions of this theorem, it is \emph{not} necessarily true that $\mu$ is even a non-zero measure, let alone that it reflects the values of the functions $f$.
-\end{remark}
 
 %\begin{lemma}
 %	let $\mu^+$ be a function from $\B$ to $[0,\infty)$ such that for any $I \in \B(1/M^k,\RR^d)$,

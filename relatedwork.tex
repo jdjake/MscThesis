@@ -10,10 +10,10 @@ Here, we discuss the main papers which influenced our results. In particular, th
 
 Keleti's two page paper constructs a full dimensional set $X \subset [0,1]$ such that for each $t \neq 0$, $X$ intersects $t + X$ in at most one place. The set $X$ is then said to \emph{avoid translates}. This paper contains the core idea behind the \emph{interval dissection} method adapted in Fraser and Pramanik's paper. We also adapt this technique in our paper, which makes the result of interest.
 
-It is often convenient to avoid certain configurations when they are expressed in terms of an equation, which is also exploited in Fraser and Pramanik's work, and in Math\'{e}'s.
-
 \begin{lemma}
-    Let $X$ be a set. Then $X$ avoids translates if and only if there do not exists values $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = x_4 - x_3$.
+    Let $X$ be a set. Then $X$ avoids translates if and only if there do not exists values $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = x_4 - x_3$. In particular, a set $X$ avoids translates if and only if it avoids the four point configuration
+    %
+    \[ \C = \{ (x_1, x_2, x_3, x_4): x_1 < x_2 \leq x_3 < x_4,\ x_2 - x_1 = x_4 - x_3 \}. \]
 \end{lemma}
 \begin{proof}
 
@@ -105,7 +105,7 @@ Before we move onto other methods which developed Keleti's argument work, it is 
     \item \emph{Iterative Application of Discrete Solution}: Keleti then repeatedly applies his argument iteratively. In particular, Property (i) of Lemma \ref{KeletiDiscreteLemma} allows him to apply his argument iteratively. The reason why Keleti obtains a configuration avoiding set in the limit is because of Property (ii). Most importantly the reason why Keleti obtains a set with full Hausdorff dimension, if the sequence $\{ N_k \}$ decreases rapidly enough, is because of Property (iii).
 \end{itemize}
 
-Of course, it is not possible to extend the discrete solution of the configuration argument to general configurations; this part of Keleti's method strongly depends on the arithmetic structure of the configuration. The iterative application of a discrete solution, however, can be applied in generality. In various senses, this technique is applied in all the results we review in this chapter.
+Of course, it is not possible to extend the discrete solution of the configuration argument to general configurations; this part of Keleti's method strongly depends on the arithmetic structure of the configuration. The iterative application of a discrete solution, however, can be applied in generality. In various senses, this technique is applied in all the results we review in this chapter, and in the new results we provide later on in this thesis.
 
 
 
@@ -317,7 +317,7 @@ What remains is to bound the Hausdorff dimension of $X$. For this, one must use 
     %
     \[ M_{k+1} \gtrsim_\varepsilon \left( (N_1 \dots N_k)^{6dn} [2^k A^d] \right)^{1/\varepsilon}. \]
     %
-    This equation is satisfied if $M_k = 2^{2^{k^2}}$.
+    This equation is satisfied if $M_k = 2^{2^{k \log k}}$.
 \end{proof}
 
 \begin{comment}
