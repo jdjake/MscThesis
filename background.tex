@@ -27,7 +27,7 @@ Our main focus in this thesis is the \emph{pattern avoidance problem}. For a fix
 	%
 	\[ \C = \bigcup_{n = 1}^\infty \{ (x_1, \dots, x_n) \in \C^n(V): \text{there is}\ a_1, \dots, a_n \in K\ \text{s.t.}\ a_1x_1 + \dots + a_nx_n = 0 \}. \]
 	%
-	A set $X \subset V$ avoids $\C$ if and only if $X$ is a linearly independent subset of $X$. Note that if $V$ is infinite dimensional, then $\C$ cannot be replaced by a $n$ point configuration for any $n$; arbitrarily large tuples must be considered. We will be interested in the case where $K = \QQ$, and $V = \RR$. Our interest here is to find analytically large linearly independant subsets of $V$.
+	A set $X \subset V$ avoids $\C$ if and only if $X$ is a linearly independent subset of $V$. Note that if $V$ is infinite dimensional, then $\C$ cannot be replaced by a $n$ point configuration for any $n$; arbitrarily large tuples must be considered. We will be interested in the case where $K = \QQ$, and $V = \RR$. Our interest here is to find analytically large linearly independant subsets of $V$.
 \end{example}
 
 %\begin{example}[General Position Configuration]
@@ -42,7 +42,7 @@ Our main focus in this thesis is the \emph{pattern avoidance problem}. For a fix
 %	so each $\C^{k+1}$ is essentially a union of $k$ dimensional hyperplanes.
 %\end{example}
 
-Even though our problem formulation assumes configurations are formed by distinct sets of points, one can still formulate avoidance problems involving repeated points by a simple trick.
+Even though our problem formulation assumes configurations are formed by distinct sets of points, one can still formulate avoidance problems involving repeated points by a simple trick, exemplified by the next example.
 
 \begin{example}[Sum Set Configuration]
 	Let $G$ be an abelian group, and fix $Y \subset G$. Set
@@ -77,11 +77,11 @@ In this thesis, inspired by results in these three settings, we establish method
 	%
 	\begin{equation} \label{densityApplication} \lim_{l(Q) \to 0} \frac{|X \cap Q|}{|Q|} = 1, \end{equation}
 	%
-	where $Q$ ranges over all cubes in $\RR^d$ with $x \in Q$, and $l(Q)$ denotes the sidelength of $Q$. Fix $\varepsilon > 0$, to be specified later, and choose $r$ small enough that $|X \cap Q| \geq (1 - \varepsilon) |Q|$ for any cube $Q$ with $x \in Q$ and $l(Q) \leq r$. Now let $Q_0$ denote a cube centered at $x$ with $l(Q_0) \leq r$. Applying Property \ref{nonDiscreteConfig}, we find $C = (a_1, \dots, a_n) \in \C$ such that
+	where $Q$ ranges over all axis-oriented cubes in $\RR^d$ with $x \in Q$, and $l(Q)$ denotes the sidelength of $Q$. Fix $\varepsilon > 0$, to be specified later, and choose $r$ small enough that $|X \cap Q| \geq (1 - \varepsilon) |Q|$ for any cube $Q$ with $x \in Q$ and $l(Q) \leq r$. Now let $Q_0$ denote a cube centered at $x$ with $l(Q_0) \leq r$. Applying Property \ref{nonDiscreteConfig}, we find $C = (a_1, \dots, a_n) \in \C$ such that
 	%
 	\begin{equation} \label{equation690346024} \diam \{ a_1, \dots, a_n \} \leq l(Q_0)/2. \end{equation}
 	%
-	For each $p \in Q_0$, let $C(p) = (a_1(p), \dots, a_n(p))$, where $a_i(p) = p + (a_i - a_1)$. Property \ref{translationinvariance} implies $C(p) \in \C$ for each $p \in \RR^d$. A union bound shows
+	For each $p \in Q_0$, let $C(p) = (a_1(p), \dots, a_n(p))$, where $a_i(p) = p + (a_i - a_1)$. A union bound shows
 	%
 	\begin{equation} \label{equation548} \left| \{ p \in Q_0 : C(p) \not \in \C(X) \} \right| \leq \sum_{i = 1}^d \left| \{ p \in Q_0 : a_i(p) \not \in X \} \right|.
 	\end{equation}
@@ -100,12 +100,14 @@ In this thesis, inspired by results in these three settings, we establish method
 	%
 	\[ \left| \{ p \in Q_0 : C(p) \not \in \C(X) \} \right| \leq \varepsilon d |Q_0|. \]
 	%
-	Provided $\varepsilon d < 1$, this means there is $p \in Q_0$ with $C(p) \in \C(X)$. But this means $X$ does not avoid $\C$.
+	Provided $\varepsilon d < 1$, this means there is $p \in Q_0$ with $C(p) \in \C(X)$. Property \ref{translationinvariance} implies $C(p) \in \C$, so $X$ does not avoid $\C$.
 \end{proof}
+
+% TO DO: SWAPPING THIS RESULT FOR A DENSITY RESULT, IF WE CAN OBTAIN IT.
 
 Since no set of positive Lebesgue measure can avoid non-discrete configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets for many non-discrete configurations. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set.
 
-There are many variants of fractional dimension. Here we choose to use the Minkowski dimension and the Hausdorff dimension. They assign the same dimension to any smooth manifold with non-vanishing curvature, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
+There are many variants of fractional dimension. Here we choose to use the Minkowski dimension and the Hausdorff dimension. They assign the same dimension to any smooth manifold, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
 %The Fourier dimension is a refinement of the Hausdorff dimension which gives greater control on the set when viewed `in the frequency domain', and therefore gives additional structural information on sets.
 
 
@@ -118,11 +120,36 @@ There are many variants of fractional dimension. Here we choose to use the Minko
 
 \section{Minkowski Dimension}
 
-We begin by discussing the Minkowski dimension, which is the simplest to define. Given $l > 0$, and a bounded set $E \subset \RR^d$, we let $N(l,E)$ denote the \emph{covering number} of $E$, i.e. the minimum number of sidelength $l$ cubes required to cover $E$. We define the \emph{lower} and \emph{upper} Minkowski dimension as
+Given $l > 0$, and a bounded set $E \subset \RR^d$, we let $N(l,E)$ denote the \emph{covering number} of $E$, i.e. the minimum number of sidelength $l$ cubes required to cover $E$. We define the \emph{lower} and \emph{upper} Minkowski dimension as
 %
-\[ \lowminkdim(E) = \liminf_{l \to 0} \frac{\log(N(l,E))}{\log(1/l)} \quad\text{and}\quad \upminkdim(E) = \limsup_{l \to 0} \frac{\log(N(l,E))}{\log(1/l)}. \]
+\[ \lowminkdim(E) = \liminf_{l \to 0} \left[ \frac{\log(N(l,E))}{\log(1/l)} \right] \quad\text{and}\quad \upminkdim(E) = \limsup_{l \to 0} \left[ \frac{\log(N(l,E))}{\log(1/l)} \right]. \]
 %
-If $\upminkdim(E) = \lowminkdim(E)$, then we refer to this common quantity as the \emph{Minkowski dimension} of $E$, denoted $\minkdim(E)$. Thus $\lowminkdim(E) < s$ if there exists a sequence of lengths $\{ l_k \}$ converging to zero with $N(l_k,E) \leq (1/l_k)^s$, and $\upminkdim(E) < s$ if $N(l,E) \leq (1/l)^s$ for \emph{all} sufficiently small lengths $l$.
+If $\upminkdim(E) = \lowminkdim(E)$, then we refer to this common quantity as the \emph{Minkowski dimension} of $E$, denoted $\minkdim(E)$. Thus $\lowminkdim(E) < s$ if there exists a sequence of lengths $\{ l_k \}$ converging to zero such that for each $k$, $E$ is covered by fewer than $(1/l_k)^s$ sidelength $l_k$ cubes, and $\upminkdim(E) < s$ if $E$ is covered by fewer than $(1/l)^s$ sidelength $l$ cubes for \emph{any} suitably small $l$.
+
+\begin{remark}
+	Any cube with sidelength $r$ is covered in $O_d(1)$ balls of radius $r$. Conversely, any ball of radius $r$ is covered by $O_d(1)$ cubes of sidelength $r$. Thus for any $r > 0$, if we temporarily define $N_B(r,E)$ to be the optimal number of radius $r$ \emph{balls} it takes to cover $E$, then $N(r,E) \sim_d N_B(r,E)$. As $r \to 0$, this means
+	%
+	\[ \frac{\log(N(r,E))}{\log(1/r)} = \frac{\log(N_B(r,E))}{\log(1/r)} + o(1). \]
+	%
+	In particular, $\lowminkdim(E) < s$ if and only if there exists a sequence of lengths $\{ r_k \}$ such that $E$ is covered by $(1/r_k)^s$ radius $r_k$ \emph{balls}, and $\upminkdim(E) < s$ if and only if $E$ is covered by $(1/r)^s$ radius $r$ \emph{balls}, for any suitably small $r > 0$.
+\end{remark}
+
+It is often easy to upper bound the Minkowski dimension of a set, simply by providing a cover of the set and counting the number of cubes that cover it. We now provide an example. We say a set $S \subset \RR^d$ is an $s$ dimensional \emph{Lipschitz manifold} if there exists a family of bounded, open subsets $\{ U_\alpha \}$ of $\RR^s$, together with a family of bi-Lipschitz maps $\{ f_\alpha: U_\alpha \to S \}$, such that the sets $\{ f_\alpha(U_\alpha) \}$ form a relatively open cover of $S$. Every $C^1$ manifold in $\RR^d$ is a Lipschitz manifold. This example proves useful in Chapter \ref{ch:RoughSets}.
+
+\begin{theorem} \label{ManifoldDimensionThm}
+	Let $S \subset \RR^d$ be a \emph{Lipschitz manifold} of dimension $s$, and let $K$ be a compact subset of $S$. Then $\upminkdim(K) \leq s$.
+\end{theorem}
+\begin{proof}
+	Since $K$ is compact, we can find finitely many bi-Lipschitz maps $f_1, \dots, f_N$ such that the family $\{ f_i(U_i) : 1 \leq i \leq N \}$ covers $K$. Then there is $C$ such that for each $i$, if $x,y \in U_i$,
+	%
+	\[ |f_i(x) - f_i(y)| \leq C \cdot |x-y|. \]
+	%
+	Since each $U_i$ is bounded, for any $r > 0$, we can find a family of balls $B_{i,1}, \dots, B_{i,M_i}$ of radius $(r/C)$ covering $U_i$, such that the centres $x_{i,1}, \dots, x_{i,M_i}$ of the balls also lie in $U_i$, and $M_i \lesssim (C/r)^s$. But then the balls of radius $r$ with centres lying in
+	%
+	\[ \{ f_i(x_{i,j}) : 1 \leq i \leq N, 1 \leq j \leq M_i \} \]
+	%
+	cover $K$, and there are $\sum_{i = 1}^N M_i \lesssim N/(Cr)^s = (N/C^s) / r^s$ such balls. Since $C$ and $N$ are independent of $r$, and $r > 0$ was arbitrary, this shows $\upminkdim(K) \leq s$.
+\end{proof}
 
 \section{Hausdorff Dimension}
 
@@ -132,7 +159,7 @@ For $E \subset \RR^d$ and $\delta > 0$, we define the \emph{Hausdorff content}
 %
 The \emph{$s$-dimensional Hausdorff measure} of $E$ is
 %
-\[ H^s(E) = \lim_{\delta \to 0} H_\delta^s(E) = \sup_{\delta > 0} H^s_\delta(E). \]
+\[ H^s(E) = \lim_{\delta \to 0} H_\delta^s(E) = \sup \left\{ H^s_\delta(E) : \delta > 0 \right\}. \]
 %
 It is easy to see $H^s$ is an exterior measure on $\RR^d$, and $H^s(E \cup F) = H^s(E) + H^s(F)$ if the Hausdorff distance $d(E,F)$ between $E$ and $F$ is positive. So $H^s$ is actually a metric exterior measure, and the Caratheodory extension theorem shows all Borel sets are measurable with respect to $H^s$. Sometimes, it is convenient to use the exterior measure
 %
@@ -185,7 +212,7 @@ Given any Borel set $E$, Corollary \ref{corollaryhausdorffzero}, combined with L
 \end{proof}
 
 \begin{remark}
-	If $\hausdim(E) < d$, then $|E| = H^d(E) = 0$. Thus any set with fractional dimension less than $d$ must have measure zero. This means we can use the dimension as a way of distinguishing between sets of measure zero, which is precisely what we need to study configuration avoidance problem for non-discrete configurations.
+	If $\hausdim(E) < d$, then $|E| = H^d(E) = 0$. Thus any set with fractional dimension less than $d$ must have measure zero. This means we can use the dimension as a way of distinguishing between sets of measure zero, which is precisely what we need to study the configuration avoidance problem for non-discrete configurations.
 \end{remark}
 
 The fact that Hausdorff dimension is defined over multiple scales simultaneously makes it more stable under analytical operations. In particular, for any family of at most countably many sets $\{ E_k \}$,
@@ -204,7 +231,7 @@ and
 	\umbdim(E) &= \inf \left\{ s : E \subset \bigcup_{i = 1}^\infty E_i, \upminkdim(E_i) \leq s \right\}.
 \end{align*}
 %
-This notion of dimension, in a disguised form, appears in Chapter BLAH.
+This notion of dimension, in a disguised form, appears in Chapter \ref{ch:RoughSets}.
 
 
 
@@ -212,7 +239,7 @@ This notion of dimension, in a disguised form, appears in Chapter BLAH.
 
 
 
-\section{Dyadic Scales}
+\section{Dyadic Scales} \label{sec:Dyadics}
 
 It is now useful to introduce the dyadic notation we utilize throughout this thesis. At the cost of losing topological perspective about $\RR^d$, applying dyadic techniques often allows us to elegantly discretize certain problems in Euclidean space.
 
@@ -220,10 +247,10 @@ Fix an integer $N$. The classic family of dyadic cubes with \emph{branching fact
 %
 \[ \DD_k^d = \left\{ \prod_{i = 1}^d \left[ \frac{n_i}{N^k}, \frac{n_i + 1}{N^k} \right] : n \in \ZZ^d \right\}, \]
 %
-and then setting $\DD = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD$ are known as \emph{dyadic cubes}, and elements of $\DD_k^d$ are known as \emph{dyadic cubes of generation $k$}. The most important properties of the dyadic cubes is that for each $k$, $\DD_k^d$ is a cover of $\RR^d$ by cubes of sidelength $1/N^k$, and for any two cubes $Q,R \in \DD$, either their interiors are disjoint, or one cube is nested in the other.
+and then setting $\DD^d = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD^d$ are known as \emph{dyadic cubes}, and elements of $\DD_k^d$ are known as \emph{dyadic cubes of generation $k$}. The most important properties of the dyadic cubes is that for each $k$, $\DD_k^d$ is a cover of $\RR^d$ by cubes of sidelength $1/N^k$, and for any two cubes $Q_1,Q_2 \in \DD^d$, either their interiors are disjoint, or one cube is nested in the other.
 %
 \begin{itemize}
-	\item For each cube $Q \in \DD_{k+1}^d$, there is a unique cube $R \in \DD_k^d$ such that $Q \subset R$. We refer to $R$ as the \emph{parent} of $Q$, and $Q$ as a \emph{child} of $R$. Each cube in $\DD$ has exactly $N^d$ children. For $Q \in \DD_{k+1}^d$, we let $Q^* \in \DD_k^d$ denote it's parent.
+	\item For each cube $Q_1 \in \DD_{k+1}^d$, there is a unique cube $Q_2 \in \DD_k^d$ such that $Q_1 \subset Q_2$. We refer to $Q_2$ as the \emph{parent} of $Q_1$, and $Q_1$ as a \emph{child} of $Q_2$. Each cube in $\DD$ has exactly $N^d$ children. For $Q \in \DD_{k+1}^d$, we let $Q^* \in \DD_k^d$ denote it's parent.
 
 	\item We say a set $E \subset \RR^d$ is \emph{$\DD_k$ discretized} if it is a union of cubes in $\DD_k^d$. If $E$ is $\DD_k$ discretized, we define
 	%
@@ -244,24 +271,24 @@ and then setting $\DD = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD$ are known
 %
 Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidelength, from the perspective of geometric measure theory, working with dyadic cubes is normally equivalent to working with the class of all cubes.
 
-Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by application of a simple procedure applied recursively. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
+Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedurew. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
 
 \begin{example}
-	A classic fractal-type set is the Cantor set $C$. We form $C$ from the family of dyadic cubes with branching factor $M = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are listed in order. We set
+	A classic fractal-type set is the Cantor set $C$. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
 	%
 	\[ C_{k+1} = \bigcup \{ I_1 \cup I_3 : I \in \DD_k^1(C_k) \}. \]
 	%
 	Then $C = \bigcap_{k \geq 0} C_k$ is the Cantor set.
 \end{example}
 
-Unfortunately, a \emph{constant} branching factor is not sufficient to describe the types of recursive procedures we discuss in this thesis. This motivates a more general iterated family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which give the branching factor at each stage of the dyadic cubes we define.
+Unfortunately, a \emph{constant} branching factor is not sufficient to describe the types of recursive procedures we discuss in this thesis. This motivates a more general iterated family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
 %
 \begin{itemize}
 	\item For each $k \geq 0$, we define 
 	%
 	\[ \DQ_k^d = \left\{ \prod_{i = 1}^d \left[ \frac{m_i}{N_1 \dots N_k}, \frac{m_i + 1}{N_1 \dots N_k} \right] : m \in \ZZ^d \right\}. \]
 	%
-	These are the \emph{dyadic cubes of generation $k$}. We let $\DQ^d = \bigcup_{k \geq 0} \DQ_k^d$. Note that any two cubes $\DQ^d$ are either nested within one another, or disjoint from one another.
+	These are the \emph{dyadic cubes of generation $k$}. We let $\DQ^d = \bigcup_{k \geq 0} \DQ_k^d$. Note that any two cubes $\DQ^d$ are either nested within one another, or their interiors are disjoint.
 
 	\item We set $l_k = (N_1 \dots N_k)^{-1}$. Then $l_k$ is the sidelength of the cubes in $\DQ_k^d$.
 
@@ -326,7 +353,9 @@ The cubes in $\DR_k^d$ are coarser than those in $\DQ_k^d$, but finer than those
 %	Then we know $r_k < \varepsilon$, so $H^s_\varepsilon(E) < \varepsilon^d$. Letting $\varepsilon \to 0$, we conclude $H^d(E) = 0$. Thus $H^d$ is absolutely continuous with respect to the Lebesgue measure. The measure $H^d$ is translation invariant, so $H^d$ is actually a constant multiple of the Lebesgue measure.
 %\end{example}
 
-It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a probability measure which obeys a certain decay law on small sets. We say a Borel probability measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and there exists $C > 0$ such that for any cube $Q$, $\mu(Q) \leq C \cdot l(Q)^s$. The proof of Frostman's lemma will utilize a technique often useful, known as the \emph{mass distribution principle}. Such a principle was stated in BLAH.
+It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a Borel measure obeying a decay law on small sets. We say a Borel probability measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and there exists $C > 0$ such that for any cube $Q$, $\mu(Q) \leq C \cdot l(Q)^s$. The proof of Frostman's lemma will utilize a technique often useful, known as the \emph{mass distribution principle}. To prove the mass distribution principle, we apply weak convergence.
+
+\begin{comment}
 
 \begin{lemma}
 	For each $k \geq 0$, let $\mathcal{E}_k$ be a finite collection of non-empty, compact, disjoint subsets of $\RR^d$, such that for each $A \in \mathcal{E}_{k+1}$, there is a unique $A^* \in \mathcal{E}_k$ such that $A \subset A^*$, and for any $A^* \in \mathcal{E}_k$, there is at least one $A \in \mathcal{E}_{k+1}$ with $A \subset A^*$. Let $E_k = \bigcup \mathcal{E}_k$, and let $E_\infty = \bigcap E_k$. Let $\mu: \bigcup_{k \geq 0} \mathcal{E}_k \to [0,\infty)$ be a function such that for any $i$, and for any $A \in \mathcal{E}_i$,
@@ -395,17 +424,17 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	Since $F$ was an arbitrary closed set, this implies all Borel sets are measurable with respect to $\sigma(\mathcal{E})$.
 \end{proof}
 
-An alternative approach, leading to a more general theorem, is given by employing weak convergence.
+\end{comment}
 
 \begin{lemma} \label{weakstarcompleteness}
-	A Cauchy sequence of non-negative Borel measures on $\RR^d$ is convergent with respect to the weak $*$ topology.
-\end{lemma}
-\begin{proof}
-	Let $\{ \mu_i \}$ be a Cauchy sequence of non-negative, regular Borel measures. This means that for each $f \in C_c(\RR^d)$, the sequence of numbers
+	Suppose $\{ \mu_i \}$ is a Cauchy sequence of non-negative Borel measures on $\RR^d$, in the sense that for any $f \in C_c(\RR^d)$, the sequence
 	%
 	\[ \left\{ \int f d\mu_i \right\} \]
 	%
-	is Cauchy. Fix a compact set $K$. then we can find a function $\varphi \in C_c(\RR^d)$ such that $\mathbf{I}_K \leq \varphi$. This means that
+	is Cauchy. Then there is a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly.
+\end{lemma}
+\begin{proof}
+	Fix a compact set $K$. then we can find a function $\varphi \in C_c(\RR^d)$ such that $\mathbf{I}_K \leq \varphi$. This means that
 	%
 	\[ \mu_i(K) = \int \mathbf{I}_K d\mu_i \leq \int \varphi d\mu_i. \]
 	%
@@ -413,7 +442,7 @@ An alternative approach, leading to a more general theorem, is given by employin
 	%
 	\[ \int f d\mu^{K_1} = \lim_{i \to \infty} \int_{K_1} f d\mu_i = \lim_{i \to \infty} \int_{K_2} f d \mu_i = \int f d\mu^{K_2}. \]
 	%
-	Thus we can define a measure $\mu$ such that
+	Thus we can define a measure $\mu$ such that for each $f \in C_c(\RR^d)$,
 	%
 	\[ \int f d\mu = \lim_{K \to \infty} \int f d\mu^K. \]
 	%
@@ -424,7 +453,31 @@ An alternative approach, leading to a more general theorem, is given by employin
 	Since $f$ was arbitrary, $\mu_i \to \mu$ weakly.
 \end{proof}
 
-\begin{lemma}[Mass Distribution Principle] \label{massdistributionprinciplelem}
+\begin{comment}
+
+\begin{lemma}
+	For each $k$, let $\mathcal{E}_k$ be a finite collection of closed sets, such that for any $A \in \mathcal{E}_{k+1}$, we fix $A^* \in \mathcal{E}_k$ such that $A \subset A^*$. Suppose that for any $A' \in \mathcal{E}_k$, there is at least one $A \in \mathcal{E}_{k+1}$ such that $A^* = A'$. Let $f: \bigcup_k \mathcal{E}_k \to [0,\infty)$ be a function such that for any $A' \in \mathcal{E}_k$,
+	%
+	\begin{equation} \label{equation73234091} \sum \{ f(A) : A^* = A' \} = f(A'). \end{equation}
+	%
+	Then there exists a regular Borel measure $\mu$ supported on
+	%
+	\[ \bigcap_{k = 1}^\infty \bigg\{ \overline{\bigcup \{ A : A \in \mathcal{E}_k : f(A) > 0 \}} \bigg\} \]
+	%
+	such that for each $k$, and each $A \in \mathcal{E}_k$,
+	%
+	\begin{equation} \label{massdissupperbound} \mu(A) \geq f(A), \end{equation}
+	%
+	and for any Borel $E$,
+	%
+	\begin{equation} \label{massdisslowerbound} \mu(E) \leq \sum f(A), \end{equation}
+	%
+	where $A$ ranges over elements of $\mathcal{E}_k$ with $A \cap E \neq \emptyset$.
+\end{lemma}
+
+\end{comment}
+
+\begin{theorem}[Mass Distribution Principle] \label{massdistributionprinciplelem}
 	Let $f: \DQ^d \to [0,\infty)$ be a function such that for any $Q_0 \in \DQ^d$,
 	%
 	\begin{equation} \label{equation73234091} \sum_{Q^* = Q_0} f(Q) = f(Q_0), \end{equation}
@@ -435,16 +488,14 @@ An alternative approach, leading to a more general theorem, is given by employin
 	%
 	such that for each $Q \in \DQ^d$,
 	%
-	\begin{equation} \label{massdissupperbound} \mu(Q) \geq f(Q), \end{equation}
+	\begin{equation} \label{massdissupperbound} \mu(Q^\circ) \leq f(Q) \leq \mu(Q), \end{equation}
 	%
 	and for any set $E$ and $k \geq 0$,
 	%
-	\begin{equation} \label{massdisslowerbound} \mu(E) \leq \sum f(Q), \end{equation}
-	%
-	where $Q$ ranges over all cubes in $\DQ^d_k(E(l_k))$.
-\end{lemma}
+	\begin{equation} \label{massdisslowerbound} \mu(E) \leq \sum \left\{ f(Q) : Q \in \DQ^d_k(E(l_k)) \right\}. \end{equation}
+\end{theorem}
 \begin{proof}
-	For each $i$, let $\mu_i$ be a regular Borel measure such that for each $j \leq i$, and $Q \in \DQ_j^d$, $\mu_i(Q) = f(Q)$. One such choice is given, for each $f \in C_c(\RR^d)$, by the equation
+	For each $i$, let $\mu_i$ be a regular Borel measure such that for each $j \leq i$, and $Q \in \DQ_j^d$, $\mu_i(Q) = \mu_i(Q^\circ) = f(Q)$. One such choice is given, for each $f \in C_c(\RR^d)$, by the equation
 	%
 	\[ \int f d\mu_i = \sum_{Q \in \DQ_i^d} \frac{f(Q)}{|Q|} \int_Q f\; dx. \]
 	%
@@ -474,8 +525,16 @@ An alternative approach, leading to a more general theorem, is given by employin
 	%
 	\[ \mu(E) \leq \liminf_{i \to \infty} \mu_i(E(l_i)^\circ) \leq \liminf_{i \to \infty} \mu_i(E(l_i)) = \sum f(Q), \]
 	%
-	where $Q$ ranges over the cubes in $\DQ_i^d(E(l_k))$.
+	where $Q$ ranges over the cubes in $\DQ_i^d(E(l_i))$.
 \end{proof}
+
+\begin{remark}
+	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $f$ is that in the weak limit, mass from cubes can `leak' into the mass of adjacent cubes. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. If, for each $Q_0 \in \DQ^d$,
+	%
+	\[ \lim_{k \to \infty} \sum \{ f(Q) : Q \in \DQ^d_k(Q_0(l_k)) - \DQ^d_k(Q_0) \} = 0, \]
+	%
+	then \eqref{massdissupperbound} and \eqref{massdisslowerbound} actually satisfies $\mu(Q) = f(Q)$ for all $Q \in \DQ$, so $\mu$ gives an extension of $f$. One such condition that guarantees this is that $f(Q) \lesssim l(Q)^s$ for some $s > d-1$. Another is that for any $k$, and for any two cubes $Q_0, Q_1 \in \DQ_k^d$ with $Q_0 \cap Q_1 \neq \emptyset$, either $f(Q_0) = 0$ or $f(Q_1) = 0$. If $f$ does not satisfy such a bound, however, then mass from cubes can `leak' into the mass of adjacent cubes if the measure is suitably concentrated at the boundary. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the proof still is a `mass distribution', it just means that the mass may be shared by adjacent cubes.
+\end{remark}
 
 %\begin{lemma}
 %	let $\mu^+$ be a function from $\B$ to $[0,\infty)$ such that for any $I \in \B(1/M^k,\RR^d)$,
@@ -496,17 +555,17 @@ An alternative approach, leading to a more general theorem, is given by employin
 %	As in the last lemma, define the operators $E_k$ and the measures $\mu_k$. By weak compactness, a subsequence of these measures converge weakly to some measure $\mu$, and $E_k(\mu) = \lim E_k(\mu_{j_k}) \leq \mu_k$. The measure $\mu$ is nonzero, since $\| \mu_{j_k} \| \geq c$ for each $k$, and so $\| \mu \| \geq c$.
 %\end{proof}
 
-\begin{lemma}[Frostman's Lemma]
+\begin{theorem}[Frostman's Lemma]
 	If $E$ is a Borel set, $H^s(E) > 0$ if and only if there exists an $s$ dimensional Frostman measure supported on $E$.
-\end{lemma}
+\end{theorem}
 \begin{proof}
 	Suppose that $\mu$ is $s$ dimensional and supported on $E$. If $H^s(F) = 0$, then for each $\varepsilon > 0$ there is a sequence of cubes $\{ Q_k \}$ with $\sum_{k = 1}^\infty l(Q_k)^s \leq \varepsilon$. But then
 	%
 	\[ \mu(F) \leq \sum_{k = 1}^\infty \mu(Q_k) \lesssim \sum_{k = 1}^\infty l(Q_k)^s \leq \varepsilon. \]
 	%
-	Taking $\varepsilon \to 0$, we conclude $\mu(F) = 0$. Thus $\mu$ is absolutely continuous with respect to $H^s$. Since $\mu(E) > 0$, this means that $H^s(E) > 0$.
+	Taking $\varepsilon \to 0$, we conclude $\mu(F) = 0$. Thus $\mu$ is absolutely continuous with respect to $H^s$. Taking the contrapositive of what we just proved, since $\mu(E) > 0$, this means that $H^s(E) > 0$.
 
-	To prove the converse, we will suppose for simplicity that $E$ is compact. We work dyadically, with the classical family of dyadic cubes $\DD$.  By translating, we may assume that $H^s(E \cap [0,1]^d) > 0$, and so without loss of generality we may assume $E \subset [0,1]^d$. For each $Q \in \DD_k^d$, define $f^+(Q) = H^s_\infty(E \cap Q)$. Then $f^+(Q) \leq 1/2^{ks}$, and $f^+$ is subadditive. We try and define a function $f$ to which we can apply Lemma \ref{massdistributionprinciplelem}. We initially define $f$ by setting $f([0,1]^d) = f^+([0,1]^d)$. Given $Q \in \DD_k^d$, we enumerate it's children as $Q_1, \dots, Q_M \in \DD_{k+1}^d$. We then consider any values $A_1, \dots, A_M \geq 0$ such that
+	To prove the converse, we will suppose for simplicity that $E$ is compact. We work dyadically with the classical family of dyadic cubes $\DD$.  By translating, we may assume that $H^s(E \cap [0,1]^d) > 0$, and so without loss of generality we may assume $E \subset [0,1]^d$. For each $Q \in \DD_k^d$, define $f^+(Q) = H^s_\infty(E \cap Q)$. Then $f^+(Q) \leq 1/2^{ks}$, and $f^+$ is subadditive. We try and define a function $f$ to which we can apply Theorem \ref{massdistributionprinciplelem}. We initially define $f$ by setting $f([0,1]^d) = f^+([0,1]^d)$. Given $Q \in \DD_k^d$, we enumerate it's children as $Q_1, \dots, Q_M \in \DD_{k+1}^d$. We then consider any values $A_1, \dots, A_M \geq 0$ such that
 	%
   	\begin{equation} \label{equation3424209034}
   		A_1 + \dots + A_M = f(Q),
@@ -525,6 +584,8 @@ An alternative approach, leading to a more general theorem, is given by employin
 	where $Q'$ ranges over the cubes in $\DD_k^d(Q(l_k))$. Given any cube $Q$, we find $k$ with $1/2^{k-1} \leq l(Q) \leq 1/2^k$. Then $Q$ is covered by $O_d(1)$ dyadic cubes in $\DD_k^d$, and so $\mu(Q) \lesssim l(Q)^s$. Thus $\mu$ is a Frostman measure of dimension $s$.
 \end{proof}
 
+\begin{comment}
+
 Frostman's lemma implies that to study the Hausdorff dimension of the set, it suffices to understand the class of measures which can be supported on that set. The Fourier dimension of a set also studies this perspective, by slightly refining the measure bound required by the Frostman dimension in frequency space.
 
 
@@ -537,7 +598,6 @@ Frostman's lemma implies that to study the Hausdorff dimension of the set, it su
 
 
 
-\begin{comment}
 
 \section{Fourier Dimension}
 
@@ -664,7 +724,7 @@ Later on, we will use two important principles to calculate the Fourier transfor
 
 \section{Dyadic Fractional Dimension}
 
-We wish to establish results about fractional dimension `dyadically', working with the family of cubes $\DQ^d$ specified in terms of a sequence $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
+It is often natural for us to establish results about fractional dimension `dyadically', working with the family of cubes $\DQ^d$. $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
 
 \begin{lemma} \label{comparableCovers}
 	For any set $E$,
@@ -685,7 +745,7 @@ Thus it is natural to ask whether it is true that for any set $E$,
 	\end{aligned}
 \end{equation}
 %
-The answer depends on the choice of $\{ N_k \}$. In particular, we find that a sufficient condition is that
+The answer depends on the choice of $\{ N_k \}$. In particular, a sufficient condition (and as we see later, essentially necessary) is that
 %
 \begin{equation} \label{definingsequencegrowthrate}
 	N_{k+1} \lesssim_\varepsilon (N_1 \dots N_k)^\varepsilon \quad \text{for any $\varepsilon > 0$}.
@@ -700,9 +760,9 @@ We will see that this condition allows us to work dyadically in many scenarios w
 %This makes sense, because $\Sigma^d$ only really has `balls' of radius $\{ l_k \}$, for each $k$, and \emph{any} cover of $E$ by balls of radius $l_k$ contains $\sigma_k^d(E)$. In order 
 %we have $N(E,l_k) = \# (\Sigma_k^d(E))$, since \emph{any} cover of $E$ by balls of radius $l_k$
 
-\begin{lemma} \label{definingsequenceminkowski}
+\begin{theorem} \label{definingsequenceminkowski}
 	If \eqref{definingsequencegrowthrate} holds, then \eqref{definingSequence} holds.
-\end{lemma}
+\end{theorem}
 \begin{proof}
 	Fix a length $l$, and find $k$ with $l_{k+1} \leq l \leq l_k$. Applying Lemma \ref{comparableCovers} shows
 	%
@@ -720,7 +780,7 @@ We will see that this condition allows us to work dyadically in many scenarios w
 	%
 	\[ \frac{\log[N(l,E)]}{\log[1/l]} \geq \left[ \frac{\log(1/l_k)}{\log(1/l_{k+1})} \right] \frac{\log[N_{\DQ}(k,E)]}{\log[1/l_k]} + O_d(1/k). \]
 	%
-	Thus, provided that
+	Provided that
 	%
 	\begin{equation} \label{equivalenceofscales}
 		\frac{\log(1/l_{k+1})}{\log(1/l_k)} \to 1,
@@ -733,13 +793,21 @@ We will see that this condition allows us to work dyadically in many scenarios w
 	and this is equivalent to \eqref{definingsequencegrowthrate}.
 \end{proof}
 
-Any constant branching factor satisfies \ref{definingsequencegrowthrate} for the Minkowski dimension. In particular, we can work fairly freely with the classical dyadic cubes without any problems occuring. But more importantly for our work, we can let the sequence $\{ N_k \}$ increase rapidly.
+Any constant branching factor satisfies \eqref{definingsequencegrowthrate} for the Minkowski dimension. In particular, we can work fairly freely with the classical dyadic cubes without any problems occuring. But more importantly for our work, we can let the sequence $\{ N_k \}$ increase rapidly.
 
-\begin{lemma} \label{rapidBranching}
-	If $N_k = 2^{\lfloor 2^{k \psi(k)} \rfloor}$, where $\psi(k)$ is any decreasing sequence of positive numbers tending to zero, such that $\psi(k) \gtrsim \log(k)/k$, then \eqref{definingsequencegrowthrate} holds.
-\end{lemma}
+\begin{theorem} \label{rapidBranching}
+	If $N_k = 2^{\lfloor 2^{k \psi(k)} \rfloor}$, where $\psi(k)$ is any decreasing sequence of positive numbers tending to zero, such that
+	%
+	\begin{equation} \label{definingsequencegrowthassumption} \psi(k) \geq \log_2(k)/k. \end{equation}
+	%
+	Then \eqref{definingsequencegrowthrate} holds.
+\end{theorem}
 \begin{proof}
-	We note that $\log(N_k) = 2^{k \psi(k)} + O(1)$. Thus
+	We note that $\log(N_k) = 2^{k \psi(k)} + O(1)$, and that \eqref{definingsequencegrowthassumption} implies that
+	%
+	\[ 2^{\psi(1)} + \dots + 2^{k \psi(k)} \geq k. \]
+	%
+	Putting these two facts together, we conclude that
 	%
 	\begin{align*}
 		\frac{\log(N_{k+1})}{\log(N_1) + \dots + \log(N_k)} &= \frac{2^{(k+1) \psi(k+1)} + O(1)}{2^{\psi(1)} + 2^{2 \psi(2)} + \dots + 2^{k \psi(k)} + O(k)}\\
@@ -748,27 +816,31 @@ Any constant branching factor satisfies \ref{definingsequencegrowthrate} for the
 		&\leq (2^{\psi(k)} - 1) \to 0.
 	\end{align*}
 	%
-	This is equivalent to the fact that $N_{k+1} \lesssim_\varepsilon (N_1 \dots N_k)^\varepsilon$ for any $\varepsilon > 0$.
+	This is equivalent to \eqref{definingsequencegrowthrate}.
 \end{proof}
 %
-We refer to any sequence $\{ l_k \}$ constructed by $\{ N_k \}$ satisfying the conditions of Lemma \ref{rapidBranching} as a \emph{subhyperdyadic} sequence. If a sequence is generated by a sequence $\{ N_k = 2^{\lfloor 2^{ck} \rfloor} \}$, for some fixed $c > 0$, the values $\{ l_k \}$ are referred to as \emph{hyperdyadic}. The next (counter) example shows that hyperdyadic sequences are essentially the `boundary' for sequences that can be used to measure the Minkowski dimension.
+We refer to any sequence $\{ l_k \}$ constructed by $\{ N_k \}$ satisfying \eqref{definingsequencegrowthassumption} for some function $\psi$ as a \emph{subhyperdyadic} sequence. If a sequence $\{ l_k \}$ is generated by a sequence $\{ N_k \}$ such that for some fixed $c > 0$,
+%
+\[ N_k = 2^{\lfloor 2^{ck} \rfloor}, \]
+%
+then the values $\{ l_k \}$ are referred to as \emph{hyperdyadic}. The next (counter) example shows that hyperdyadic sequences are essentially the `boundary' for sequences that can be used to measure the Minkowski dimension.
 
 \begin{example}
-	We consider a multi-scale dyadic construction, utilizing the two families $\DQ^d$ and $\DR^d$. Fix $0 \leq c < 1$, and define $N_k = 2^{\lfloor 2^{ck} \rfloor}$, and $M_k = 2^{\lfloor c 2^{ck} \rfloor}$. Then $M_k \divides N_k$ for each $k$. We recursively define a nested family of sets $\{ E_k \}$, with each $E_k$ a $\DQ_k^d$ discretized set, and set $E = \bigcap E_k$. We define $E_0 = [0,1]$. Then, given $E_k$, we divide each sidelength $l_k$ dyadic interval in $E_k$ into $M_{k+1}$ intervals, and then keep the first sidelength $l_k/M_{k+1}$ interval from this set, which is formed from $N_{k+1}/M_{k+1}$ sidelength $l_{k+1}$ dyadic intervals. Thus $\#(\DQ_0(E_0)) = 1$, and
+	We consider a multi-scale dyadic construction, utilizing the two families $\DQ^d$ and $\DR^d$. Fix $0 \leq c < 1$, and define $N_k = 2^{\lfloor 2^{ck} \rfloor}$, and $M_k = 2^{\lfloor c 2^{ck} \rfloor}$. Then $M_k \divides N_k$ for each $k$. We recursively define a nested family of sets $\{ E_k \}$, with each $E_k$ a $\DQ_k^d$ discretized set, and set $E = \bigcap E_k$. We define $E_0 = [0,1]$. Then, given $E_k$, for each $Q \in \DQ_k(E_k)$, we select a \emph{single} cube $R_Q \in \DR_{k+1}(E_k)$, and define $E_{k+1} = \bigcup R_Q$. Then $\#(\DQ_0(E_0)) = 1$, and
 	%
-	\[ \#(\DQ_{k+1}(E_{k+1})) = (N_{k+1}/M_{k+1}) \#(\DQ_k(E_k)) \]
+	\[ \#(\DQ_{k+1}(E_{k+1})) = (N_{k+1}/M_{k+1}) \#(\DQ_k(E_k)), \]
 	%
-	so
+	which we can simplify to read
 	%
 	\begin{equation} \label{equation12623} \#(\DQ_k(E_k)) = \frac{N_1 \dots N_k}{M_1 \dots M_k} \end{equation}
 	%
 	Noting that $\log(N_i) = 2^{ci} + O(1)$, and $\log(M_i) = c2^{ci} + O(1)$, we conclude that
 	%
 	\begin{align*}
-		\frac{\log \#(\DQ_k(E_k))}{\log(1/l_k)} &= \frac{(1-c)(2^c + \dots + 2^{ck}) + O(k)}{(2^c + \dots + 2^{ck}) + O(k)} = 1-c + O\left(\frac{k}{2^{ck}} \right) \to 1-c.
+		\frac{\log \#(\DQ_k(E_k))}{\log(1/l_k)} &= \frac{(1-c)(2^c + \dots + 2^{ck}) + O(k)}{(2^c + \dots + 2^{ck}) + O(k)} \to 1-c.
 	\end{align*}
 	%
-	On the other hand, if $r_{k+1} = l_k/M_{k+1}$, then for each $k$,
+	On the other hand, for each $k$,
 	%
 	\[ \#(\DR_{k+1}^d(E_k)) = \#(\DQ_k(E_k)) = \frac{N_1 \dots N_k}{M_1 \dots M_k}, \]
 	%
@@ -776,10 +848,9 @@ We refer to any sequence $\{ l_k \}$ constructed by $\{ N_k \}$ satisfying the c
 	%
 	\begin{align*}
 		\frac{\log \#(\DR_{k+1}^d(E_k))}{\log(1/r_{k+1})} &= \frac{(1-c)(2^c + \dots + 2^{ck}) + O(k)}{(2^c + \dots + 2^{ck}) + c2^{c(k+1)} + O(k)} \\
-		&= \frac{\left( \frac{(1-c) 2^c}{2^c - 1} \right) 2^{ck} + O(k)}{ \left( \frac{2^c}{2^c - 1} + c2^c \right) 2^{ck} + O(k)}\\
-		&= \frac{1-c}{1 - c + c2^c} + O \left( \frac{k}{2^{ck}} \right) \to \frac{1 - c}{1 - c + c2^c} < 1 - c.
+		&= \frac{(1-c) \cdot 2^{c(k+1)} + O(k)}{(1 - c + c 2^c) \cdot 2^{c(k+1)} + O(k)}\\
+		&\to \frac{1 - c}{1 - c + c2^c} < 1 - c.
 	\end{align*}
-	%
 %
 %	Fix $0 \leq c < 1$. Let $\{ M_k \}$ be a sequence of integers such that $M_k \divides N_k$ for each $k$. We recursively define a sequence of sets $\{ E_k \}$, with $E_k$ a union of length $l_k$ intervals
 %
@@ -861,11 +932,11 @@ We refer to any sequence $\{ l_k \}$ constructed by $\{ N_k \}$ satisfying the c
 %
 %and define the Hausdorff dimension correspondingly. A natural question is whether $\dim(\pi(E)) = \dim(E)$ for the various fractal dimensions we consider in this thesis. This is addressed in the next section.
 
-We now move on to calculating Hausdorff dimension dyadically. The natural quantity to consider is the measure defined for any $E$ as $H^s_{\DQ}(E) = \lim_{m \to \infty} H^s_{\DQ,m}(E)$, where
+We now move on to calculating Hausdorff dimension dyadically. The natural quantity to consider is the measure defined for any set $E$ as $H^s_{\DQ}(E) = \lim_{m \to \infty} H^s_{\DQ,m}(E)$, where
 %
 \[ H^s_{\DQ,m}(E) = \inf \left\{ \sum_k l(Q_k)^s : E \subset \bigcup_k^\infty Q_k,\ Q_k \in \bigcup_{i \geq m} \DQ_i^d\ \text{for each $k$} \right\}. \]
 %
-A similar argument to the standard Hausdorff measures shows there is a unique $s_0$ such that $H^s_{\DQ}(E) = \infty$ for $s < s_0$, and $H^s_{\DQ}(E) = 0$ for $s > s_0$. It is obvious that $H^s_{\DQ}(E) \geq H^s(E)$ for any set $E$, so we certainly have $s_0 \geq \hausdim(E)$. The next lemma guarantees that $s_0 = \hausdim(E)$, under the same conditions on the sequence $\{ N_k \}$ as found in Lemma \ref{definingsequenceminkowski}.
+A similar argument to the standard Hausdorff measures shows there is a unique $s_0$ such that $H^s_{\DQ}(E) = \infty$ for $s < s_0$, and $H^s_{\DQ}(E) = 0$ for $s > s_0$. It is obvious that $H^s_{\DQ}(E) \geq H^s(E)$ for any set $E$, so we certainly have $s_0 \geq \hausdim(E)$. The next lemma guarantees that $s_0 = \hausdim(E)$, under the same conditions on the sequence $\{ N_k \}$ as found in Theorem \ref{definingsequenceminkowski}.
 
 \begin{lemma} \label{lemma51464}
 	If \eqref{definingsequencegrowthrate} holds, then for any $\varepsilon > 0$, $H^s_{\DQ}(E) \lesssim_{s,\varepsilon} H^{s-\varepsilon}(E)$.
@@ -895,33 +966,37 @@ Finally, we consider computing whether we can establish that a measure is a Fros
 	\[ \mu(Q) \lesssim_d l_k^s = [(l_k/l)^s l^\varepsilon ] l^{s - \varepsilon} \leq [l_k^{s + \varepsilon} / l_{k+1}^s] l^{s - \varepsilon} = \left[ \frac{N_{k+1}^s}{(N_1 \dots N_k)^\varepsilon} \right] l^{s-\varepsilon} \lesssim_\varepsilon l^{s-\varepsilon}. \qedhere \]
 \end{proof}	
 
+Let's recognize the utility of this approach from the perspective of a dyadic construction. Suppose we have a sequence of nested sets $\{ E_k \}$, where $E_k$ is a $\DQ_k$ discretized subset of $[0,1]^d$, and for each $Q_0 \in \DQ_k(E_k)$, there is at least one cube $Q \in \DQ_{k+1}(E_{k+1})$ with $Q^* = Q_0$. Then we can set $E = \bigcap E_k$ as a `limit' of the discretizations $E_k$. We can associate with this construction a finite measure $\mu$. It is defined by setting $f([0,1]^d) = 1$, and setting, for each $Q \in \DQ_{k+1}(E_{k+1})$,
+%
+\[ f(Q) = \frac{f(Q^*)}{\# \{ Q' \in \DQ_{k+1}(E_{k+1}) : (Q')^* = Q^* \}}. \]
+%
+The mass distribution principle then gives a Borel measure $\mu$, which we refer to as the \emph{canonical measure} associated with this construction. For this measure, it is often easy to show from a combinatorial argument that $f(Q) \lesssim l(Q)^s$ if $Q \in \DQ^d$, which also implies $\mu(Q) \lesssim l(Q)^s$ for $Q \in \DQ^d$. This makes Theorem \ref{easyCoverTheorem} useful.
+
 \begin{remark}
-	The dyadic construction showing that Minkowski dimension cannot be measured only at hyperdyadic scales also shows that a bound on a measure $\mu$ on hyperdyadic cubes does not imply the correct bound at all scales. It is easy to show from \eqref{equation12623} that the canonical measure $\mu$ for this example satisfies $\mu(Q) \lesssim l(Q)^{1-c}$ for all $Q \in \DQ_k(E_k)$, yet we know that for the set constructed in that example,
+	The dyadic construction showing that Minkowski dimension cannot be measured only at hyperdyadic scales also shows that a bound on a measure $\mu$ on hyperdyadic cubes does not imply the correct bound at all scales. It is easy to show from \eqref{equation12623} that the canonical measure $\mu$ for this example satisfies, for each $k$, each $Q \in \DQ_k(E_k)$, and each $\varepsilon > 0$,
+	%
+	\[ \mu(Q) = \left( \#(\DQ_k(E_k)) \right)^{-1} \lesssim_\varepsilon l(Q)^{1-c-\varepsilon} \]
+	%
+	for all $Q \in \DQ_k(E_k)$, yet we know that for the set constructed in that example,
 	%
 	\[ \hausdim(E) \leq \lowminkdim(E) < 1 - c. \]
 	%
 	Frostman's lemma implies we cannot possibly have $\mu(Q) \lesssim_\varepsilon l(Q)^{1-c-\varepsilon}$ for all $\varepsilon > 0$ and \emph{all} cubes $Q$.
 \end{remark}
 
-Let's recognize the utility of this approach from the perspective of a dyadic construction. Suppose we have a sequence of nested sets $\{ E_k \}$, where $E_k$ is a $\DQ_k$ discretized subset of $[0,1]^d$, and for each $Q_0 \in \DQ_k(E_k)$, there is at least one cube $Q \in \DQ_{k+1}(E_{k+1})$ with $Q^* = Q_0$. Then we can set $E = \bigcap E_k$ as a `limit' of the discretizations $E_k$. We can associate with this construction a finite measure $\mu$. It is defined by setting $f([0,1]^d) = 1$, and setting, for each $Q \in \DQ_{k+1}(E_{k+1})$,
-%
-\[ f(Q) = \frac{f(Q^*)}{\# \{ Q' \in \DQ_{k+1}(E_{k+1}) : (Q')^* = Q^* \}}. \]
-%
-The mass distribution principle shows that there exists a Borel measure $\mu$, which we refer to as the \emph{canonical measure} associated with this construction. For this measure, it is often easy to show from a combinatorial argument that $f(Q) \lesssim l(Q)^s$ if $Q \in \DQ^d$, which leads to bounds on the measure $\mu$. This makes Theorem \ref{easyCoverTheorem} useful.
-
 %Our final method for interpolating requires extra knowledge of the dissection process, but enables us to choose the $l_k$ arbitrarily rapidly. The idea behind this is that there is an additional sequence of lengths $r_k$ with $l_k \leq r_k \leq l_{k-1}$. The difference between $r_k$ and $l_{k-1}$ is allowed to be arbitrary, but the decay rate between $l_k$ and $r_k$ is of polynomial-type, which enables us to use the covering methods of the previous section. In addition, we rely on a `uniform mass bound' between $r_k$ and $l_k$ to cover the remaining classes of intervals. Because we can take $r_k$ arbitrarily large relative to $l_k$, this renders any constants that occur in the construction to become immediately negligible. For two quantities $A$ and $B$, we will let $A \precsim_k B$ stand for an inequality with a hidden constant depending only on parameters with index smaller than $k$, i.e. $A \leq C(l_1, \dots, l_k, r_1,\dots,r_k) B$ for some constant $C(l_1, \dots, l_k, r_1, \dots, r_k)$ depending only on parameters with indices up to $k$.
 
 \section{Beyond Hyperdyadics}
 
-If we are to use a faster increasing sequence of branching factors than the last section guarantees, we therefore must exploit some extra property of our construction, which is not always present in general sets. Here, we rely on a \emph{uniform mass distribution} between scales. Given the uniformity assumption, the lengths can decrease as fast as desired. We utilize a multi-scale set of dyadic cubes.
+If we use a faster increasing sequence of branching factors than that satisfying \eqref{definingsequencegrowthrate}, we must exploit some extra property of our construction, which is not always present in general sets. Here, we rely on a \emph{uniform mass distribution} between scales. Given the uniformity assumption, the lengths can decrease as fast as desired. We utilize the multi-scale set of dyadic cubes $\DQ^d$ and $\DR^d$ introduced in Section \ref{sec:Dyadics}.
 
 \begin{lemma} \label{uniformMassFrostman}
 	Let $\mu$ be a measure supported on a set $E$. Suppose that
     %
     \begin{enumerate}
     	\item \label{discreteBound} For any $Q \in \DQ_k^d$, $\mu(Q) \lesssim l_k^s$.
-    	\item \label{controlledScale} For each $Q \in \DR_k^d$, $\#[\DQ_k^d(E(l_k) \cap Q)] \lesssim 1$.
-    	\item \label{uniformDist} For any $Q \in \DR_{k+1}^d$ with parent cube $Q^* \in \DQ_k^d$, $\mu(Q) \lesssim (r_{k+1}/l_k)^d \mu(Q^*)$.
+    	\item \label{controlledScale} For each $R \in \DR_{k+1}^d$, $\#[\DQ_{k+1}^d(E(l_k) \cap R)] \lesssim 1$.
+    	\item \label{uniformDist} For any $R \in \DR_{k+1}^d$ with parent cube $Q \in \DQ_k^d$, $\mu(R) \lesssim (1/M_{k+1})^d \cdot \mu(Q)$.
     \end{enumerate}
 	%
 	Then $\mu$ is a Frostman measure of dimension $s$.
@@ -942,7 +1017,50 @@ If we are to use a faster increasing sequence of branching factors than the last
 	This addresses all cases, so $\mu$ is a Frostman measure of dimension $s$.
 \end{proof}
 
-TODO: ADDRESS OTHER FRACTIONAL DIMENSION CASES?
+This theorem is commonly used here when dealing with multi-scale dyadic fractal constructions, whose character is summarized in the following Theorem.
+
+\begin{theorem} \label{TheConstructionTheorem}
+	let $E = \bigcap E_k$, where $\{ E_k \}$ is a nested family of subsets of $\RR^d$, such that $E_k$ is $\DQ_k$ discretized for each $k$. Suppose that 
+	%
+	\begin{enumerate}
+		\item \label{SingleSelection} Sparse, Uniform Selection: For each $Q \in \DQ_k(E_k)$, there exists a set $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that $\#(\mathcal{R}_Q) \geq (1/2) \cdot \#(\DR_{k+1}(Q))$ such that
+		%
+		\[ \# \left( \DQ_{k+1}(R \cap E_{k+1}) \right) = \begin{cases} 1 & : R \in \mathcal{R}_Q, \\ 0 & : R \not \in \mathcal{R}_Q. \end{cases} \]
+
+		\item \label{RapidDecrease} Rapid Decrease: For any $\varepsilon > 0$, $N_1 \dots N_k \lesssim_\varepsilon N_{k+1}^\varepsilon$.
+
+		\item \label{ChangeofScales} Change of Scales: There is $0 < s \leq 1$ such that for any $\varepsilon > 0$, $N_{k+1} \lesssim_\varepsilon M_{k+1}^{(1 + \varepsilon)/s}$.
+	\end{enumerate}
+	%
+	Then $E$ has Hausdorff dimension $sd$.
+\end{theorem}
+\begin{proof}
+	Consider the function $f: \DQ^d \to [0,\infty)$ defined with respect to the sequence $\{ E_k \}$, which generates the canonical measure $\mu$ supported on $E$ using the mass distribution principle. For each $R \in \DR_{k+1}(E_k)$ with parent cube $Q \in \DQ_k(E_k)$, Property \ref{SingleSelection} shows
+	%
+	\begin{equation} \label{equation6250234923} f(R) \leq (2/M_{k+1}^d) f(Q). \end{equation}
+	%
+	Properties \ref{RapidDecrease} and \ref{ChangeofScales} imply that for each $\varepsilon > 0$,
+	%
+	\begin{equation} \label{equation363491043214} 1/M_{k+1} \lesssim_\varepsilon r_{k+1}^{1 - \varepsilon} \lesssim_\varepsilon l_{k+1}^{s(1  - 2 \varepsilon)}. \end{equation}
+	%
+	If $Q \in \DQ_{k+1}(E_{k+1})$ has parent cubes $R \in \DR_{k+1}(E_k)$ and $Q^* \in \DQ_k(E_k)$, then by \eqref{equation6250234923}, \eqref{equation363491043214}, and the fact that $f(Q^*) \leq 1$,
+	%
+	\begin{equation} \label{equation120492309562} f(Q) = f(R) \leq (2/M_{k+1}^d) f(Q^*) \leq (2/M_{k+1}^d) \lesssim_{\varepsilon} l_{k+1}^{ds(1 - 2\varepsilon)}. \end{equation}
+	%
+	If $Q$ is a cube with length $l_k$, then $\#(\DQ_k^d(Q(l_k))) = O_d(1)$, which combined with \eqref{massdisslowerbound}, shows that
+	%
+	\begin{equation} \label{equation69009230919} \mu(Q) \lesssim_\varepsilon l_{k+1}^{ds(1-2\varepsilon)}. \end{equation}
+	%
+	Property \ref{controlledScale} of Lemma \ref{uniformMassFrostman} is implied by Property \ref{SingleSelection}.  Equation \eqref{equation69009230919} is a form of Property \ref{discreteBound} in Lemma \ref{uniformMassFrostman}. Together with \eqref{massdisslowerbound}, \eqref{equation6250234923} implies that the canonical measure $\mu$ satisfies Property \ref{uniformDist} of Lemma \ref{uniformMassFrostman}. Thus all assumptions of Lemma \ref{uniformMassFrostman} are satisfied, and so we conclude $\mu$ is a Frostman measure of dimension $ds(1 - 2\varepsilon)$ for each $\varepsilon > 0$. Taking $\varepsilon \to 0$, and applying Frostman's lemma, we conclude that the Hausdorff dimension of the support of $\mu$, which is a subset of $E$, is greater than or equal to $ds$. For each $k$, we find that for each $\varepsilon > 0$,
+	%
+	\[ \#(\DQ_{k+1}(E_{k+1})) \leq \#(\DR_{k+1}(E_k)) \leq (1/M_{k+1})^d \lesssim_\varepsilon l_{k+1}^{ds - \varepsilon}. \]
+	%
+	Taking $k \to \infty$, and then $\varepsilon \to 0$, we conclude that
+	%
+	\[ \hausdim(E) \leq \lowminkdim(E) \leq ds. \]
+	%
+	Since we already know $\hausdim(E) \geq ds$, this completes the proof.
+\end{proof}
 
 %\begin{remark}
 %    The condition $\mu_\beta(J) \lesssim_{N-1} (r_N/l_N) \mu_\beta(I)$ essentially means that the probability mass on a length $l_N$ interval $I$ is uniformly distributed over the length $r_N$ intervals it contains. This is what enables us to remove the discussion of the growth of the sequence $\beta$ over time from discussion.

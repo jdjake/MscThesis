@@ -4,11 +4,15 @@
 \chapter{Related Work}
 \label{ch:RelatedWork}
 
-Here, we discuss the main papers which influenced our results. In particular, the work of Keleti on translate avoiding sets, Fraser and Pramanik's work on sets avoiding smooth configurations, Math\'{e}'s result on sets avoiding algebraic varieties, and Schmerkin's result on sets with large Fourier dimension avoiding smooth configurations.
+Here, we discuss the main papers which influenced our results. In particular, the work of Keleti on translate avoiding sets, Fraser and Pramanik's work on sets avoiding smooth configurations, and Math\'{e}'s result on sets avoiding algebraic varieties. 
+
+\begin{comment}
+and Schmerkin's result on sets with large Fourier dimension avoiding smooth configurations.
+\end{comment}
 
 \section{Keleti: A Translate Avoiding Set}
 
-Keleti's two page paper constructs a full dimensional set $X \subset [0,1]$ such that for each $t \neq 0$, $X$ intersects $t + X$ in at most one place. The set $X$ is then said to \emph{avoid translates}. This paper contains the core idea behind the \emph{interval dissection} method adapted in Fraser and Pramanik's paper. We also adapt this technique in our paper, which makes the result of interest.
+Keleti's two page paper constructs a full dimensional set $X \subset [0,1]$ such that for each $t \neq 0$, $X$ intersects $t + X$ in at most one place. The set $X$ is then said to \emph{avoid translates}. This paper contains the core idea behind the \emph{discretization} method adapted in Fraser and Pramanik's paper. We also adapt this technique in our paper, which makes the result of interest.
 
 \begin{lemma}
     Let $X$ be a set. Then $X$ avoids translates if and only if there do not exists values $x_1 < x_2 \leq x_3 < x_4$ in $X$ with $x_2 - x_1 = x_4 - x_3$. In particular, a set $X$ avoids translates if and only if it avoids the four point configuration
@@ -73,39 +77,38 @@ Each iteration of the algorithm produces a new set $X_k$, and so leaving the alg
 
 It is easy to see from the algorithm that
 %
-\[ \# (\DQ_k(X_k)) = (l_{k-1}/10l_k) \cdot \#(\DQ_{k-1}(X_{k-1})). \]
+\[ \# (\DQ_k(X_k)) = (N_k/10) \cdot \#(\DQ_{k-1}(X_{k-1})). \]
 %
 Closing the recursive definition shows
 %
 \[ \#(\DQ_k(X_k)) = \frac{1}{10^k l_k}. \]
 %
-In particular, this means $|X_k| = 1/10^k$, so $X$ has measure zero irrespective of our parameters. Nonetheless, the canonical measure $\mu$ on $X$ defined with respect to the decomposition $\{ X_k \}$ satisfies $\mu(I) = 10^k l_k$ for all $I \in \B(l_k,X)$. If $10^k l_k^\varepsilon \lesssim_\varepsilon 1$ for all $\varepsilon$, then we can establish the bounds $\mu(I) \lesssim_\varepsilon l_k^{1-\varepsilon}$ for all $\varepsilon$. In particular, this is true if $N_k = 10^{\lfloor \log(k + 2) \rfloor}$. And because this sequence does not rapidly decrease too fast, we can apply Lemma \ref{easyCoverTheorem} to show $\mu$ is a Frostman measure of dimension $1-\varepsilon$ for each $\varepsilon > 0$, so $X$ has full Hausdorff dimension.
+In particular, this means $|X_k| = 1/10^k$, so $|X|$ has Lebesgue measure zero regardless of how we choose the parameters $\{ N_k \}$. 
 
+\begin{theorem}
+    For some sequence $\{ N_k \}$, the set $X$ has full Hausdorff dimension.
+\end{theorem}
+\begin{proof}
+    Set $N_k = 10 M_k$ for each $k \geq 1$, then one sees that for each $R \in \DR_k(X_k)$, $\#(\DQ_{k+1}(R \cap X_{k+1})) = 1$. Thus Property \ref{SingleSelection} of Theorem \ref{TheConstructionTheorem} is satisfied. Furthermore, Property \ref{ChangeofScales} of Theorem \ref{TheConstructionTheorem} is satisfied with $s = 1$. We conclude that if $N_1 \dots N_k \lesssim_\varepsilon N_{k+1}^\varepsilon$, then all assumptions of Theorem \ref{TheConstructionTheorem} is satisfied, and we conclude $X$ is a set with full Hausdorff dimension. This is true, for instance, if we set $N_k = 2^{2^{\lfloor k \log k \rfloor}}$.
+\end{proof}
 
+The most important feature of Keleti's argument is his reduction of a non-discrete configuration avoidance problem to a sequence of discrete avoidance problems on cubes. Let us summarize the result of Keleti's discrete argument in a lemma.
 
-\section{Generalizing Keleti's Argument}
-
-Before we move onto other methods which developed Keleti's argument work, it is useful to dwell on what general properties this argument has:
-%
-\begin{itemize}
-    \item \emph{Simplification to a Discrete Problem}: A major part of Keleti's argument is solving a discrete version of the configuration argument. We could summarize the result of Keleti's discrete argument in a lemma.
+\begin{lemma} \label{KeletiDiscreteLemma}
+    Let $T_1, T_2 \subset \RR$ be disjoint, $\DQ_k$ discretized sets. Then we can find $S_1 \subset T_1$ and $S_2 \subset T_2$ such that
     %
-    \begin{lemma} \label{KeletiDiscreteLemma}
-        Let $T_1, T_2$ be disjoint, $\DQ_k$ discretized sets. Then we can find $S_1 \subset T_1$ and $S_2 \subset T_2$ such that
-        %
-        \begin{enumerate}
-            \item[(i)] For each $k$, $S_k$ is a $\DQ_{k+1}$ discretized subset of $T_k$.
-            \item[(ii)] If $x_1 \in S_1$ and $x_2,x_3,x_4 \in S_2$, then $x_2 - x_1 \neq x_4 - x_3$.
-            \item[(iii)] For each cube $Q \in \DQ_k$ with $Q \subset T_k$,
+    \begin{enumerate}
+        \item[(i)] For each $k$, $S_k$ is a $\DQ_{k+1}$ discretized subset of $T_k$.
+        \item[(ii)] If $x_1 \in S_1$ and $x_2,x_3,x_4 \in S_2$, then $x_2 - x_1 \neq x_4 - x_3$.
+        \item[(iii)] For each cube $Q \in \DQ_k$ with $Q \subset T_k$,
             %
-            \[ \#(\DQ_{k+1}(Q \cap S_k)) \geq (1/10) \cdot \#(\DQ_{k+1}(Q)). \]
-        \end{enumerate}
-    \end{lemma}
+        \[ \#(\DQ_{k+1}(Q \cap S_k)) \geq (1/10) \cdot \#(\DQ_{k+1}(Q)). \]
+    \end{enumerate}
+\end{lemma}
+%
+Property (i) of Lemma \ref{KeletiDiscreteLemma} then allows Keleti to apply his argument iteratively at each Dyadic scale. Property (ii) implies Keleti obtains a configuration avoiding set in the limit of these iterations. Most importantly the reason why Keleti obtains a set with full Hausdorff dimension, if the sequence $\{ N_k \}$ grows suitably fast in $k$, is because of Property (iii).
 
-    \item \emph{Iterative Application of Discrete Solution}: Keleti then repeatedly applies his argument iteratively. In particular, Property (i) of Lemma \ref{KeletiDiscreteLemma} allows him to apply his argument iteratively. The reason why Keleti obtains a configuration avoiding set in the limit is because of Property (ii). Most importantly the reason why Keleti obtains a set with full Hausdorff dimension, if the sequence $\{ N_k \}$ decreases rapidly enough, is because of Property (iii).
-\end{itemize}
-
-Of course, it is not possible to extend the discrete solution of the configuration argument to general configurations; this part of Keleti's method strongly depends on the arithmetic structure of the configuration. The iterative application of a discrete solution, however, can be applied in generality. In various senses, this technique is applied in all the results we review in this chapter, and in the new results we provide later on in this thesis.
+Of course, it is not possible to extend the discrete solution of the configuration argument to general configurations; this part of Keleti's method strongly depends on the arithmetic structure of the configuration. The iterative application of a discrete solution, however, can be applied in generality. Combined with Theorem \ref{TheConstructionTheorem}, this technique gives a powerful method to reduce configuration avoidance problems about Hausdorff dimension to discrete avoidance problems on cubes.
 
 
 
@@ -121,7 +124,7 @@ Inspired by Keleti's result, Pramanik and Fraser obtained a generalization of th
 %
 under mild regularity conditions on the function $f: [0,1]^{dn} \to [0,1]^m$. Here, a simple pidgeonholing strategy suffices.
 
-\begin{theorem}[Pramanik and Fraser]
+\begin{theorem}[Pramanik and Fraser] \label{pramanikandfrasertheorem}
     Fix $m \leq d(n-1)$. Consider a countable family of functions $\{ f_k : [0,1]^{dn} \to [0,1]^m \}$ each of which being $C^2$, and such that for each $k$, $Df_k$ has full rank at any $(x_1, \dots, x_n)$ with $f(x_1, \dots, x_n) = 0$, where the $(x_1, \dots, x_n)$ are distinct. Then there exists a set $X \subset \RR^d$ with Hausdorff dimension $m/(n-1)$ such that $X$ avoids the configuration
     %
     \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^n(\RR^d): f(x_1, \dots, x_n) = 0 \}. \]
@@ -187,7 +190,7 @@ Pramanik and Fraser also simplify to a discrete version of their problem, which 
     which establishes Property \ref{BBoundProperty}.
 \end{proof}
 
-We apply the lemma recursively $n-1$ times to continually reduce the dimensionality of the avoidance problem we are considering. Eventually, we obtain the case where $n = 0$, and we are in need of a final technique.
+We apply the lemma recursively $n-1$ times to continually reduce the dimensionality of the avoidance problem we are considering. Eventually, we obtain the case where $n = 0$, and then avoiding the configuration is easy.
 
 \begin{lemma} \label{Lemma1209410535}
     Fix $n > 1$. Let $T \subset [0,1]^d$ be $\DQ_k$ discretized, and let $B \subset T$ be $\DQ_{k+1}$ discretized. Suppose
@@ -197,7 +200,7 @@ We apply the lemma recursively $n-1$ times to continually reduce the dimensional
     and
     %
     \begin{equation} \label{equation903103513095}
-        N_{k+1} > \left[ C \cdot 2^n (N_1 \dots N_k)^{2dn} \right]^{1/m} M_{k+1}^{d(n-1)/m}
+        N_{k+1} \geq \left[ C \cdot 2^n (N_1 \dots N_k)^{2dn} \right]^{1/m} M_{k+1}^{d(n-1)/m}
     \end{equation}
     %
     Then there exists a $\DQ_{k+1}$ discretized set $S \subset T$ such that
@@ -269,11 +272,7 @@ We apply the lemma recursively $n-1$ times to continually reduce the dimensional
     Applying Lemma \ref{Lemma315091513} iteratively $n-1$ times, then finishing with Lemma $\ref{Lemma1209410535}$, constructs the sets $S_1, \dots, S_n$.
 \end{proof}
 
-\begin{remark}
-    The values of $N_1, \dots, N_k$, exponentials $2^k$, and constants, are roughly insignificant in comparison to $M_{k+1}$ and $N_{k+1}$, when these numbers are hyperdyadic for a suitably large constant, or grow faster than hyperdyadic. In particular, we can roughly read off the Hausdorff dimension of the set $m/(n-1)$ we construct from the inverse power of $M_{k+1}$ in \eqref{equation903103513095}, i.e. that $N_{k+1} \gtrapprox M_{k+1}^{d(n-1)/m}$.
-\end{remark}
-
-Just like in Keleti's proof, Pramanik and Fraser's technique applies a discrete result, Corollary \ref{PramanikFraserBuildingBlockLemma}, iteratively at many scales to obtain a high dimensional set avoiding the zeroes of a function. We construct a nested family $\{ X_k : k \geq 0 \}$ of $\DQ_k$ discretized sets, converging to a set $X$, which we will show is translate avoiding. We intiailize $X_0 = [0,1]$. Our queue shall consist of $n$ tuples of disjoint intervals $(T_1, \dots, T_n)$, all of the same length, which initially consists of all possible tuples of intervals in $\DQ_1^d([0,1]^d)$. To construct the sequence $\{ X_k \}$, we perform the following iterative procedure:
+Just like in Keleti's proof, Pramanik and Fraser's technique applies a discrete result, Corollary \ref{PramanikFraserBuildingBlockLemma}, iteratively at many scales, with the help of a queueing process, to obtain a high dimensional set avoiding the zeroes of a function. We construct a nested family $\{ X_k : k \geq 0 \}$ of $\DQ_k$ discretized sets, converging to a set $X$, which we will show is translate avoiding. We initialize $X_0 = [0,1]$. Our queue shall consist of $n$ tuples of disjoint intervals $(T_1, \dots, T_n)$, all of the same length, which initially consists of all possible tuples of intervals in $\DQ_1^d([0,1]^d)$. To construct the sequence $\{ X_k \}$, we perform the following iterative procedure:
 %
 \begin{algorithm}[H]
     \begin{algorithmic}
@@ -296,31 +295,14 @@ Just like in Keleti's proof, Pramanik and Fraser's technique applies a discrete 
     \[ \C = \{ (x_1, \dots, x_n) \in \C^n(\RR^d) : f(x_1, \dots, x_n) = 0 \}. \]
 \end{lemma}
 \begin{proof}
-Suppose $x_1, \dots, x_n \in X$ are distinct. Then at some stage $k$, $x_1, \dots, x_n$ lie in disjoint cubes $T_1', \dots, T_n' \in \DQ_k^d(X_k)$, for some large $k$. At this stage, $(T_1', \dots, T_n')$ is added to the back of the queue, and therefore, at some much later stage $N$, the tuple $(T_1', \dots, T_n')$ is taken off the front. Sets $S_1 \subset T_1', \dots, S_n \subset T_n'$ are constructed satisfying Property (A) of Corollary \ref{PramanikFraserBuildingBlockLemma}. Since $x_1, \dots, x_n \in X$, we must have $x_i \in S_i$ for each $i$, so $f(x_1, \dots, x_n) \neq 0$.
+    Suppose $x_1, \dots, x_n \in X$ are distinct. Then at some stage $k$, $x_1, \dots, x_n$ lie in disjoint cubes $T_1', \dots, T_n' \in \DQ_k^d(X_k)$, for some large $k$. At this stage, $(T_1', \dots, T_n')$ is added to the back of the queue, and therefore, at some much later stage $N$, the tuple $(T_1', \dots, T_n')$ is taken off the front. Sets $S_1 \subset T_1', \dots, S_n \subset T_n'$ are constructed satisfying Property (A) of Corollary \ref{PramanikFraserBuildingBlockLemma}. Since $x_1, \dots, x_n \in X$, we must have $x_i \in S_i$ for each $i$, so $f(x_1, \dots, x_n) \neq 0$.
 \end{proof}
 
-What remains is to bound the Hausdorff dimension of $X$. For this, one must use a sequence of factors $\{ N_k \}$ which is \emph{just} faster than a hyperdyadic sequence of factors.
-
-\begin{theorem}
-    If $M_k = 2^{2^{k \log k}}$, $X$ has Hausdorff dimension exceeding $m/(n-1)$.
-\end{theorem}
-\begin{proof}
-    First, we construct the canonical measure $\mu$ on $X$. Property (B) of Corollary \ref{PramanikFraserBuildingBlockLemma} implies that for each $Q \in \DQ_{k+1}^d$, $\mu(Q) \leq 2/M_{k+1}^d \mu(Q^*)$, which implies that for $Q \in \DQ_k^d$, $\mu(Q) \leq 2^k / (M_k \dots M_1)^d$. By Lemma \ref{uniformMassFrostman}, it suffices to show that for each $\varepsilon > 0$,
-    %
-    \begin{equation}\label{inequality7} \frac{2^k}{(M_{k+1} \dots M_1)^d} \lesssim_\varepsilon \frac{1}{(N_1 \dots N_{k+1})^{m/(n-1)(1 - \varepsilon)}} \end{equation}
-    %
-    Set
-    %
-    \[ N_{k+1} = A (N_1 \dots N_k)^{2dn/m} M_{k+1}^{d(n-1)/m}, \]
-    %
-    where $A$ is an arbitrary constant not depending on $k$ so that $\eqref{equation903103513095}$ holds. Then inequality \eqref{inequality7} is then implied if
-    %
-    \[ M_{k+1} \gtrsim_\varepsilon \left( (N_1 \dots N_k)^{6dn} [2^k A^d] \right)^{1/\varepsilon}. \]
-    %
-    This equation is satisfied if $M_k = 2^{2^{k \log k}}$.
-\end{proof}
-
-\begin{comment}
+What remains is to show that for some sequence of parameters $\{ N_k \}$ and $\{ M_k \}$ satisfying \eqref{equation903103513095}, we can apply Theorem \ref{TheConstructionTheorem}. The conclusion of Corollary \ref{PramanikFraserBuildingBlockLemma} shows Property \ref{SingleSelection} of Theorem \ref{TheConstructionTheorem} is always satisfied. If we set
+%
+\[ N_{k+1} = \left\lceil \left[ C \cdot 2^n (N_1 \dots N_k)^{2dn} \right]^{1/m} M_{k+1}^{d(n-1)/m} \right\rceil, \]
+%
+so that \eqref{equation903103513095}, then both Properties \ref{controlledScale} and \ref{RapidDecrease} of Theorem \ref{TheConstructionTheorem} are satisfied with $s = m/d(n-1)$ if $N_1 \dots N_k \lesssim_\varepsilon M_{k+1}^\varepsilon$ for each $\varepsilon > 0$. This is true, for instance, if we set $M_k = 2^{\lfloor 2^{k \log k} \rfloor}$, and Theorem \ref{TheConstructionTheorem} then shows the resultant set $X$ has Hausdorff dimension $m/(n-1)$.
 
 \section{Math\'{e}: Polynomial Configurations}
 
@@ -385,12 +367,6 @@ Originally, Math\'{e}'s result does not explicitly use a discretization method a
     %
     In particular, this implies Property (A).
 \end{proof}
-
-\begin{remark}
-    As in Pramanik and Fraser's result, the dimension $d/m$ of the resultant set obtained from applying this interval disection argument can be read off from the power of $M_{k+1}$ in \eqref{equation124426034990370935}.
-\end{remark}
-
-\end{comment}
 
 \begin{comment}
 
