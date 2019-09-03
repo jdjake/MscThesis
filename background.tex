@@ -798,9 +798,9 @@ Any constant branching factor satisfies \eqref{definingsequencegrowthrate} for t
 \begin{theorem} \label{rapidBranching}
 	If $N_k = 2^{\lfloor 2^{k \psi(k)} \rfloor}$, where $\psi(k)$ is any decreasing sequence of positive numbers tending to zero, such that
 	%
-	\begin{equation} \label{definingsequencegrowthassumption} \psi(k) \geq \log_2(k)/k. \end{equation}
+	\begin{equation} \label{definingsequencegrowthassumption} \psi(k) \geq \log_2(k)/k, \end{equation}
 	%
-	Then \eqref{definingsequencegrowthrate} holds.
+	then \eqref{definingsequencegrowthrate} holds.
 \end{theorem}
 \begin{proof}
 	We note that $\log(N_k) = 2^{k \psi(k)} + O(1)$, and that \eqref{definingsequencegrowthassumption} implies that
@@ -1023,13 +1023,13 @@ This theorem is commonly used here when dealing with multi-scale dyadic fractal 
 	let $E = \bigcap E_k$, where $\{ E_k \}$ is a nested family of subsets of $\RR^d$, such that $E_k$ is $\DQ_k$ discretized for each $k$. Suppose that 
 	%
 	\begin{enumerate}
-		\item \label{SingleSelection} Sparse, Uniform Selection: For each $Q \in \DQ_k(E_k)$, there exists a set $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that $\#(\mathcal{R}_Q) \geq (1/2) \cdot \#(\DR_{k+1}(Q))$ such that
+		\item \label{SingleSelection} For each $Q \in \DQ_k(E_k)$, there exists a set $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that $\#(\mathcal{R}_Q) \geq (1/2) \cdot \#(\DR_{k+1}(Q))$ such that
 		%
 		\[ \# \left( \DQ_{k+1}(R \cap E_{k+1}) \right) = \begin{cases} 1 & : R \in \mathcal{R}_Q, \\ 0 & : R \not \in \mathcal{R}_Q. \end{cases} \]
 
-		\item \label{RapidDecrease} Rapid Decrease: For any $\varepsilon > 0$, $N_1 \dots N_k \lesssim_\varepsilon N_{k+1}^\varepsilon$.
+		\item \label{RapidDecrease} For any $\varepsilon > 0$, $N_1 \dots N_k \lesssim_\varepsilon N_{k+1}^\varepsilon$.
 
-		\item \label{ChangeofScales} Change of Scales: There is $0 < s \leq 1$ such that for any $\varepsilon > 0$, $N_{k+1} \lesssim_\varepsilon M_{k+1}^{(1 + \varepsilon)/s}$.
+		\item \label{ChangeofScales} There is $0 < s \leq 1$ such that for any $\varepsilon > 0$, $N_{k+1} \lesssim_\varepsilon M_{k+1}^{(1 + \varepsilon)/s}$.
 	\end{enumerate}
 	%
 	Then $E$ has Hausdorff dimension $sd$.

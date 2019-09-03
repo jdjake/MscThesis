@@ -13,21 +13,21 @@ In the last chapter, we saw that many authors have considered the pattern avoida
 \begin{remarks}
 	\
 	\begin{enumerate}
-		\item[1.] When $s < d$, avoiding the configuration $\C$ is trivial, since the set $X = [0,1]^d - \pi(\C)$ is full dimensional and solves the pattern avoidance problem, where $\pi(x_1, \dots, x_n) = x_1$ is a projection map from $\C^n(\RR^d)$ to $\RR^d$. We will therefore assume that $s \geq d$ in our proof of the theorem. Note that obtaining a full dimensional set in the case $s = d$, however, is still interesting.
+		\item[1.] When $s < d$, avoiding the configuration $\C$ is trivial. If we define $\pi: \C^n(\RR^d) \to \RR^d$ by $\pi(x_1, \dots, x_n) = x_1$, then the set $X = [0,1]^d - \pi(\C)$ is full dimension and avoids $\C$. Note that obtaining a full dimensional set in the case $s = d$, however, is still interesting.
 
 		\item[2.] Theorem \ref{mainTheorem} is trivial when $s = dn$, since we can set $X = \emptyset$. We will therefore assume that $s < dn$ in our proof of the theorem.
 
-		\item[3.] Let $f: \RR^{dn} \to \RR^m$ be a $C^1$ map such that $f$ has full rank at any point $(x_1, \dots, x_n) \in \RR^{dn}$ for which $x_1, \dots, x_n$ are distinct vectors and $f(x_1, \dots, x_n) = 0$. If we set
+		\item[3.] Let $f: \RR^{dn} \to \RR^m$ be a $C^1$ map such that $f$ has full rank at any point $(x_1, \dots, x_n) \in \C^n(\RR^d)$ with $f(x_1, \dots, x_n) = 0$. If we set
 		%
 		\[ \C = \{ x \in \C^n(\RR^d) : f(x) = 0 \}, \]
 		%
-		Then $\C$ is a $C^1$ submanifold of $\RR^d$ of dimension $nd - m$. The manifold is $\sigma$ compact, so we can write $\C = \bigcup K_i$, where each $K_i$ is a compact set. Applying Theorem \ref{ManifoldDimensionThm} shows $\lowminkdim(K_i) \leq nd - m$ for each $i$, so we can apply Theorem \ref{mainTheorem} with $s = nd - m$ to yield a set in $\RR^d$ with Hausdorff dimension at least
+		Then $\C$ is a $C^1$ submanifold of $\C^n(\RR^d)$ of dimension $nd - m$. A submanifold of Euclidean space is $\sigma$ compact, so we can write $\C = \bigcup K_i$, where each $K_i$ is a compact set. Applying Theorem \ref{ManifoldDimensionThm} shows $\lowminkdim(K_i) \leq nd - m$ for each $i$, so we can apply Theorem \ref{mainTheorem} with $s = nd - m$ to yield a set in $\RR^d$ with Hausdorff dimension at least
 		%
 		\[ \frac{nd - s}{n-1} = \frac{m}{n-1}. \]
 		%
 		This recovers Theorem \ref{pramanikandfrasertheorem}, making Theorem \ref{mainTheorem} a generalization of Pramanik and Fraser's result.
 
-		\item[4.] Since Theorem \ref{mainTheorem} does not require any regularity assumptions on the set $\C$, it can be applied in contexts that cannot be addressed using previous methods in the literature. Two such applications, new to the best of our knowledge, have been recorded in Section \ref{applications}; see Theorems \ref{sumset-application} and \ref{C1IsoscelesThm} there.
+		\item[4.] Since Theorem \ref{mainTheorem} does not require any regularity assumptions on the set $\C$, it can be applied in contexts that cannot be addressed using previous methods in the literature. Two such applications, new to the best of our knowledge, have been recorded in Chapter \ref{ch:Applications}; see Theorems \ref{sumset-application} and \ref{C1IsoscelesThm} there.
 	\end{enumerate}
 \end{remarks}
 
@@ -44,16 +44,17 @@ Like with the results considered in the last chapter, we construct the set $X$ i
 
 In this section we describe a method for avoiding a discretized version of $\C$ at a single scale. We apply this technique in Section \ref{discretizationsection} at many scales to construct a set $X$ avoiding $\C$ at all scales.
 %This single scale avoidance technique is the core building block of our construction, and the efficiency with which we can avoid $\C$ at a single scale has direct consequences on the Hausdorff dimension of the set $X$ obtained in Theorem \ref{mainTheorem}.
-In the discrete setting, $\C$ is replaced by a union of cubes in $\DQ^{dn}_{k+1}$ denoted by $B$. We say a cube $Q = Q_1 \times \dots \times Q_n \in \DQ^{dn}_{k+1}$ is \emph{strongly non-diagonal} if the $n$ cubes $Q_1, \dots, Q_n$ are distinct. Given a $\DQ_k$ discretized set $T \subset \RR^d$, our goal is to construct a $\DQ_{k+1}$ discretized set $S \subset T$, such that $\DQ_{k+1}^{dn}(F^n)$ does not contain any strongly non-diagonal cubes of $\DQ_{k+1}^{dn}(B)$. Using the setup introduced at the end of the introduction, we later let $T = X_k$, and set $X_{k+1}$ as the set $S$ constructed by Lemma \ref{discretelemma}.
+In the discrete setting, $\C$ is replaced by a union of cubes in $\DQ^{dn}_{k+1}$ denoted by $B$. We say a cube $Q = Q_1 \times \dots \times Q_n \in \DQ^{dn}_{k+1}$ is \emph{strongly non-diagonal} if the $n$ cubes $Q_1, \dots, Q_n$ are distinct. Given a $\DQ_k$ discretized set $T \subset \RR^d$, our goal is to construct a $\DQ_{k+1}$ discretized set $S \subset T$, such that $\DQ_{k+1}^{dn}(F^n)$ does not contain any strongly non-diagonal cubes of $\DQ_{k+1}^{dn}(B)$.
 
 %To ensure the set $X$ obtained in Theorem \ref{mainTheorem} has large Hausdorff dimension regardless of the rapid decay of scales used in the construction of $X$, it is crucial that $F$ is uniformly distributed among $\DR_{k+1}^d(T)$ so that we can apply Lemma \ref{uniformMassFrostman}. This is what Lemma \ref{discretelemma} achieves, given that $N_{k+1}$ is suitably large in comparsion to $M_{k+1}$, i.e. so that \eqref{rBound} holds.
 
 \begin{lemma} \label{discretelemma}
-	Fix $k$, $1 \leq s < dn$, and $0 \leq \varepsilon < (dn - s)/2$. Let $T \subset \RR^d$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^{dn}$ be a nonempty $\DQ_{k+1}$ discretized set such that
+	Fix $k$, $s \in [1,dn)$, and $\varepsilon \in [0,(dn-s)/2)$. Let $T \subset \RR^d$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^{dn}$ be a nonempty $\DQ_{k+1}$ discretized set such that
 	%
 	\[ \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}. \]
 	%
-	Then there exists a constant $C(s,d,n)$\footnote{The proof will show that we can choose $C(s,d,n) \sim_d 4^{\frac{1}{dn - s}}$, which explodes as $s \to dn$.}, depending only on the constants $s$, $d$, and $n$, such that, provided
+	Then there exists a constant $C(s,d,n) > 0$%\footnote{The proof will show that we can choose $C(s,d,n) \sim_d 4^{\frac{1}{dn - s}}$, which explodes as $s \to dn$.}
+	, depending only on $s$, $d$, and $n$, such that, provided
 	% C(s,d,n) \geq 4d, 2^{\frac{n+1}{dn - t}}
 	\begin{equation} \label{rBound}
 		N_{k+1} \geq C(s,d,n) \cdot M_{k+1}^{\frac{d(n-1)}{dn - s - \varepsilon}},
@@ -62,11 +63,17 @@ In the discrete setting, $\C$ is replaced by a union of cubes in $\DQ^{dn}_{k+1}
 	then there is a $\DQ_{k+1}$ discretized set $S \subset T$ satisfying the following three properties:
 	%
 	\begin{enumerate}
-		\item\label{avoidanceItem} \emph{Avoidance}: For any collection of $n$ distinct cubes $Q_1, \dots, Q_n \in \DQ_{k+1}(S)$, $Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B)$.
-
-		\item\label{nonConcentrationItem} \emph{Sparse Regularity}: For each $Q \in \DQ_k(T)$, there exists $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that $\#(\mathcal{R}_Q) \geq \#(\DR_{k+1}(Q))$, and if $R \in \DR_{k+1}(Q)$,
+		\item\label{avoidanceItem} For any collection of $n$ distinct cubes $Q_1, \dots, Q_n \in \DQ_{k+1}(S)$,
 		%
-		\[ \#(\DQ_{k+1}(R)) = \begin{cases} 1 & : R \in \mathcal{R}_Q \\ 0 & : R \not \in \mathcal{R}_Q. \end{cases} \]
+		\[ Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B). \]
+
+		\item\label{nonConcentrationItem} For each $Q \in \DQ_k(T)$, there exists $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that
+		%
+		\[ \#(\mathcal{R}_Q) \geq \#(\DR_{k+1}(Q)), \]
+		%
+		and if $R \in \DR_{k+1}(Q)$,
+		%
+		\[ \#(\DQ_{k+1}(R \cap S)) = \begin{cases} 1 & : R \in \mathcal{R}_Q \\ 0 & : R \not \in \mathcal{R}_Q. \end{cases} \]
 	\end{enumerate}
 \end{lemma}
 
@@ -85,17 +92,27 @@ In the discrete setting, $\C$ is replaced by a union of cubes in $\DQ^{dn}_{k+1}
 		S(A) = \bigcup \Big[ \DQ_{k+1}(A) - \{ \pi(K) \setcolon K \in \mathcal{K}(A) \} \Big],
 	\end{equation}
 	%
-	where $\pi \colon \RR^{dn} \to \RR^d$ is the projection map $(x_1, \dots, x_n) \mapsto x_1$, for $x_i \in \RR^d$. For any distinct $R_1, R_2 \in \DR_{k+1}(T)$, $Q_{R_1} \cap Q_{R_2} = \emptyset$, since $Q_{R_1} \subset R_1^\circ$, $Q_{R_2} \subset R_2^\circ$, and $R_1^\circ \cap R_2^\circ = \emptyset$. Given any strongly non-diagonal cube $K = K_1 \times \cdots \times K_n \in \DQ_{k+1}(B)$, either $K \not \in \DQ_{k+1}(A^n)$, or $K \in \DQ_{k+1}(A^n)$. If the former occurs then $K \not \in \DQ_{k+1}(S(A))$ since $S(A) \subset A$, so $\DQ_{k+1}(S(A)^n) \subset \DQ_{k+1}(A^n)$. If the latter occurs then $K \in \mathcal{K}(A)$, and since $\pi(K) = K_1$, $K_1 \not \in \DQ_{k+1}(S(A))$. In either case, $K \not \in \DQ_{k+1}(S(A)^n)$, so $S(A)$ satisfies Property \ref{avoidanceItem}. By construction, $A$ contains at most one sub cube $Q \in \DQ_{k+1}(R)$ for each $R \in \DR_{k+1}(T)$. Since $S(A) \subset A$, $S(A)$ satisfies Property \ref{nonConcentrationItem}. Thus the set $S(A)$ satisfies Property \ref{avoidanceItem}, regardless of which values are assumed by the random variables $\{ Q_R \}$. Next we will show that with non-zero probability, the set $S(A)$ satisfies Property \ref{nonConcentrationItem}. 
+	where $\pi \colon \RR^{dn} \to \RR^d$ is the projection map $(x_1, \dots, x_n) \mapsto x_1$, for $x_i \in \RR^d$.
 
-	For each cube $Q \in \DQ_{k+1}(T)$, there is a unique `parent' cube $R \in \DR_{k+1}(T)$ such that $Q \subset R$. Note that \eqref{rBound} implies, if $C(s,d,n) \geq 4d$, that $N_{k+1} \geq 4d M_{k+1}$. Since $Q_R$ is chosen uniformly from $\DQ_{k+1}(R)$, for any $Q \in \DQ_{k+1}(R)$,
+	Given any strongly non-diagonal cube $K = K_1 \times \cdots \times K_n \in \DQ_{k+1}(B)$, either $K \not \in \DQ_{k+1}(A^n)$, or $K \in \DQ_{k+1}(A^n)$. If the former occurs then $K \not \in \DQ_{k+1}(S(A))$ since $S(A) \subset A$, so $\DQ_{k+1}(S(A)^n) \subset \DQ_{k+1}(A^n)$. If the latter occurs then $K \in \mathcal{K}(A)$, and since $\pi(K) = K_1$, $K_1 \not \in \DQ_{k+1}(S(A))$. In either case, $K \not \in \DQ_{k+1}(S(A)^n)$, so $S(A)$ satisfies Property \ref{avoidanceItem}. By construction, we know that for each $R \in \DR_{k+1}(T)$,
+	%
+	\begin{equation} \label{equation8423246093490} \#(\DQ_{k+1}(S(A) \cap R)) \leq \#(\DQ_{k+1}(A \cap R)) = 1. \end{equation}
+	%
+	To conclude that $S(A)$ satisfies Property \ref{nonConcentrationItem}, it therefore suffices to show that
+	%
+	\[ \# (\mathcal{K}(A)) \leq (1/2) \cdot M_{k+1}^d. \]
+	%
+	We now show this is true with non-zero probability.
+
+	For each cube $Q \in \DQ_{k+1}(T)$, there is a unique `parent' cube $R \in \DR_{k+1}(T)$ such that $Q \subset R$. Note that \eqref{rBound} implies, if $C(s,d,n) \geq 4d$, that $N_{k+1} \geq 4d \cdot M_{k+1}$. Since $Q_R$ is chosen uniformly from $\DQ_{k+1}(R)$, for any $Q \in \DQ_{k+1}(R)$,
 	%
 	\[ \prob(Q \subset A) = \prob(Q_R = Q) = \left( \DQ_{k+1}(R) \right)^{-1} = (M_{k+1}/N_{k+1})^d. \]
 	%
-	The cubes $\{ Q_R \}$ are chosen independently, so if $K_1, \dots, K_n$ are distinct cubes in $\DQ_{k+1}(T)$, then either the cubes $K_1, \dots, K_n$ have distinct parents, in which case we apply the independence of the random cubes $\{ Q_R \}$ to conclude that
+	Suppose $K_1, \dots, K_n \in \DQ_{k+1}(T)$ are distinct cubes. If the cubes have distinct parents in $\DR_{k+1}^d$, we can apply the independence of the random cubes $\{ Q_R \}$ to conclude that
 	%
-	\[ \prob(K_1, \dots, K_n \subset A) \leq (M_{k+1}/N_{k+1})^{dn}. \]
+	\[ \prob(K_1, \dots, K_n \subset A) = (M_{k+1}/N_{k+1})^{dn}. \]
 	%
-	If the cubes $K_1, \dots, K_n$ do not have distinct parents, Property \ref{nonConcentrationItem} implies
+	If the cubes $K_1, \dots, K_n$ do not have distinct parents, \eqref{equation8423246093490} shows
 	%
 	\[ \prob(K_1, \dots, K_n \subset A) = 0. \]
 	%
@@ -127,10 +144,10 @@ In the discrete setting, $\C$ is replaced by a union of cubes in $\DQ^{dn}_{k+1}
 	In particular, there exists at least one (non-random) set $A_0$ such that
 	%
 	\begin{equation}\label{KU0Small}
-		\# \mathcal{K}(A_0) \leq \expect(\# \mathcal{K}(A)) \leq (1/2) \cdot M_{k+1}^d.
+		\#(\mathcal{K}(A_0)) \leq \expect(\# (\mathcal{K}(A))) \leq (1/2) \cdot M_{k+1}^d.
 	\end{equation}
 	%
-	In other words, $S(A_0) \subset A_0$ is obtained by removing at most $(1/2) \cdot M_{k+1}^d$ cubes in $\B^d_s$ from $A_0$. For each $Q \in \B_l^d(T)$, we know that $\# \DQ_{k+1}(Q \cap U_0) = M_{k+1}^d$. Combining this with \eqref{KU0Small}, we arrive at the estimate 
+	In other words, $S(A_0) \subset A_0$ is obtained by removing at most $(1/2) \cdot M_{k+1}^d$ cubes in $\B^d_s$ from $A_0$. For each $Q \in \B_l^d(T)$, we know that $\# \DQ_{k+1}(Q \cap A_0) = M_{k+1}^d$. Combining this with \eqref{KU0Small}, we arrive at the estimate 
 	%
 	\begin{align*}
 		\# \DQ_{k+1}(Q \cap S(A_0)) &= \DQ_{k+1}(Q \cap A_0) - \# \{ \pi(K) \setcolon K \in \mathcal{K}(A_0), \pi(K) \in A_0 \}\\
@@ -144,13 +161,13 @@ In the discrete setting, $\C$ is replaced by a union of cubes in $\DQ^{dn}_{k+1}
 \begin{remarks}
 	\
 	\begin{enumerate}
-		\item[1.] While Lemma \ref{discretelemma} uses probabilistic arguments, the conclusion of the lemma is not a probabilistic statement. In particular, one can find a suitable $S$ constructively by checking every possible choice of $A$ (there are finitely many) to find one particular choice $A_0$ which satisfies \eqref{KU0Small}, and then defining $S$ by \eqref{defnOfF}. Thus the set we obtain in Theorem \ref{mainTheorem} exists by purely constructive means.
+		\item[1.] While Lemma \ref{discretelemma} uses probabilistic arguments, the proof of the lemma is still constructive. In particular, one can find a suitable $S$ constructively by checking every possible choice of $A$ (there are finitely many) to find one particular choice $A_0$ which satisfies \eqref{KU0Small}, and then defining $S$ by \eqref{defnOfF}. Thus the set we obtain in Theorem \ref{mainTheorem} exists by purely constructive means.
 		
 		\item[2.] As with the proofs in Chapter \ref{ch:RelatedWork}, the fact that we can choose
 		%
 		\[ N_{k+1} \sim M_{k+1}^{(1 - \varepsilon)/t} \]
 		%
-		for all sufficiently small $\varepsilon > 0$, where $t = (dn - s)/d(n-1)$, implies that the set we construct should have dimension $(dn - s)/(n-1)$.
+		where $t = (dn - s)/d(n-1)$, implies we should be able to iteratively apply Lemma \ref{discretelemma} to obtain a set with Hausdorff dimension $(dn - s)/(n-1)$.
 	\end{enumerate} 
 \end{remarks}
 
@@ -207,17 +224,17 @@ In this section we construct the set $X$ from Theorem \ref{mainTheorem} by apply
 	It remains to verify that the sets $\{ B_k^\circ \}$ strongly cover $\C$. Fix a point $z \in \C$. Then there exists an index $i$ such that $z \in Y_i$, and there is a subsequence $k_1, k_2, \dots$ such that $i_{k_j} = i$ for each $j$. But then $z \in Y_i \subset B_{i_{k_j}}^\circ$, so $z$ is contained in each of the sets $B_{i_{k_j}}^\circ$, and thus $z \in \limsup B_i^\circ$. Thus Property \ref{StrongCoverProperty} is proved.
 \end{proof}
 
-To construct $X$, we consider a nested, decreasing family of sets $\{ X_k \}$, where each $X_k$ is an $l_k$ discretized subset of $\RR^d$. We then set $X = \bigcap X_k$. The goal is to choose $X_k$ such that $X_k^n$ does not contain any {\it strongly non diagonal} cubes in $Z_k$.
+To construct $X$, we consider a nested, decreasing family of sets $\{ X_k \}$, where each $X_k$ is an $l_k$ discretized subset of $\RR^d$. We then set $X = \bigcap X_k$. The goal is to choose $X_k$ such that $X_k^n$ does not contain any {\it strongly non diagonal} cubes in $B_k$.
 
 \begin{lemma} \label{stronglydiagonal}
-	Let $\{ l_k \}$ be a sequence of positive numbers converging to zero, and let $B \subset \RR^{dn}$. Let $\{ B_k \}$ be a sequence of sets, with each $B_k$ an $l_k$ discretized subset of $\RR^{dn}$, such that the interiors $\{ B_k^\circ \}$ strongly cover $B$. For each index $k$, let $X_k$ be an $l_k$ discretized subset of $\RR^d$. Suppose that for each $k$, $\DQ_k(X_k^n) \cap \DQ_k(B_k)$ contains no strongly non diagonal cubes. If $X = \bigcap X_k$, then for any distinct $x_1, \dots, x_n \in X$, we have $(x_1, \dots, x_n) \not \in B$.
+	For each $k$, let $B_k \subset \RR^{dn}$ be a $\DQ_k$ discretized set, such that the interiors $\{ B_k^\circ \}$ strongly cover $\C$. For each index $k$, let $X_k$ be a $\DQ_k$ discretized set such that $\DQ_k(X_k^n) \cap \DQ_k(B_k)$ contains no strongly non diagonal cubes. If $X = \bigcap X_k$, then $X$ avoids $B$.
 \end{lemma}
 \begin{proof}
-	Let $x = (x_1, \dots, x_n) \in B$ be a point such that $x_1, \dots, x_n$ are distinct. Define
+	Let $x = (x_1, \dots, x_n) \in \C$ be a point such that $x_1, \dots, x_n$ are distinct. Define
 	%
-	\[ \Delta = \{ (w_1, \dots, w_n) \in \RR^{dn} \setcolon \text{there exists $i \neq j$ such that $w_i = w_j$} \}. \]
+	\[ \Delta = \{ (y_1, \dots, y_n) \in \RR^{dn} \setcolon \text{there exists $i \neq j$ such that $y_i = y_j$} \}. \]
 	%
-	Then $d(\Delta,x) > 0$, where $d$ is the Hausdorff distance between $\Delta$ and $x$. Since $\{ B_k \}$ strongly covers $B$, there is a subsequence $\{ k_m \}$ such that $x \in B_{k_m}^\circ$ for every index $m$. Since $l_k$ converges to 0 and thus $l_{k_m}$ converges to $0$, if $m$ is sufficiently large then $\sqrt{dn} \cdot l_{k_m} < d(\Delta,x)$. Note that $\sqrt{dn} \cdot l_{k_m}$ is the diameter of a cube in $\DQ_{k_m}$. For such a choice of $m$, any cube $Q \in \B^d_{l_{k_m}}$ which contains $x$ is strongly non-diagonal. Thus $x \in B_{k_m}^\circ$. Since $X_{k_m}$ and $B_{k_m}$ share no cube which contains $x$, this implies $x \not \in X_{k_m}$. In particular, this means $x \not \in X^n$.
+	Then $d(\Delta,x) > 0$, where $d$ is the Hausdorff distance between $\Delta$ and $x$. Since $\{ B_k \}$ strongly covers $\C$, there is a subsequence $\{ k_m \}$ such that $x \in B_{k_m}^\circ$ for every index $m$. Since $l_k$ converges to 0 and thus $l_{k_m}$ converges to $0$, if $m$ is sufficiently large then $\sqrt{dn} \cdot l_{k_m} < d(\Delta,x)$. Note that $\sqrt{dn} \cdot l_{k_m}$ is the diameter of a cube in $\DQ_{k_m}$. For such a choice of $m$, any cube $Q \in \DQ_{k_m}^d$ which contains $x$ is strongly non-diagonal. Thus $x \in B_{k_m}^\circ$. Since $X_{k_m}$ and $B_{k_m}$ share no cube which contains $x$, this implies $x \not \in X_{k_m}$. In particular, this means $x \not \in X^n$.
 \end{proof}
 
 All that remains is to apply the discrete lemma to choose the sequence $\{ X_k \}$. Given $\C$, apply Lemma \ref{coveringLemma} to choose a sequence $\{ N_k \}$ and a sequence $\{ B_k \}$. We recursively define the sequence $\{ X_k \}$. Set $X_0 = [0,1]^d$. Then, Property \ref{RapidDecayProperty} of Lemma \ref{coveringLemma} implies
@@ -228,11 +245,11 @@ Let $M_{k+1}$ be the largest power of two smaller than
 %
 \begin{equation} \label{equation9249815935} \left( \frac{N_{k+1}}{C(s,d,n)} \right)^{\frac{dn - s -\varepsilon_k}{d(n-1)}} \end{equation}
 %
-Then $1 \leq M_{k+1} \leq N_{k+1}$, and \eqref{rBound} is satisfied. Setting $B = B_{k+1}$, and $T = X_k$. Then we can apply Lemma \ref{discretelemma} to find a set $S$ satisfying all Properties of that Lemma. We then set $X_{k+1} = S$.
+Then $1 \leq M_{k+1} \leq N_{k+1}$, and \eqref{rBound} is satisfied. Set $B = B_{k+1}$, and $T = X_k$. Then we can apply Lemma \ref{discretelemma} to find a set $S$ satisfying all Properties of that Lemma, and set $X_{k+1} = S$.
 
 Property \ref{avoidanceItem} of Lemma \ref{discretelemma} together with Lemma \ref{stronglydiagonal} implies that the set $X = \bigcap X_k$ avoids $\C$. Property \ref{nonConcentrationItem} of Lemma \ref{discretelemma} shows that the sequence $\{ X_k \}$ satisfies Property \ref{SingleSelection} of Theorem \ref{TheConstructionTheorem}. Property \ref{RapidDecayProperty} of Lemma \ref{coveringLemma} implies Property \ref{RapidDecrease} of Theorem \ref{TheConstructionTheorem} is satisfied. And by definition, i.e. the choice of $\{ M_k \}$ as given by \eqref{equation9249815935},
 %
-\begin{equation} \label{equation1403463468957983} N_k \lesssim M_k^{1/t} \end{equation}
+\begin{equation} \label{equation1403463468957983} N_k \leq M_k^{\frac{d(n-1)}{dn - s - \varepsilon_k}} \lesssim_\varepsilon M_k^{\frac{1 + \varepsilon}{t}} \end{equation}
 %
 where $t = (nd - s)/d(n-1)$. \eqref{equation1403463468957983} is a form of Property \ref{ChangeofScales} of Theorem \ref{TheConstructionTheorem}. Thus all assumptions of Theorem \ref{TheConstructionTheorem} are satisfied, and so we find $X$ has Hausdorff dimension $(nd - s)/(n-1)$.
 
@@ -245,21 +262,21 @@ where $t = (nd - s)/d(n-1)$. \eqref{equation1403463468957983} is a form of Prope
 
 
 
-\chapter{Applications} \label{applications}
+\chapter{Applications} \label{ch:Applications}
 
-As discussed in the introduction, Theorem \ref{mainTheorem} generalizes Theorems 1.1 and 1.2 from \cite{MalabikaRob}. In this section, we present two applications of Theorem \ref{mainTheorem} in settings where previous methods do not yield any results.
+As discussed in the introduction, Theorem \ref{mainTheorem} generalizes Theorems 1.1 and 1.2 from \cite{MalabikaRob}. In this chapter, we present two applications of Theorem \ref{mainTheorem} in settings where previous methods do not yield any results.
 
 \section{Sum-sets avoiding specified sets}
 
 \begin{theorem} \label{sumset-application} 
-	Let $Y \subset \RR^d$ be a countable union of sets of Minkowski dimension at most $t < d$. Then there exists a set $X \subset \RR^d$ with Hausdorff dimension at least $d - t$ such that $X + X$ is disjoint from $Y$.
+	Let $Y \subset \RR^d$ be a countable union of sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR^d$ with Hausdorff dimension at least $d - t$ such that $X + X$ is disjoint from $Y$.
 \end{theorem}
 \begin{proof}
-	Define $Z = Z_1 \cup Z_2$, where
+	Define $\C = \C_1 \cup \C_2$, where
 	%
-	\[ Z_1 = \{ (x,y) \setcolon x + y \in Y \} \quad \text{and} \quad Z_2 = \{ (x,y) \setcolon y \in Y/2 \}. \]
+	\[ \C_1 = \{ (x,y) \setcolon x + y \in Y \} \quad \text{and} \quad \C_2 = \{ (x,y) \setcolon y \in Y/2 \}. \]
 	%
-	Since $Y$ is a countable union of sets of Minkowski dimension at most $t$, $Z$ is a countable union of sets with lower Minkowski dimension at most $d + t$. Applying Theorem \ref{mainTheorem} with $n = 2$ and $s = d + t$ produces a set $X \subset \RR^d$ with Hausdorff dimension $2d  - (d + t) = d - t$ such that $(x,y) \not \in Z$ for all $x,y \in X$ with $x \neq y$. We claim that $X+ X$ is disjoint from $Y$. To see this, first suppose $x, y \in X$, $x \ne y$. Since $X$ avoids $Z_1$, we conclude that $x + y \not \in Y$. Suppose now that $x = y \in X$. Since $X$ avoids $Z_2$, we deduce that $X \cap (Y/2) = \emptyset$, and thus for any $x \in X$, $x + x = 2x \not \in Y$. This completes the proof.
+	Since $Y$ is a countable union of sets with lower Minkowski dimension at most $t$, $\C$ is a countable union of sets with lower Minkowski dimension at most $d + t$. Applying Theorem \ref{mainTheorem} with $n = 2$ and $s = d + t$ produces a set $X \subset \RR^d$ with Hausdorff dimension $2d  - (d + t) = d - t$ such that $(x,y) \not \in \C$ for all $x,y \in X$ with $x \neq y$. We claim that $X+ X$ is disjoint from $Y$. To see this, first suppose $x, y \in X$, $x \neq y$. Since $X$ avoids $Z_1$, we conclude that $x + y \not \in Y$. Suppose now that $x = y \in X$. Since $X$ avoids $Z_2$, we deduce that $X \cap (Y/2) = \emptyset$, and thus for any $x \in X$, $x + x = 2x \not \in Y$. This completes the proof.
 \end{proof}
 
 
@@ -267,86 +284,109 @@ As discussed in the introduction, Theorem \ref{mainTheorem} generalizes Theorems
 
 In \cite{MalabikaRob}, Fraser and the second author prove that there exists a set $S \subset [0,1]$ with dimension $\log_3 2$ such that for any simple $C^2$ curve $\gamma \colon [0,1] \to \RR^n$ with bounded non-vanishing curvature, $\gamma(S)$ does not contain the vertices of an isosceles triangle. Our method enables us to obtain a result that works for Lipschitz curves with small Lipschitz constants. The dimensional bound that we provide is slightly worse than \cite{MalabikaRob} ($1/2$ instead of $\log_3 2$), and the set we obtain only works for a single Lipschitz curve, not for many curves simultaneously.
 
-\begin{theorem}\label{C1IsoscelesThm}
-	Let $f\colon [0,1] \to \RR^{n-1}$ be Lipschitz with \[ \| f \|_{\text{Lip}}  := \sup \bigl\{|f(x) - f(y)|/|x-y| : x, y \in [0,1], x \ne y   \bigr\} < 1. \]  Then there is a set $X \subset [0,1]$ of Hausdorff dimension $1/2$ so that the set $\{(t,f(t)) \setcolon t\in X\}$ does not contain the vertices of an isosceles triangle.
+\begin{theorem} \label{C1IsoscelesThm}
+	Let $f \colon [0,1] \to \RR^{n-1}$ be Lipschitz with \[ \| f \|_{\text{Lip}}  := \sup \bigl\{|f(x) - f(y)|/|x-y| : x, y \in [0,1], x \ne y   \bigr\} < 1. \]  Then there is a set $X \subset [0,1]$ of Hausdorff dimension $1/2$ so that the set
+	%
+	\[ \{(t,f(t)) \setcolon t\in X\} \]
+	%
+	does not contain the vertices of an isosceles triangle.
 \end{theorem}
 
-\begin{corollary}
-\label{C1IsoscelesCor}
-Let $f\colon [0,1] \to \RR^{n-1}$ be $C^1$.  Then there is a set $X \subset [0,1]$ of Hausdorff dimension $1/2$ so that the set $\{(t,f(t)) \setcolon t\in X\}$ does not contain the vertices of an isosceles triangle.
+\begin{corollary} \label{C1IsoscelesCor}
+	Let $f\colon [0,1] \to \RR^{n-1}$ be $C^1$.  Then there is a set $X \subset [0,1]$ of Hausdorff dimension $1/2$ so that the set
+	%
+	\[ \{(t,f(t)) \setcolon t\in X\} \]
+	%
+	does not contain the vertices of an isosceles triangle.
 \end{corollary} 
 \begin{proof}[Proof of Corollary \ref{C1IsoscelesCor}]
-The graph of any $C^1$ function can be locally expressed, after possibly a translation and rotation, as the graph of a Lipschitz function with small Lipschitz constant. In particular, there exists an interval $I\subset[0,1]$ of positive length so that the graph of $f$ restricted to $I$, after being suitably translated, rotated, and dilated, is the graph of a Lipschitz function $g\colon [0,1] \to \RR^{n-1}$ with Lipschitz constant at most $1/2$. Since isosceles triangles remain invariant under these transformations, the corollary is a consequence of Theorem \ref{C1IsoscelesThm}.  
+	The graph of any $C^1$ function can be locally expressed, after possibly a translation and rotation, as the graph of a Lipschitz function with small Lipschitz constant. In particular, there exists an interval $I\subset[0,1]$ of positive length so that the graph of $f$ restricted to $I$, after being suitably translated and rotated, is the graph of a Lipschitz function $g\colon [0,1] \to \RR^{n-1}$ with Lipschitz constant at most $1/2$. Since isosceles triangles remain invariant under these transformations, the corollary is a consequence of Theorem \ref{C1IsoscelesThm}.  
 \end{proof} 
 
 \begin{proof}[Proof of Theorem \ref{C1IsoscelesThm}]
 	Set
 	%
-	\begin{equation} \label{def-Z} Z = \left\{ (x_1,x_2,x_3) \in [0,1]^3 \setcolon \; \begin{aligned} &{\text{The three points }} p_j = (x_j,f(x_j)), 1 \leq j \leq 3 \\  &\text{ form the vertices of an isosceles triangle} \end{aligned} \right\}. \end{equation} 
+	\begin{equation} \label{def-Z}
+		\C = \left\{ (x_1,x_2,x_3) \in \C^3[0,1] \setcolon \; \begin{array}{c}
+			\text{The points $p_j = (x_j,f(x_j))$ form}\\
+			\text{the vertices of an isosceles triangle}
+		\end{array} \right\}.
+	\end{equation} 
 	%
-	In the next lemma, we show $Z$ has lower Minkowski dimension at most two. By Theorem \ref{mainTheorem}, there is a set $X \subset[0,1]$ of Hausdorff dimension $1/2$ so that for each distinct $x_1,x_2,x_3\in X$, we have $(x_1,x_2,x_3)\not\in Z$. This is precisely the statement that for each $x_1,x_2,x_3\in X$, the points $(x_1,f(x_1)),\ (x_2,f(x_2))$, and $(x_3,f(x_3))$ do not form the vertices of an isosceles triangle. 
+	In the next lemma, we show $\C$ has lower Minkowski dimension at most two. By Theorem \ref{mainTheorem}, there is a set $X \subset [0,1]$ of Hausdorff dimension $1/2$ so that $X$ avoids $\C$. This is precisely the statement that for each $x_1,x_2,x_3\in X$, the points $(x_1,f(x_1)),\ (x_2,f(x_2))$, and $(x_3,f(x_3))$ do not form the vertices of an isosceles triangle. 
 \end{proof}
 
 \begin{lemma}
-	Let $f\colon [0,1] \to \RR^{n-1}$ be Lipschitz with $\| f \|_{\text{Lip}} < 1$. Then the set $Z$ given by \eqref{def-Z} has Minkowski dimension at most two.
+	Let $f\colon [0,1] \to \RR^{n-1}$ be Lipschitz with $\| f \|_{\text{Lip}} < 1$. Then the set $\C$ given by \eqref{def-Z} satisfies $\upminkdim(\C) \leq 2$.
 \end{lemma}
 \begin{proof}
 	First, notice that three points $p_1,p_2,p_3 \in \RR^n$ form an isosceles triangle, with $p_3$ as the apex, if and only if $p_3 \in H_{p_1,p_2}$, where
 	%
 	\begin{equation} \label{def-H}  H_{p_1,p_2} = \left\{ x \in \RR^n \setcolon \left( x - \frac{p_1 + p_2}{2} \right) \cdot (p_2 - p_1) = 0 \right\}. \end{equation} 
 	%
-	To prove $Z$ has Minkowski has dimension at most two, it suffices to show that the set
+	To prove $\C$ has Minkowski has dimension at most two, it suffices to show the set
 	%
 	\[ W = \left\{ x \in [0,1]^3 \setcolon p_3 = (x_3,f(x_3)) \in H_{p_1, p_2} \right\} \]
 	%
-	has upper Minkowski dimension at most 2. This is because $Z$ is the union of three copies of $W$, obtained by permuting coordinates. To bound the upper Minkowski dimension of $W$, we prove the estimate
-	\begin{equation}\label{boundOnWCoveringNumber}  \# \bigl(\mathcal B_{\delta}^3(W(\delta)) \bigr) \leq C \delta^{-2} \log(1/\delta) \quad \text{ for all } 0 < \delta < 1,  
+	has upper Minkowski dimension at most 2. This is because $\C$ is covered by three copies of $W$, obtained by permuting coordinates. We work with the family of dyadic cubes $\DD^n$. To bound the upper Minkowski dimension of $W$, we prove the estimate
+	%
+	\begin{equation}\label{boundOnWCoveringNumber}
+		\# \bigl(\mathcal \DD_k(W(1/2^k)) \bigr) \leq C k 4^k \quad \text{ for all } k \geq 1,  
 	\end{equation}  
-	where $C$ is a constant independent of $\delta$, and $\delta$ is a dyadic scale.
+	%
+	where $C$ is a constant independent of $k$. Then for any $\varepsilon > 0$, \eqref{boundOnWCoveringNumber} implies that for suitably large $k$,
+	%
+	\[ \# \bigl(\mathcal \DD_k(W(1/2^k)) \bigr) \leq 2^{(2 + \varepsilon)k}. \]
+	%
+	Since $\varepsilon$ was arbitrary, this shows $\upminkdim(W) \leq 2$.
 
-Fix $0 < \delta < 1$. Note that
+	To establish \eqref{boundOnWCoveringNumber}, we write
+	%
 	\begin{equation}\label{deltaCoveringWSum}
-		\# \bigl(\mathcal B_{\delta}^3(W) \bigr) = \sum_{k = 0}^{1/\delta}\ \sum_{\substack{I_1, I_2 \in \B^1_\delta[0,1]\\d(I_1,I_2) = k\delta}} \# \B^3_\delta(W(\delta) \cap I_1 \times I_2 \times [0,1]).
+		\# \bigl(\mathcal \DD_k(W(1/2^k)) \bigr) = \sum_{m = 0}^{2^k}\ \sum_{\substack{I_1, I_2 \in \DD_k[0,1]\\d(I_1,I_2) = m/2^k}} \# \left( \DD_k(W(1/2^k) \cap (I_1 \times I_2 \times [0,1]) \right).
 	\end{equation}
 	Our next task is to bound each of the summands in \eqref{deltaCoveringWSum}.
-	 Let $I_1, I_2 \in \B^1_\delta[0,1]$, and let $k = \delta^{-1}d(I_1,I_2)$. Let $x_1$ be the midpoint of $I_1$, and $x_2$ the midpoint of $I_2$. Let $(y_1,y_2,y_3) \in W \cap I_1 \times I_2 \times [0,1]$. Then it follows from \eqref{def-H} that 
+	 Let $I_1, I_2 \in \DD_k[0,1]$, and let $m = 2^k \cdot d(I_1,I_2)$. Let $x_1$ be the midpoint of $I_1$, and $x_2$ the midpoint of $I_2$. Let $(y_1,y_2,y_3) \in W \cap (I_1 \times I_2 \times [0,1])$. Then it follows from \eqref{def-H} that 
 	%
 	\[ \left( y_3 - \frac{y_1 + y_2}{2} \right) \cdot (y_2 - y_1) + \left( f(y_3) - \frac{f(y_2) + f(y_1)}{2} \right) \cdot (f(y_2) - f(y_1)) = 0. \]
 	%
-	We know $|x_1 - y_1|, |x_2 - y_2| \leq \delta/2$, so
+	We know $|x_1 - y_1|, |x_2 - y_2| \leq 1/2^{k+1}$, so
 	%
 	\begin{align} \label{xyDiff}
 		&\left| \left( y_3 - \frac{y_1 + y_2}{2} \right) (y_2 - y_1) - \left( y_3 - \frac{x_1 + x_2}{2} \right) (x_2 - x_1) \right| \nonumber\\
 		&\ \ \ \ \ \leq \frac{|y_1 - x_1| + |y_2 - x_2|}{2} |y_2 - y_1| + \Big( |y_1 - x_1| + |y_2 - x_2| \Big) \left| y_3 - \frac{x_1 + x_2}{2} \right|\\
-		&\ \ \ \ \ \leq (\delta/2) \cdot 1 + \delta \cdot 1 \leq 3\delta/2. \nonumber
+		&\ \ \ \ \ \leq (1/2^{k+1}) \cdot 1 + (1/2^k) \cdot 1 \leq 3/2^{k+1}. \nonumber
 	\end{align}
 	%
-	Conversely, we know $|f(x_1) - f(y_1)|, |f(x_2) - f(y_2)| \leq \delta/2$ because $\| f \|_{\text{Lip}} < 1$, and a similar calculation yields
+	Conversely, $|f(x_1) - f(y_1)|, |f(x_2) - f(y_2)| \leq 1/2^{k+1}$ because $\| f \|_{\text{Lip}} \leq 1$, and a similar calculation yields
 	%
 	\begin{align} \label{fnDiff}
 	\begin{split}
 		&\Big| \left( f(y_3) - \frac{f(y_1) + f(y_2)}{2} \right) \cdot (f(y_2) - f(y_1))\\
-		\\&\ \ \ \ \ - \left( f(y_3) - \frac{f(x_1) + f(x_2)}{2} \right) \cdot (f(x_2) - f(x_1)) \Big|\leq 3\delta/2.
+		&\ \ \ \ \ - \left( f(y_3) - \frac{f(x_1) + f(x_2)}{2} \right) \cdot (f(x_2) - f(x_1)) \Big|\leq 3/2^{k+1}.
 	\end{split}
 	\end{align}
 	%
 	Putting \eqref{xyDiff} and \eqref{fnDiff} together, we conclude that
 	%
-	\begin{equation} \label{hyperplanethick}
-		\left| \left( y_3 - \frac{x_1 + x_2}{2} \right) (x_2 - x_1) + \left( f(y_3) - \frac{f(x_2) + f(x_1)}{2} \right) \cdot (f(x_2) - f(x_1)) \right| \leq 3\delta.
-	\end{equation}
+	\begin{align} \label{hyperplanethick}
+	\begin{split}
+		&\Big| \left( y_3 - \frac{x_1 + x_2}{2} \right) (x_2 - x_1)\\
+		&\ \ \ \ \ + \left( f(y_3) - \frac{f(x_2) + f(x_1)}{2} \right) \cdot (f(x_2) - f(x_1)) \Big| \leq 3/2^k.
+	\end{split}
+	\end{align}
 	%
-	Since $|(x_2-x_1,f(x_2)-f(x_1))| \geq |x_2-x_1| \geq k\delta$, we can interpret \eqref{hyperplanethick} as saying the point $(y_3, f(y_3))$ is contained in a $3/k$ thickening of the hyperplane $H_{(x_1,f(x_1)), (x_2,f(x_2))}$. Given another value $y' \in W \cap I_1 \cap I_2 \cap [0,1]$, it satisfies a variant of the inequality \eqref{hyperplanethick}, and we can subtract the difference between the two inequalities to conclude
+	Since $|(x_2-x_1,f(x_2)-f(x_1))| \geq |x_2-x_1| \geq m/2^k$, we can interpret \eqref{hyperplanethick} as saying the point $(y_3, f(y_3))$ is contained in a $3/k$ thickening of the hyperplane $H_{(x_1,f(x_1)), (x_2,f(x_2))}$. Given another value $y' \in W \cap (I_1 \cap I_2 \cap [0,1])$, it satisfies a variant of the inequality \eqref{hyperplanethick}, and we can subtract the difference between the two inequalities to conclude
 	%
 	\begin{equation} \label{diffinequality}
-		\left| \left( y_3 - y_3' \right) (x_2 - x_1) + (f(y_3) - f(y_3')) \cdot (f(x_2) - f(x_1)) \right| \leq 6\delta.
+		\left| \left( y_3 - y_3' \right) (x_2 - x_1) + (f(y_3) - f(y_3')) \cdot (f(x_2) - f(x_1)) \right| \leq 6/2^k.
 	\end{equation}
 	%
 	The triangle difference inequality applied with \eqref{diffinequality} implies
 	%
 	\begin{align} \label{yylowbound}
 	\begin{split}
-		(f(y_3) - f(y_3')) \cdot (f(x_2) - f(x_1)) &\geq |y_3 - y_3'||x_2-x_1| - 6\delta\\ &= (k+1)\delta \cdot |y_3 - y_3'| - 6 \delta.
+		(f(y_3) - f(y_3')) \cdot (f(x_2) - f(x_1)) &\geq |y_3 - y_3'||x_2-x_1| - 6/2^k\\ &= \frac{(m+1) \cdot |y_3 - y_3'| - 6}{2^k}.
 	\end{split}
 	\end{align}
 	%
@@ -354,25 +394,32 @@ Fix $0 < \delta < 1$. Note that
 	%
 	\begin{align} \label{yyupbound}
 	\begin{split}
-		(f(y_3) - f(y_3')) \cdot (f(x_2) - f(x_1)) &\leq \| f \|_{\text{Lip}}^2 |y_3 - y_3'| |x_2 - x_1| \\ &=  \| f \|_{\text{Lip}}^2 \cdot (k+1) \delta \cdot |y_3 - y_3'|.
+		(f(y_3) - f(y_3')) \cdot (f(x_2) - f(x_1)) &\leq \| f \|_{\text{Lip}}^2 \cdot |y_3 - y_3'| |x_2 - x_1| \\ &=  \| f \|_{\text{Lip}}^2 \cdot (m+1)/2^k \cdot |y_3 - y_3'|.
 	\end{split}
 	\end{align}
-Combining \eqref{yylowbound} and \eqref{yyupbound} and rearranging, we see that
-	\begin{equation}\label{y3minusY3Prime} |y_3 - y_3'| \leq \frac{6}{(k+1)(1 - \| f \|_{\text{Lip}}^2)}  \lesssim\frac{1}{k+1},
-	 \end{equation} 
-	where the implicit constant depends only on $\| f \|_{\text{Lip}}$ (and blows up as $\| f \|_{\text{Lip}}$ approaches $1$).  We conclude that
-	\begin{equation}\label{coveringNumberBoundLargeK} \# \B^3_\delta(W(\delta) \cap I_1 \times I_2 \times [0,1]) \lesssim \frac{1}{k+1},\end{equation} 
-which holds uniformly over any value of $k$.
+	%
+	Combining \eqref{yylowbound} and \eqref{yyupbound} and rearranging, we see that
+	%
+	\begin{equation}\label{y3minusY3Prime}
+		|y_3 - y_3'| \leq \frac{6}{(m+1)(1 - \| f \|_{\text{Lip}}^2)}  \lesssim\frac{1}{m+1},
+	\end{equation} 
+	%
+	where the implicit constant depends only on $\| f \|_{\text{Lip}}$.  We conclude that
+	%
+	\begin{equation}\label{coveringNumberBoundLargeK}
+		\# \DQ_k(W(1/2^k) \cap (I_1 \times I_2 \times [0,1])) \lesssim \frac{2^k}{m+1},
+	\end{equation} 
+	%
+	which holds uniformly over any value of $m$.
 
-We are now ready to bound the sum from \eqref{deltaCoveringWSum}. Note that for each value of $k$, there are at most $2/\delta$ pairs $(I_1,I_2)$ with $d(I_1,I_2) = k \delta$. Indeed, there are $1/\delta$ choices for $I_1$ and then at most two choices for $I_2$. Equation  \eqref{coveringNumberBoundLargeK} shows 
+	We are now ready to bound the sum from \eqref{deltaCoveringWSum}. Note that for each value of $m$, there are at most $2^{k+1}$ pairs $(I_1,I_2)$ with $d(I_1,I_2) = m/2^k$. Indeed, there are $2^k$ choices for $I_1$ and then at most two choices for $I_2$. Equation  \eqref{coveringNumberBoundLargeK} shows 
 	%
 	\begin{align*}
-		\# \B^3_\delta(W(\delta)) = \sum_{k = 0}^{1/\delta} \sum_{\substack{I_1, I_2 \in \B^1_\delta[0,1]\\d(I_1,I_2) = k\delta}} \# \B^3_\delta(W(\delta) \cap I_1 \times I_2 \times [0,1])
-		\lesssim \delta^{-2} \sum_{k = 0}^{1/\delta} \frac{1}{k+1}
-		\lesssim \delta^{-2}\log(1/\delta).
+		\# \DQ_k(W(1/2^k)) &= \sum_{m = 0}^{2^k} \sum_{\substack{I_1, I_2 \in \DQ_k[0,1]\\d(I_1,I_2) = m/2^k}} \# \DQ_k(W(1/2^k) \cap (I_1 \times I_2 \times [0,1]))\\
+		&\lesssim 4^k \sum_{m = 0}^{2^k} \frac{1}{m+1} \lesssim k/4^k.
 	\end{align*}
 	%
-In the above inequalities, the implicit constants depend on $\| f \|_{\text{Lip}},$ but they are independent of $\delta$. This establishes \eqref{boundOnWCoveringNumber} and completes the proof.
+	In the above inequalities, the implicit constants depend on $\| f \|_{\text{Lip}},$ but they are independent of $k$. This establishes \eqref{boundOnWCoveringNumber} and completes the proof.
 \end{proof}
 
 \endinput
