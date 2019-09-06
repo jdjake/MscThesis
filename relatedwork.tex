@@ -125,11 +125,11 @@ under mild regularity conditions on the function $f: \C^n[0,1]^d \to [0,1]^m$. F
 \begin{theorem}[Pramanik and Fraser] \label{pramanikandfrasertheorem}
     Fix $m \leq d(n-1)$. Consider a countable family of $C^2$ functions $\{ f_k : [0,1]^{dn} \to [0,1]^m \}$ such that for each $k$, $Df_k$ has full rank at any $(x_1, \dots, x_n) \in \C^n[0,1]^d$ where $f_k(x_1, \dots, x_n) = 0$. Then there exists a set $X \subset \RR^d$ with Hausdorff dimension $m/(n-1)$ such that $X$ avoids the configuration
     %
-    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^n(\RR^d): f(x_1, \dots, x_n) = 0 \}. \]
+    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^n(\RR^d): f_k(x_1, \dots, x_n) = 0 \}. \]
 \end{theorem}
 
 \begin{remark}
-    For simplicity, we only prove the result for a single function, rather than a countable family of functions. The only major difference between the two approaches is the choice of scales we must choose later on in the argument.
+    For simplicity, we only prove the result for a single function, rather than a countable family of functions. The only major difference between the two approaches is the choice of scales we must choose later on in the argument, and a slight modification of the queueing argument.
 \end{remark}
 
 Pramanik and Fraser also simplify to a discrete version of their problem, which they then iteratively apply. In the discrete setting, rather than making a linear shift in one of the intervals we avoid as in Keleti's approach, one must use the smoothness properties of the function to find large segments of an interval avoiding. Corollary \ref{PramanikFraserBuildingBlockLemma} gives the discrete solution that Pramanik and Fraser utilizes.
@@ -146,7 +146,7 @@ Pramanik and Fraser also simplify to a discrete version of their problem, which 
         %
         and for each $R \in \DR_{k+1}^d(Q)$,
         %
-        \[ \#(\DQ_{k+1}(R)) = \begin{cases} 1 &: R \in \mathcal{R}(Q,) \\ 0 &: R \not \in \mathcal{R}(Q). \end{cases} \]
+        \[ \#(\DQ_{k+1}(R)) = \begin{cases} 1 &: R \in \mathcal{R}(Q), \\ 0 &: R \not \in \mathcal{R}(Q). \end{cases} \]
 
         \item \label{BBoundProperty} $\#(\DQ_{k+1}(B')) \leq 2 (N_1 \dots N_k)^d \left( M_{k+1}/N_{k+1} \right)^d \cdot \#(\DQ_{k+1}(B))$.
     \end{enumerate}
