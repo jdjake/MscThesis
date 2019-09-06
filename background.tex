@@ -10,7 +10,7 @@ We consider an ambient set $\AAA$. It's \emph{$n$-point configuration space} is
 %
 \[ \Config^n(\AAA) = \{ (a_1, \dots, a_n) \in \AAA^n: a_i \neq a_j\ \text{if $i \neq j$} \}. \]
 %
-An \emph{$n$ point configuration}, or \emph{$n$ point pattern}, is a subset of $\Config^n(\AAA)$. More generally, we define the general \emph{configuration space} of $\AAA$ as $\Config(\AAA) = \bigcup_{n = 1}^\infty \Config^n(\AAA)$, and a \emph{pattern}, or \emph{configuration}, on $\AAA$ as a subset of $\Config(\AAA)$.
+An \emph{$n$ point configuration}, or \emph{$n$ point pattern}, is a subset of $\Config^n(\AAA)$. More generally, we define the general \emph{configuration space} of $\AAA$ as $\Config(\AAA) = \bigcup_{n = 1}^\infty \Config^n(\AAA)$. A \emph{pattern}, or \emph{configuration} on $\AAA$  a subset of $\Config(\AAA)$.
 
 Our main focus in this thesis is the \emph{pattern avoidance problem}. For a fixed configuration $\C$ on $\AAA$, we say a set $X \subset \AAA$ \emph{avoids} $\C$ if $\Config(X)$ is disjoint from $\C$. The pattern avoidance problem asks to find sets $X$ of maximal size avoiding a fixed configuration $\C$. Often $\C$ describes algebraic or geometric structure, and the pattern avoidance problem asks to find the maximal size of a set before it is guaranteed to have such structure.
 
@@ -60,7 +60,7 @@ Depending on the structure of the ambient space $\AAA$ and the configuration $\C
 	\item If $\AAA = \RR^d$, but $\C$ is a discrete configuration, then a satisfactory goal is to find a set $X$ with large Lebesgue measure avoiding $\C$.
 \end{itemize}
 %
-In this thesis, inspired by results in these three settings, we establish methods for avoiding non-discrete configurations $\C$ in $\RR^d$. Here, Lebesgue measure completely fails to measure the size of pattern avoiding solutions, as the next theorem shows, under the often true assumption that $\C$ is \emph{translation invariant}, i.e. that if $(a_1, \dots, a_n) \in \C$ and $b \in \RR^d$, $(a_1 + b, \dots, a_n + b) \in \C$.
+In this thesis, inspired by results in the three discrete setting above, we establish methods for avoiding non-discrete configurations $\C$ in $\RR^d$. Here, Lebesgue measure completely fails to measure the size of pattern avoiding solutions, as the next theorem shows, under the often true assumption that $\C$ is \emph{translation invariant}, i.e. that if $(a_1, \dots, a_n) \in \C$ and $b \in \RR^d$, $(a_1 + b, \dots, a_n + b) \in \C$.
 
 \begin{theorem}
 	Let $\C$ be a $n$-point configuration on $\RR^d$. Suppose
@@ -105,9 +105,9 @@ In this thesis, inspired by results in these three settings, we establish method
 
 % TO DO: SWAPPING THIS RESULT FOR A DENSITY RESULT, IF WE CAN OBTAIN IT.
 
-Since no set of positive Lebesgue measure can avoid non-discrete configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets for many non-discrete configurations. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set.
+Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set.
 
-There are many variants of fractional dimension. Here we choose to use the Minkowski dimension and the Hausdorff dimension. They assign the same dimension to any smooth manifold, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
+There are many variants of fractional dimension. Here we choose to use the Minkowski dimension, and the Hausdorff dimension. They assign the same dimension to any smooth manifold, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
 %The Fourier dimension is a refinement of the Hausdorff dimension which gives greater control on the set when viewed `in the frequency domain', and therefore gives additional structural information on sets.
 
 
@@ -134,10 +134,10 @@ If $\upminkdim(E) = \lowminkdim(E)$, then we refer to this common quantity as th
 	In particular, $\lowminkdim(E) < s$ if and only if there exists a sequence of lengths $\{ r_k \}$ such that $E$ is covered by $(1/r_k)^s$ radius $r_k$ \emph{balls}, and $\upminkdim(E) < s$ if and only if $E$ is covered by $(1/r)^s$ radius $r$ \emph{balls}, for any suitably small $r > 0$.
 \end{remark}
 
-It is often easy to upper bound the Minkowski dimension of a set, simply by providing a cover of the set and counting the number of cubes that cover it. We now provide an example. We say a set $S \subset \RR^d$ is an $s$ dimensional \emph{Lipschitz manifold} if there exists a family of bounded, open subsets $\{ U_\alpha \}$ of $\RR^s$, together with a family of bi-Lipschitz maps $\{ f_\alpha: U_\alpha \to S \}$, such that the sets $\{ f_\alpha(U_\alpha) \}$ form a relatively open cover of $S$. Every $C^1$ manifold in $\RR^d$ is a Lipschitz manifold. This example proves useful in Chapter \ref{ch:RoughSets}.
+It is often easy to upper bound the Minkowski dimension of a set, simply by providing a cover of the set and counting the number of cubes that cover it. Let us now consider an example. We say a set $S \subset \RR^d$ is an $s$ dimensional \emph{Lipschitz manifold} if there exists a family of bounded, open subsets $\{ U_\alpha \}$ of $\RR^s$, together with a family of bi-Lipschitz maps $\{ f_\alpha: U_\alpha \to S \}$, such that the sets $\{ f_\alpha(U_\alpha) \}$ form a relatively open cover of $S$. Every $C^1$ manifold in $\RR^d$ is a Lipschitz manifold. This example proves useful in Chapter \ref{ch:RoughSets}.
 
 \begin{theorem} \label{ManifoldDimensionThm}
-	Let $S \subset \RR^d$ be a \emph{Lipschitz manifold} of dimension $s$, and let $K$ be a compact subset of $S$. Then $\upminkdim(K) \leq s$.
+	Let $S \subset \RR^d$ be a Lipschitz manifold of dimension $s$. Then for any compact set $K \subset S$, $\upminkdim(K) \leq s$.
 \end{theorem}
 \begin{proof}
 	Since $K$ is compact, we can find finitely many bi-Lipschitz maps $f_1, \dots, f_N$ such that the family $\{ f_i(U_i) : 1 \leq i \leq N \}$ covers $K$. Then there is $C$ such that for each $i$, if $x,y \in U_i$,
@@ -148,7 +148,7 @@ It is often easy to upper bound the Minkowski dimension of a set, simply by prov
 	%
 	\[ \{ f_i(x_{i,j}) : 1 \leq i \leq N, 1 \leq j \leq M_i \} \]
 	%
-	cover $K$, and there are $\sum_{i = 1}^N M_i \lesssim N/(Cr)^s = (N/C^s) / r^s$ such balls. Since $C$ and $N$ are independent of $r$, and $r > 0$ was arbitrary, this shows $\upminkdim(K) \leq s$.
+	cover $K$, and there are $\sum_{i = 1}^N M_i \lesssim (N/C^s) r^{-s}$ such balls. Since $C$ and $N$ are independent of $r$, and $r > 0$ was arbitrary, this shows $\upminkdim(K) \leq s$.
 \end{proof}
 
 \section{Hausdorff Dimension}
@@ -178,11 +178,11 @@ The majority of Borel sets which occur in practice fail to be measurable with re
 \begin{proof}
 	Suppose that $H^t(E) = A < \infty$. Then for any $\delta > 0$, there is a cover of $E$ by a collection of intervals $\{ Q_k \}$, such that $l(Q_k) \leq \delta$ for each $k$, and
 	%
-	\[ \sum l(Q_k)^t \leq A < \infty. \]
+	\[ \sum_{k = 1}^\infty l(Q_k)^t \leq A < \infty. \]
 	%
 	But then
 	%
-	\[ H^s_\delta(E) \leq \sum l(Q_k)^s \leq \sum l(Q_k)^{s-t} l(Q_k)^t \leq \delta^{s-t} A. \]
+	\[ H^s_\delta(E) \leq \sum_{k = 1}^\infty l(Q_k)^s \leq \sum_{k = 1}^\infty l(Q_k)^{s-t} l(Q_k)^t \leq \delta^{s-t} A. \]
 	%
 	As $\delta \to 0$, we conclude $H^s(E) = 0$, proving \emph{(i)}. And \emph{(ii)} is just the contrapositive of (i), and therefore immediately follows.
 \end{proof}
@@ -204,11 +204,11 @@ Given any Borel set $E$, Corollary \ref{corollaryhausdorffzero}, combined with L
 	For any bounded set $E$, $\hausdim(E) \leq \lowminkdim(E) \leq \upminkdim(E)$.
 \end{theorem}
 \begin{proof}
-	Given $l > 0$, we have a simple bound $H^s_l(E) \leq N(l,E) \cdot l^s$. If $\lowminkdim(E) < s$, then there exists a sequence $\{ l_k \}$ with $l_k \to 0$, and $N(l_k,E) \leq (1/l_k)^s$. Thus we conclude that
+	Given $l > 0$, we have a simple bound $H^s_l(E) \leq N(l,E) \cdot l^s$. If $\lowminkdim(E) < s$, then there exists a sequence $\{ l_k \}$ with $l_k \to 0$, and $N(l_k,E) \leq (1/l_k)^s$. We conclude that
 	%
 	\[ H^s(E) = \lim_{k \to \infty} H^s_{l_k}(E) \leq \lim_{k \to \infty} N(l_k,E) \cdot l_k^s \leq 1, \]
 	%
-	Thus $\hausdim(E) \leq s$. Taking infima over all $s$, we find $\hausdim(E) \leq \lowminkdim(E)$.
+	Thus Lemma \ref{HausdorffBoundary} implies $\hausdim(E) \leq s$. Taking infima over all $s > \lowminkdim(E)$ shows $\hausdim(E) \leq \lowminkdim(E)$.
 \end{proof}
 
 \begin{remark}
@@ -241,7 +241,7 @@ This notion of dimension, in a disguised form, appears in Chapter \ref{ch:RoughS
 
 \section{Dyadic Scales} \label{sec:Dyadics}
 
-It is now useful to introduce the dyadic notation we utilize throughout this thesis. At the cost of losing topological perspective about $\RR^d$, applying dyadic techniques often allows us to elegantly discretize certain problems in Euclidean space.
+It is now useful to introduce the dyadic notation we utilize throughout this thesis. At the cost of losing access to the continuous structure of $\RR^d$, applying dyadic techniques often allows us to elegantly discretize problems in Euclidean space.
 
 Fix an integer $N$. The classic family of dyadic cubes with \emph{branching factor} $N$ is given by setting, for each integer $k \geq 0$,
 %
@@ -271,10 +271,10 @@ and then setting $\DD^d = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD^d$ are k
 %
 Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidelength, from the perspective of geometric measure theory, working with dyadic cubes is normally equivalent to working with the class of all cubes.
 
-Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedurew. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
+Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedure. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
 
 \begin{example}
-	A classic fractal-type set is the Cantor set $C$. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
+	Let us construct the Cantor set $C$ as a fractal-type set. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
 	%
 	\[ C_{k+1} = \bigcup \{ I_1 \cup I_3 : I \in \DD_k^1(C_k) \}. \]
 	%
@@ -478,62 +478,70 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 \end{comment}
 
 \begin{theorem}[Mass Distribution Principle] \label{massdistributionprinciplelem}
-	Let $f: \DQ^d \to [0,\infty)$ be a function such that for any $Q_0 \in \DQ^d$,
+	Let $w: \DQ^d \to [0,\infty)$ be a function such that for any $Q_0 \in \DQ^d$,
 	%
-	\begin{equation} \label{equation73234091} \sum_{Q^* = Q_0} f(Q) = f(Q_0), \end{equation}
+	\begin{equation} \label{equation73234091} \sum_{Q^* = Q_0} w(Q) = w(Q_0), \end{equation}
 	%
 	Then there exists a regular Borel measure $\mu$ supported on
 	%
-	\[ \bigcap_{k = 1}^\infty \left[ \bigcup \{ Q \in \DQ_k^d : f(Q) > 0 \} \right] \]
+	\[ \bigcap_{k = 1}^\infty \left[ \bigcup \{ Q \in \DQ_k^d : w(Q) > 0 \} \right], \]
 	%
 	such that for each $Q \in \DQ^d$,
 	%
-	\begin{equation} \label{massdissupperbound} \mu(Q^\circ) \leq f(Q) \leq \mu(Q), \end{equation}
+	\begin{equation} \label{massdissupperbound} \mu(Q^\circ) \leq w(Q) \leq \mu(Q), \end{equation}
 	%
-	and for any set $E$ and $k \geq 0$,
+	and for any set $E$ and $k \geq 0$, if $\mathcal{E}_k = \DQ_k(E(l_k))$, then
 	%
-	\begin{equation} \label{massdisslowerbound} \mu(E) \leq \sum \left\{ f(Q) : Q \in \DQ^d_k(E(l_k)) \right\}. \end{equation}
+	\begin{equation} \label{massdisslowerbound} \mu(E) \leq \sum_{Q \in \mathcal{E}_k} w(Q). \end{equation}
 \end{theorem}
 \begin{proof}
-	For each $i$, let $\mu_i$ be a regular Borel measure such that for each $j \leq i$, and $Q \in \DQ_j^d$, $\mu_i(Q) = \mu_i(Q^\circ) = f(Q)$. One such choice is given, for each $f \in C_c(\RR^d)$, by the equation
+	For each $i$, let $\mu_i$ be a regular Borel measure such that for each $j \leq i$, and $Q \in \DQ_j^d$, $\mu_i(Q) = \mu_i(Q^\circ) = w(Q)$. One such choice is given, for each $\varphi \in C_c(\RR^d)$, by the equation
 	%
-	\[ \int f d\mu_i = \sum_{Q \in \DQ_i^d} \frac{f(Q)}{|Q|} \int_Q f\; dx. \]
+	\[ \int \varphi d\mu_i = \sum_{Q \in \DQ_i^d} \frac{w(Q)}{|Q|} \int_Q \varphi\; dx. \]
 	%
-	We claim that $\{ \mu_i \}$ is a Cauchy sequence in the space of all regular Borel measures on $\RR^d$, viewing the space as a locally convex space under the weak topology. Fix $\varphi \in C_c(\RR^d)$, and choose some $N$ such that $\varphi$ is supported on $[-N,N]^d$. Set $Q_0 = [-N,N]^d$. Since $\varphi$ is compactly supported, $\varphi$ is \emph{uniformly continuous}, so for each $\varepsilon > 0$, if $i$ is suitably large, there is a sequence of values $\{ a_Q : Q \in \DQ_i^d(Q_0) \}$ such that if $x \in Q$, $|\varphi(x) - a_Q| \leq \varepsilon$. But this means that
+	We claim that $\{ \mu_i \}$ is a Cauchy sequence. Fix $\varphi \in C_c(\RR^d)$, and choose some $N$ such that $\varphi$ is supported on $[-N,N]^d$. Set $Q' = [-N,N]^d$, and for each $i$, set $\mathcal{Q}'_i = \DQ_i(Q')$. Since $\varphi$ is compactly supported, $\varphi$ is \emph{uniformly continuous}, so for each $\varepsilon > 0$, if $i$ is suitably large, there is a sequence of values $\{ a_Q : Q \in \DQ_i^d(Q') \}$ such that if $x \in Q$, $|\varphi(x) - a_Q| \leq \varepsilon$. But this means
 	%
-	\[ \sum (a_Q - \varepsilon) \mathbf{I}_Q \leq \varphi \leq \sum (a_Q + \varepsilon) \mathbf{I}_Q, \]
+	\[ \sum_{Q \in \mathcal{Q}'_i} (a_Q - \varepsilon) \mathbf{I}_Q \leq \varphi \leq \sum_{Q \in \mathcal{Q}'_i} (a_Q + \varepsilon) \mathbf{I}_Q. \]
 	%
-	where $Q$ ranges over cubes in $\DQ_i^d(Q_0)$. Thus for any $j \geq i$,
+	Thus for any $j \geq i$,
 	%
-	\[ \int \varphi\; d\mu_j\leq \sum (a_Q + \varepsilon) \mu_j(Q) = \sum (a_Q + \varepsilon) f(Q) \]
+	\[ \int \varphi\; d\mu_j\leq \sum_{Q \in \mathcal{Q}'_i} (a_Q + \varepsilon) \mu_j(Q) = \sum_{Q \in \mathcal{Q}'_i} (a_Q + \varepsilon) w(Q) \]
 	%
 	and
 	%
-	\[ \int \varphi\; d\mu_j \geq \sum (a_Q - \varepsilon) \mu_j(Q) = \sum (a_Q - \varepsilon) f(Q). \]
+	\[ \int \varphi\; d\mu_j \geq \sum_{Q \in \mathcal{Q}'_i} (a_Q - \varepsilon) \mu_j(Q) = \sum_{Q \in \mathcal{Q}'_i} (a_Q - \varepsilon) w(Q). \]
 	%
 	In particular, if $j,j' \geq i$,
 	%
-	\[ \left| \int \varphi d\mu_j - \int \varphi d\mu_{j'} \right| \leq 2 \varepsilon \sum_{Q \in \DQ_i(Q_0)} f(Q) = 2\varepsilon \sum_{Q \in \DQ_0(Q_0)} f(Q). \]
+	\[ \left| \int \varphi d\mu_j - \int \varphi d\mu_{j'} \right| \leq 2 \varepsilon \sum_{Q \in \mathcal{Q}'_i} w(Q). \]
 	%
-	Since $\varepsilon$ and $\varphi$ were arbitrary, this shows $\{ \mu_i \}$ is Cauchy.
+	Repeated applications of \eqref{equation73234091} show that
+	%
+	\[ \sum_{Q \in \mathcal{Q}'_i} w(Q) = \sum_{Q \in \mathcal{Q}'_0} w(Q), \]
+	%
+	which is therefore bounded independently of $i$. Since $\varepsilon$ and $\varphi$ were arbitrary, this shows $\{ \mu_i \}$ is Cauchy.
 
-	Applying Lemma \ref{weakstarcompleteness}, there exists a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly. For any $Q \in \DQ^d$, since $Q$ is a closed set,
+	Applying Lemma \ref{weakstarcompleteness}, we find a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly. For any $Q \in \DQ^d$, since $Q$ is a closed set,
 	%
-	\[ \mu(Q) \geq \limsup_{i \to \infty} \mu_i(Q) = f(Q). \]
+	\[ \mu(Q) \geq \limsup_{i \to \infty} \mu_i(Q) = w(Q), \]
 	%
-	Conversely, if $E$ is an arbitrary set, then $E \subset E(l_i)^\circ$ for any $i$, so
+	and since $Q^\circ$ is an open set,
 	%
-	\[ \mu(E) \leq \liminf_{i \to \infty} \mu_i(E(l_i)^\circ) \leq \liminf_{i \to \infty} \mu_i(E(l_i)) = \sum f(Q), \]
+	\[ \mu(Q^\circ) \leq \liminf_{i \to \infty} \mu_i(Q^\circ) = w(Q). \]
 	%
-	where $Q$ ranges over the cubes in $\DQ_i^d(E(l_i))$.
+	This establishes \eqref{massdissupperbound}. Conversely, if $E$ is arbitrary, then $E \subset E(l_i)^\circ$ for any $i$, so if $\mathcal{E}_i = \DQ_i(E(l_i))$, then
+	%
+	\[ \mu(E) \leq \liminf_{i \to \infty} \mu_i(E(l_i)^\circ) \leq \liminf_{i \to \infty} \mu_i(E(l_i)) = \sum_{Q \in \mathcal{E}_i} w(Q). \]
+	%
+	This establishes \eqref{massdisslowerbound}.
 \end{proof}
 
 \begin{remark}
-	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $f$ is that in the weak limit, mass from cubes can `leak' into the mass of adjacent cubes. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. If, for each $Q_0 \in \DQ^d$,
+	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $w$ is that in the weak limit, mass from cubes can `leak' into the mass of adjacent cubes. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the result is still a `mass distribution' result. It just means that the mass specified by $w$ may be shared by adjacent cubes in the weak limit. If, for each $Q' \in \DQ^d$,
 	%
-	\[ \lim_{k \to \infty} \sum \{ f(Q) : Q \in \DQ^d_k(Q_0(l_k)) - \DQ^d_k(Q_0) \} = 0, \]
+	\[ \lim_{k \to \infty} \sum_{Q \in \mathcal{Q}'_k} w(Q) = 0, \]
 	%
-	then \eqref{massdissupperbound} and \eqref{massdisslowerbound} actually satisfies $\mu(Q) = f(Q)$ for all $Q \in \DQ$, so $\mu$ gives an extension of $f$. One such condition that guarantees this is that $f(Q) \lesssim l(Q)^s$ for some $s > d-1$. Another is that for any $k$, and for any two cubes $Q_0, Q_1 \in \DQ_k^d$ with $Q_0 \cap Q_1 \neq \emptyset$, either $f(Q_0) = 0$ or $f(Q_1) = 0$. If $f$ does not satisfy such a bound, however, then mass from cubes can `leak' into the mass of adjacent cubes if the measure is suitably concentrated at the boundary. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the proof still is a `mass distribution', it just means that the mass may be shared by adjacent cubes.
+	where $\mathcal{Q}'_k = \DQ_k(Q'(l_k)) - \DQ_k(Q')$, then \eqref{massdissupperbound} and \eqref{massdisslowerbound} together imply we actually have $\mu(Q) = w(Q)$ for all $Q \in \DQ$. Thus $\mu$ is a measure extending $w$. One such condition that guarantees this is that $w(Q) \lesssim l(Q)^s$ for some $s > d-1$. Another is that for any $k \geq 0$, and distinct $Q_0, Q_1 \in \DQ_k^d$ with $Q_0 \cap Q_1 \neq \emptyset$, either $w(Q_0) = 0$ or $w(Q_1) = 0$.
 \end{remark}
 
 %\begin{lemma}
@@ -563,23 +571,31 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\[ \mu(F) \leq \sum_{k = 1}^\infty \mu(Q_k) \lesssim \sum_{k = 1}^\infty l(Q_k)^s \leq \varepsilon. \]
 	%
-	Taking $\varepsilon \to 0$, we conclude $\mu(F) = 0$. Thus $\mu$ is absolutely continuous with respect to $H^s$. Taking the contrapositive of what we just proved, since $\mu(E) > 0$, this means that $H^s(E) > 0$.
+	Taking $\varepsilon \to 0$, we conclude $\mu(F) = 0$. Thus $\mu$ is absolutely continuous with respect to $H^s$. Since $\mu(E) > 0$, this means that $H^s(E) > 0$.
 
-	To prove the converse, we will suppose for simplicity that $E$ is compact. We work dyadically with the classical family of dyadic cubes $\DD$.  By translating, we may assume that $H^s(E \cap [0,1]^d) > 0$, and so without loss of generality we may assume $E \subset [0,1]^d$. For each $Q \in \DD_k^d$, define $f^+(Q) = H^s_\infty(E \cap Q)$. Then $f^+(Q) \leq 1/2^{ks}$, and $f^+$ is subadditive. We try and define a function $f$ to which we can apply Theorem \ref{massdistributionprinciplelem}. We initially define $f$ by setting $f([0,1]^d) = f^+([0,1]^d)$. Given $Q \in \DD_k^d$, we enumerate it's children as $Q_1, \dots, Q_M \in \DD_{k+1}^d$. We then consider any values $A_1, \dots, A_M \geq 0$ such that
+	To prove the converse, we will suppose for simplicity that $E$ is compact. We work dyadically with the classical family of dyadic cubes $\DD$, with branching factor $N = 2$.  By translating, we may assume that $H^s(E \cap [0,1]^d) > 0$, and so without loss of generality we may assume $E \subset [0,1]^d$. For each $Q \in \DD^d$, define $w^+(Q) = H^s_\infty(E \cap Q)$. Then
+	%
+	\begin{equation} \label{equation7099014901209} w^+(Q) \leq l(Q)^s, \end{equation}
+	%
+	and $w^+$ is subadditive. We now recursively define a function $w$ such that for any $Q \in \DQ^d$, \eqref{equation73234091} and
+	%
+	\begin{equation} \label{equation104-240-640954} w(Q) \leq w^+(Q), \end{equation}
+	%
+	are satisfied at each stage of the definition of $w$. We initially define $w$ by setting $w([0,1]^d) = w^+([0,1]^d)$. Given $Q \in \DD_k^d$, we enumerate it's children as $Q_1, \dots, Q_M \in \DD_{k+1}^d$. We then consider any values $A_1, \dots, A_M \geq 0$ such that
 	%
   	\begin{equation} \label{equation3424209034}
-  		A_1 + \dots + A_M = f(Q),
+  		A_1 + \dots + A_M = w(Q),
   	\end{equation}
   	%
   	and for each $k$,
   	%
   	\begin{equation} \label{equation12039123012}
-  		A_k \leq f^+(Q_k).
+  		A_k \leq w(Q_k).
   	\end{equation}
 	%
-	This is feasible to do because $f^+(Q_1) + \dots + f^+(Q_M) \geq f^+(Q)$. We then define $f(Q_k) = A_k$ for each $k$. Equation \eqref{equation3424209034} implies the recursive constraint is satisfied, so $f$ is a well defined function. Furthermore, \eqref{equation3424209034} implies \eqref{equation73234091} of Lemma \ref{massdistributionprinciplelem}, and so the mass distribution principle implies that there exists a measure $\mu$ supported on $E$, satisfying \eqref{massdisslowerbound} and \eqref{massdissupperbound}. In particular, \eqref{massdisslowerbound} implies $\mu$ is non-zero. For each $Q \in \DD_k^d$, $\#[\DD_k^d(Q(l_k))] = 3^d = O_d(1)$, so we can apply \eqref{massdissupperbound} to conclude
+	This is feasible to do because $w^+(Q_1) + \dots + w^+(Q_M) \geq w^+(Q)$, and \eqref{equation104-240-640954} holds for the previous definition of $w$. We then define $w(Q_k) = A_k$ for each $k$. Equation \eqref{equation3424209034} implies \eqref{equation73234091} holds for this new set of definitions, and \eqref{equation12039123012} implies \eqref{equation104-240-640954} holds. Thus $w$ is a well defined function. Furthermore, \eqref{equation3424209034} implies \eqref{equation73234091} of Lemma \ref{massdistributionprinciplelem}, and so the mass distribution principle gives the existence of a measure $\mu$ supported on $E$, satisfying \eqref{massdisslowerbound} and \eqref{massdissupperbound}. In particular, \eqref{massdisslowerbound} implies $\mu$ is non-zero. For each $Q' \in \DD_k^d$, $\#[\DD_k^d(Q(l_k))] = 3^d = O_d(1)$, so if we define $\mathcal{Q}' = \DD_k^d(Q(l_k))$, then \eqref{massdissupperbound}, \eqref{equation7099014901209}, and \eqref{equation104-240-640954} imply
 	%
-	\[ \mu(Q) \lesssim_d \max f(Q') \leq 1/2^{ks} = l(Q)^s. \]
+	\[ \mu(Q') \lesssim_d \max_{Q \in \mathcal{Q}'} w^+(Q) \leq 1/2^{ks} = l(Q)^s. \]
 	%
 	where $Q'$ ranges over the cubes in $\DD_k^d(Q(l_k))$. Given any cube $Q$, we find $k$ with $1/2^{k-1} \leq l(Q) \leq 1/2^k$. Then $Q$ is covered by $O_d(1)$ dyadic cubes in $\DD_k^d$, and so $\mu(Q) \lesssim l(Q)^s$. Thus $\mu$ is a Frostman measure of dimension $s$.
 \end{proof}
@@ -724,7 +740,7 @@ Later on, we will use two important principles to calculate the Fourier transfor
 
 \section{Dyadic Fractional Dimension}
 
-It is often natural for us to establish results about fractional dimension `dyadically', working with the family of cubes $\DQ^d$. $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
+It is often natural for us to establish results about fractional dimension `dyadically', working with the family of cubes $\DQ^d$ and branching factors $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
 
 \begin{lemma} \label{comparableCovers}
 	For any set $E$,
@@ -932,7 +948,11 @@ then the values $\{ l_k \}$ are referred to as \emph{hyperdyadic}. The next (cou
 %
 %and define the Hausdorff dimension correspondingly. A natural question is whether $\dim(\pi(E)) = \dim(E)$ for the various fractal dimensions we consider in this thesis. This is addressed in the next section.
 
-We now move on to calculating Hausdorff dimension dyadically. The natural quantity to consider is the measure defined for any set $E$ as $H^s_{\DQ}(E) = \lim_{m \to \infty} H^s_{\DQ,m}(E)$, where
+We now move on to calculating Hausdorff dimension dyadically. The natural quantity to consider is the measure defined for any set $E$ as
+%
+\[ H^s_{\DQ}(E) = \lim_{m \to \infty} H^s_{\DQ,m}(E), \]
+%
+where
 %
 \[ H^s_{\DQ,m}(E) = \inf \left\{ \sum_k l(Q_k)^s : E \subset \bigcup_k^\infty Q_k,\ Q_k \in \bigcup_{i \geq m} \DQ_i^d\ \text{for each $k$} \right\}. \]
 %
@@ -966,11 +986,11 @@ Finally, we consider computing whether we can establish that a measure is a Fros
 	\[ \mu(Q) \lesssim_d l_k^s = [(l_k/l)^s l^\varepsilon ] l^{s - \varepsilon} \leq [l_k^{s + \varepsilon} / l_{k+1}^s] l^{s - \varepsilon} = \left[ \frac{N_{k+1}^s}{(N_1 \dots N_k)^\varepsilon} \right] l^{s-\varepsilon} \lesssim_\varepsilon l^{s-\varepsilon}. \qedhere \]
 \end{proof}	
 
-Let's recognize the utility of this approach from the perspective of a dyadic construction. Suppose we have a sequence of nested sets $\{ E_k \}$, where $E_k$ is a $\DQ_k$ discretized subset of $[0,1]^d$, and for each $Q_0 \in \DQ_k(E_k)$, there is at least one cube $Q \in \DQ_{k+1}(E_{k+1})$ with $Q^* = Q_0$. Then we can set $E = \bigcap E_k$ as a `limit' of the discretizations $E_k$. We can associate with this construction a finite measure $\mu$. It is defined by setting $f([0,1]^d) = 1$, and setting, for each $Q \in \DQ_{k+1}(E_{k+1})$,
+Let's recognize the utility of this approach from the perspective of a dyadic construction. Suppose we have a sequence of nested sets $\{ E_k \}$, where $E_k$ is a $\DQ_k$ discretized subset of $[0,1]^d$, and for each $Q_0 \in \DQ_k(E_k)$, there is at least one cube $Q \in \DQ_{k+1}(E_{k+1})$ with $Q^* = Q_0$. Then we can set $E = \bigcap E_k$ as a `limit' of the discretizations $E_k$. We can associate with this construction a finite measure $\mu$ supported on $E$. It is defined by the mass distribution principle with respect to a funciton $w: \DQ^d \to [0,\infty)$. We set $w([0,1]^d) = 1$, and for each $Q \in \DQ_{k+1}(E_{k+1})$, set
 %
-\[ f(Q) = \frac{f(Q^*)}{\# \{ Q' \in \DQ_{k+1}(E_{k+1}) : (Q')^* = Q^* \}}. \]
+\[ w(Q) = \frac{w(Q^*)}{\# \{ Q' \in \DQ_{k+1}(E_{k+1}) : (Q')^* = Q^* \}}. \]
 %
-The mass distribution principle then gives a Borel measure $\mu$, which we refer to as the \emph{canonical measure} associated with this construction. For this measure, it is often easy to show from a combinatorial argument that $f(Q) \lesssim l(Q)^s$ if $Q \in \DQ^d$, which also implies $\mu(Q) \lesssim l(Q)^s$ for $Q \in \DQ^d$. This makes Theorem \ref{easyCoverTheorem} useful.
+The mass distribution principle then gives a Borel measure $\mu$, which we refer to as the \emph{canonical measure} associated with this construction. For this measure, it is often easy to show from a combinatorial argument that $w(Q) \lesssim l(Q)^s$ if $Q \in \DQ^d$, which together with \eqref{massdissupperbound} also implies $\mu(Q) \lesssim l(Q)^s$ for $Q \in \DQ^d$. This makes Theorem \ref{easyCoverTheorem} useful.
 
 \begin{remark}
 	The dyadic construction showing that Minkowski dimension cannot be measured only at hyperdyadic scales also shows that a bound on a measure $\mu$ on hyperdyadic cubes does not imply the correct bound at all scales. It is easy to show from \eqref{equation12623} that the canonical measure $\mu$ for this example satisfies, for each $k$, each $Q \in \DQ_k(E_k)$, and each $\varepsilon > 0$,
@@ -1002,7 +1022,7 @@ If we use a faster increasing sequence of branching factors than that satisfying
 	Then $\mu$ is a Frostman measure of dimension $s$.
 \end{lemma}
 \begin{proof}
-	We establish the general bound $\mu(Q) \lesssim l(Q)^s$ for all cubes $Q$ by separating into two different cases:
+	We establish the general bound $\mu(Q) \lesssim l(Q)^s$ for all cubes $Q$ by separating our analysis into two different cases:
 	%
 	\begin{itemize}
 		\item Suppose there is $k$ with $r_{k+1} \leq l(Q) \leq l_k$. Then $\#(\DR_{k+1}^d(Q(r_{k+1}))) \lesssim (l/r_{k+1})^d$. Properties \ref{discreteBound} and \ref{uniformDist} imply each of these cubes has measure at most $O( (r_{k+1}/l_k)^d l_k^s)$, so we obtain that
@@ -1014,7 +1034,7 @@ If we use a faster increasing sequence of branching factors than that satisfying
     \[ \mu(Q) \lesssim l_k^s \leq l^s. \]
 	\end{itemize}
 	%
-	This addresses all cases, so $\mu$ is a Frostman measure of dimension $s$.
+	We have addressed all cases, so $\mu$ is a Frostman measure of dimension $s$.
 \end{proof}
 
 This theorem is commonly used here when dealing with multi-scale dyadic fractal constructions, whose character is summarized in the following Theorem.
@@ -1023,7 +1043,7 @@ This theorem is commonly used here when dealing with multi-scale dyadic fractal 
 	let $E = \bigcap E_k$, where $\{ E_k \}$ is a nested family of subsets of $\RR^d$, such that $E_k$ is $\DQ_k$ discretized for each $k$. Suppose that 
 	%
 	\begin{enumerate}
-		\item \label{SingleSelection} For each $Q \in \DQ_k(E_k)$, there exists a set $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that $\#(\mathcal{R}_Q) \geq (1/2) \cdot \#(\DR_{k+1}(Q))$ such that
+		\item \label{SingleSelection} For each $Q \in \DQ_k(E_k)$, there exists a set $\mathcal{R}_Q \subset \DR_{k+1}(Q)$ such that $\#(\mathcal{R}_Q) \geq (1/2) \cdot \#(\DR_{k+1}(Q))$, and
 		%
 		\[ \# \left( \DQ_{k+1}(R \cap E_{k+1}) \right) = \begin{cases} 1 & : R \in \mathcal{R}_Q, \\ 0 & : R \not \in \mathcal{R}_Q. \end{cases} \]
 
@@ -1034,24 +1054,29 @@ This theorem is commonly used here when dealing with multi-scale dyadic fractal 
 	%
 	Then $E$ has Hausdorff dimension $sd$.
 \end{theorem}
+
+\begin{remark}
+	Note that Property \ref{RapidDecrease} is essentially the opposite of \eqref{definingsequencegrowthrate}.
+\end{remark}
+
 \begin{proof}
-	Consider the function $f: \DQ^d \to [0,\infty)$ defined with respect to the sequence $\{ E_k \}$, which generates the canonical measure $\mu$ supported on $E$ using the mass distribution principle. For each $R \in \DR_{k+1}(E_k)$ with parent cube $Q \in \DQ_k(E_k)$, Property \ref{SingleSelection} shows
+	Consider the function $w: \DQ^d \to [0,\infty)$ defined with respect to the sequence $\{ E_k \}$, which generates the canonical measure $\mu$ supported on $E$ using the mass distribution principle. For each $R \in \DR_{k+1}(E_k)$ with parent cube $Q \in \DQ_k(E_k)$, Property \ref{SingleSelection} shows
 	%
-	\begin{equation} \label{equation6250234923} f(R) \leq (2/M_{k+1}^d) f(Q). \end{equation}
+	\begin{equation} \label{equation6250234923} w(R) \leq (2/M_{k+1}^d) f(Q). \end{equation}
 	%
-	Properties \ref{RapidDecrease} and \ref{ChangeofScales} imply that for each $\varepsilon > 0$,
+	Properties \ref{RapidDecrease} and \ref{ChangeofScales} together imply that for each $\varepsilon > 0$,
 	%
 	\begin{equation} \label{equation363491043214} 1/M_{k+1} \lesssim_\varepsilon r_{k+1}^{1 - \varepsilon} \lesssim_\varepsilon l_{k+1}^{s(1  - 2 \varepsilon)}. \end{equation}
 	%
-	If $Q \in \DQ_{k+1}(E_{k+1})$ has parent cubes $R \in \DR_{k+1}(E_k)$ and $Q^* \in \DQ_k(E_k)$, then by \eqref{equation6250234923}, \eqref{equation363491043214}, and the fact that $f(Q^*) \leq 1$,
+	If $Q \in \DQ_{k+1}(E_{k+1})$ has parent cubes $R \in \DR_{k+1}(E_k)$ and $Q^* \in \DQ_k(E_k)$, then by \eqref{equation6250234923}, \eqref{equation363491043214}, and the fact that $w(Q^*) \leq 1$,
 	%
-	\begin{equation} \label{equation120492309562} f(Q) = f(R) \leq (2/M_{k+1}^d) f(Q^*) \leq (2/M_{k+1}^d) \lesssim_{\varepsilon} l_{k+1}^{ds(1 - 2\varepsilon)}. \end{equation}
+	\begin{equation} \label{equation120492309562} w(Q) = w(R) \leq (2/M_{k+1}^d) w(Q^*) \leq (2/M_{k+1}^d) \lesssim_{\varepsilon} l_{k+1}^{ds(1 - 2\varepsilon)}. \end{equation}
 	%
 	If $Q$ is a cube with length $l_k$, then $\#(\DQ_k^d(Q(l_k))) = O_d(1)$, which combined with \eqref{massdisslowerbound}, shows that
 	%
 	\begin{equation} \label{equation69009230919} \mu(Q) \lesssim_\varepsilon l_{k+1}^{ds(1-2\varepsilon)}. \end{equation}
 	%
-	Property \ref{controlledScale} of Lemma \ref{uniformMassFrostman} is implied by Property \ref{SingleSelection}.  Equation \eqref{equation69009230919} is a form of Property \ref{discreteBound} in Lemma \ref{uniformMassFrostman}. Together with \eqref{massdisslowerbound}, \eqref{equation6250234923} implies that the canonical measure $\mu$ satisfies Property \ref{uniformDist} of Lemma \ref{uniformMassFrostman}. Thus all assumptions of Lemma \ref{uniformMassFrostman} are satisfied, and so we conclude $\mu$ is a Frostman measure of dimension $ds(1 - 2\varepsilon)$ for each $\varepsilon > 0$. Taking $\varepsilon \to 0$, and applying Frostman's lemma, we conclude that the Hausdorff dimension of the support of $\mu$, which is a subset of $E$, is greater than or equal to $ds$. For each $k$, we find that for each $\varepsilon > 0$,
+	Property \ref{controlledScale} of Lemma \ref{uniformMassFrostman} is implied by Property \ref{SingleSelection}.  Equation \eqref{equation69009230919} is a form of Property \ref{discreteBound} in Lemma \ref{uniformMassFrostman}. Together with \eqref{massdisslowerbound}, \eqref{equation6250234923} implies that the canonical measure $\mu$ satisfies Property \ref{uniformDist} of Lemma \ref{uniformMassFrostman}. Thus all assumptions of Lemma \ref{uniformMassFrostman} are satisfied, and so we conclude $\mu$ is a Frostman measure of dimension $ds(1 - 2\varepsilon)$ for each $\varepsilon > 0$. Taking $\varepsilon \to 0$, and applying Frostman's lemma, we conclude that the Hausdorff dimension of the support of $\mu$, which is a subset of $E$, is greater than or equal to $ds$. For each $k$, and $\varepsilon > 0$,
 	%
 	\[ \#(\DQ_{k+1}(E_{k+1})) \leq \#(\DR_{k+1}(E_k)) \leq (1/M_{k+1})^d \lesssim_\varepsilon l_{k+1}^{ds - \varepsilon}. \]
 	%

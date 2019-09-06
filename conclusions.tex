@@ -4,4 +4,90 @@
 \chapter{Conclusions}
 \label{ch:Conclusions}
 
+\section{Fourier Dimension}
+
+\begin{theorem}
+    Let $K$ be a collection of at most $A \cdot N^s$, strongly non-diagonal sidelength $1/N$ dyadic cubes in $[0,1]^{nd}$. Then there exists a random set $X \subset [0,1]^d$, which is a union of sidelength $1/N$ dyadic cubes in $[0,1]^d$, and a constant $C$, depending only on $A$, $d$, and $n$, such that with probability $1 - C/\log N$,
+    %
+    \begin{itemize}
+        \item $X^d \cap K = \emptyset$,
+        \item If $\mu$ is the probability measure equal to a constant multiple of the Lebesgue measure on $X$, and supported on $X$, then for any $m \in \{ -N, \dots, N \}^d$,
+        %
+        \[ |\widehat{\mu}(m) - \widehat{dx}(m)| \leq \frac{C (\log N)^{1 - 1/n}}{N^{d-s/n}}. \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Fix $p = 1/(AN^s \log N)^{1/n}$. Let $\{ X_Q \}$ be a family of independant and identically distributed $\{ 0, 1 \}$ valued Bernoulli random variable, for each sidelength $1/N$ dyadic cube, such that $\mathbf{P}(X_Q = 1) = p$ for each $Q$, and define $X = \bigcup \{ Q : X_Q = 1 \}$. Then Chernoff's inequality implies there exists a universal constant $c$ such that if $S = \sum_Q X_Q$, then
+    %
+    \[ \mathbf{P} \left( S \geq (1/2)(N^d p) \right) \geq 1 - 2 e^{- c N^d p}. \]
+    %
+    Substituting in parameters, we conclude
+    %
+    \begin{equation} \label{fourierdim1} \mathbf{P} \left( S \geq \left[ 1/2 A^{1/n} (\log N)^{1/n} \right] \cdot N^{d - s/n} \right) \geq 1 - 2 \exp \left( \frac{-N^{d-s/n}}{A^{1/n} (\log N)^{1/n}} \right) \end{equation}
+    %
+    Thus $X$ is the union of a large number of cubes with high probability.
+
+    Given any cube $Q_1 \times \dots \times Q_n \in K$, we have
+    %
+    \[ \mathbf{P}(Q_1 \times \dots Q_n \subset X) = \mathbf{P}(Q_1 \in X, \dots, Q_n \in X) = p^n. \]
+    %
+    Thus
+    %
+    \[ \mathbf{E}(\# \{ Q_1 \times \dots \times Q_n \in X^n \}) \leq A N^s p^n = 1/\log N. \]
+    %
+    In particular, Markov's inequality implies
+    %
+    \begin{equation} \label{fourierdim2}
+    \begin{split}
+        \mathbf{P}(\# \{ Q_1 \times \dots \times Q_n \in X^n \} = 0) &= \mathbf{P}(\# \{ Q_1 \times \dots \times Q_n \in X^n \} < 1)\\
+        &\geq 1 - 1/\log N.
+    \end{split}
+    \end{equation}
+    %
+    Thus $X^d$ avoids $K$ completely with high probability.
+
+    Now we analyze the Fourier decay of the set $X$, conditioning on the value of $S$. For each cube $Q$, define
+    %
+    \[ f_Q = \begin{cases} \left( \frac{N^d}{S} - 1 \right) \cdot \mathbf{I}_Q & : X_Q = 1, \\ \left( -1 \right) \cdot \mathbf{I}_Q & : X_Q = 0. \end{cases} \]
+    %
+    If $f = \sum_Q f_Q$, then $f dx = d\mu - dx$. For each $x$, $\mathbf{E}[f_Q(x)|S] = 0$. If $x \not \in Q$, this is obvious, since $f_Q(x) = 0$ always holds, and if $x \in Q$, we find
+    %
+    \begin{align*}
+        \mathbf{E}[f_Q(x)|S] &= \mathbf{P}(X_Q = 1|S) (N^d/S - 1) + \mathbf{P}(X_Q = 0|S) (-1)\\
+        &= (S/N^d)(N^d/S - 1) + (1 - S/N^d)(-1) = 0,
+    \end{align*}
+    %
+    This implies that for each $m \in \mathbf{Z}^d$,
+    %
+    \[ \mathbf{E} \left[ \widehat{f_Q}(m)|S \right] = \int \mathbf{E}[f_Q(x) | S] e^{- 2 \pi i x \cdot m}\; dx = 0. \]
+    %
+    Now $|\widehat{f_Q}(m)| \leq 1/S$ for all $Q$, and since the family $\big\{ \widehat{f_Q}(m) \big\}$ are independent random variables as $Q$ varies over all dyadic cubes, we can apply Hoeffding's inequality to conclude that there exists a universal constant $c$ such that for the random variable $\widehat{f}(m) = \sum \widehat{f_Q}(m)$,
+    %
+    \[ \mathbf{P} \left( |\widehat{f}(m)| \geq \log N /S \right) \leq 2/N^{c \log N} \]
+    %
+    If we now take a union bound over all $m \in \{ -N, \dots, N \}^d$, we can guarantee that
+    %
+    \begin{equation} \label{fourierdim3}
+        \mathbf{P} \left( |\widehat{f}(m)| \leq \log N/S\ \text{for all $m \in \{ -N, \dots, N\}^d$} \right) \geq 1 - 2^{d+1}/N^{c \log N - d}.
+    \end{equation}
+    %
+    Thus $\widehat{f}$ has good decay with high probability.
+
+    Combining \eqref{fourierdim1}, \eqref{fourierdim2}, and \eqref{fourierdim3}, we conclude that there exists a constant $C$ such that with probability at least
+    %
+    \[ 1 - 2 \exp \left( \frac{-N^{d-s/n}}{A^{1/n} (\log N)^{1/n}} \right) - 1/\log N - \frac{2^{d+1}}{N^{c \log N - d}} \geq 1 - C / \log N, \]
+    %
+    the set $X$ avoids $K$, and for all $m \in \{ -N, \dots, N \}^d$,
+    %
+    \[ |\widehat{f}(m)| \leq \frac{C (\log N)^{1-1/n}}{N^{d-s/n}}. \qedhere \]
+\end{proof}
+
+Combing this discrete Lemma with ideas of (BLAH: INSERT SCHMERKIN'S PAPER) should yield a set with Fourier dimension $(nd - s)/n$.
+
+\section{Low Rank Avoidance}
+
+\section{Boosting $n-1$ to $n$}
+
+The results mentioned in this conclusion complements Theorem \ref{mainTheorem} in some senses, but this association also shows this result is unsatisfactory, in a sense that we have replaced the $n-1$ in the denominator with $n$. K\"{o}rner, in his paper BLAH, encountered a similar problem, in relation to constructing sets avoiding independence relationships. We hope to utilize techniques in his paper to improve our result.
+
 \endinput
