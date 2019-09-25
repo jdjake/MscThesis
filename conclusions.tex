@@ -1,50 +1,203 @@
 %% The following is a directive for TeXShop to indicate the main file
 %%!TEX root = diss.tex
 
-\chapter{Conclusions}
+\chapter{Future Work}
 \label{ch:Conclusions}
+
+To conclude this thesis, we describe a rough sketch of some ideas which we hope will lead to future developments from the ideas of `rough sets avoiding patterns' we detailed in Chapter \ref{ch:RoughSets}. Section 6.1 studies the problem of finding a set avoiding a rough configuration which supports a measure with large Fourier decay, and Section 6.2 attempts to exploit additional geometric information about particular rough patterns to obtain stronger results in this setting.
 
 \section{Fourier Dimension}
 
-\begin{theorem}
-    Let $K$ be a collection of at most $A \cdot N^s$, strongly non-diagonal sidelength $1/N$ dyadic cubes in $[0,1]^{nd}$. Then there exists a random set $X \subset [0,1]^d$, which is a union of sidelength $1/N$ dyadic cubes in $[0,1]^d$, and a constant $C$, depending only on $A$, $d$, and $n$, such that with probability $1 - C/\log N$,
+A popular technique in current research in geometric measure theory is exploiting Fourier analysis to obtain additional structural information about configurations in sets. One of the key insights into this procedure is that the Frostman dimension of any finite Borel measure $\mu$ is equal to
+%
+\[ \sup \left\{ s > 0 : \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}} d\xi < \infty \right\}. \]
+%
+For brevity, we leave the proof to other sources, e.g. \cite[Section 3.5]{Matilla}. Note that if
+%
+\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}}\; d\xi < \infty, \]
+%
+then there exists a constant $C$ such that for \emph{most} values $\xi \in \RR^d$,
+%
+\begin{equation} \label{fourierdimensioncondition}
+    |\widehat{\mu}(\xi)| \leq C |\xi|^{-s/2}.
+\end{equation}
+%
+We obtain a strengthening of the Frostman measure condition if we require \eqref{fourierdimensioncondition} to hold for \emph{all} values $\xi$. In particular, we say a measure $\mu$ has \emph{Fourier dimension} $s$ if \eqref{fourierdimensioncondition} holds for all $\xi \in \RR^d$. If this is true, then for all $t < s$,
+%
+\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-t}}\; d\xi < \infty \]
+%
+so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph{Fourier dimension} of a set $E$ as
+%
+\[ \fordim(E) = \sup \left\{ s : \begin{array}{c} \text{there is $\mu$ supported on $E$ with}\\ \text{Fourier dimension $s$} \end{array} \right\}, \]
+%
+then $\fordim(E) \leq \hausdim(E)$. We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'.
+
+There is much interest in determining whether sets with large Fourier dimension must contain patterns, for instance, in \cite{PramanikLaba} and \cite{Shmerkin}. Most classical, self-similar fractals (for instance, the middle-thirds Cantor set) have Fourier dimension zero. Nonetheless, it is a general principle that \emph{random} families of sets tend to have Fourier dimension equal to the Hausdorff dimension. Since the main technique of Theorem \ref{mainTheorem} involves a random selection strategy, we might hope that a modification of the analysis produces a set with Fourier dimension $(nd - 1)/(n-1)$. This section discusses a slightly suboptimal result which gives a set with Fourier dimension $(nd - 1)/n$. We hope to improve this result to give a set with Fourier dimension $(nd - 1)/(n-1)$ in the near future. We begin with two lemmas, which simplify the analysis of the Fourier decay of the probability measures we study.
+
+\begin{lemma}
+    Suppose $\mu$ is a compactly supported finite Borel measure, consider $s > 0$, and suppose there exists a constant $C$ such that for each $n \in \ZZ^d$,
     %
-    \begin{itemize}
-        \item $X^d \cap K = \emptyset$,
-        \item If $\mu$ is the probability measure equal to a constant multiple of the Lebesgue measure on $X$, and supported on $X$, then for any $m \in \{ -N, \dots, N \}^d$,
+    \[ |\widehat{\mu}(n)| \leq C |n|^{-s/2}. \] 
+    %
+    Then there exists a constant $C'$ such that for each $|\xi| \in \RR^d$,
+    %
+    \[ |\widehat{\mu}(\xi)| \lesssim C' |\xi|^{-s/2}. \]
+    %
+    In particular, $\mu$ has Fourier dimension $s$.
+\end{lemma}
+\begin{proof}
+    Without loss of generality, we may assume that $\mu$ is supported on a compact subset of $[1/3,2/3)^d$, since every compactly supported measure is a finite sum of translates of measures of this form. Consider the distribution $\Lambda = \sum_{n \in \mathbf{Z}^d} \delta_n$, where $\delta_n$ is the Dirac delta distribution at $n$. Then the Poisson summation formula says that the Fourier transform of $\Lambda$ is itself. If $I \in C_c(\RR^d)$ is a bump function with support in $[0,1)^d$, and with $I(x) = 1$ for $x \in [1/3,2/3)^d$, then $\mu = I (\Lambda * \mu)$, so
+    %
+    \begin{equation} \label{mubounded}
+    \begin{split}
+        |\widehat{\mu}(\xi)| &= \left| \left[ \widehat{I} * (\Lambda \widehat{\mu}) \right](\xi) \right|\\
+        &= \left| \sum_{n \in \mathbf{Z}^d} \widehat{\mu}(n)(\widehat{I} * \delta_n)(\xi) \right|\\
+        &= \left| \sum_{n \in \mathbf{Z}^d} \widehat{\mu}(n) \widehat{I}(n - \xi) \right|\\
+        &\leq \sum_{n \in \mathbf{Z}^d} |\widehat{\mu}(n)| |\widehat{I}(n - \xi)|.
+%       &\lesssim \sum_{n \in \mathbf{Z}^d} |\widehat{\mu}(n)| \prod_{i = 1}^d \frac{1}{1 + |n_i - \xi_i|}
+    \end{split}
+    \end{equation}
+    %
+    Now suppose that $|\widehat{\mu}(n)| \lesssim |n|^{-s/2}$ for each $n \in \mathbf{Z}^d$. Since $I$ is smooth, we know $|\widehat{I}(\nu)| \lesssim 1/|\nu|^{d+1}$. If we perform a dyadic decomposition, we find
+    %
+    \begin{equation}
+        \label{calculation1}
+    \begin{split}
+        \sum_{1 \leq |n - \xi| \leq |\xi|/2} |\widehat{\mu}(n)| |\widehat{I}(n - \xi)| &\lesssim |\xi|^{-s/2} \sum_{1 \leq |n - \xi| \leq |\xi|/2} |\widehat{I}(n - \xi)|\\
+        &\lesssim |\xi|^{-s/2} \left( \sum_{k = 1}^{\log |\xi|} \sum_{\frac{|\xi|}{2^{k+1}} \leq |n - \xi| \leq \frac{|\xi|}{2^{k}}} \frac{2^{(d+1)k}}{|\xi|^{(d+1)}} \right)\\
+        &\lesssim |\xi|^{-s/2} \left( \sum_{k = 1}^{\log |\xi|} |\xi|^{-1} 2^k \right) \lesssim |\xi|^{-s/2}.
+    \end{split}
+    \end{equation}
+    %
+    On the other hand, since there are $O(1)$ points $n$ with $|n - \xi| \leq 1$, we find
+    %
+    \begin{equation} \label{calculation2}
+        \sum_{|n - \xi| \leq 1} |\widehat{\mu}(n)| |\widehat{I}(n - \xi)| \lesssim |\xi|^{-s/2}
+    \end{equation}
+    %
+    Finally, we can perform another dyadic decomposition, using the fact that $|\widehat{I}(\nu)| \lesssim 1/|\nu|^{2d}$, to find that
+    %
+    \begin{equation} \label{calculation3}
+    \begin{split}
+        \sum_{|n - \xi| \geq |\xi|/2} |\widehat{\mu}(n)| |\widehat{I}(n - \xi)| &\lesssim \sum_{k = 0}^\infty \sum_{|\xi| 2^{k-1} \leq |n - \xi| \leq |\xi| 2^k} \frac{|\widehat{\mu}(n)|}{|\xi|^{2d} 2^{2dk}}\\
+        &\lesssim \sum_{k = 0}^\infty |\xi|^{-d} 2^{-dk} \lesssim |\xi|^{-d}.
+    \end{split}
+    \end{equation}
+    %
+    Combining \eqref{calculation1}, \eqref{calculation2}, and \eqref{calculation3} with \eqref{mubounded}, we conclude that
+    %
+    \[ |\widehat{\mu}(\xi)| \lesssim |\xi|^{-s/2}. \qedhere \]
+\end{proof}
+
+To ensure that our probability measures have rapid decay, we must choose a canonical family of bump functions to `smooth out' the probability measures we study. Let $\psi$ be a compactly supported, positive, smooth function supported on $[0,1]^d$ with
+%
+\[ \int \psi(x)\; dx = 1. \]
+%
+For each $k$, and for each $Q \in \DQ_k$, let $a(Q) \in \ZZ^d$ be the point such that
+%
+\[ Q = \left[ \frac{a(Q)_1}{N_k}, \frac{a(Q)_1 + 1}{N_k} \right] \times \dots \times \left[ \frac{a(Q)_d}{N_k}, \frac{a(Q)_d + 1}{N_k} \right] \in \DQ_k. \]
+%
+Define
+%
+\[ \psi_Q(x) = N_k^d \cdot \psi(x N_k - a(Q)). \]
+%
+Then $\psi_Q$ is supported on $Q$, with $\int \psi_Q(x)\; dx = 1$, and for any $\xi \in \RR^d$,
+%
+\[ \widehat{\psi_Q}(\xi) = e^{- 2 \pi i a \cdot \xi} \widehat{\psi}(\xi/N_k). \]
+%
+Note that, because $\psi$ is smooth and compactly supported, for any $m > 0$,
+%
+\[ |\widehat{\psi_Q}(\xi)| \lesssim_m N_k^m / |\xi|^m. \]
+%
+Thus $\widehat{\psi_Q}$ has rapid decay outside of the box $[-N_k,N_k]^d$.
+
+\begin{lemma}
+    Given any integer $k > 0$, and any $\DQ_k$ discretized set $E \subset [0,1]^d$, let $\mu_E$ be the absolutely continuous probability measure with density function
+    %
+    \[ \frac{1}{\#(\DQ_k(E))} \sum_{Q \in \DQ_k(E)} \psi_Q. \]
+    %
+    Then, for each $\varepsilon > 0$, there is a universal constant $C_\varepsilon$, independant of $k$ and $E$, such that if $|\xi| \geq N_k^{1 + \varepsilon}$, then
+    %
+    \[ |\widehat{\mu_E}(\xi)| \leq C_\varepsilon / |\xi|^{d/2}. \]
+\end{lemma}
+\begin{proof}
+    We calculate that
+    %
+    \[ \widehat{\mu_E}(\xi) = \frac{\widehat{\psi}(\xi/N_k)}{|\DQ_k(E)|} \sum_{Q \in \DQ_k(E)} e^{-2 \pi i (a(Q) \cdot \xi)}. \]
+    %
+    Pick $m \geq (d/2)(1 + 1/\varepsilon)$. Then, if $|\xi| \geq N_k^{1 + \varepsilon}$, we find
+    %
+    \begin{align*}
+        |\widehat{\mu_E}(\xi)| &\leq |\widehat{\psi}(\xi/N_k)| \lesssim_m \frac{N_k^m}{|\xi|^m} = \frac{N_k^m}{|\xi|^{m - d/2}} \frac{1}{|\xi|^{d/2}} \leq \frac{1}{|\xi|^{d/2}}. \qedhere
+    \end{align*}
+\end{proof}
+
+Our goal now is now to carefully modify the discrete selection strategy and discretized probability measures we use, so that with high probability, the measures have the appropriate Fourier decay for the Fourier dimension bound we wish to obtain. Surprisingly, here we only need to perform a single scale analysis with the family of cubes $\DQ^d$, rather than a multi scale analysis involving the cubes $\DQ^d$ and $\DR^d$ as in Chapter \ref{ch:RoughSets}.
+
+\begin{theorem}
+    Fix $s \in [1,dn)$, and $\varepsilon \in [0,(dn-s)/2)$. Let $T \subset \RR^d$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^{dn}$ be a nonempty $\DQ_{k+1}$ discretized set such that
+    %
+    \[ \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}. \]
+    %
+    Then there exists a constant $C(s,d,n) > 0$, depending only on $s$, $d$, and $n$, such that, provided
+    %
+    \[ N_{k+1} \geq C(s,d,n) \cdot M_{k+1}^{\frac{dn}{dn - s - \varepsilon}}, \]
+    %
+    there exists a random $\DQ_k$ discretized set $S \subset T$, and a constant $C$, depending only on $\varepsilon$, $d$, and $n$, such that with probability $1 - C/\log N_{k+1}$,
+    %
+    \begin{enumerate}
+        \item[(A)] For any collection of $n$ distinct cubes $Q_1, \dots, Q_n \in \DQ_{k+1}(S)$,
         %
-        \[ |\widehat{\mu}(m) - \widehat{dx}(m)| \leq \frac{C (\log N)^{1 - 1/n}}{N^{d-s/n}}. \]
-    \end{itemize}
+        \[ Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B). \]
+
+        \item[(B)] For any $m \in \{ -N, \dots, N \}^d$,
+        %
+        \[ |\widehat{\mu_S}(m) - \widehat{\mu_T}(m)| \leq \frac{C (\log N)^{1 - 1/n}}{N^{d-s/n}}. \]
+    \end{enumerate}
 \end{theorem}
 \begin{proof}
-    Fix $p = 1/(AN^s \log N)^{1/n}$. Let $\{ X_Q \}$ be a family of independant and identically distributed $\{ 0, 1 \}$ valued Bernoulli random variable, for each sidelength $1/N$ dyadic cube, such that $\mathbf{P}(X_Q = 1) = p$ for each $Q$, and define $X = \bigcup \{ Q : X_Q = 1 \}$. Then Chernoff's inequality implies there exists a universal constant $c$ such that if $S = \sum_Q X_Q$, then
+    Let
     %
-    \[ \mathbf{P} \left( S \geq (1/2)(N^d p) \right) \geq 1 - 2 e^{- c N^d p}. \]
+    \[ p = \frac{1}{(N_{k+1}^{s + \varepsilon} C_{k+1})^{1/n}}, \]
     %
-    Substituting in parameters, we conclude
+    and then let $\{ X_Q \}$ be a family of independent and identically distributed $\{ 0, 1 \}$ valued Bernoulli random variables, for each $Q \in \DQ_{k+1}(T)$, such that $\PP(X_Q = 1) = p$, and define $S = \bigcup \{ Q : X_Q = 1 \}$. If we define $S = \sum_Q X_Q$, then $S$ is the sum of $\#(\DQ_k(T)) \cdot N_{k+1}^d$ variables, and so Chernoff's inequality implies that
     %
-    \begin{equation} \label{fourierdim1} \mathbf{P} \left( S \geq \left[ 1/2 A^{1/n} (\log N)^{1/n} \right] \cdot N^{d - s/n} \right) \geq 1 - 2 \exp \left( \frac{-N^{d-s/n}}{A^{1/n} (\log N)^{1/n}} \right) \end{equation}
+    \[ \PP \left( S \leq p \cdot N_{k+1}^d \cdot \# \DQ_k(T)/2 \right) \leq 10 e^{- p \DQ_k(T) N_{k+1}^d} \]
     %
-    Thus $X$ is the union of a large number of cubes with high probability.
+    Substituting in the value of $p$, we conclude
+    %
+    \begin{equation} \label{fourierdim1}
+    \begin{split}
+        \PP \left( S \leq \left( \frac{1}{2 C_{k+1}^{1/n}} \right) \cdot N_{k+1}^{\frac{dn - (s + \varepsilon)}{n}} \right) &\leq \PP \left( S \leq \left( \frac{\# \DQ_k(T)}{2 C_{k+1}^{1/n}} \right) \cdot N_{k+1}^{\frac{dn - (s + \varepsilon)}{n}} \right)\\
+        &\leq 10 \exp \left( -N_{k+1}^{\frac{dn - (s + \varepsilon)}{n}} C_{k+1}^{-1/n} \DQ_k(T) \right)\\
+        &\leq 10 \exp \left( -N_{k+1}^{d - (s + \varepsilon)/n} C_{k+1}^{-1/n} \right)
+    \end{split}
+    \end{equation}
+    %
+    Thus $S$ is the union of a large number of cubes with high probability.
 
-    Given any cube $Q_1 \times \dots \times Q_n \in K$, we have
+    Without loss of generality, we may assume that every cube $Q_1 \times \dots \times Q_n \in \DQ_{k+1}(B)$, the values $Q_1, \dots, Q_n$ are distinct. In particular, given any such cube, we have
     %
-    \[ \mathbf{P}(Q_1 \times \dots Q_n \subset X) = \mathbf{P}(Q_1 \in X, \dots, Q_n \in X) = p^n. \]
+    \[ \mathbf{P}(Q_1 \times \dots Q_n \subset S) = \mathbf{P}(X_{Q_1} = 1, \dots, X_{Q_n} = 1) = p^n. \]
     %
     Thus
     %
-    \[ \mathbf{E}(\# \{ Q_1 \times \dots \times Q_n \in X^n \}) \leq A N^s p^n = 1/\log N. \]
+    \[ \mathbf{E}(\#(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n))) \leq N_{k+1}^{s+\varepsilon} p^n = C_{k+1}^{-1}. \]
     %
     In particular, Markov's inequality implies
     %
     \begin{equation} \label{fourierdim2}
     \begin{split}
-        \mathbf{P}(\# \{ Q_1 \times \dots \times Q_n \in X^n \} = 0) &= \mathbf{P}(\# \{ Q_1 \times \dots \times Q_n \in X^n \} < 1)\\
-        &\geq 1 - 1/\log N.
+        \mathbf{P}(\# (\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n)) \neq 0) &= \mathbf{P}(\# (\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n)) \geq 1)\\
+        &\leq C_{k+1}^{-1}.
     \end{split}
     \end{equation}
     %
-    Thus $X^d$ avoids $K$ completely with high probability.
+    Thus $\DQ_{k+1}(S^d)$ is disjoint from $\DQ_{k+1}(B)$ with high probability.
+
+    Now we analyze the Fourier transform of the measure $\mu_S$. 
+
+    For each cube $Q$, define $f_Q = \psi_Q / S$.
 
     Now we analyze the Fourier decay of the set $X$, conditioning on the value of $S$. For each cube $Q$, define
     %
@@ -82,12 +235,16 @@
     \[ |\widehat{f}(m)| \leq \frac{C (\log N)^{1-1/n}}{N^{d-s/n}}. \qedhere \]
 \end{proof}
 
-Combing this discrete Lemma with ideas of (BLAH: INSERT SCHMERKIN'S PAPER) should yield a set with Fourier dimension $(nd - s)/n$.
+Applying this discrete Lemma just as the discrete Lemma is applied in Chapter \ref{ch:RoughSets} yields a random set, and the Borel-Cantelli lemma implies that almost surely, the set $X$ produced is configuration avoiding and has Fourier dimension $(nd - s)/n$.
 
 \section{Low Rank Avoidance}
 
-\section{Boosting $n-1$ to $n$}
+Another way we can attempt to generalize the results of Chapter \ref{ch:RoughSets} is by attempting to improve the result if the rough configuration $\C$ is given additional geometric structure. In Chapter \ref{ch:RoughSets}, we showed a technique to find large sets avoid configurations with low Minkowski dimension. This means precisely that these configurations are efficiently covered by cubes at all scales. Here, we discuss whether one can obtain large sets avoiding configurations efficiently covered by other families of geometric shapes, e.g. by thickened lines, thickened planes, or more generally, by thickened variants of any family of algebraic hypersurfaces.
 
-The results mentioned in this conclusion complements Theorem \ref{mainTheorem} in some senses, but this association also shows this result is unsatisfactory, in a sense that we have replaced the $n-1$ in the denominator with $n$. K\"{o}rner, in his paper BLAH, encountered a similar problem, in relation to constructing sets avoiding independence relationships. We hope to utilize techniques in his paper to improve our result.
+Here, we only describe a discrete building block lemma, which can be fleshed out into
+
+\begin{theorem}
+    Let $T_1, \dots, T_n \subset [0,1]^d$ be disjoint, $\DQ_k$ discretized sets, and let $B \subset [0,1]^k$
+\end{theorem}
 
 \endinput

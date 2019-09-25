@@ -4,31 +4,56 @@
 \chapter{Background}
 \label{ch:Background}
 
+In this chapter we discuss the required background to understand the techniques of the pattern avoidance problem. The majority of the background in geometric measure theory can be found in other resources, e.g. in \cite{Falconer}, \cite{MattilaGeomMeasure}, or \cite{TaoHausdorff}, though not geared in particular towards the pattern avoidance problem.
+
 \section{Configuration Avoidance}
 
-We consider an ambient set $\AAA$. It's \emph{$n$-point configuration space} is
+Our main focus in this thesis is the \emph{pattern avoidance problem}. In this section, we formalize the notion of a pattern, and what it means to avoid it. Given a set $\mathbf{A}$, we let
 %
 \[ \Config^n(\AAA) = \{ (a_1, \dots, a_n) \in \AAA^n: a_i \neq a_j\ \text{if $i \neq j$} \}. \]
 %
-An \emph{$n$ point configuration}, or \emph{$n$ point pattern}, is a subset of $\Config^n(\AAA)$. More generally, we define the general \emph{configuration space} of $\AAA$ as $\Config(\AAA) = \bigcup_{n = 1}^\infty \Config^n(\AAA)$. A \emph{pattern}, or \emph{configuration} on $\AAA$  a subset of $\Config(\AAA)$.
+and
+%
+\[ \Config(\AAA) = \bigcup_{n = 1}^\infty \Config^n(\AAA). \]
+%
+We call $\Config(\AAA)$ the \emph{configuration space} of $\mathbf{A}$.
 
-Our main focus in this thesis is the \emph{pattern avoidance problem}. For a fixed configuration $\C$ on $\AAA$, we say a set $X \subset \AAA$ \emph{avoids} $\C$ if $\Config(X)$ is disjoint from $\C$. The pattern avoidance problem asks to find sets $X$ of maximal size avoiding a fixed configuration $\C$. Often $\C$ describes algebraic or geometric structure, and the pattern avoidance problem asks to find the maximal size of a set before it is guaranteed to have such structure.
+\begin{example}[Non-Colinearity]
+	We say a set $X \subset \RR^d$ \emph{avoids colinear points} if no three points $x_1,x_2,x_3 \in X$ lie on a common line in $\RR^d$. Define
+	%
+	\[ \C = \left\{ (x, x + av, x + 2av) \in \C^3(\RR^d) : a \in \RR - \{ 0 \}, v \in \RR^d - \{ 0 \} \right\}. \]
+	%
+	Then $X$ avoids colinear points if and only if for any $x_1,x_2,x_3 \in X$, $(x_1,x_2,x_3) \not \in \C$.
+\end{example}
 
-\begin{example}[Isoceles Triangle Configuration]
-	Let
+\begin{example}[Isosceles Triangle Configuration]
+	We say a set $X \subset \RR^2$ \emph{avoids isosceles triangles} if no three points $x_1,x_2,x_3 \in X$ form the vertices of a non-degenerate isosceles triangle. Define
 	%
 	\[ \C = \left\{ (x_1, x_2, x_3) \in \Config^3(\RR^2) : |x_1-x_2| = |x_1-x_3| \right\}. \]
 	%
-	Then $\C$ is a 3-point configuration, and a set $X \subset \RR^2$ avoids $\C$ if and only if it does not contain all three vertices of an isoceles triangle. %Notice that $|x_1 - x_2| = |x_1 - x_3|$ holds if and only if $|x_1 - x_2|^2 = |x_1 - x_3|^2$, which is an algebraic equation in the coordinates of $x_1,x_2$, and $x_3$. Thus $\C$ is an algebraic hypersurface of degree two in $\RR^6$.
+	A set $X$ avoids isosceles triangles if and only for any $x_1,x_2,x_3 \in X$, $(x_1,x_2,x_3) \not \in \C$. %Notice that $|x_1 - x_2| = |x_1 - x_3|$ holds if and only if $|x_1 - x_2|^2 = |x_1 - x_3|^2$, which is an algebraic equation in the coordinates of $x_1,x_2$, and $x_3$. Thus $\C$ is an algebraic hypersurface of degree two in $\RR^6$.
 \end{example}
 
 \begin{example}[Linear Independence Configuration]
 	Let $V$ be a vector space over a field $K$. We set
 	%
-	\[ \C = \bigcup_{n = 1}^\infty \{ (x_1, \dots, x_n) \in \C^n(V): \text{there is}\ a_1, \dots, a_n \in K\ \text{s.t.}\ a_1x_1 + \dots + a_nx_n = 0 \}. \]
+	\[ \C = \bigcup_{n = 1}^\infty \left\{ (x_1, \dots, x_n) \in \Config^n(V): \begin{array}{c}
+			\text{there is $a_1, \dots, a_n \in K$ such that}\\
+			\text{$a_1x_1 + \dots + a_nx_n = 0$}
+		\end{array} \right\}. \]
 	%
-	A set $X \subset V$ avoids $\C$ if and only if $X$ is a linearly independent subset of $V$. Note that if $V$ is infinite dimensional, then $\C$ cannot be replaced by a $n$ point configuration for any $n$; arbitrarily large tuples must be considered. We will be interested in the case where $K = \QQ$, and $V = \RR$. Our interest here is to find analytically large linearly independant subsets of $V$.
+	A set $X \subset V$ is linearly independent in $V$ if, for any $n$, and any set of $n$ points $x_1, \dots, x_n \in X$, $(x_1, \dots, x_n) \not \in \C$. In this thesis, we will be interested in the case where $K = \QQ$, and $V = \RR$.
 \end{example}
+
+\begin{example}[Sum Set Configuration]
+	Let $G$ be an abelian group, and fix $Y \subset G$. Set
+	%
+	\[ \C^1 = \{ g \in \Config^1(G): g + g \in Y \} \quad \text{and} \quad \C^2 = \{ (g_1,g_2) \in \Config^2(G): g_1 + g_2 \in Y \}. \]
+	%
+	Define $\C = \C^1 \cup \C^2$. Then $(X + X) \cap Y = \emptyset$ if and only if for any $x_1,x_2 \in X$, $(x_1,x_2) \not \in \C^2$, and for any $x \in X$, $x \not \in \C^1$.
+\end{example}
+
+All the configurations we discuss in this thesis can be specified in terms of subsets of $\Config(\AAA)$. Thus we formally define a \emph{configuration} on $\AAA$ to be a subset of $\Config(\AAA)$, and an \emph{$n$ point configuration} if it is a subset of $\Config^n(\AAA)$. For a fixed configuration $\C$ on $\AAA$, we say a set $X \subset \AAA$ \emph{avoids} $\C$ if $\Config(X)$ is disjoint from $\C$. The \emph{pattern avoidance problem} asks to find sets $X$ of maximal size avoiding a fixed configuration $\C$. Often, the configuration $\C$ describes algebraic or geometric structure, and the pattern avoidance problem asks to find the maximal size of a set before it is guaranteed to have such structure.
 
 %\begin{example}[General Position Configuration]
 %	Suppose we wish to find a subset $X$ of $\RR^d$ such that for each positive integer $k \leq d$, and for each collection of $k+1$ distinct points $x_1, \dots, x_{k+1} \in X$, the points do not lie in a $k-1$ dimensional hyperplane. For each $k \leq d$, set
@@ -42,25 +67,7 @@ Our main focus in this thesis is the \emph{pattern avoidance problem}. For a fix
 %	so each $\C^{k+1}$ is essentially a union of $k$ dimensional hyperplanes.
 %\end{example}
 
-Even though our problem formulation assumes configurations are formed by distinct sets of points, one can still formulate avoidance problems involving repeated points by a simple trick, exemplified by the next example.
-
-\begin{example}[Sum Set Configuration]
-	Let $G$ be an abelian group, and fix $Y \subset G$. Set
-	%
-	\[ \C^1 = \{ g \in \Config^1(G): g + g \in Y \} \quad \text{and} \quad \C^2 = \{ (g_1,g_2) \in \Config^2(G): g_1 + g_2 \in Y \}. \]
-	%
-	Then define $\C = \C^1 \cup \C^2$. A set $X \subset G$ avoids $\C$ if and only if $(X + X) \cap Y = \emptyset$.
-\end{example}
-
-Depending on the structure of the ambient space $\AAA$ and the configuration $\C$, there are various ways of measuring the size of sets $X \subset \AAA$ for the purpose of the pattern avoidance problem:
-%
-\begin{itemize}
-	\item If $\AAA$ is finite, we wish to find a set $X$ with large cardinality.
-	\item If $\{ \AAA_n \}$ is an increasing family of finite sets with $\AAA = \bigcup_n \AAA_n$, we wish to find a set $X$ such that $X \cap \AAA_n$ has large cardinality asymptotically as $n \to \infty$.
-	\item If $\AAA = \RR^d$, but $\C$ is a discrete configuration, then a satisfactory goal is to find a set $X$ with large Lebesgue measure avoiding $\C$.
-\end{itemize}
-%
-In this thesis, inspired by results in the three discrete setting above, we establish methods for avoiding non-discrete configurations $\C$ in $\RR^d$. Here, Lebesgue measure completely fails to measure the size of pattern avoiding solutions, as the next theorem shows, under the often true assumption that $\C$ is \emph{translation invariant}, i.e. that if $(a_1, \dots, a_n) \in \C$ and $b \in \RR^d$, $(a_1 + b, \dots, a_n + b) \in \C$.
+Depending on the structure of the ambient space $\AAA$ and the configuration $\C$, there are various ways of measuring the size of sets $X \subset \AAA$ for the purpose of the pattern avoidance problem. If $\AAA$ is finite, for instance, a natural choice is the cardinality of $X$. But our goal is to study pattern avoidance where $\AAA = \RR^d$. In certain cases, one can use the Lebesgue measure to determine the size of a pattern avoiding set. But this really only works for `discrete' configurations on $\RR^d$, as the next theorem shows, under the often true assumption that $\C$ is \emph{translation invariant}, i.e. that if $(a_1, \dots, a_n) \in \C$ and $b \in \RR^d$, $(a_1 + b, \dots, a_n + b) \in \C$.
 
 \begin{theorem}
 	Let $\C$ be a $n$-point configuration on $\RR^d$. Suppose
@@ -83,7 +90,7 @@ In this thesis, inspired by results in the three discrete setting above, we esta
 	%
 	For each $p \in Q_0$, let $C(p) = (a_1(p), \dots, a_n(p))$, where $a_i(p) = p + (a_i - a_1)$. A union bound shows
 	%
-	\begin{equation} \label{equation548} \left| \{ p \in Q_0 : C(p) \not \in \C(X) \} \right| \leq \sum_{i = 1}^d \left| \{ p \in Q_0 : a_i(p) \not \in X \} \right|.
+	\begin{equation} \label{equation548} \left| \{ p \in Q_0 : C(p) \not \in \C(X) \} \right| \leq \sum_{i = 1}^n \left| \{ p \in Q_0 : a_i(p) \not \in X \} \right|.
 	\end{equation}
 	%
 	We have $a_i(p) \not \in X$ precisely when $p + (a_i - a_1) \not \in X$, so
@@ -98,17 +105,16 @@ In this thesis, inspired by results in the three discrete setting above, we esta
 	%
 	Combining \eqref{equation548}, \eqref{equation1243462}, and \eqref{equation543}, we find
 	%
-	\[ \left| \{ p \in Q_0 : C(p) \not \in \C(X) \} \right| \leq \varepsilon d |Q_0|. \]
+	\[ \left| \{ p \in Q_0 : C(p) \not \in \C(X) \} \right| \leq \varepsilon n |Q_0|. \]
 	%
-	Provided $\varepsilon d < 1$, this means there is $p \in Q_0$ with $C(p) \in \C(X)$. Property \ref{translationinvariance} implies $C(p) \in \C$, so $X$ does not avoid $\C$.
+	Provided $\varepsilon n < 1$, this means there is $p \in Q_0$ with $C(p) \in \C(X)$. Property \ref{translationinvariance} implies $C(p) \in \C$, so $X$ does not avoid $\C$.
 \end{proof}
 
 % TO DO: SWAPPING THIS RESULT FOR A DENSITY RESULT, IF WE CAN OBTAIN IT.
 
-Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractional dimension} of a set.
+Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractal dimension} of a set.
 
-There are many variants of fractional dimension. Here we choose to use the Minkowski dimension, and the Hausdorff dimension. They assign the same dimension to any smooth manifold, but vary over more singular sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
-%The Fourier dimension is a refinement of the Hausdorff dimension which gives greater control on the set when viewed `in the frequency domain', and therefore gives additional structural information on sets.
+There are many variants of fractal dimension. Here we choose to use the Minkowski dimension, and the Hausdorff dimension. They assign the same dimension to any smooth manifold, but can differ for rougher sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
 
 
 
@@ -144,7 +150,7 @@ It is often easy to upper bound the Minkowski dimension of a set, simply by prov
 	%
 	\[ |f_i(x) - f_i(y)| \leq C \cdot |x-y|. \]
 	%
-	Since each $U_i$ is bounded, for any $r > 0$, we can find a family of balls $B_{i,1}, \dots, B_{i,M_i}$ of radius $(r/C)$ covering $U_i$, such that the centres $x_{i,1}, \dots, x_{i,M_i}$ of the balls also lie in $U_i$, and $M_i \lesssim (C/r)^s$. But then the balls of radius $r$ with centres lying in
+	Since each $U_i$ is bounded, for any $r > 0$, we can find a family of balls $B_{i,1}, \dots, B_{i,M_i}$ of radius $(r/C)$ covering $U_i$, such that the centers $x_{i,1}, \dots, x_{i,M_i}$ of the balls also lie in $U_i$, and $M_i \lesssim (C/r)^s$. But then the balls of radius $r$ with centers lying in
 	%
 	\[ \{ f_i(x_{i,j}) : 1 \leq i \leq N, 1 \leq j \leq M_i \} \]
 	%
@@ -212,23 +218,23 @@ Given any Borel set $E$, Corollary \ref{corollaryhausdorffzero}, combined with L
 \end{proof}
 
 \begin{remark}
-	If $\hausdim(E) < d$, then $|E| = H^d(E) = 0$. Thus any set with fractional dimension less than $d$ must have measure zero. This means we can use the dimension as a way of distinguishing between sets of measure zero, which is precisely what we need to study the configuration avoidance problem for non-discrete configurations.
+	If $\hausdim(E) < d$, then $|E| = H^d(E) = 0$. Thus any set with fractal dimension less than $d$ (either Hausdorff of Minkowski) must have measure zero. This means we can use the dimension as a way of distinguishing between sets of measure zero, which is precisely what we need to study the configuration avoidance problem for non-discrete configurations.
 \end{remark}
 
 The fact that Hausdorff dimension is defined over multiple scales simultaneously makes it more stable under analytical operations. In particular, for any family of at most countably many sets $\{ E_k \}$,
 %
 \[ \hausdim \left\{ \bigcup E_k \right\} = \sup \left\{ \hausdim(E_k) \right\}. \]
 %
-This need not be true for the Minkowski dimension; a single point has Minkowski dimension zero, but the rational numbers, which are a countable union of points, have Minkowski dimension one. An easy way to make Minkowski dimension countably stable is to define the \emph{modified Minkowski dimensions}
+This need not be true for the Minkowski dimension; a single point has Minkowski dimension zero, but $\mathbf{Q} \cap [0,1]$, which is a countable union of points, has Minkowski dimension one. An easy way to make Minkowski dimension countably stable is to define the \emph{modified Minkowski dimensions}
 %
 \begin{align*}
-	\lmbdim(E) &= \inf \left\{ s : E \subset \bigcup_{i = 1}^\infty E_i, \lowminkdim(E_i) \leq s \right\}
+	\lmbdim(E) &= \inf \left\{ s : E \subset \bigcup_{i = 1}^\infty E_i, \lowminkdim(E_i) \leq s\ \text{for each $i$} \right\}
 \end{align*}
 %
 and
 %
 \begin{align*}
-	\umbdim(E) &= \inf \left\{ s : E \subset \bigcup_{i = 1}^\infty E_i, \upminkdim(E_i) \leq s \right\}.
+	\umbdim(E) &= \inf \left\{ s : E \subset \bigcup_{i = 1}^\infty E_i, \upminkdim(E_i) \leq s\ \text{for each $i$} \right\}.
 \end{align*}
 %
 This notion of dimension, in a disguised form, appears in Chapter \ref{ch:RoughSets}.
@@ -250,7 +256,7 @@ Fix an integer $N$. The classic family of dyadic cubes with \emph{branching fact
 and then setting $\DD^d = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD^d$ are known as \emph{dyadic cubes}, and elements of $\DD_k^d$ are known as \emph{dyadic cubes of generation $k$}. The most important properties of the dyadic cubes is that for each $k$, $\DD_k^d$ is a cover of $\RR^d$ by cubes of sidelength $1/N^k$, and for any two cubes $Q_1,Q_2 \in \DD^d$, either their interiors are disjoint, or one cube is nested in the other.
 %
 \begin{itemize}
-	\item For each cube $Q_1 \in \DD_{k+1}^d$, there is a unique cube $Q_2 \in \DD_k^d$ such that $Q_1 \subset Q_2$. We refer to $Q_2$ as the \emph{parent} of $Q_1$, and $Q_1$ as a \emph{child} of $Q_2$. Each cube in $\DD$ has exactly $N^d$ children. For $Q \in \DD_{k+1}^d$, we let $Q^* \in \DD_k^d$ denote it's parent.
+	\item For each cube $Q_1 \in \DD_{k+1}^d$, there is a unique cube $Q_2 \in \DD_k^d$ such that $Q_1 \subset Q_2$. We refer to $Q_2$ as the \emph{parent} of $Q_1$, and $Q_1$ as a \emph{child} of $Q_2$. Each cube in $\DD$ has exactly $N^d$ children. For $Q \in \DD_{k+1}^d$, we let $Q^* \in \DD_k^d$ denote its parent.
 
 	\item We say a set $E \subset \RR^d$ is \emph{$\DD_k$ discretized} if it is a union of cubes in $\DD_k^d$. If $E$ is $\DD_k$ discretized, we define
 	%
@@ -262,7 +268,7 @@ and then setting $\DD^d = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD^d$ are k
 	%
 	\[ E(1/N^k) = \bigcup \{ Q \in \DD_k^d : Q \cap E \neq \emptyset \}. \]
 	%
-	Then $E(1/N^k)$ is the smallest $\DD_k$ discretized set containing $E$ in it's interior. Our choice of notation invites thinking of $E(1/N^k)$ as a discretized version of the classic $1/N^k$ thickening
+	Then $E(1/N^k)$ is the smallest $\DD_k$ discretized set containing $E$ in its interior. Our choice of notation invites thinking of $E(1/N^k)$ as a discretized version of the classic $1/N^k$ thickening
 	%
 	\[ \{ x \in \RR^d : d(x,E) < 1/N^k \}. \]
 	%
@@ -271,17 +277,23 @@ and then setting $\DD^d = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD^d$ are k
 %
 Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidelength, from the perspective of geometric measure theory, working with dyadic cubes is normally equivalent to working with the class of all cubes.
 
-Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each succesive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedure. Such a construction satisfies Property (i), (ii), and (v) of Falconer's definition of a fractal, justifying the name.
+Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each successive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedure. Such a construction satisfies the following three properties of Falconer's definition of a fractal, as detailed in \cite{Falconer}:
+%
+\begin{itemize}
+	\item[(i)] $X$ has detail on arbitrarily small scales.
+	\item[(ii)] $X$ is too irregular to be described in traditional geometric language.
+	\item[(v)] $X$ is defined recursively.
+\end{itemize}
 
 \begin{example}
-	Let us construct the Cantor set $C$ as a fractal-type set. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
+	Let us construct the middle thirds Cantor set $C$ as a fractal-type set. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
 	%
 	\[ C_{k+1} = \bigcup \{ I_1 \cup I_3 : I \in \DD_k^1(C_k) \}. \]
 	%
 	Then $C = \bigcap_{k \geq 0} C_k$ is the Cantor set.
 \end{example}
 
-Unfortunately, a \emph{constant} branching factor is not sufficient to describe the types of recursive procedures we discuss in this thesis. This motivates a more general iterated family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
+Unfortunately, a \emph{constant} branching factor is not sufficient to describe the types of recursive procedures we discuss in this thesis. Thus, we introduce a more general family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
 %
 \begin{itemize}
 	\item For each $k \geq 0$, we define 
@@ -353,7 +365,7 @@ The cubes in $\DR_k^d$ are coarser than those in $\DQ_k^d$, but finer than those
 %	Then we know $r_k < \varepsilon$, so $H^s_\varepsilon(E) < \varepsilon^d$. Letting $\varepsilon \to 0$, we conclude $H^d(E) = 0$. Thus $H^d$ is absolutely continuous with respect to the Lebesgue measure. The measure $H^d$ is translation invariant, so $H^d$ is actually a constant multiple of the Lebesgue measure.
 %\end{example}
 
-It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a Borel measure obeying a decay law on small sets. We say a Borel probability measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and there exists $C > 0$ such that for any cube $Q$, $\mu(Q) \leq C \cdot l(Q)^s$. The proof of Frostman's lemma will utilize a technique often useful, known as the \emph{mass distribution principle}. To prove the mass distribution principle, we apply weak convergence.
+It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lower bound} the Hausdorff dimension of a given set. A key technique to finding a lower bound is \emph{Frostman's lemma}, which says that a set has large Hausdorff dimension if and only if it supports a Borel measure obeying a decay law on small sets. We say a finite Borel measure $\mu$ is a \emph{Frostman measure} of dimension $s$ if it is non-zero, compactly supported, and there exists $C > 0$ such that for any cube $Q$, $\mu(Q) \leq C \cdot l(Q)^s$. The proof of Frostman's lemma will utilize a technique often useful, known as the \emph{mass distribution principle}. To prove the mass distribution principle, we apply weak convergence.
 
 \begin{comment}
 
@@ -438,15 +450,17 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\[ \mu_i(K) = \int \mathbf{I}_K d\mu_i \leq \int \varphi d\mu_i. \]
 	%
-	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, it is uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Thus the measures $\mu_i|_K$ are uniformly finite, and we can apply the Banach Alaoglu theorem to find a regular Borel measure $\mu^K$ such that $\mu_i|_K \to \mu^K$ weakly. Note that if $f \in C_c(\RR^d)$ is supported on $K_1 \cap K_2$ for two compact sets $K_1$ and $K_2$, then
+	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, it is uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Applying the Banach Alaoglu theorem, we conclude that the collection of measures $\{ \mu_i|_K \}$ is contained in a compact subset of the space of non-negative Borel measures with respect to the weak $*$ topology. But every compact subset of a locally convex space is complete, and so we can therefore find a finite Borel measure $\mu^K$ supported on $K$ such that $\mu_i|_K \to \mu^K$ weakly.
+
+	If $f \in C_c(\RR^d)$ is supported on $K_1 \cap K_2$, for two compact sets $K_1$ and $K_2$, then
 	%
 	\[ \int f d\mu^{K_1} = \lim_{i \to \infty} \int_{K_1} f d\mu_i = \lim_{i \to \infty} \int_{K_2} f d \mu_i = \int f d\mu^{K_2}. \]
 	%
-	Thus we can define a measure $\mu$ such that for each $f \in C_c(\RR^d)$,
+	Thus we can define a measure $\mu$ such that for each $f \in C_c(\RR^d)$, if $f$ is supported on a compact set $K$, then
 	%
-	\[ \int f d\mu = \lim_{K \to \infty} \int f d\mu^K. \]
+	\[ \int f d\mu = \int f d\mu^K. \]
 	%
-	For any $f \in C_c(\RR^d)$ supported on a compact set $K$,
+	For any $f \in C_c(\RR^d)$, $f$ is supported on some compact set $K$, and then
 	%
 	\[ \int f d\mu = \int f d\mu^K = \lim_{i \to \infty} \int_K f d\mu_i = \lim_{i \to \infty} \int f d\mu_i. \]
 	%
@@ -480,7 +494,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 \begin{theorem}[Mass Distribution Principle] \label{massdistributionprinciplelem}
 	Let $w: \DQ^d \to [0,\infty)$ be a function such that for any $Q_0 \in \DQ^d$,
 	%
-	\begin{equation} \label{equation73234091} \sum_{Q^* = Q_0} w(Q) = w(Q_0), \end{equation}
+	\begin{equation} \label{equation73234091} \sum_{Q^* = Q_0} w(Q) = w(Q_0). \end{equation}
 	%
 	Then there exists a regular Borel measure $\mu$ supported on
 	%
@@ -567,7 +581,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	If $E$ is a Borel set, $H^s(E) > 0$ if and only if there exists an $s$ dimensional Frostman measure supported on $E$.
 \end{theorem}
 \begin{proof}
-	Suppose that $\mu$ is $s$ dimensional and supported on $E$. If $H^s(F) = 0$, then for each $\varepsilon > 0$ there is a sequence of cubes $\{ Q_k \}$ with $\sum_{k = 1}^\infty l(Q_k)^s \leq \varepsilon$. But then
+	Suppose that $\mu$ is $s$ dimensional and supported on $E$. If $H^s(F) = 0$, then for each $\varepsilon > 0$ there is a sequence of cubes $\{ Q_k \}$ whose union covers $F$, with $\sum_{k = 1}^\infty l(Q_k)^s \leq \varepsilon$. But then
 	%
 	\[ \mu(F) \leq \sum_{k = 1}^\infty \mu(Q_k) \lesssim \sum_{k = 1}^\infty l(Q_k)^s \leq \varepsilon. \]
 	%
@@ -581,7 +595,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\begin{equation} \label{equation104-240-640954} w(Q) \leq w^+(Q), \end{equation}
 	%
-	are satisfied at each stage of the definition of $w$. We initially define $w$ by setting $w([0,1]^d) = w^+([0,1]^d)$. Given $Q \in \DD_k^d$, we enumerate it's children as $Q_1, \dots, Q_M \in \DD_{k+1}^d$. We then consider any values $A_1, \dots, A_M \geq 0$ such that
+	are satisfied at each stage of the definition of $w$. We initially define $w$ by setting $w([0,1]^d) = w^+([0,1]^d)$. Given $Q \in \DD_k^d$, we enumerate its children as $Q_1, \dots, Q_M \in \DD_{k+1}^d$. We then consider any values $A_1, \dots, A_M \geq 0$ such that
 	%
   	\begin{equation} \label{equation3424209034}
   		A_1 + \dots + A_M = w(Q),
@@ -599,6 +613,12 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	where $Q'$ ranges over the cubes in $\DD_k^d(Q(l_k))$. Given any cube $Q$, we find $k$ with $1/2^{k-1} \leq l(Q) \leq 1/2^k$. Then $Q$ is covered by $O_d(1)$ dyadic cubes in $\DD_k^d$, and so $\mu(Q) \lesssim l(Q)^s$. Thus $\mu$ is a Frostman measure of dimension $s$.
 \end{proof}
+
+Given any finite Borel measure $\mu$, we let
+%
+\[ \hausdim(\mu) = \left\{ s : \mu\ \text{is a Frostman measure of dimension $s$} \right\}. \]
+%
+Frostman's lemma says that for any Borel set $E$, $\hausdim(E)$ is the supremum of $\hausdim(\mu)$, over all measures $\mu$ supported on a closed subset of $E$. We refer to $\hausdim(\mu)$ as the \emph{Frostman dimension} of the measure $\mu$.
 
 \begin{comment}
 
@@ -689,48 +709,6 @@ then $\fordim(E) \leq \hausdim(E)$. A set $E$ is \emph{Salem} if $\fordim(E) = \
 
 Later on, we will use two important principles to calculate the Fourier transforms of measures supported $\DQ_k$ discretized sets. The first property is an instance of the Heisenberg uncertainty principle, which says that the Fourier transform of a function $f$ supported on a sidelength $r$ intervals has fast decay outside of a sidelength $1/r$ interval. The second is an instance of the Poisson summation formula, which says that the Fourier transform of a measure $\mu$ supported on $[0,1]^d$ can be read off from it's Fourier series $\{ \widehat{\mu}(k) : k \in \ZZ^d \}$.
 
-\begin{theorem}
-	Suppose $\mu$ is supported on $[0,1)^d$.
-\end{theorem}
-\begin{proof}
-	Consider the distribution $\Lambda = \sum_{n \in \mathbf{Z}} \delta_n$, where $\delta_n$ is the Dirac delta function at $n$. Then the Poisson summation formula says that the Fourier transform of $\Lambda$ is itself. If $I = \mathbf{I}_{x \in [0,1)^d}$, then
-	%
-	\[ |\widehat{I}(\xi)| = \prod_{i = 1}^d \left| \frac{1 - e^{-2 \pi i \xi_i}}{2\pi \xi_i} \right| \lesssim \prod_{i = 1}^d \frac{1}{1 + |\xi_i|} \]
-	%
-	We have $\mu = I (\Lambda * \mu)$, so
-	%
-	\begin{align*}
-		|\widehat{\mu}(\xi)| &= \left| \left[ \widehat{I} * (\Lambda \widehat{\mu}) \right](\xi) \right| = \left| \sum_{n \in \mathbf{Z}} \widehat{\mu}(n)(\widehat{I} * \delta_n)(\xi) \right| = \left| \sum_{n \in \mathbf{Z}} \widehat{\mu}(n) \widehat{I}(n - \xi) \right|\\
-		&\lesssim \sum_{|n - \xi| \leq 1} |\widehat{\mu}(n)| + \sum_{|n - \xi| \geq 1} \frac{|\widehat{\mu}(n)|}{|\xi_1 - n_1| \dots |\xi_d - n_d|}.
-	\end{align*}
-	%
-	\begin{align*}
-		\sum_{n \in \ZZ^d} [1 + |n|]^{-s/2} \prod_{i = 1}^d \frac{1}{1 + |\xi_i - n_i|} &\lesssim \int_{\RR^d} [1 + |x|]^{-s/2} \prod_{i = 1}^d \frac{1}{1 + |\xi_i - x_i|} dx\\
-		&= \int_{\RR^d} [1 + |x + \xi|]^{-s/2} \prod_{i = 1}^d \frac{1}{1 + |x_i|}.
-	\end{align*}
-	% [1 + |x|] \geq |x_1| ... |x_d| 
-	%
-	Now suppose $|\widehat{\mu}(n)| \lesssim |n|^{-s/2}$. If $|\xi| \geq 10$, and $|n - \xi| \leq 1$, then $n^{-s/2} \leq |\xi|^{-s/2}$. Since there are $O(1)$ values $n \in \mathbf{Z}^d$ with $|n - \xi| \leq 1$, this implies that
-	%
-	\[ \sum_{|n - \xi| \leq 1} |\widehat{\mu}(n)| \lesssim |\xi|^{-s/2}. \]
-	%
-	On the other hand, since there are $O(1)$ values $n \in \mathbf{Z}$ with $|n| \leq 1$, we find
-	%
-	\[ \sum_{\substack{|n| \leq 1\\|n - \xi| \geq 1}} \frac{|\widehat{\mu}(n)|}{|\xi_1 - n_1| \dots |\xi_d - n_d|} \lesssim \frac{1}{|\xi_1 - n_1| \dots |\xi_d - n_d|} \]
-
-	and $|\xi| \geq 10$, we perform a dyadic decomposition, writing
-	%
-	\begin{align*}
-		|\widehat{\mu}(\xi)| &\lesssim \sum_{|n - \xi| \leq 1} [1 + |n|]^{-s/2} + \sum_{k = 1}^\infty \sum_{2^{k-1} \leq |n - \xi| \leq 2^k} \frac{[1 + |n|]^{-s/2}}{2^k}.
-	\end{align*}
-	%
-	There are $O(1)$ integers $n$ with $|n - \xi| \leq 1$, and if $|n - \xi| \leq 1$, then $[1 + |n|]^{-s/2} \lesssim |\xi|^{-s/2}$. This shows
-	%
-	\[ \sum_{|n - \xi| \leq 1} |n|^{-s/2} \lesssim |\xi|^{-s/2}. \]
-	%
-	For each $k$, there are $O(2^{dk})$ integers $n$ with $2^{k-1} \leq |n - \xi| \leq 2^k$, and for each such $n$, $[1 + |n|]^{-s/2} \lesssim [|\xi| - 2^k]^{-s/2}$
-\end{proof}
-
 \end{comment}
 
 
@@ -740,12 +718,12 @@ Later on, we will use two important principles to calculate the Fourier transfor
 
 \section{Dyadic Fractional Dimension}
 
-It is often natural for us to establish results about fractional dimension `dyadically', working with the family of cubes $\DQ^d$ and branching factors $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
+It is often natural for us to establish results about fractal dimension `dyadically', working with the family of cubes $\DQ^d$ and branching factors $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
 
 \begin{lemma} \label{comparableCovers}
 	For any set $E$,
 	%
-	\[ N_{\DQ}(m,E) \approx_d \# \{ Q \in \DQ_m^d : Q \cap E \neq \emptyset \} \approx_d N(l_m,E). \]
+	\[ N_{\DQ}(m,E) \sim_d \# \{ Q \in \DQ_m^d : Q \cap E \neq \emptyset \} \sim_d N(l_m,E). \]
 \end{lemma}
 \begin{proof}
 	Let $\mathcal{E} = \{ Q \in \DQ_m^d : Q \cap E \neq \emptyset \}$. Then $N(l_m,E) \leq N_{\DQ}(m,E) \leq \#(E)$. Conversely, let $\{ Q_k \}$ be a minimal cover of $E$ by cubes. Then each cube $Q_k$ intersects at most $3^d$ cubes in $\DQ_k^d$, so $\#(\mathcal{E}) \leq 3^d \cdot N(l_m,E) \leq 3^d \cdot N_{\DQ}(m,E)$.
@@ -809,7 +787,7 @@ We will see that this condition allows us to work dyadically in many scenarios w
 	and this is equivalent to \eqref{definingsequencegrowthrate}.
 \end{proof}
 
-Any constant branching factor satisfies \eqref{definingsequencegrowthrate} for the Minkowski dimension. In particular, we can work fairly freely with the classical dyadic cubes without any problems occuring. But more importantly for our work, we can let the sequence $\{ N_k \}$ increase rapidly.
+Any constant branching factor satisfies \eqref{definingsequencegrowthrate} for the Minkowski dimension. In particular, we can work fairly freely with the classical dyadic cubes without any problems occurring. But more importantly for our work, we can let the sequence $\{ N_k \}$ increase rapidly.
 
 \begin{theorem} \label{rapidBranching}
 	If $N_k = 2^{\lfloor 2^{k \psi(k)} \rfloor}$, where $\psi(k)$ is any decreasing sequence of positive numbers tending to zero, such that
@@ -848,7 +826,7 @@ then the values $\{ l_k \}$ are referred to as \emph{hyperdyadic}. The next (cou
 	%
 	which we can simplify to read
 	%
-	\begin{equation} \label{equation12623} \#(\DQ_k(E_k)) = \frac{N_1 \dots N_k}{M_1 \dots M_k} \end{equation}
+	\begin{equation} \label{equation12623} \#(\DQ_k(E_k)) = \frac{N_1 \dots N_k}{M_1 \dots M_k}. \end{equation}
 	%
 	Noting that $\log(N_i) = 2^{ci} + O(1)$, and $\log(M_i) = c2^{ci} + O(1)$, we conclude that
 	%
@@ -986,7 +964,7 @@ Finally, we consider computing whether we can establish that a measure is a Fros
 	\[ \mu(Q) \lesssim_d l_k^s = [(l_k/l)^s l^\varepsilon ] l^{s - \varepsilon} \leq [l_k^{s + \varepsilon} / l_{k+1}^s] l^{s - \varepsilon} = \left[ \frac{N_{k+1}^s}{(N_1 \dots N_k)^\varepsilon} \right] l^{s-\varepsilon} \lesssim_\varepsilon l^{s-\varepsilon}. \qedhere \]
 \end{proof}	
 
-Let's recognize the utility of this approach from the perspective of a dyadic construction. Suppose we have a sequence of nested sets $\{ E_k \}$, where $E_k$ is a $\DQ_k$ discretized subset of $[0,1]^d$, and for each $Q_0 \in \DQ_k(E_k)$, there is at least one cube $Q \in \DQ_{k+1}(E_{k+1})$ with $Q^* = Q_0$. Then we can set $E = \bigcap E_k$ as a `limit' of the discretizations $E_k$. We can associate with this construction a finite measure $\mu$ supported on $E$. It is defined by the mass distribution principle with respect to a funciton $w: \DQ^d \to [0,\infty)$. We set $w([0,1]^d) = 1$, and for each $Q \in \DQ_{k+1}(E_{k+1})$, set
+Let's recognize the utility of this approach from the perspective of a dyadic construction. Suppose we have a sequence of nested sets $\{ E_k \}$, where $E_k$ is a $\DQ_k$ discretized subset of $[0,1]^d$, and for each $Q_0 \in \DQ_k(E_k)$, there is at least one cube $Q \in \DQ_{k+1}(E_{k+1})$ with $Q^* = Q_0$. Then we can set $E = \bigcap E_k$ as a `limit' of the discretizations $E_k$. We can associate with this construction a finite measure $\mu$ supported on $E$. It is defined by the mass distribution principle with respect to a function $w: \DQ^d \to [0,\infty)$. We set $w([0,1]^d) = 1$, and for each $Q \in \DQ_{k+1}(E_{k+1})$, set
 %
 \[ w(Q) = \frac{w(Q^*)}{\# \{ Q' \in \DQ_{k+1}(E_{k+1}) : (Q')^* = Q^* \}}. \]
 %
