@@ -272,18 +272,20 @@ and then setting $\DD^d = \bigcup_{k \geq 0} \DD_k^d$. Elements of $\DD^d$ are k
 	%
 	\[ \{ x \in \RR^d : d(x,E) < 1/N^k \}. \]
 	%
-	We have no need for the standard thickening in this thesis, so there is no notational conflict.
+	We have no need for the standard notion of thickening in this thesis, so there is no notational conflict.
 \end{itemize}
 %
 Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidelength, from the perspective of geometric measure theory, working with dyadic cubes is normally equivalent to working with the class of all cubes.
 
-Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each successive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedure. Such a construction satisfies the following three properties of Falconer's definition of a fractal, as detailed in \cite{Falconer}:
+Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each successive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedure. Such a construction satisfies the following three properties of Falconer's definition of a fractal, as detailed in the introduction to \cite{Falconer}:
 %
 \begin{itemize}
 	\item[(i)] $X$ has detail on arbitrarily small scales.
 	\item[(ii)] $X$ is too irregular to be described in traditional geometric language.
 	\item[(v)] $X$ is defined recursively.
 \end{itemize}
+%
+This justifies the term `fractal' when used to referring about these sets.
 
 \begin{example}
 	Let us construct the middle thirds Cantor set $C$ as a fractal-type set. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
