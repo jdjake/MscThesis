@@ -4,45 +4,60 @@
 \chapter{Future Work}
 \label{ch:Conclusions}
 
-To conclude this thesis, we describe a rough sketch of some ideas which we hope will lead to future developments from the ideas of `rough sets avoiding patterns' we detailed in Chapter \ref{ch:RoughSets}. Section 6.1 attempts to explit additional geometric information about rough configurations to find sets with large Hausdorff dimension avoiding patterns, and section 6.2 studies the problem of finding a set avoiding a rough configuration which supports a measure with large Fourier decay.
+To conclude this thesis, we sketch some ideas developing the theory of `rough sets avoiding patterns', which we introduced in Chapter \ref{ch:RoughSets}. Section 6.1 attempts to exploit additional geometric information about certain rough configurations to find sets with large Hausdorff dimension avoiding patterns, and Section 6.2 studies the problem of finding a set avoiding a rough configuration which supports a measure with large Fourier decay.
 
 \section{Low Rank Avoidance}
 
-Another way we can attempt to generalize the results of Chapter \ref{ch:RoughSets} is by attempting to improve the result if the rough configuration $\C$ is given additional geometric structure. In Chapter \ref{ch:RoughSets}, we showed a technique to find large sets avoid configurations with low Minkowski dimension. This means precisely that these configurations are efficiently covered by cubes at all scales. Here, we discuss whether one can obtain large sets avoiding configurations efficiently covered by other families of geometric shapes, e.g. by thickened lines, thickened planes, or more generally, by thickened variants of any family of algebraic hypersurfaces.
+One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize addition geometric structure of the rough configuration $\C$ to obtain larger avoiding sets. Recall that in Chapter \ref{ch:RoughSets}, we studied the avoidance problem for configurations with low Minkowski dimension. This condition means precisely that these configurations are efficiently covered by cubes at all scales. The idea of this section is to study configurations which are efficiently covered by other families of geometric objects at all scales, i.e. by a family of thickened hyperplanes, or by a family of thickened lines. Note that a set $E$ is efficiently covered by a family of thickened parallel hyperplanes at all scales if and only, for a linear transformation $M$ with that hyperplane as a kernel, $M(E)$ has low Minkowski dimension.
 
-\begin{theorem}
+\begin{theorem} \label{theorem9063909014901}
     Let $\C \subset \C(\RR)$ be the countable union of sets $\{ \C_i \}$ such that
     %
     \begin{itemize}
         \item For each $i$, there exists $n_i$ such that $\C_i$ is a pre-compact subset of $\C^{n_i}(\RR)$.
 
-        \item There exists an integer $k_i > 0$ and $s \in [0,k_i)$, together with a rational-coefficient linear transformation $M: \RR^{n_i} \to \RR^{k_i}$ such that $M(\C_i)$ has Minkowski dimension $s$.
+        \item There exists an integer $m_i > 0$ and $s_i \in [0,m_i)$, together with a full-rank rational-coefficient linear transformation $M_i: \RR^{n_i} \to \RR^{m_i}$ such that $M_i(\C_i)$ has lower Minkowski dimension at most $s_i$.
     \end{itemize}
     %
     Then there exists a set $X \subset [0,1]$ avoiding $\C$ with Hausdorff dimension at least
     %
-    \[ \inf_i \left( \frac{k_i - s_i}{k_i} \right). \]
+    \[ \inf_i \left( \frac{m_i - s_i}{m_i} \right). \]
 \end{theorem}
 
-\begin{remark}
-    Rescaling the problem by a constant does not affect any of the quantities in the problem. In particular, in our proof we may assume that the matrix we study is integer valued, which can be obtained by scaling down by a large integer.
-\end{remark}
+\begin{remarks}
+    \
+    \begin{enumerate}
+        \item[1.] A useful feature of this method is that the resulting set does not depend on the number of points in a configuration. This is a feature only shared by Math\'{e}'s result, Theorem \ref{mathemainresult} in Section 3.3. We exploit this feature later on in this section to find large subsets avoiding a countable family of equations with arbitrarily many variables.
 
-Here, we only describe a discrete building block lemma, which can be fleshed out into a full proof by techniques analogous to that given in Chapters \ref{ch:RelatedWork} and \ref{ch:RoughSets}. But first, we must `change coordinates' in the problem, so our description of the lemma is simpler. First, since our transformation $M$ has full rank, we may find indices
+        \item[2.] It might be expected, based on the result of Theorem \ref{mainTheorem}, that one should be able to obtain a set $X \subset [0,1]$ avoiding $\C$ with Hausdorff dimension
+        %
+        \[ \inf_i \left( \frac{m_i - s_i}{m_i - 1} \right), \]
+        %
+        whenever $s_i \geq 1$ for all $i$. We plan to pursue this question in further research.
+
+        \item[3.] Also note that the theorem only applies in the one-dimensional configuration avoidance setting. We also plan to find higher dimensional analogues to this theorem, when $d > 1$, in the near future.
+    \end{enumerate}
+\end{remarks}
+
+Here, we only describe a solution to the discretized version of the problem. This can be fleshed out into a full proof of Theorem \ref{theorem9063909014901} by techniques analogous to those given in Chapters \ref{ch:RelatedWork} and \ref{ch:RoughSets}. Thus we discuss a single linear transformation $M: \RR^{dn} \to \RR^m$, and try to avoid a discretized version of a low dimensional set.
+
+Before we describe the discretized result, let us simplify the problem slightly. Since our transformation $M$ has full rank, we may find indices
 %
-\[ i_1, \dots, i_k \in \{ 1, \dots, n \} \]
+\[ i_1, \dots, i_m \in \{ 1, \dots, n \} \]
 %
-such that the transformation $M$ is invertible when restricted to these indices the span of $\{ e_{i_1}, \dots, e_{i_k} \}$. By an affine change of coordinates in the range of $M$, which preserves the Minkowski dimension of any set, we may assume that $M(e_{i_j}) = e_j$ for each $1 \leq j \leq k$.
+such that the transformation $M$ is invertible when restricted to the span of $\{ e_{i_1}, \dots, e_{i_m} \}$. By an affine change of coordinates in the range of $M$, which preserves the Minkowski dimension of any set, we may assume without loss of generality that $M(e_{i_j}) = e_j$ for each $1 \leq j \leq m$.
 
 \begin{theorem} \label{theorem059891891829}
-    Fix $s \in [0,k)$ and $\varepsilon \in [0, (k-s)/2)$. Let $T_1, \dots, T_n \subset [0,1]$ be disjoint, $\DQ_k$ discretized sets, and let $B \subset \RR^k$ be a $\DQ_{k+1}$ discretized set such that
+    Fix $s \in [0,m)$ and $\varepsilon \in [0, (m-s)/2)$. Let $T_1, \dots, T_n \subset [0,1]$ be disjoint, $\DQ_k$ discretized sets, and let $B \subset \RR^m$ be a $\DQ_{k+1}$ discretized set such that
     %
-    \[ \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}. \]
+    \begin{equation} \label{equation6091904232093}
+        \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}.
+    \end{equation}
     %
-    Then there exists a constant $C(s,n,k,M) > 0$, and an integer constant $A(M) > 0$, such that if $A(M) \divides N_{k+1}$, and 
+    Then there exists a constant $C(n,m,M) > 0$, and an integer constant $A(M) > 0$, such that if $A(M) \divides N_{k+1}$, and 
     %
     \begin{equation} \label{equation19024u1298352389}
-        N_{k+1} \geq C(s,n,k,M) \cdot M_{k+1}^{\frac{k}{s - k}},
+        N_{k+1} > C(n,m,M) \cdot M_{k+1}^{\frac{m}{m - (s + \varepsilon)}}.
     \end{equation}
     %
     then there exists sets $S_1 \subset T_1$, \dots, $S_n \subset T_n$ such that
@@ -50,74 +65,101 @@ such that the transformation $M$ is invertible when restricted to these indices 
 
 \end{theorem}
 \begin{proof}
-    For each $i \not \in \{ i_1, \dots, i_k \}$, there are rational numbers $a_{ij} = p_{ij}/q_{ij} \in \mathbf{Q}$ such that $M(e_i) = \sum a_{ij} e_j$. For each interval $R \in \DR_{k+1}(T_i)$, we let $a(R) \in \{ 0, \dots, N_1 \dots N_k M_{k+1} - 1 \}$ be the integer such that
+    For each $i \not \in \{ i_1, \dots, i_m \}$, there are rational numbers $a_{ij} = p_{ij}/q_{ij} \in \mathbf{Q}$ such that $M(e_i) = \sum a_{ij} e_j$. Set $A(M) = \prod_{ij} q_{ij}$. For each interval $R \in \DR_{k+1}(T_i)$, we let
+    %
+    \[ a(R) \in \{ 0, \dots, N_1 \dots N_k M_{k+1} - 1 \} \]
+    %
+    be the unique integer such that
     %
     \[ R = \left[ \frac{a(R)}{N_1 \dots N_k M_{k+1}}, \frac{a(R) + 1}{N_1 \dots N_k M_{k+1}} \right]. \]
     %
-    Let $X \in \{ 0, \dots, N_{k+1}/M_{k+1} - 1 \}^k$. For each $1 \leq j \leq k$, define
+    Let $X \in \{ 0, \dots, N_{k+1}/M_{k+1} - 1 \}^m$. For each $1 \leq j \leq m$, define
     %
     \[ S_{i_j}(X) = \bigcup_{R \in \DR_{k+1}(T_{i_j})} \left[ \frac{a(R)}{N_1 \dots N_k M_{k+1}} + \frac{X_j}{N_1 \dots N_{k+1}}, \frac{a(R)}{N_1 \dots N_k M_{k+1}} + \frac{X_j + 1}{N_1 \dots N_{k+1}} \right]. \]
     %
-    For $i \not \in \{ i_1, \dots, i_k \}$, define
+    For $i \not \in \{ i_1, \dots, i_m \}$, define
     %
     \[ S_i(X) = \bigcup_{\substack{R \in \DR_{k+1}(T_i)\\ \prod q_{ij} \divides a(R)}} \left[ \frac{a(R)}{N_1 \dots N_k M_{k+1}}, \frac{a(R)}{N_1 \dots N_k M_{k+1}} + \frac{1}{N_1 \dots N_{k+1}} \right] \]
     %
-    For each $i$, we let $\mathcal{S}_i(X)$ denote the set of startpoints to intervals in $S_i$, and
+    For each $i$, we let $\mathcal{S}_i(X)$ denote the set of startpoints to intervals in $S_i$. Then
     %
-    \[ \mathcal{A}(X) = M(\mathcal{S}_1(X) \times \dots \times \mathcal{S}_n(X)). \]
+    \[ \mathcal{S}_{i_j}(X) \subset \frac{\ZZ}{N_1 \dots N_k M_{k+1}} + \frac{X_j}{N_1 \dots N_{k+1}} \]
     %
-    Then $\mathcal{A}(X) \subset (\ZZ^k + X)/(N_1 \dots N_{k+1})$. In particular, this implies that for $X \neq X'$, $d(\mathcal{A}(X), \mathcal{A}(X')) \geq 1/N_1 \dots N_{k+1}$. Applying the pigeonhole principle and applying \eqref{equation19024u1298352389}, this means that there exists a constant $C$ depending only on $M$ and $k$, and some value of $X_0$ such that
+    and for $i \not \in \{ i_1, \dots, i_m \}$,
     %
-    \[ \# \left\{ a \in \mathcal{A}(X_0) : d(a,B) \leq \frac{2}{\sqrt{d} \| M \|} \frac{1}{N_1 \dots N_{k+1}} \right\} \leq C \cdot \frac{N_{k+1}^{s + \varepsilon}}{(N_{k+1}/M_{k+1})^k} = C \cdot \frac{M_{k+1}^k}{N_{k+1}^{k - (s + \varepsilon)}} < 1. \]
+    \[ \mathcal{S}_i(X) \subset \frac{\prod q_{ij}}{N_1 \dots N_k M_{k+1}}. \]
     %
-    In particular, this means that there is some $X_0$ such that
+    It therefore follows that if
     %
-    \[ d(a,B) \geq \frac{2}{\sqrt{d} \| M \|} \frac{1}{N_1 \dots N_{k+1}}. \]
+    \[ \mathcal{A}(X) = M(\mathcal{S}_1(X) \times \dots \times \mathcal{S}_n(X)), \]
     %
-    for all $a \in \mathcal{A}(X_0)$. But this means that $M(S_1(X_0) \times \dots \times S_n(X_0))$ is disjoint from $B$. Taking $S_i = S_i(X_0)$ for each $i$ completes the proof.
+    then
+    %
+    \[ \mathcal{A}(X) \subset \frac{\ZZ^m}{N_1 \dots N_k M_{k+1}} + \frac{X}{N_1 \dots N_{k+1}}. \]
+    %
+    In particular, if $X \neq X'$, $\mathcal{A}(X)$ and $\mathcal{A}(X')$ are disjoint. Equation \eqref{equation19024u1298352389} implies there is a constant $C(n,m,M)$, such that
+    %
+    \[ \# \left\{ n \in \mathbf{Z}^m : d \left( \frac{n}{N_1 \dots N_{k+1}}, B \right) \leq \frac{2}{\sqrt{d} \cdot \| M \|} \frac{1}{N_1 \dots N_{k+1}} \right\} \leq C(n,m,M)^{m - (s + \varepsilon)} \cdot N_{k+1}^{s + \varepsilon}. \]
+    %
+    Applying the pigeonhole principle and \eqref{equation6091904232093}, there exists some value $X_0$ such that
+    %
+    \begin{align*}
+        \# \left\{ n \in \mathbf{A}(X_0) : d(n,B) \leq \frac{2}{\sqrt{d} \cdot \| M \|} \frac{1}{N_1 \dots N_{k+1}} \right\} &\leq \frac{C(n,m,M)^{m - (s + \varepsilon)} \cdot N_{k+1}^{s + \varepsilon}}{(N_{k+1}/M_{k+1})^m}\\
+        &\leq \frac{C(n,m,M)^{m - (s + \varepsilon)} \cdot M_{k+1}^m}{N_{k+1}^{m - (s + \varepsilon)}} < 1.
+    \end{align*}
+    %
+    In particular, this set is actually empty. But this means that the set
+    %
+    \[ M(S_1(X_0) \times \dots \times S_n(X_0)) \]
+    %
+    is disjoint from $B$. Taking $S_i = S_i(X_0)$ for each $i$ completes the proof.
 \end{proof}
 
-Much remains on research related to this result. For instance, it is unclear whether one can improve the bound in Theorem \ref{theorem059891891829} to
-%
-\[ \inf \frac{k_i - s}{k_i - 1}, \]
-%
-which would match the bound in Theorem \ref{mainTheorem}, and how this theorem generalizes to sets avoiding patterns in $\RR^d$, instead of just in $\RR^1$.
+Let's consider one application of Theorem \ref{theorem9063909014901}, an extension of Theorem \ref{sumset-application}.
+
+\begin{theorem}
+    Let $Y \subset \RR$ be a countable union of pre-compact sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR$ with Hausdorff dimension at least $1 - t$ such that for any integer $n > 0$, for any $a_1, \dots, a_n \in \QQ$, and for any $x_1, \dots, x_n \in X$,
+    %
+    \[ (a_1X + \dots + a_n X) \cap Y \subset (0). \]
+\end{theorem}
+\begin{proof}
+    Let $Y = \bigcup_{i = 1}^\infty Y_i$, where each $Y_i$ has lower Minkowski dimension at most $t$. For each $n$, $i$, and $a = (a_1, \dots, a_n) \in \QQ^n$ with $a \neq 0$, let
+    %
+    \[ \C_{n,a,i} = \{ (x_1, \dots, x_n) \in \C^n : a_1x_1 + \dots + a_nx_n \in Y_i \}, \]
+    %
+    and let $\C = \bigcup \C_{n,a,i}$. Let $T_{n,i,a}(x_1,\dots,x_n)$ be the linear map given by
+    %
+    \[ T_{n,a}(x_1,\dots,x_n) = a_1x_1 + \dots + a_nx_n. \]
+    %
+    Then $T_{n,a}$ is nonzero, and $T_{n,a}(\C_{n,i,a})$ how lower Minkowski dimension at most $t$. Applying Theorem \ref{theorem9063909014901}, we obtain a set $X \subset [0,1]$ avoiding $\C$ with Hausdorff dimension at least $1 - t$.
+
+    We prove $X$ satisfies the conclusions of this theorem by induction on $n$. Consider the case $n = 1$, and fix $a \in \QQ$. If $a \neq 0$, then because $X$ avoids $\C_{a,i}$ for each $i$, if $x \in X$, $ax \not \in Y$, so $aX \cap Y = \emptyset$. If $a = 0$, then $aX = 0$, so $(aX) \cap Y \subset (0)$.
+
+    In general, consider $a = (a_1, \dots, a_{n+1}) \in \QQ^{n+1}$. If $a \neq 0$, then because $X$ avoids $\C_{n,a,i}$ for each $i$, we know if $x_1, \dots, x_{n+1} \in X$ are distinct, then $a_1 x_1 + \dots + a_{n+1} x_{n+1} \not \in Y$. If the values $x_1, \dots, x_{n+1} \in X$ are not distinct, then by rearranging both the values $\{ x_i \}$ and $\{ a_i \}$, we may without loss of generality assume that $x_n = x_{n+1}$. Then
+    %
+    \begin{align*}
+        a_1 x_1 + \dots + a_{n+1} x_{n+1} &= a_1 x_1 + \dots + a_{n-1} x_{n-1} + (a_n + a_{n+1}) x_n\\
+        &\subset (a_1 X + \dots + a_{n-1} X + (a_n + a_{n+1}) X).
+    \end{align*}
+    %
+    By induction,
+    %
+    \[ (a_1 X + \dots + a_{n-1} X + (a_n + a_{n+1}) X) \cap Y \subset (0), \]
+    %
+    so we conclude that either $a_1 x_1 + \dots + a_{n+1} x_{n+1} \not \in Y$, or $a_1x_1 + \dots + a_{n+1} x_{n+1} = 0$. The only remaining case we have not covered is if $a \in \QQ^{n+1}$ is equal to zero. But in this case,
+    %
+    \[ (a_1 X + \dots + a_n X) = (0 + \dots + 0) = 0, \]
+    %
+    and so it is trivial that $(a_1 X + \dots + a_n X) \cap Y \subset (0)$.
+\end{proof}
 
 \section{Fourier Dimension}
 
-A popular technique in current research in geometric measure theory is exploiting Fourier analysis to obtain additional structural information about configurations in sets. A key insight to this technique is that the Frostman dimension of any finite Borel measure $\mu$ is equal to
-%
-\[ \sup \left\{ s > 0 : \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}} d\xi < \infty \right\}. \]
-%
-For brevity, we leave the proof to other sources, e.g. \cite[Section 3.5]{Matilla}. Note that if
-%
-\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}}\; d\xi < \infty, \]
-%
-then there exists a constant $C$ such that for \emph{most} values $\xi \in \RR^d$,
-%
-\begin{equation} \label{fourierdimensioncondition}
-    |\widehat{\mu}(\xi)| \leq C |\xi|^{-s/2}.
-\end{equation}
-%
-We obtain a strengthening of the Frostman measure condition if we require \eqref{fourierdimensioncondition} to hold for \emph{all} values $\xi$. In particular, we say a measure $\mu$ has \emph{Fourier dimension} $s$ if \eqref{fourierdimensioncondition} holds for all $\xi \in \RR^d$. If this is true, then for all $t < s$,
-%
-\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-t}}\; d\xi < \infty \]
-%
-so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph{Fourier dimension} of a set $E$ as
-%
-\[ \fordim(E) = \sup \left\{ s : \begin{array}{c} \text{there is a Borel probability measure $\mu$}\\ \text{supported on $E$ with Fourier dimension $s$} \end{array} \right\}, \]
-%
-then $\fordim(E) \leq \hausdim(E)$. We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'.
-
-There is much interest in determining whether sets with large Fourier dimension can avoid configurations. Results published recently include \cite{PramanikLaba} and \cite{Shmerkin}. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, it is a general principle that \emph{random} families of sets tend to have Fourier dimension equal to the Hausdorff dimension. Since the main technique of Theorem \ref{mainTheorem} involves a random selection strategy, we might hope that a modification of the procedure produces a set with large Fourier dimension.
+There is much interest in determining whether sets with large Fourier dimension can avoid configurations. Results published recently include \cite{PramanikLaba} and \cite{Shmerkin}. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, it is a general principle that \emph{random} families of sets tend to have Fourier dimension equal to the Hausdorff dimension. Since the main technique of Theorem \ref{mainTheorem} involves a random selection strategy, we might hope that a modification of the procedure produces a set with large Fourier dimension. In this Section, we show this is true, though with a suboptimal dimension to what we expect from Theorem \ref{mainTheorem}. We hope to obtain this improved bound in the near future.
 
 \begin{theorem} \label{FourierTheorem}
     Let $s \geq d$, and suppose $\C$ is the countable union of pre-compact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]^d$ with Fourier dimension at least $(nd - s)/n$ avoiding $\C$.
 \end{theorem}
-
-\begin{remark}
-    Comparing Theorem \ref{FourierTheorem} with Theorem \ref{mainTheorem}, we see that our result here is slightly suboptimal, giving a dimension $(nd - s)/n$ set rather than the $(nd - s)/(n-1)$ dimensional set we obtained in the Hausdorff dimension setting. The hope to obtain a more optimal result in the near future.
-\end{remark}
 
 We begin with a lemma which simplifies the analysis of the Fourier decay of the probability measures we study to the analysis of frequencies in $\ZZ^d$.
 
@@ -183,7 +225,7 @@ We begin with a lemma which simplifies the analysis of the Fourier decay of the 
     and since $\widehat{\mu}$ is bounded, \eqref{endequation53} actually holds for all $\xi \in \RR^d$.
 \end{proof}
 
-Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use so that with high probability, we have sharp control over the Fourier transform of these measures. Lemma \ref{discretefouriermeasures} implies that we only need control over integer-valued frequencies. The discretized measures $\{ \nu_k \}$ we select are, for each $k$, a sum of point mass distributions at the points $(\ZZ/N_1 \dots N_k)^d$. Therefore, $\widehat{\nu_k}$ will be $N_1 \dots N_k$ periodic, in the sense that for any $m \in (N_k \ZZ)^d$ and $\xi \in \RR^d$, $\widehat{\nu_k}(\xi + m) = \widehat{\nu_k}(\xi)$. Since we are only concerned with integer-valued frequencies, it will therefore suffice to obtain control of $\widehat{\nu_k}$ on frequencies lying in $\{ 1, \dots, N_1 \dots N_k \}^d$.
+Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use so we have sharp control over the Fourier transform of these measures at each scale of our construction. Lemma \ref{discretefouriermeasures} implies that we only need control over integer-valued frequencies. The discretized measures $\{ \nu_k \}$ we select are, for each $k$, a sum of point mass distributions at the points $(\ZZ/N_1 \dots N_k)^d$. Therefore, $\widehat{\nu_k}$ will be $N_1 \dots N_k$ periodic, in the sense that for any $m \in (N_k \ZZ)^d$ and $\xi \in \RR^d$, $\widehat{\nu_k}(\xi + m) = \widehat{\nu_k}(\xi)$. Since we are only concerned with integer-valued frequencies, it will therefore suffice to obtain control of $\widehat{\nu_k}$ on frequencies lying in $\{ 1, \dots, N_1 \dots N_k \}^d$ in the discrete part of the argument.
 
 In the discrete lemma below, we rely on a variant of the proof strategy of Theorem 2.1 of \cite{Shmerkin}, but modified so that we can allow the branching factors $\{ N_k \}$ to increase arbitrarily fast. We still use the families $\DQ_k^d$ and $\DR_k^d$, together with parameters $\{ N_k \}$ and $\{ M_k \}$, in order to perform a multi-scale analysis. For each $\DQ_k$ discretized set $E \subset [0,1]^d$, we define a probability measure
 %
@@ -201,8 +243,11 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     Fix $s \in [1,dn)$, and $\varepsilon \in [0,(dn-s)/4)$. Let $T \subset \RR^d$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^{dn}$ be a nonempty $\DQ_{k+1}$ discretized set such that
     %
     \begin{equation} \label{equation982589128942189}
-        \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}.
+    \begin{split}
+        \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}
+    \end{split}
     \end{equation}
+    %  \leq N_{k+1}^d
     %
     Then there exists a constant $A(d,n,s)$ such that, provided
     %
@@ -210,11 +255,17 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
         M_{k+1}^{\frac{dn}{dn - s - 2\varepsilon}} \leq N_{k+1} \leq 2 M_{k+1}^{\frac{dn}{dn - s - 2\varepsilon}},
     \end{equation}
     %
-    there exists a random $\DQ_k$ discretized set $S \subset T$, such that with probability
+    \begin{equation} \label{equation189248914891}
+        \quad N_{k+1} \geq 3^{1/\varepsilon},
+    \end{equation}
     %
-    \[ 1 - \frac{1}{N_{k+1}^\varepsilon} - \left( \left\lceil \frac{A(d,n,s)}{\varepsilon} \right \rceil! \right)^3 \frac{(N_1 \dots N_k)^d}{N_{k+1}^d}, \]
+    and
     %
-    the set $S$ satisfies the following two properties:
+    \begin{equation} \label{equation77871247817841278}
+        N_{k+1} \geq 3^{1/d} \left( \left\lceil \frac{A(d,n,s)}{\varepsilon} \right\rceil! \right)^{3/d} (N_1 \dots N_k),
+    \end{equation}
+    %
+    then there exists a $\DQ_{k+1}$ discretized set $S \subset T$, satisfying the following properties:
     %
     \begin{enumerate}
         \item[(A)] For any collection of $n$ distinct cubes $Q_1, \dots, Q_n \in \DQ_{k+1}(S)$,
@@ -239,12 +290,12 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     %
     \[ \mathbf{E}(\#(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n))) \leq M_{k+1}^{dn}/N_{k+1}^{dn - (s + \varepsilon)} \leq 1/N_{k+1}^\varepsilon. \]
     %
-    Markov's inequality implies
+    Markov's inequality, together with \eqref{equation189248914891} implies
     %
     \begin{equation} \label{fourierdim2}
     \begin{split}
         \mathbf{P}(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n) \neq \emptyset) &= \mathbf{P}(\# (\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n)) \geq 1)\\
-        &\leq 1/N_{k+1}^\varepsilon.
+        &\leq 1/N_{k+1}^\varepsilon \leq 1/3.
     \end{split}
     \end{equation}
     %
@@ -266,7 +317,7 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     %
     \[ \PP \left( |\widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_T}(m)| \geq M_{k+1}^{-d/2 - \varepsilon} \right) \leq \exp(- \#(\DQ_k(T)) M_{k+1}^\varepsilon / 2 ). \]
     %
-    The function $\widehat{\nu_S} - \widehat{\eta_{k+1}}$ is $N_1 \dots N_{k+1}$ periodic. Thus, to uniformly bound $\widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m)$, we need only bound the function over $(N_1 \dots N_{k+1})^d$ values. Applying a union bound and applying \eqref{equation5523786128439}, we therefore find that
+    The function $\widehat{\nu_S} - \widehat{\eta_{k+1}}$ is $N_1 \dots N_{k+1}$ periodic. Thus, to uniformly bound $\widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m)$, we need only bound the function over $(N_1 \dots N_{k+1})^d$ values. Applying a union bound with \eqref{equation5523786128439}, we find that
     %
     \begin{equation} \label{equation81298398120412}
     \begin{split}
@@ -279,16 +330,17 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     %
     Note that
     %
-    \[ M_{k+1}^{-d/2 - \varepsilon} \lesssim N_{k+1}^{-(1 - 2\varepsilon/d) \frac{dn - s - 2\varepsilon}{2n}} \leq N_{k+1}^{-(1 - \varepsilon) \frac{dn - s - 2\varepsilon}{2n}}. \]
+    \begin{equation} \label{equation8998724714871}
+        M_{k+1}^{-d/2 - \varepsilon} \lesssim N_{k+1}^{-(1 - 2\varepsilon/d) \frac{dn - s - 2\varepsilon}{2n}} \leq N_{k+1}^{-(1 - \varepsilon) \frac{dn - s - 2\varepsilon}{2n}}.
+    \end{equation}
     %
-    If we set $A(d,n,s) = (4d^2n/(dn - s))$, then \eqref{fourierdim2} and \eqref{equation81298398120412} allow us to conclude that with probability at least
+    If we set $A(d,n,s) = (4d^2n/(dn - s))$, then \eqref{equation77871247817841278}, \eqref{equation81298398120412}, and \eqref{equation8998724714871} allow us to conclude that
     %
-    \[ 1 - \frac{1}{N_{k+1}^\varepsilon} - \left[ \left( \frac{A(d,n,s)}{\varepsilon} \right)! \right]^3 \frac{(N_1 \dots N_k)^d}{N_{k+1}^d}, \]
+    \begin{equation} \label{equation1241751}
+        \PP \left( \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ^d)} \geq N_{k+1}^{-(1 - \varepsilon)} \right) \leq 1/3.
+    \end{equation}
     %
-    the sets $\DQ_{k+1}(S^n)$ and $\DQ_{k+1}(B)$ are disjoint, and
-    %
-    \[ \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ^d)} \leq N_{k+1}^{-(1 - \varepsilon) \frac{dn - s - 2\varepsilon}{2n}}. \qedhere \]
-
+    Taking a union bound over \eqref{fourierdim2} and \eqref{equation1241751}, we find there is a non-zero probability that a set $S$ exists satisfying Property (A) and (B).
     \begin{comment}
 
     %
@@ -445,17 +497,13 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
 \end{comment}
 \end{proof}
 
-The remainder of the construction follows essentially the construction of the configuration avoiding set in Chapter \ref{ch:RoughSets}, obtaining a family of discretized sets $\{ X_k \}$ with $X = \bigcap X_k$. The only difference is we do not `terminate randomness' at each application of the discrete lemma, instead just choosing intervals randomly at each stage and not worrying whether the sets we choose actually satisfy Properties (A) and (B) at each stage. Nonetheless, we know that these properties are satisfied with large probability, and so provided the parameters $\{ N_k \}$ and $\varepsilon_k$ satisfy
-%
-\[ \sum_{k = 1}^\infty \frac{1}{N_{k+1}^\varepsilon} + \left( \left\lceil \frac{A(d,n,s)}{\varepsilon_k} \right\rceil ! \right)^3 \frac{(N_1 \dots N_{k-1})^d}{N_k^d} < \infty, \]
-%
-the Borel-Cantelli lemma implies that almost surely, Properties (A) and (B) of Lemma \ref{discreteFourierBuildingBlock} hold at all sufficiently large stages of the construction. This is sufficient to guarantee that the set $X$ avoids the configuration $\C$. We will show that under the additional constraint that for each $\varepsilon > 0$,
+The remainder of the construction follows essentially the construction of the configuration avoiding set in Chapter \ref{ch:RoughSets}, obtaining a family of discretized sets $\{ X_k \}$ with $X = \bigcap X_k$. As in Chapter \ref{ch:RoughSets}, Property (A) of Lemma \eqref{discreteFourierBuildingBlock} is sufficient to guarantee that $X$ avoids the configuration $\C$. The remainder of this section is devoted to showing that Property (B) of Lemma \eqref{discreteFourierBuildingBlock} is sufficient to guarantee that under the additional assumption that for each $\varepsilon > 0$,
 %
 \begin{equation} \label{equation41028694692} (N_1 \dots N_k) \lesssim_\varepsilon N_{k+1}^\varepsilon, \end{equation}
 %
-the set $X$ has Fourier dimension $(nd - s)/n$.
+the set $X$ has the Fourier dimension guaranteed by Theorem \ref{FourierTheorem}.
 
-We must now construct a measure on $X$ with the appropriate Fourier decay. The measures $\nu_S$ do not `quite' suffice for this purpose, since their Fourier transforms do not actually have any decay. We will fix this by convolving $\nu_S$ with an appropriate bump function. Let $\psi$ be a compactly supported, positive, smooth function supported on $[0,1]^d$ with
+The measures $\nu_{X_k}$ do not quite suffice to construct a measure on $X$ with the appropriate Fourier decay. The reason for this is that the Fourier transforms of these measures do not actually have any decay. We will fix this by convolving $\nu_S$ with an appropriate bump function. Let $\psi$ be a compactly supported, positive, smooth function supported on $[0,1]^d$ with
 %
 \[ \int \psi(x)\; dx = 1. \]
 %
@@ -469,7 +517,7 @@ Then $\psi_k$ is supported on $[0,1/N_1 \dots N_k]^d$, $\int \psi_k(x)\; dx = 1$
 %
 Note that, because $\psi$ is smooth and compactly supported, for any $m > 0$,
 %
-\[ |\widehat{\psi_k}(\xi) \lesssim_m (N_1 \dots N_k)^m / |\xi|^m. \]
+\[ |\widehat{\psi_k}(\xi)| \lesssim_m (N_1 \dots N_k)^m / |\xi|^m. \]
 %
 An important heuristic, a variant of the Heisenberg uncertainty principle, is that $\widehat{\psi_k}$ is `essentially' supported on the box $[-N_k,N_k]^d$.
 
@@ -491,29 +539,34 @@ An important heuristic, a variant of the Heisenberg uncertainty principle, is th
 \end{proof}
 
 \begin{lemma}
-    Almost surely, for each $\varepsilon > 0$, there exists a constant $C_\varepsilon > 0$ and an integer $K > 0$, such that for any integer $k \geq K$, and any $m \in \ZZ^d$,
+    For each $\varepsilon > 0$, there exists a constant $C_\varepsilon > 0$ and an integer $K > 0$, such that for any integer $k \geq K$, and any $m \in \ZZ^d$,
     %
     \[ |\widehat{\mu_{X_k}}(m)| \leq C_\varepsilon k \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
 \end{lemma}
 \begin{proof}
-    By the Borel-Cantelli lemma, almost surely, there exists some $K$ such that Property (A) and (B) of Lemma \ref{discreteFourierBuildingBlock} is satisfied at every stage of the construction past the $K$th stage. Without loss of generality, by choosing a larger $K$ if necessary, that $\varepsilon_k \leq \varepsilon [2n/(dn - s + 2)]$. Because $\mu_{X_K}$ is smooth and compactly supported, there is certainly a constant $C_\varepsilon$ such that for any $m \in \ZZ^d$,
+    We establish the result by induction. Because $\mu_{X_0} = \psi$ is smooth and compactly supported, there exists a constant $C_\varepsilon$ such that for any $m \in \ZZ^d$,
     %
-    \[ |\widehat{\mu_{X_K}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)} \leq C_\varepsilon K \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
+    \[ |\widehat{\mu_{X_0}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
     %
     This constant should also be chosen larger than the constant in Lemma \ref{lemma09679009341}. The remainder of the argument is established by induction. Suppose that for each $m \in \ZZ^d$,
     %
-    \[ |\widehat{\mu_{X_l}}(m)| \leq C_\varepsilon l \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
+    \[ |\widehat{\mu_{X_k}}(m)| \leq C_\varepsilon k \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
     %
-    For $|m| \leq N_{l+1}^{1 + \varepsilon}$,
+    For $|m| \leq N_{k+1}^{1 + \varepsilon}$, we apply Property (B) of Lemma \ref{discreteFourierBuildingBlock} to conclude
     % (1-\varepsilon_k) \frac{dn - s - 2\varepsilon_k}{2n} \geq (dn - s)/(2n) - \varepsilon
     \begin{align*}
-        |\widehat{\mu_{X_{l+1}}}(m)| &\leq N_{l+1}^{-(1-\varepsilon_{l+1}) \frac{dn - s - 2\varepsilon_{l+1}}{2n}} + C_\varepsilon l \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}\\
-        &\leq (l + 1) |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}.
+        |\widehat{\mu_{X_{k+1}}}(m)| &= |\widehat{\psi_{k+1}}(m) \widehat{\nu_{X_{k+1}}}(m)|\\
+        &\leq |\widehat{\psi_{k+1}}(m)| |\widehat{\nu_{X_{k+1}}}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)|\\
+        &\ \ \ \ \ + |\widehat{\psi_{k+1}}(m) \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)|\\
+        &= |\widehat{\nu_{X_{k+1}}}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)| + \left| \frac{\widehat{\psi_{k+1}}(m)}{\widehat{\psi_k}(m)} \right| |\widehat{\mu_{X_k}}(m)|\\
+        &= |\widehat{\nu_{X_{k+1}}}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)| + \left| \frac{\widehat{\psi} \left( \frac{m}{N_1 \dots N_{k+1}} \right)}{\widehat{\psi} \left( \frac{m}{N_1 \dots N_k} \right)} \right| |\widehat{\mu_{X_k}}(m)|\\
+        &\leq N_{k+1}^{-(1-\varepsilon_{l+1}) \frac{dn - s - 2\varepsilon_{k+1}}{2n}} + C_\varepsilon k \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}\\
+        &\leq (k + 1) |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}.
     \end{align*}
     %
     If $|m| \geq N_{k+1}^{1 + \varepsilon}$, we can apply Lemma \ref{lemma09679009341} to conclude that
     %
-    \[ |\widehat{\mu_{X_{l+1}}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)} \leq C_\varepsilon (l+1) |m|^{\left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
+    \[ |\widehat{\mu_{X_{k+1}}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)} \leq C_\varepsilon (l+1) |m|^{\left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
     %
     This completes the proof.
 \end{proof}

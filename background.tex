@@ -245,6 +245,42 @@ This notion of dimension, in a disguised form, appears in Chapter \ref{ch:RoughS
 
 
 
+\section{Fourier Dimension}
+
+A popular technique in current research in geometric measure theory is exploiting Fourier analysis to obtain additional structural information about configurations in sets. A key insight to this technique is that the Frostman dimension of any finite Borel measure $\mu$ is equal to
+%
+\[ \sup \left\{ s > 0 : \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}} d\xi < \infty \right\}. \]
+%
+For brevity, we leave the proof to other sources, e.g. \cite[Section 3.5]{Matilla}. Note that if
+%
+\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}}\; d\xi < \infty, \]
+%
+then there exists a constant $C$ such that for \emph{most} values $\xi \in \RR^d$,
+%
+\begin{equation} \label{fourierdimensioncondition}
+    |\widehat{\mu}(\xi)| \leq C |\xi|^{-s/2}.
+\end{equation}
+%
+We obtain a strengthening of the Frostman measure condition if we require \eqref{fourierdimensioncondition} to hold for \emph{all} values $\xi$. In particular, we say a measure $\mu$ has \emph{Fourier dimension} $s$ if \eqref{fourierdimensioncondition} holds for all $\xi \in \RR^d$. If this is true, then for all $t < s$,
+%
+\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-t}}\; d\xi < \infty \]
+%
+so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph{Fourier dimension} of a set $E$ as
+%
+\[ \fordim(E) = \sup \left\{ s : \begin{array}{c} \text{there is a Borel probability measure $\mu$}\\ \text{supported on $E$ with Fourier dimension $s$} \end{array} \right\}, \]
+%
+then $\fordim(E) \leq \hausdim(E)$. We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. The Fourier dimension of a set will play a prominant role in Section 6.2, where we attempt to find sets with large Fourier dimension avoiding configurations.
+
+
+
+
+
+
+
+
+
+
+
 \section{Dyadic Scales} \label{sec:Dyadics}
 
 It is now useful to introduce the dyadic notation we utilize throughout this thesis. At the cost of losing access to the continuous structure of $\RR^d$, applying dyadic techniques often allows us to elegantly discretize problems in Euclidean space.

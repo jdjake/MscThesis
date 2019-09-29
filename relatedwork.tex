@@ -306,10 +306,10 @@ then \eqref{equation903103513095} holds, so we can apply Lemma \ref{pramanikandf
 
 Math\'{e}'s result \cite{Mathe} constructs sets avoiding low degree algebraic hypersurfaces.
 
-\begin{theorem}[Math\'{e}]
-    Let $\{ f_k: \RR^{nd} \to \mathbf{R} \}$ be a countable family of rational coefficient polynomials with degree at most $m$. Then there exists a set $X \subset [0,1]^d$ with Hausdorff dimension $d/m$ which avoids the configuration
+\begin{theorem}[Math\'{e}] \label{mathemainresult}
+    For each $k$, let $f_k: \RR^{n_k d} \to \RR$ be a rational coefficient polynomial with degree at most $m$. Then there exists a set $X \subset [0,1]^d$ with Hausdorff dimension $d/m$ which avoids the configuration
     %
-    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^n(\RR^d) : f_k(x_1, \dots, x_n) = 0 \}. \]
+    \[ \C = \bigcup_k \{ (x_1, \dots, x_n) \in \C^{n_k}(\RR^d) : f_k(x_1, \dots, x_n) = 0 \}. \]
 \end{theorem}
 
 Originally, Math\'{e}'s result does not explicitly use a discretization method analogous to Keleti and Pramanik and Fraser, but his proof strategy can be reconfigured to work in this setting. For the purpose of brevity, we do not carry out the complete argument, merely giving the discretization method below. By first trying to avoid the zero sets of the partial derivatives of the function $f$, one can reduce to the case where a partial derivative of $f$ is non-vanishing on the $\DQ_k$ discretized sets we start with. The key technique is that $f$ maps discrete lattices of points to a discrete, `one dimensional lattice' in $\RR^d$, and the degree of the polynomial gives us the difference in lengths between the two lattices. This idea was present in Keleti's work, and one can view Math\'{e}'s result as a generalization along these lines. We revisit this idea in Chapter \ref{ch:Conclusions}. As in Pramanik and Fraser's result, we utilize the multi-scale dyadic notations $\DQ$ and $\DR$, with an implicitly chosen sequence $\{ N_k \}$ and $\{ M_k \}$.
