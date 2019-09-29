@@ -39,7 +39,7 @@ One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize ad
     \end{enumerate}
 \end{remarks}
 
-Here, we only describe a solution to the discretized version of the problem. This can be fleshed out into a full proof of Theorem \ref{theorem9063909014901} by techniques analogous to those given in Chapters \ref{ch:RelatedWork} and \ref{ch:RoughSets}. Thus we discuss a single linear transformation $M: \RR^{dn} \to \RR^m$, and try to avoid a discretized version of a low dimensional set.
+For purpose of brevity, here we only describe a solution to the discretized version of the problem. This can be fleshed out into a full proof of Theorem \ref{theorem9063909014901} by techniques analogous to those given in Chapters \ref{ch:RelatedWork} and \ref{ch:RoughSets}. Thus we discuss a single linear transformation $M: \RR^{dn} \to \RR^m$, and try to avoid a discretized version of a low dimensional set.
 
 Before we describe the discretized result, let us simplify the problem slightly. Since our transformation $M$ has full rank, we may find indices
 %
@@ -60,9 +60,21 @@ such that the transformation $M$ is invertible when restricted to the span of $\
         N_{k+1} > C(n,m,M) \cdot M_{k+1}^{\frac{m}{m - (s + \varepsilon)}}.
     \end{equation}
     %
-    then there exists sets $S_1 \subset T_1$, \dots, $S_n \subset T_n$ such that
+    then there exists $\DQ_{k+1}$ discretized sets $S_1 \subset T_1$, \dots, $S_n \subset T_n$ such that
     %
+    \begin{enumerate}
+        \item For any collection of $n$ distinct cubes $Q_i \in \DQ_{k+1}(S_i)$,
+        %
+        \[ Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B). \]
 
+        \item For each $i$, and for each $Q \in \DQ_k(T_i)$, there exists $\DR_Q \subset \DR_{k+1}(Q)$ such that
+        %
+        \[ \#(\DR_Q) \geq \frac{\#(\DR_{k+1}(Q))}{A(M)}, \]
+        %
+        and if $R \in \DR_{k+1}(Q)$,
+        %
+        \[ \#(\DQ_{k+1}(R \cap S_i)) = \begin{cases} 1 &: R \in \DR_Q, \\ 0 &: R \not \in \DR_Q. \end{cases} \]
+    \end{enumerate}
 \end{theorem}
 \begin{proof}
     For each $i \not \in \{ i_1, \dots, i_m \}$, there are rational numbers $a_{ij} = p_{ij}/q_{ij} \in \mathbf{Q}$ such that $M(e_i) = \sum a_{ij} e_j$. Set $A(M) = \prod_{ij} q_{ij}$. For each interval $R \in \DR_{k+1}(T_i)$, we let
@@ -115,7 +127,7 @@ such that the transformation $M$ is invertible when restricted to the span of $\
     is disjoint from $B$. Taking $S_i = S_i(X_0)$ for each $i$ completes the proof.
 \end{proof}
 
-Let's consider one application of Theorem \ref{theorem9063909014901}, an extension of Theorem \ref{sumset-application}.
+Before we move on, let's consider one application of Theorem \ref{theorem9063909014901}, which gives an extension of Theorem \ref{sumset-application} to arbitrarily large sums.
 
 \begin{theorem}
     Let $Y \subset \RR$ be a countable union of pre-compact sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR$ with Hausdorff dimension at least $1 - t$ such that for any integer $n > 0$, for any $a_1, \dots, a_n \in \QQ$, and for any $x_1, \dots, x_n \in X$,
@@ -571,10 +583,10 @@ An important heuristic, a variant of the Heisenberg uncertainty principle, is th
     This completes the proof.
 \end{proof}
 
-The same argument as in Theorem \ref{massdistributionprinciplelem} shows that the sequence $\{ \mu_{X_k} \}$ is a Cauchy sequence under the weak $*$ topology. If we form the limit $\mu_X = \lim_{k \to \infty} \mu_{X_k}$, then the Fourier transforms $\widehat{\mu_{X_k}}$ converge pointwise to $\widehat{\mu_X}$. In particular, for each $\varepsilon > 0$ and $n \in \ZZ^d$, we conclude that
+The same argument as in Theorem \ref{massdistributionprinciplelem} shows that the sequence $\{ \mu_{X_k} \}$ is a Cauchy sequence under the weak $*$ topology. If we form the limit $\mu_X = \lim_{k \to \infty} \mu_{X_k}$, then the Fourier transforms $\widehat{\mu_{X_k}}$ converge pointwise to $\widehat{\mu_X}$. In particular, for each $\varepsilon > 0$ and $m \in \ZZ^d$, we conclude that
 %
-\[ |\widehat{\mu_X}(n)| \leq \limsup |\widehat{\mu_{X_k}}(n)| \leq C_\varepsilon |n|^{- \left( \frac{nd - s}{n} - \varepsilon \right)}. \]
+\[ |\widehat{\mu_X}(m)| \leq \limsup |\widehat{\mu_{X_k}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{nd - s}{n} - \varepsilon \right)}. \]
 %
-Combined with Lemma \ref{discretefouriermeasures}, this implies $X$ almost surely has Fourier dimension $(nd - s)/n$.
+Combined with Lemma \ref{discretefouriermeasures}, this implies $X$ has Fourier dimension $(nd - s)/n$.
 
 \endinput
