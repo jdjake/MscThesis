@@ -167,7 +167,7 @@ Before we move on, let's consider one application of Theorem \ref{theorem9063909
 
 \section{Fourier Dimension}
 
-There is much interest in determining whether sets with large Fourier dimension can avoid configurations. Results published recently include \cite{PramanikLaba} and \cite{Shmerkin}. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, it is a general principle that \emph{random} families of sets tend to have Fourier dimension equal to the Hausdorff dimension. Since the main technique of Theorem \ref{mainTheorem} involves a random selection strategy, we might hope that a modification of the procedure produces a set with large Fourier dimension. In this Section, we show this is true, though with a suboptimal dimension to what we expect from Theorem \ref{mainTheorem}. We hope to obtain this improved bound in the near future.
+Recently, there has been much interest in determining whether sets with large Fourier dimension can avoid configurations. Rcesults published recently in the literature include \cite{PramanikLaba} and \cite{Shmerkin}. In this Section, we attempt to modify the procedure of Theorem \ref{mainTheorem} to obtain a set with large Fourier dimension. In this section, we obtain such a result, though with a suboptimal dimension to what we expect from Theorem \ref{mainTheorem}. We hope to obtain this improved bound in the near future.
 
 \begin{theorem} \label{FourierTheorem}
     Let $s \geq d$, and suppose $\C$ is the countable union of pre-compact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]^d$ with Fourier dimension at least $(nd - s)/n$ avoiding $\C$.
@@ -231,13 +231,95 @@ We begin with a lemma which simplifies the analysis of the Fourier decay of the 
     Combining \eqref{calculation1}, \eqref{calculation2}, and \eqref{calculation3} with \eqref{mubounded}, we conclude that if $|\xi| \geq 2$,
     %
     \begin{equation} \label{endequation53}
-        |\widehat{\mu}(\xi)| \lesssim |\xi|^{-s/2},
+        |\widehat{\mu}(\xi)| \lesssim |\xi|^{-s/2}.
     \end{equation}
     %
-    and since $\widehat{\mu}$ is bounded, \eqref{endequation53} actually holds for all $\xi \in \RR^d$.
+    Since $\widehat{\mu}$ is bounded, \eqref{endequation53} actually holds for all $\xi \in \RR^d$.
 \end{proof}
 
-Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use so we have sharp control over the Fourier transform of these measures at each scale of our construction. Lemma \ref{discretefouriermeasures} implies that we only need control over integer-valued frequencies. The discretized measures $\{ \nu_k \}$ we select are, for each $k$, a sum of point mass distributions at the points $(\ZZ/N_1 \dots N_k)^d$. Therefore, $\widehat{\nu_k}$ will be $N_1 \dots N_k$ periodic, in the sense that for any $m \in (N_k \ZZ)^d$ and $\xi \in \RR^d$, $\widehat{\nu_k}(\xi + m) = \widehat{\nu_k}(\xi)$. Since we are only concerned with integer-valued frequencies, it will therefore suffice to obtain control of $\widehat{\nu_k}$ on frequencies lying in $\{ 1, \dots, N_1 \dots N_k \}^d$ in the discrete part of the argument.
+Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use so we have sharp control over the Fourier transform of these measures at each scale of our construction.
+
+To ensure that the Fourier transform of the measures we study have rapid decay, it will be important to mollify the measures with a family of smooth bump functions. Let $\alpha$ be a non-negative, $C^\infty$ function supported on $[0,1]^d$ such that $\alpha(x) = 1$ for $x \in [1/3,2/3]^d$, and $\alpha(x) \leq 1$ for all other values of $x$. Then let $\beta$ be the non-negative, $C^\infty$ function supported on $[-1/3,1/3]^d$, defined for each $x \in [-1/3,1/3]^d$ by
+%
+\[ \beta(x_1, \dots, x_d) = 1 - \alpha(|x_1|, \dots, |x_d|). \]
+%
+We note that for each $x \in \RR^d$,
+%
+\begin{equation} \label{equation123881948959}
+    \sum_{n \in \ZZ^d} \alpha(x + n) + \beta(x + n) = 1.
+\end{equation}
+%
+Equation \eqref{equation123881948959}, together with the symmetry of $\beta$ in each axis, implies that
+%
+\[ \int [\alpha(x) + \beta(x)]\; dx = 1. \]
+%
+We now define a function $\psi$, for each $x \in \RR^d$, by the formula
+%
+\[ \psi(x) = \alpha(x) + \frac{1}{2^d} \sum_{n \in \{0,1\}^d} \beta(x + n). \]
+%
+Thus $\psi$ is smooth, supported on $[-1,2]$,
+%
+\[ \int \psi(x) = 1, \]
+%
+and for any $x \in \RR^d$,
+%
+\[ \sum_{n \in \ZZ^d} \psi(x + n) = 1. \]
+%
+For each integer $k > 0$, let $\psi_k$ be the function defined for each $x \in \RR^d$ by
+%
+\[ \psi_k(x) = (N_1 \dots N_k)^d \psi(N_1 \dots N_k x). \]
+%
+Then $\psi_k$ is supported on the set
+%
+\[ \left[ \frac{-1}{N_1 \dots N_k}, \frac{2}{N_1 \dots N_k} \right], \]
+%
+$\int \psi_k(x) = 1$, and for any $\xi \in \RR^d$,
+%
+\[ \widehat{\psi_k}(\xi) = \widehat{\psi} \left( \frac{\xi}{N_1 \dots N_k} \right). \]
+%
+Lemma \ref{discretefouriermeasures} implies that we only need control over integer-valued frequencies. An important heuristic, a variant of the Heisenberg uncertainty principle, is that the Fourier decay of a measure $\mu$ which is roughly constant on boxes in $\DQ_k$ has rapid decay for frequencies of magnitude greater than $(N_1 \dots N_k)$. This is `almost' true, and can be made rigorous if we mollify the measure $\mu$ with a smooth bump function.
+
+\begin{lemma}
+    Let $f$ be a function such that for all $\xi \in \RR^d$,
+    %
+    \[ \left| \widehat{f}(\xi) \right| \leq \frac{C}{|\xi|^{s/2}}. \]
+    %
+    Let
+    %
+    \[ \nu = \sum_{k_1, \dots, k_d = 0}^{N - 1} \delta \left( \frac{k}{N} \right), \]
+    %
+    Then for all $\xi \in \RR^d$,
+    %
+    \[ \left| \left[ \widehat{f} * (\widehat{\nu} \widehat{\psi_N}) \right](\xi) \right| \leq \frac{C'}{|\xi|^{s/2}}. \]
+\end{lemma}
+\begin{proof}
+    s
+\end{proof}
+
+\begin{lemma}
+    If $|g(x)| \leq C/|m|^{s/2}$, and $f$ is the distribution function of the mean zero variance $1/C$ Gaussian function, then
+\end{lemma}
+\begin{proof}
+    We have
+    %
+    \[ \sup_{|x| \leq |y|} |x + y|^{s/2} |g(x)| \leq 2^{s/2} |y|^{s/2} \| g \|_{L^\infty(\RR^d)}. \]
+    \[ \sup_{|x| \geq |y|} |x + y|^{s/2} |g(x)| \leq 2^{s/2} \sup |x|^{s/2} |g(x)|. \]
+    %
+    Thus
+    %
+    \begin{align*}
+        \sup |x|^{s/2} |(f * g)(x)| &= \sup |x|^{s/2} \left| \int f(y) g(x - y)\; dy \right|\\
+        &\leq 2^{s/2} \| g \|_{L^\infty(\RR^d)} \int_{|x - y| \leq |y|} |y|^{s/2} |f(y)|\; dy\\
+        &\ \ \ \ + 2^{s/2} \left( \sup |x|^{s/2} |g(x)| \right) \int_{|x-y| \geq |y|} |f(y)|\; dy\\
+        &\leq 2^{s/2} \left( \| g \|_{L^\infty(\RR^d)} + \sup |x|^{s/2} |g(x)| \right) \int (1 + |y|^{s/2}) |f(y)|\; dy.
+    \end{align*}
+    %
+    If $|x| \geq N$, then for each term in the integrand, either $|y| \geq N/2$ or $|x - y| \geq N/2$.
+    THIS MIGHT WORK IF WE SET $g$ TO BE THE PREVIOUS MEASURE, AND $f$ THE FUTURE CONVOLUTED TERM.
+\end{proof}
+
+
+The discretized measures $\{ \nu_k \}$ we select are, for each $k$, a sum of point mass distributions at the points $(\ZZ/N_1 \dots N_k)^d$. Therefore, $\widehat{\nu_k}$ will be $N_1 \dots N_k$ periodic, in the sense that for any $m \in (N_k \ZZ)^d$ and $\xi \in \RR^d$, $\widehat{\nu_k}(\xi + m) = \widehat{\nu_k}(\xi)$. Since we are only concerned with integer-valued frequencies, it will therefore suffice to obtain control of $\widehat{\nu_k}$ on frequencies lying in $\{ 1, \dots, N_1 \dots N_k \}^d$ in the discrete part of the argument.
 
 In the discrete lemma below, we rely on a variant of the proof strategy of Theorem 2.1 of \cite{Shmerkin}, but modified so that we can allow the branching factors $\{ N_k \}$ to increase arbitrarily fast. We still use the families $\DQ_k^d$ and $\DR_k^d$, together with parameters $\{ N_k \}$ and $\{ M_k \}$, in order to perform a multi-scale analysis. For each $\DQ_k$ discretized set $E \subset [0,1]^d$, we define a probability measure
 %

@@ -269,8 +269,9 @@ so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph
 %
 \[ \fordim(E) = \sup \left\{ s : \begin{array}{c} \text{there is a Borel probability measure $\mu$}\\ \text{supported on $E$ with Fourier dimension $s$} \end{array} \right\}, \]
 %
-then $\fordim(E) \leq \hausdim(E)$. We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. The Fourier dimension of a set will play a prominant role in Section 6.2, where we attempt to find sets with large Fourier dimension avoiding configurations.
+then $\fordim(E) \leq \hausdim(E)$.
 
+We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, one heuristic is that the Fourier dimension of \emph{random} families of sets tend to almost surely have Fourier dimension equal to their Hausdorff dimension. Our main technique in Chapter \ref{ch:RoughSets} involves a random selection strategy, and so in Section 6.2, we attempt to utilize this random selection strategy to find sets with large Fourier dimension avoiding configurations.
 
 
 
@@ -477,18 +478,20 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 \end{comment}
 
 \begin{lemma} \label{weakstarcompleteness}
-	Suppose $\{ \mu_i \}$ is a Cauchy sequence of non-negative Borel measures on $\RR^d$, in the sense that for any $f \in C_c(\RR^d)$, the sequence
+	Suppose $\{ \mu_i \}$ is a Cauchy sequence of non-negative, regular Borel measures on $\RR^d$, in the sense that for any $f \in C_c(\RR^d)$, the sequence
 	%
 	\[ \left\{ \int f d\mu_i \right\} \]
 	%
-	is Cauchy. Then there is a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly.
+	is Cauchy. Then there is a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly, in the sense that for any $f \in C_C(\RR^d)$,
+	%
+	\[ \int f d\mu = \lim_{i \to \infty} \int f d\mu_i. \]
 \end{lemma}
 \begin{proof}
-	Fix a compact set $K$. then we can find a function $\varphi \in C_c(\RR^d)$ such that $\mathbf{I}_K \leq \varphi$. This means that
+	Fix a compact set $K$. Then we can find a function $\varphi \in C_c(\RR^d)$ such that $\mathbf{I}_K \leq \varphi$. This means that
 	%
 	\[ \mu_i(K) = \int \mathbf{I}_K d\mu_i \leq \int \varphi d\mu_i. \]
 	%
-	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, it is uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Applying the Banach Alaoglu theorem, we conclude that the collection of measures $\{ \mu_i|_K \}$ is contained in a compact subset of the space of non-negative Borel measures with respect to the weak $*$ topology. But every compact subset of a locally convex space is complete, and so we can therefore find a finite Borel measure $\mu^K$ supported on $K$ such that $\mu_i|_K \to \mu^K$ weakly.
+	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, the values $\int \varphi d\mu_i$ are uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Applying the Banach Alaoglu theorem, we conclude that the collection of measures $\{ \mu_i|_K \}$ is contained in a compact subset of the space of non-negative Borel measures with respect to the weak $*$ topology. But every compact subset of a locally convex space is complete, and so we can therefore find a finite Borel measure $\mu^K$ supported on $K$ such that $\mu_i|_K \to \mu^K$ weakly.
 
 	If $f \in C_c(\RR^d)$ is supported on $K_1 \cap K_2$, for two compact sets $K_1$ and $K_2$, then
 	%
@@ -754,7 +757,7 @@ Later on, we will use two important principles to calculate the Fourier transfor
 
 
 
-\section{Dyadic Fractional Dimension}
+\section{Dyadic Fractal Dimension}
 
 It is often natural for us to establish results about fractal dimension `dyadically', working with the family of cubes $\DQ^d$ and branching factors $\{ N_k : k \geq 1 \}$. We begin with Minkowski dimension. For each $m$, let $N_{\DQ}(m,E)$ denote the minimal number of cubes in $\DQ_m^d$ required to cover $E$. This is often easy to calculate, up to a multiplicative constant, by greedily selecting cubes which intersect $E$.
 
