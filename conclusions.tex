@@ -167,16 +167,16 @@ Before we move on, let's consider one application of Theorem \ref{theorem9063909
 
 \section{Fourier Dimension}
 
-Recently, there has been much interest in determining whether sets with large Fourier dimension can avoid configurations. Rcesults published recently in the literature include \cite{PramanikLaba} and \cite{Shmerkin}. In this Section, we attempt to modify the procedure of Theorem \ref{mainTheorem} to obtain a set with large Fourier dimension. In this section, we obtain such a result, though with a suboptimal dimension to what we expect from Theorem \ref{mainTheorem}. We hope to obtain this improved bound in the near future.
+Recently, there has been much interest in determining whether sets with large Fourier dimension can avoid configurations. Rcesults published recently in the literature include \cite{PramanikLaba} and \cite{Shmerkin}. In this Section, we attempt to modify the procedure of Theorem \ref{mainTheorem} to obtain a set with large Fourier dimension. In this section, we obtain such a result, though with a suboptimal dimension to what we expect from Theorem \ref{mainTheorem}. Furthermore, we restrict ourself to $d = 1$, so that issues involving smoothness do not concern us. We hope to obtain a method which gives an improved bound, and applies to sets in higher dimensional space, in the near future.
 
 \begin{theorem} \label{FourierTheorem}
-    Let $s \geq d$, and suppose $\C$ is the countable union of pre-compact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]^d$ with Fourier dimension at least $(nd - s)/n$ avoiding $\C$.
+    Suppose $\C$ is a configuration on $\RR$, formed from the countable union of pre-compact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]$ with Fourier dimension at least $(n - s)/n$ avoiding $\C$.
 \end{theorem}
 
 We begin with a lemma which simplifies the analysis of the Fourier decay of the probability measures we study to the analysis of frequencies in $\ZZ^d$.
 
 \begin{lemma} \label{discretefouriermeasures}
-    Suppose $\mu$ is a compactly supported finite Borel measure, consider $s > 0$, and suppose there exists a constant $C$ such that for each $m \in \ZZ^d$,
+    Suppose $\mu$ is a compactly supported finite Borel measure on $\RR^d$, consider $s > 0$, and suppose there exists a constant $C$ such that for each $m \in \ZZ^d$,
     %
     \begin{equation} \label{mufourierbound1}   
         |\widehat{\mu}(m)| \leq C |m|^{-s/2}.
@@ -237,108 +237,187 @@ We begin with a lemma which simplifies the analysis of the Fourier decay of the 
     Since $\widehat{\mu}$ is bounded, \eqref{endequation53} actually holds for all $\xi \in \RR^d$.
 \end{proof}
 
-Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use so we have sharp control over the Fourier transform of these measures at each scale of our construction.
+Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use to obtain have sharp control over the Fourier transform of these measures at each scale of our construction. A key strategy is to obtain high probability bounds controlling the Fourier transform of functions on the sets we choose using Hoeffding's inequality.
 
-To ensure that the Fourier transform of the measures we study have rapid decay, it will be important to mollify the measures with a family of smooth bump functions. Let $\alpha$ be a non-negative, $C^\infty$ function supported on $[0,1]^d$ such that $\alpha(x) = 1$ for $x \in [1/3,2/3]^d$, and $\alpha(x) \leq 1$ for all other values of $x$. Then let $\beta$ be the non-negative, $C^\infty$ function supported on $[-1/3,1/3]^d$, defined for each $x \in [-1/3,1/3]^d$ by
-%
-\[ \beta(x_1, \dots, x_d) = 1 - \alpha(|x_1|, \dots, |x_d|). \]
-%
-We note that for each $x \in \RR^d$,
-%
-\begin{equation} \label{equation123881948959}
-    \sum_{n \in \ZZ^d} \alpha(x + n) + \beta(x + n) = 1.
-\end{equation}
-%
-Equation \eqref{equation123881948959}, together with the symmetry of $\beta$ in each axis, implies that
-%
-\[ \int [\alpha(x) + \beta(x)]\; dx = 1. \]
-%
-We now define a function $\psi$, for each $x \in \RR^d$, by the formula
-%
-\[ \psi(x) = \alpha(x) + \frac{1}{2^d} \sum_{n \in \{0,1\}^d} \beta(x + n). \]
-%
-Thus $\psi$ is smooth, supported on $[-1,2]$,
-%
-\[ \int \psi(x) = 1, \]
-%
-and for any $x \in \RR^d$,
-%
-\[ \sum_{n \in \ZZ^d} \psi(x + n) = 1. \]
-%
-For each integer $k > 0$, let $\psi_k$ be the function defined for each $x \in \RR^d$ by
-%
-\[ \psi_k(x) = (N_1 \dots N_k)^d \psi(N_1 \dots N_k x). \]
-%
-Then $\psi_k$ is supported on the set
-%
-\[ \left[ \frac{-1}{N_1 \dots N_k}, \frac{2}{N_1 \dots N_k} \right], \]
-%
-$\int \psi_k(x) = 1$, and for any $\xi \in \RR^d$,
-%
-\[ \widehat{\psi_k}(\xi) = \widehat{\psi} \left( \frac{\xi}{N_1 \dots N_k} \right). \]
-%
-Lemma \ref{discretefouriermeasures} implies that we only need control over integer-valued frequencies. An important heuristic, a variant of the Heisenberg uncertainty principle, is that the Fourier decay of a measure $\mu$ which is roughly constant on boxes in $\DQ_k$ has rapid decay for frequencies of magnitude greater than $(N_1 \dots N_k)$. This is `almost' true, and can be made rigorous if we mollify the measure $\mu$ with a smooth bump function.
+\begin{theorem}[Hoeffding's Inequality]
+    Let $\{ X_i \}$ be an independant family of $N$ mean-zero random variables, such that $|X_i| \leq A$ for each $i$. Then for each $t > 0$,
+    %
+    \[ \PP \left( \left| \frac{1}{N} \sum X_i \right| \geq t \right) \leq 2 \exp \left( (N/A^2) \cdot (- t^2) \right). \]
+\end{theorem}
 
-\begin{lemma}
-    Let $f$ be a function such that for all $\xi \in \RR^d$,
-    %
-    \[ \left| \widehat{f}(\xi) \right| \leq \frac{C}{|\xi|^{s/2}}. \]
-    %
-    Let
-    %
-    \[ \nu = \sum_{k_1, \dots, k_d = 0}^{N - 1} \delta \left( \frac{k}{N} \right), \]
-    %
-    Then for all $\xi \in \RR^d$,
-    %
-    \[ \left| \left[ \widehat{f} * (\widehat{\nu} \widehat{\psi_N}) \right](\xi) \right| \leq \frac{C'}{|\xi|^{s/2}}. \]
-\end{lemma}
-\begin{proof}
-    s
-\end{proof}
+As with Theorem \ref{mainTheorem}, we perform a multi-scale analysis, using the notations introduced in Section \ref{sec:Dyadics}. Lemma \ref{discretefouriermeasures} implies that we only need control over integer-valued frequencies. The discretized measures $\{ \nu_k \}$ we select are, for each $k$, a sum of point mass distributions at the points $\ZZ/N_1 \dots N_k$. Therefore, $\widehat{\nu_k}$ will be $N_1 \dots N_k$ periodic, in the sense that for any $m \in (N_1 \dots N_k) \ZZ$ and $\xi \in \RR$, $\widehat{\nu_k}(\xi + m) = \widehat{\nu_k}(\xi)$. Since we are only concerned with integer valued frequencies, it will therefore suffice to control the Fourier transform of $\nu_k$ on frequencies lying in $\{ 1, \dots, N_1 \dots N_k \}$.
 
-\begin{lemma}
-    If $|g(x)| \leq C/|m|^{s/2}$, and $f$ is the distribution function of the mean zero variance $1/C$ Gaussian function, then
-\end{lemma}
-\begin{proof}
-    We have
-    %
-    \[ \sup_{|x| \leq |y|} |x + y|^{s/2} |g(x)| \leq 2^{s/2} |y|^{s/2} \| g \|_{L^\infty(\RR^d)}. \]
-    \[ \sup_{|x| \geq |y|} |x + y|^{s/2} |g(x)| \leq 2^{s/2} \sup |x|^{s/2} |g(x)|. \]
-    %
-    Thus
-    %
-    \begin{align*}
-        \sup |x|^{s/2} |(f * g)(x)| &= \sup |x|^{s/2} \left| \int f(y) g(x - y)\; dy \right|\\
-        &\leq 2^{s/2} \| g \|_{L^\infty(\RR^d)} \int_{|x - y| \leq |y|} |y|^{s/2} |f(y)|\; dy\\
-        &\ \ \ \ + 2^{s/2} \left( \sup |x|^{s/2} |g(x)| \right) \int_{|x-y| \geq |y|} |f(y)|\; dy\\
-        &\leq 2^{s/2} \left( \| g \|_{L^\infty(\RR^d)} + \sup |x|^{s/2} |g(x)| \right) \int (1 + |y|^{s/2}) |f(y)|\; dy.
-    \end{align*}
-    %
-    If $|x| \geq N$, then for each term in the integrand, either $|y| \geq N/2$ or $|x - y| \geq N/2$.
-    THIS MIGHT WORK IF WE SET $g$ TO BE THE PREVIOUS MEASURE, AND $f$ THE FUTURE CONVOLUTED TERM.
-\end{proof}
-
-
-The discretized measures $\{ \nu_k \}$ we select are, for each $k$, a sum of point mass distributions at the points $(\ZZ/N_1 \dots N_k)^d$. Therefore, $\widehat{\nu_k}$ will be $N_1 \dots N_k$ periodic, in the sense that for any $m \in (N_k \ZZ)^d$ and $\xi \in \RR^d$, $\widehat{\nu_k}(\xi + m) = \widehat{\nu_k}(\xi)$. Since we are only concerned with integer-valued frequencies, it will therefore suffice to obtain control of $\widehat{\nu_k}$ on frequencies lying in $\{ 1, \dots, N_1 \dots N_k \}^d$ in the discrete part of the argument.
-
-In the discrete lemma below, we rely on a variant of the proof strategy of Theorem 2.1 of \cite{Shmerkin}, but modified so that we can allow the branching factors $\{ N_k \}$ to increase arbitrarily fast. We still use the families $\DQ_k^d$ and $\DR_k^d$, together with parameters $\{ N_k \}$ and $\{ M_k \}$, in order to perform a multi-scale analysis. For each $\DQ_k$ discretized set $E \subset [0,1]^d$, we define a probability measure
+In the discrete lemma below, we rely on a variant of the proof strategy of Theorem 2.1 of \cite{Shmerkin}, but modified so that we can allow the branching factors $\{ N_k \}$ to increase arbitrarily fast. For each $\DQ_k$ discretized set $E \subset [0,1]$, we define a probability measure
 %
 \[ \nu_E = \frac{1}{\#(\DQ_k(E))} \sum_{Q \in \DQ_k(E)} \delta(a(Q)), \]
 %
-where for each $x \in \RR^d$, $\delta(x)$ is the Dirac delta measure at $x$, and for each $Q \in \DQ_k^d$, $a(Q)$ is the left-hand corner of the cube $Q$. Also, for each $k$, we define a probability measure
+where for each $x \in \RR$, $\delta(x)$ is the Dirac delta measure at $x$, and for each $Q \in \DQ_k$, $a(Q)$ is the startpoint of the interval $Q$. Also, for each $k$, we define a probability measure
 %
-\[ \eta_k = \frac{1}{N_{k+1}^d} \sum_{i_1, \dots, i_d = 0}^{N_{k+1}} \delta \left( \frac{i}{N_1 \dots N_{k+1}} \right).  \]
+\[ \eta_k = \frac{1}{N_{k+1}} \sum_{i_1, \dots, i_d = 0}^{N_{k+1}} \delta \left( \frac{i}{N_1 \dots N_{k+1}} \right).  \]
 %
-The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a sum of point mass distributions in $(\ZZ/N_1 \dots N_k)^d$, the probability measure $\mu * \eta_k$ is a sum of point mass distributions in $(\ZZ/N_1 \dots N_{k+1})^d$, uniformly distributed at the scale $1/N_1 \dots N_{k+1}$.
+The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a sum of point mass distributions in $\ZZ/N_1 \dots N_k$, the probability measure $\mu * \eta_k$ is a sum of point mass distributions in $\ZZ/N_1 \dots N_{k+1}$, uniformly distributed at the scale $1/N_1 \dots N_{k+1}$.
 
 %Our goal now is now to carefully modify the discrete selection strategy and discretized probability measures we use, so that with high probability, the measures have the appropriate Fourier decay for the Fourier dimension bound we wish to obtain. Surprisingly, here we only need to perform a single scale analysis with the family of cubes $\DQ^d$, rather than a multi scale analysis involving the cubes $\DQ^d$ and $\DR^d$ as in Chapter \ref{ch:RoughSets}.
 
 \begin{lemma} \label{discreteFourierBuildingBlock}
-    Fix $s \in [1,dn)$, and $\varepsilon \in [0,(dn-s)/4)$. Let $T \subset \RR^d$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^{dn}$ be a nonempty $\DQ_{k+1}$ discretized set such that
+    Fix $s \in [1,dn)$, and $\varepsilon \in [0,(n-s)/4)$. Let $T \subset \RR$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^n$ be a nonempty $\DQ_{k+1}$ discretized set such that
     %
     \begin{equation} \label{equation982589128942189}
     \begin{split}
         \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon}
+    \end{split}
+    \end{equation}
+    %  \leq N_{k+1}^d
+    %
+    Then there exists a constant $A(n,s)$ such that, provided
+    %
+    \begin{equation} \label{equation5523786128439}
+        M_{k+1}^{\frac{n}{n - s - 2\varepsilon}} \leq N_{k+1} \leq 2 M_{k+1}^{\frac{n}{n - s - 2\varepsilon}},
+    \end{equation}
+    %
+    \begin{equation} \label{equation189248914891}
+        \quad N_{k+1} \geq 3^{1/\varepsilon},
+    \end{equation}
+    %
+    % TODO: FIX THIS EQUATION SO IT IS ACTUALLY THE ONE NEEDED TO BE USED
+    \begin{equation} \label{equation8941894189238912}
+        N_{k+1} \geq 24 N_1 \dots N_k,
+    \end{equation}
+    %
+    and
+    %
+    \begin{equation} \label{equation77871247817841278}
+        N_{k+1} \geq (1/\varepsilon)^{1/\varepsilon}
+    \end{equation}
+    %
+    then there exists a $\DQ_{k+1}$ discretized set $S \subset T$, satisfying the following properties:
+    %
+    \begin{enumerate}
+        \item[(A)] For any collection of $n$ distinct cubes $Q_1, \dots, Q_n \in \DQ_{k+1}(S)$,
+        %
+        \[ Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B). \]
+
+        \item[(B)] For any $m \in \ZZ$,
+        %
+        \[ |\widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_T}(m)| \leq A(n,s) \cdot (N_1 \dots N_{k+1})^{-\frac{n - s}{2n} + 2\varepsilon}. \]
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    For each $R \in \DR_{k+1}(T)$, let $Q_R$ be randomly selected from $\DQ_{k+1}(R)$, such that the collection $\{ Q_R \}$ forms an independant family of random variables. Then, set $S = \bigcup \{ Q_R: R \in \DR_{k+1}(T) \}$. We then have
+    %
+    \begin{equation} \label{equation6900921094190290}
+        \#(\DQ_{k+1}(S)) = \#(\DR_{k+1}(T)) = M_{k+1} \cdot \DQ_k(T).
+    \end{equation}
+    %
+    Without loss of generality, removing cubes from $B$ if necessary, we may assume that for every cube $Q_1 \times \dots \times Q_n \in \DQ_{k+1}(B)$, the values $Q_1, \dots, Q_n$ occur in distinct intervals in $\DR_{k+1}(T)$. In particular, given any such cube, just as in Lemma \ref{discretelemma}, we have
+    %
+    \begin{equation} \label{equation12043910293120909}
+        \mathbf{P}(Q_1 \times \dots Q_n \in \DQ_{k+1}(S^n)) = (M_{k+1}/N_{k+1})^n.
+    \end{equation}
+    %
+    Thus \eqref{equation982589128942189}, \eqref{equation5523786128439}, and \eqref{equation12043910293120909} imply
+    %
+    \begin{equation} \label{equation999992482}
+        \mathbf{E} \left[ \#(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n)) \right] \leq M_{k+1}^n/N_{k+1}^{n - (s + \varepsilon)} \leq 1/N_{k+1}^\varepsilon.
+    \end{equation}
+    %
+    Markov's inequality, together with \eqref{equation189248914891} and \eqref{equation999992482}, imply
+    %
+    \begin{equation} \label{fourierdim2}
+    \begin{split}
+        \mathbf{P}(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n) \neq \emptyset) &= \mathbf{P}(\# (\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n)) \geq 1)\\
+        &\leq 1/N_{k+1}^\varepsilon \leq 1/3.
+    \end{split}
+    \end{equation}
+    %
+    Thus $\DQ_{k+1}(S^n)$ is disjoint from $\DQ_{k+1}(B)$ with high probability.
+
+    Now we analyze the Fourier transform of the measures $\nu_S$. For each cube $R \in \DR_{k+1}(T)$, and for each $m \in \ZZ$, let
+    %
+    \[ A_R(m) = e^{\frac{-2 \pi i m \cdot a(Q_R)}{N_1 \dots N_{k+1}}} - \frac{1}{N_{k+1}} \sum_{l = 0}^{N_{k+1} - 1} e^{\frac{-2 \pi i m \cdot [N_{k+1} a(Q) + l]}{N_1 \dots N_{k+1}}}. \]
+    %
+    Then $\EE[A_R(m)] = 0$, $|A_R(m)| \leq 2$ for each $m$, and
+    %
+    \[ \widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_T}(m) = \frac{1}{\#(\DR_{k+1}(T))} \sum_{R \in \DR_{k+1}(T)} A_R(m). \]
+    %
+    Now fix a particular value of $m$. Since the random variables $\{ A_R(m) : R \in \DR_{k+1}(T) \}$ are bounded, and independant from one another, we can apply Hoeffding's inequality to conclude that for each $t > 0$,
+    %
+    \begin{equation} \label{equation5551902402919120}
+    \begin{split}
+        \PP \left( |\widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_T}(m)| \geq t \right) &\leq 2 \exp \left( \frac{\#(\DR_{k+1}(T))}{4} \cdot (-t^2) \right)\\
+        &= 2 \exp \left( \frac{\#(\DQ_k(T)) M_{k+1}}{4} \cdot (-t^2) \right).
+    \end{split}
+    \end{equation}
+    %
+    The function $\widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T}$ is $N_1 \dots N_{k+1}$ periodic. Thus, to uniformly bound this function, we need only bound the function over $N_1 \dots N_{k+1}$ values. Applying a union bound with \eqref{equation5551902402919120}, we conclude
+    %
+    \[ \PP \left( \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ)} \geq t \right) \leq 2N_1 \dots N_{k+1} \cdot \exp \left( \frac{\#(\DQ_k(T)) M_{k+1}}{4} \cdot (-t^2) \right). \]
+
+    %
+    In particular, \eqref{equation5523786128439} shows
+    %
+    \begin{align*}
+        \PP & \left( \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ)} \geq (N_1 \dots N_1 M_{k+1})^{-1/2} \log(M_{k+1}) \right)\\
+        &\ \ \ \ \leq 2N_1 \dots N_{k+1} \cdot \exp \left( - \frac{\#(\DQ_k(T)) \log(M_{k+1})^2}{4 N_1 \dots N_k} \right)\\
+        &\ \ \ \ \leq 2 N_1 \dots N_k \exp \left( \log(N_{k+1}) - \frac{\log(M_{k+1})^2}{4 N_1 \dots N_k} \right)\\
+        &\ \ \ \ \leq 4 N_1 \dots N_k \exp \left( \log(N_{k+1}/2) - \frac{\left( \frac{n-s}{2n} \right)^2}{N_1 \dots N_k} \log(N_{k+1}/2)^2 \right).
+    \end{align*}
+    %
+    Since \eqref{equation8941894189238912} holds, we conclude
+    %
+    \begin{equation} \label{equation90120931902390190}
+        \PP \left( \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ)} \geq M_{k+1}^{-1/2} \log(M_{k+1}) \right) \leq 1/3.
+    \end{equation}
+    %
+    Taking a union bound over \eqref{fourierdim2} and \eqref{equation90120931902390190}, we conclude that there is a non-zero probability that the set $S$ satisfies Property (A), and
+    %
+    \[ \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ)} \leq (N_1 \dots N_k M_{k+1})^{-1/2} \log(M_{k+1}). \]
+    %
+    But since \eqref{equation77871247817841278} holds,
+    % \log(x) \leq x^\varepsilon
+    % 1/\varepsilon^{1/\varepsilon} \leq x
+    % N_{k+1} \geq 1/\varepsilon^{1/\varepsilon}
+    %
+    \begin{align*}
+        (N_1 \dots N_k M_{k+1}^{-1/2} \log(M_{k+1}) &\lesssim_{n,s} \log(N_{k+1}) (N_1 \dots N_{k+1})^{- \frac{n-s-2\varepsilon}{2n}}\\
+        &\leq (N_1 \dots N_{k+1})^{- \frac{n-s}{2n} + 2\varepsilon},
+    \end{align*}
+    %
+    which shows the set $S$ also satisfies Property (B) with an appropriately chosen constant $A(n,s)$.
+\end{proof}
+
+\begin{comment}
+
+Let us describe the measures we construct. For each $k$, we let
+%
+\[ \psi_k = N_1 \dots N_k \cdot \mathbf{I}_{\left[ 0, \frac{1}{N_1 \dots N_k} \right]}. \]
+%
+Then for each $\xi \in \RR^d$,
+%
+\[ |\widehat{\psi_k}(\xi)| = \left| N_1 \dots N_k \cdot \frac{e^{- \frac{2 \pi i \xi}{N_1 \dots N_k}} - 1}{- 2\pi i \xi} \right| \lesssim \frac{N_1 \dots N_k}{1 + |\xi|}. \]
+%
+Thus $\widehat{\psi_k}$ has fast decay for $|\xi| \geq N_1 \dots N_k$. For any $\DQ_k$ discretized set $E$, we let $\mu_E$ by the absolutely continuous probability measure with density function
+%
+\[ \frac{d\mu_E}{dx} = \frac{1}{\#(\DQ_k(E))} \sum_{Q \in \DQ_k(E)} \mathbf{I}_Q. \]
+%
+Then $\mu_E$ is supported on $E$. Since $\mu_E$ can be viewed as a convolution of $\psi_k$ with a discrete probability measure at the left-hand edges of the intervals in $\DQ_k(E)$, for each $\xi \in \RR^d$,
+%
+\[ |\widehat{\mu_E}(\xi)| \leq |\widehat{\psi_k}(\xi)| \lesssim \frac{N_1 \dots N_k}{1 + |\xi|}. \]
+%
+Thus $\widehat{\mu_E}$ has large decay for frequencies of large magnitude, and it suffices to construct $E$ such that we can control the Fourier transform of $\mu_E$ on low magnitude frequencies. To prove this, we take $E$ to be a random set, and apply Hoeffding's inequality to obtain tail bounds on the magnitude of the Fourier transform.
+
+\begin{theorem}[Hoeffding's Inequality]
+    Let $\{ X_i \}$ be a family of $N$ independant, mean zero random variables, such that $|X_i| \leq B$ for all $i$. Then
+    %
+    \[ \PP \left( \sum X_i \geq t \right) \leq 2 \exp \left( \frac{-t^2}{2B^2 N} \right). \]
+\end{theorem}
+
+\begin{lemma} \label{discreteFourierBuildingBlock}
+    Fix $s \in [1,n)$, $\varepsilon_1 \in [0,(n-s)/4)$, and $\varepsilon_2 \in (0,\infty)$. Let $T \subset \RR$ be a nonempty, $\DQ_k$ discretized set, and let $B \subset \RR^n$ be a nonempty $\DQ_{k+1}$ discretized set such that
+    %
+    \begin{equation} \label{equation982589128942189}
+    \begin{split}
+        \#(\DQ_{k+1}(B)) \leq N_{k+1}^{s + \varepsilon_1}.
     \end{split}
     \end{equation}
     %  \leq N_{k+1}^d
@@ -366,9 +445,9 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
         %
         \[ Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B). \]
 
-        \item[(B)] For any $m \in \ZZ^d$,
+        \item[(B)] For any $m \in \ZZ$,
         %
-        \[ |\widehat{\nu_S}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_T}(m)| \leq N_{k+1}^{-(1 - \varepsilon) \frac{dn - s - 2\varepsilon}{2n}}. \]
+        \[ |\widehat{\mu_S}(m) - \widehat{\mu_T}(m)| \leq N_{k+1}^{-(1 - \varepsilon_2) \frac{n - s}{2n}}. \]
     \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -378,11 +457,11 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     %
     Without loss of generality, removing cubes from $B$ if necessary, we may assume that every cube $Q_1 \times \dots \times Q_n \in \DQ_{k+1}(B)$, the values $Q_1, \dots, Q_n$ are distinct. In particular, given any such cube, just as in Lemma \ref{discretelemma}, we have
     %
-    \[ \mathbf{P}(Q_1 \times \dots Q_n \in \DQ_{k+1}(S^n)) = (M_{k+1}/N_{k+1})^{dn}. \]
+    \[ \mathbf{P}(Q_1 \times \dots Q_n \in \DQ_{k+1}(S^n)) = (M_{k+1}/N_{k+1})^n. \]
     %
     Thus \eqref{equation982589128942189} and \eqref{equation5523786128439} imply
     %
-    \[ \mathbf{E}(\#(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n))) \leq M_{k+1}^{dn}/N_{k+1}^{dn - (s + \varepsilon)} \leq 1/N_{k+1}^\varepsilon. \]
+    \[ \mathbf{E}(\#(\DQ_{k+1}(B) \cap \DQ_{k+1}(S^n))) \leq M_{k+1}^n/N_{k+1}^{n - (s + \varepsilon_1)} \leq 1/N_{k+1}^{\varepsilon_1}. \]
     %
     Markov's inequality, together with \eqref{equation189248914891} implies
     %
@@ -395,7 +474,54 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     %
     Thus $\DQ_{k+1}(S^n)$ is disjoint from $\DQ_{k+1}(B)$ with high probability.
 
-    Now we analyze the Fourier transform of the measure $\nu_S$. For each cube $R \in \DR_{k+1}(T)$, and for each $m$, let
+    Now we analyze the Fourier transform of the measure $\mu_S$. For each $R \in \DR_{k+1}(T)$, and $m \in \ZZ$, let
+    %
+    \[ A_R(m) = \int_R \left( \mu_S(x) - \mu_T(x) \right) e^{-2 \pi i m \cdot x}\; dx. \]
+    %
+    We note that for each $Q \in \DQ_{k+1}(R)$, and $x \in Q^\circ$,
+    %
+    \begin{align*}
+        \EE(\mu_S(x) - \mu_T(x)) &= (N_1 \dots N_{k+1}) \frac{\PP(Q_R = 1)}{\#(\DQ_{k+1}(S))} - (N_1 \dots N_k) \frac{1}{\#(\DQ_k(T)}\\
+        &= (N_1 \dots N_{k+1}) \frac{(M_{k+1}/N_{k+1})}{M_{k+1} \cdot \#(\DQ_k(T))} - (N_1 \dots N_k) \frac{1}{\#(\DQ_k(T))} = 0.
+    \end{align*}
+    %
+    Thus
+    %
+    \[ \EE[A_R(m)] = \int_R \EE \left[ \mu_S(x) - \mu_T(x) \right] e^{-2 \pi i m \cdot x}\; dx = 0. \]
+    %
+    Notice that for each fixed $m$, the family $\{ A_R(m) \}$ are a family of $M_{k+1} \cdot \DQ_k(T)$ independant random variables, and
+    %
+    \[ |A_R(m)| \leq \int_R |\mu_S(x) - \mu_T(x)|\; dx = \frac{2}{M_{k+1}}. \]
+    %
+    We note that
+    %
+    \[ \widehat{\mu_S}(m) - \widehat{\mu_T}(m) = \sum_{R \in \DR_{k+1}(T)} A_R(m). \]
+    %
+    Applying Hoeffding's inequality, we conclude that for each $t > 0$,
+    %
+    \[ \PP \left( \left| \widehat{\mu_S}(m) - \widehat{\mu_T}(m) \right| \geq t \right) \leq 2 \exp \left( \frac{- M_{k+1}}{8 \cdot \#(\DQ_k(T))} \cdot t^2 \right). \]
+    %
+    In particular,
+    %
+    \begin{equation} \label{equation68994812893189}
+        \PP \left( \left| \widehat{\mu_S}(m) - \widehat{\mu_T}(m) \right| \geq N_{k+1}^{-(1 - \varepsilon_2) \frac{n-s}{2n}} \right) \leq 2 \exp \left( \frac{-M_{k+1} N_{k+1}^{-(1 - \varepsilon_2) \frac{n-s}{n}}}{8 \cdot \#(\DQ_k(T))} \right).
+    \end{equation}
+    %
+    Applying a union bound with \eqref{equation68994812893189}, we conclude that if
+    %
+    \[ I = \{ m \in \ZZ : |m| \leq (N_1 \dots N_k)^{A} \}, \]
+    %
+    then
+    %
+    \[ \PP \left( \left\| \widehat{\mu_S} - \widehat{\mu_T} \right\|_{L^\infty(I)} \geq N_{k+1}^{- \left(1 - \varepsilon_2 \right) \frac{n-s}{2n}} \right) \leq 2 (N_1 \dots N_k)^A \exp \left( \frac{-M_{k+1} N_{k+1}^{-(1 - \varepsilon_2) \frac{n-s}{n}}}{8 \cdot \#(\DQ_k(T))} \right). \]
+    %
+    But if $|m| \geq (N_1 \dots N_k)^A$, then
+    %
+    \[ \PP \left( \widehat{\mu_S}(m) \right) \]
+
+
+
+    For each cube $R \in \DR_{k+1}(T)$, and for each $m$, let
     %
     \[ A_R(m) = e^{\frac{-2 \pi i m \cdot a(Q_R)}{N_1 \dots N_{k+1}}} - \frac{1}{N_{k+1}^d} \sum_{k_1, \dots, k_d = 0}^N e^{\frac{-2 \pi i m \cdot [N_{k+1} a(Q) + k]}{N_1 \dots N_{k+1}}}. \]
     %
@@ -588,81 +714,69 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     the set $X$ avoids $K$, and for all $m \in \{ -N, \dots, N \}^d$,
     %
     \[ |\widehat{f}(m)| \leq \frac{C (\log N)^{1-1/n}}{N^{d-s/n}}. \qedhere \]
-\end{comment}
+%\end{comment}
 \end{proof}
+\end{comment}
 
-The remainder of the construction follows essentially the construction of the configuration avoiding set in Chapter \ref{ch:RoughSets}, obtaining a family of discretized sets $\{ X_k \}$ with $X = \bigcap X_k$. As in Chapter \ref{ch:RoughSets}, Property (A) of Lemma \eqref{discreteFourierBuildingBlock} is sufficient to guarantee that $X$ avoids the configuration $\C$. The remainder of this section is devoted to showing that Property (B) of Lemma \eqref{discreteFourierBuildingBlock} is sufficient to guarantee that under the additional assumption that for each $\varepsilon > 0$,
+The remainder of the construction follows essentially the construction of the configuration avoiding set in Chapter \ref{ch:RoughSets}, obtaining a family of discretized sets $\{ X_k \}$ with $X = \bigcap X_k$. As in Chapter \ref{ch:RoughSets}, Property (A) of Lemma \eqref{discreteFourierBuildingBlock} is sufficient to guarantee that $X$ avoids the configuration $\C$. The remainder of this section is devoted to showing that Property (B) of Lemma \eqref{discreteFourierBuildingBlock} is sufficient to guarantee a Fourier dimension bound under the additional assumption that for each $\varepsilon > 0$,
 %
 \begin{equation} \label{equation41028694692} (N_1 \dots N_k) \lesssim_\varepsilon N_{k+1}^\varepsilon, \end{equation}
 %
 the set $X$ has the Fourier dimension guaranteed by Theorem \ref{FourierTheorem}.
 
-The measures $\nu_{X_k}$ do not quite suffice to construct a measure on $X$ with the appropriate Fourier decay. The reason for this is that the Fourier transforms of these measures do not actually have any decay. We will fix this by convolving $\nu_S$ with an appropriate bump function. Let $\psi$ be a compactly supported, positive, smooth function supported on $[0,1]^d$ with
+The measures $\nu_{X_k}$ do not quite suffice to construct a measure on $X$ with the appropriate Fourier decay. The reason for this is that the Fourier transforms of these measures do not actually have any decay, being periodic functions. We can fix this by convolving these measures with an appropriate function. For each $k$, let
 %
-\[ \int \psi(x)\; dx = 1. \]
+\[ \psi_k(x) = (N_1 \dots N_k) \cdot \mathbf{I}_{\left[ 0, \frac{1}{N_1 \dots N_k} \right]}. \]
 %
-For each $k$, let
+Then it is easy to calculate that
 %
-\[ \psi_k(x) = (N_1 \dots N_k)^d \psi(N_1 \dots N_k x). \]
+\begin{equation} \label{equation901418294891481792}
+    |\widehat{\psi_k}(m)| \lesssim \min \left( 1, \frac{N_1 \dots N_k}{|m|} \right).
+\end{equation}
 %
-Then $\psi_k$ is supported on $[0,1/N_1 \dots N_k]^d$, $\int \psi_k(x)\; dx = 1$, and for any $\xi \in \RR^d$,
+We note that the measures $\mu_k = \nu_{X_k} * \psi_k$ are still supported on $X_k$, and
 %
-\[ \widehat{\psi_k}(\xi) = \widehat{\psi}(\xi/N_1 \dots N_k). \]
+\[ \widehat{\mu_k}(\xi) = \widehat{\nu_{X_k}}(\xi) \widehat{\psi_k}(\xi). \]
 %
-Note that, because $\psi$ is smooth and compactly supported, for any $m > 0$,
+We also note that $\psi_{k+1} = \psi_k * \eta_{k+1}$. Thus
 %
-\[ |\widehat{\psi_k}(\xi)| \lesssim_m (N_1 \dots N_k)^m / |\xi|^m. \]
+\begin{equation} \label{equation6892489214781278}
+\begin{split}
+    |\widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m)| &= |\widehat{\psi_{k+1}}(m)| |\widehat{\nu_k}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_k}(m)|.
+\end{split}
+\end{equation}
 %
-An important heuristic, a variant of the Heisenberg uncertainty principle, is that $\widehat{\psi_k}$ is `essentially' supported on the box $[-N_k,N_k]^d$.
-
-\begin{lemma} \label{lemma09679009341}
-    Suppose that \eqref{equation41028694692} holds. For any $\DQ_k$ discretized set $E$, the measure $\mu_E = \nu_E * \psi_k$ is supported on $E$, and for each $\varepsilon > 0$, there is a universal constant $C_\varepsilon$, independant of $k$ and $E$, such that if $|\xi| \geq N_k^{1 + \varepsilon}$, then
-    %
-    \[ |\widehat{\mu_E}(\xi)| \leq C_\varepsilon |\xi|^{-d/2}. \]
-\end{lemma}
-\begin{proof}
-    It is simple to see that $\mu_E$ is supported on $E$, since by general properties of convolution it is supported on the sum of the support of $\psi_k$, which is $[0,1/N_k]^d$, and the support of $\nu_E$, which is the union of the left-hand corners of the cubes in $\DQ_k(E)$. We also note that
-    %
-    \[ \widehat{\mu_E}(\xi) = \widehat{\nu_E}(\xi) \widehat{\psi}(\xi/N_k). \]
-    %
-    Since $\nu_E$ is a probability measure, $\| \widehat{\nu_E} \|_{L^\infty(\RR^d)} = 1$. Now pick $m \geq d(1 + 1/\varepsilon)$. If $|\xi| \geq N_k^{1 + \varepsilon}$, we calculate, using \eqref{equation41028694692}, to conclude
-    %
-    \begin{align*}
-        |\widehat{\mu_E}(\xi)| &\leq |\widehat{\psi}(\xi/N_k)| \lesssim_m \frac{(N_1 \dots N_k)^m}{|\xi|^m} \lesssim_\varepsilon \frac{N_k^{m(1 + \varepsilon/2)}}{|\xi|^{m - d/2}} \frac{1}{|\xi|^{d/2}} \leq \frac{1}{|\xi|^{d/2}}. \qedhere
-    \end{align*}
-\end{proof}
+We can use \eqref{equation901418294891481792}, \eqref{equation6892489214781278}, and Property (B) of Lemma \ref{discreteFourierBuildingBlock} to obtain asymptotic bounds on $\widehat{\mu_k}$.
 
 \begin{lemma}
-    For each $\varepsilon > 0$, there exists a constant $C_\varepsilon > 0$ and an integer $K > 0$, such that for any integer $k \geq K$, and any $m \in \ZZ^d$,
+    For each $\varepsilon \in (0, (n-s)/4]$, there exists a constant $C_\varepsilon > 0$ and an integer $K > 0$, such that for any integer $k \geq K$, and any $m \in \ZZ^d$,
     %
-    \[ |\widehat{\mu_{X_k}}(m)| \leq C_\varepsilon k \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
+    \[ |\widehat{\mu_{X_k}}(m)| \leq C_\varepsilon k \cdot |m|^{- \left( \frac{n - s}{2n} - \varepsilon \right)}. \]
 \end{lemma}
 \begin{proof}
-    We establish the result by induction. Because $\mu_{X_0} = \psi$ is smooth and compactly supported, there exists a constant $C_\varepsilon$ such that for any $m \in \ZZ^d$,
+    We establish the result by induction. The theorem is surely true for $\mu_{X_0}$, since $X_0 = [0,1]$, so $\mu_{X_0}$ is the indicator function of an interval, so
     %
-    \[ |\widehat{\mu_{X_0}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
+    \[ |\widehat{\mu}_{X_0}(m)| \lesssim \frac{1}{|m|}. \]
     %
-    This constant should also be chosen larger than the constant in Lemma \ref{lemma09679009341}. The remainder of the argument is established by induction. Suppose that for each $m \in \ZZ^d$,
+    Now assume that for each $m \in \ZZ$,
     %
-    \[ |\widehat{\mu_{X_k}}(m)| \leq C_\varepsilon k \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
+    \[ |\widehat{\mu}_{X_k}(m)| \leq C_\varepsilon k \cdot |m|^{- \left( \frac{n - s}{2n} - \varepsilon \right)}. \]
     %
-    For $|m| \leq N_{k+1}^{1 + \varepsilon}$, we apply Property (B) of Lemma \ref{discreteFourierBuildingBlock} to conclude
-    % (1-\varepsilon_k) \frac{dn - s - 2\varepsilon_k}{2n} \geq (dn - s)/(2n) - \varepsilon
+    If $|m| \leq N_1 \dots N_{k+1}$, then \eqref{equation41028694692}, \eqref{equation6892489214781278}, and Property (B) of Lemma \eqref{discreteFourierBuildingBlock}, imply that
+    %
+    \[ |\widehat{\mu_{X_{k+1}}}(m) - \widehat{\mu_{X_k}}(m)| \leq A(n,s) (N_1 \dots N_{k+1})^{-\frac{n - s}{2n} + 2\varepsilon_{k+1}} \leq \frac{C_\varepsilon}{|m|^{\frac{n-s}{2n} - \varepsilon}}. \]
+    %
+    Conversely, if $|m| \geq N_1 \dots N_{k+1}$, then
+    %
     \begin{align*}
-        |\widehat{\mu_{X_{k+1}}}(m)| &= |\widehat{\psi_{k+1}}(m) \widehat{\nu_{X_{k+1}}}(m)|\\
-        &\leq |\widehat{\psi_{k+1}}(m)| |\widehat{\nu_{X_{k+1}}}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)|\\
-        &\ \ \ \ \ + |\widehat{\psi_{k+1}}(m) \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)|\\
-        &= |\widehat{\nu_{X_{k+1}}}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)| + \left| \frac{\widehat{\psi_{k+1}}(m)}{\widehat{\psi_k}(m)} \right| |\widehat{\mu_{X_k}}(m)|\\
-        &= |\widehat{\nu_{X_{k+1}}}(m) - \widehat{\eta_{k+1}}(m) \widehat{\nu_{X_k}}(m)| + \left| \frac{\widehat{\psi} \left( \frac{m}{N_1 \dots N_{k+1}} \right)}{\widehat{\psi} \left( \frac{m}{N_1 \dots N_k} \right)} \right| |\widehat{\mu_{X_k}}(m)|\\
-        &\leq N_{k+1}^{-(1-\varepsilon_{l+1}) \frac{dn - s - 2\varepsilon_{k+1}}{2n}} + C_\varepsilon k \cdot |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}\\
-        &\leq (k + 1) |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)}.
+        |\widehat{\mu_{X_{k+1}}}(m) - \widehat{\mu_{X_k}}(m)| &\lesssim \frac{(N_1 \dots N_k)^{1 - \frac{n-s}{2n} + 2\varepsilon_{k+1}}}{|m|}\\
+        &\leq \frac{(N_1 \dots N_k)^{1 - \frac{n-s}{2n} + 2\varepsilon_{k+1}} |m|^{-1 + \frac{n-s}{2n} - \varepsilon}}{|m|^{\frac{n-s}{2n} - \varepsilon}}\\
+        &\leq \frac{(N_1 \dots N_k)^{2\varepsilon_{k+1} - \varepsilon}}{|m|^{\frac{n-s}{2n} - \varepsilon}} \leq \frac{C_\varepsilon}{|m|^{\frac{n-s}{2n} - \varepsilon}}
     \end{align*}
     %
-    If $|m| \geq N_{k+1}^{1 + \varepsilon}$, we can apply Lemma \ref{lemma09679009341} to conclude that
+    Thus, either way, we find
     %
-    \[ |\widehat{\mu_{X_{k+1}}}(m)| \leq C_\varepsilon |m|^{- \left( \frac{dn - s}{2n} - \varepsilon \right)} \leq C_\varepsilon (l+1) |m|^{\left( \frac{dn - s}{2n} - \varepsilon \right)}. \]
-    %
-    This completes the proof.
+    \[ |\widehat{\mu_{X_{k+1}}}(m)| \leq \frac{C_\varepsilon}{|m|^{\frac{n-s}{2n} - \varepsilon}} + \frac{C_\varepsilon \cdot k}{|m|^{\frac{n-s}{2n} - \varepsilon}} \leq \frac{C_\varepsilon \cdot (k+1)}{|m|^{\frac{n-s}{2n} - \varepsilon}}. \qedhere \]
 \end{proof}
 
 The same argument as in Theorem \ref{massdistributionprinciplelem} shows that the sequence $\{ \mu_{X_k} \}$ is a Cauchy sequence under the weak $*$ topology. If we form the limit $\mu_X = \lim_{k \to \infty} \mu_{X_k}$, then the Fourier transforms $\widehat{\mu_{X_k}}$ converge pointwise to $\widehat{\mu_X}$. In particular, for each $\varepsilon > 0$ and $m \in \ZZ^d$, we conclude that
