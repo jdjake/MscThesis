@@ -4,7 +4,7 @@
 \chapter{Background}
 \label{ch:Background}
 
-In this chapter we discuss the required background to understand the techniques of the pattern avoidance problem. The majority of the background in geometric measure theory can be found in other resources, e.g. in \cite{Falconer}, \cite{MattilaGeomMeasure}, or \cite{TaoHausdorff}, though not geared in particular towards the pattern avoidance problem.
+In this chapter we discuss the required background to understand the techniques of the pattern avoidance problem. The majority of the background in geometric measure theory can be found in other resources, e.g. in \cite{Falconer}, \cite{MattilaGeomMeasure}, or \cite{TaoHausdorff}, though not in the context of the pattern avoidance problem.
 
 \section{Configuration Avoidance}
 
@@ -38,8 +38,8 @@ We call $\Config(\AAA)$ the \emph{configuration space} of $\mathbf{A}$.
 	Let $V$ be a vector space over a field $K$. We set
 	%
 	\[ \C = \bigcup_{n = 1}^\infty \left\{ (x_1, \dots, x_n) \in \Config^n(V): \begin{array}{c}
-			\text{there is $a_1, \dots, a_n \in K$ such that}\\
-			\text{$a_1x_1 + \dots + a_nx_n = 0$}
+			\text{there is $a_1, \dots, a_n \in K$ such}\\
+			\text{that $a_1x_1 + \dots + a_nx_n = 0$}
 		\end{array} \right\}. \]
 	%
 	A set $X \subset V$ is linearly independent in $V$ if, for any $n$, and any set of $n$ points $x_1, \dots, x_n \in X$, $(x_1, \dots, x_n) \not \in \C$. In this thesis, we will be interested in the case where $K = \QQ$, and $V = \RR$.
@@ -53,7 +53,7 @@ We call $\Config(\AAA)$ the \emph{configuration space} of $\mathbf{A}$.
 	Define $\C = \C^1 \cup \C^2$. Then $(X + X) \cap Y = \emptyset$ if and only if for any $x_1,x_2 \in X$, $(x_1,x_2) \not \in \C^2$, and for any $x \in X$, $x \not \in \C^1$.
 \end{example}
 
-All the configurations we discuss in this thesis can be specified in terms of subsets of $\Config(\AAA)$. Thus we formally define a \emph{configuration} on $\AAA$ to be a subset of $\Config(\AAA)$, and an \emph{$n$ point configuration} if it is a subset of $\Config^n(\AAA)$. For a fixed configuration $\C$ on $\AAA$, we say a set $X \subset \AAA$ \emph{avoids} $\C$ if $\Config(X)$ is disjoint from $\C$. The \emph{pattern avoidance problem} asks to find sets $X$ of maximal size avoiding a fixed configuration $\C$. Often, the configuration $\C$ describes algebraic or geometric structure, and the pattern avoidance problem asks to find the maximal size of a set before it is guaranteed to have such structure.
+All the configurations we discuss in this thesis can be specified in terms of subsets of $\Config(\AAA)$. Thus we formally define a \emph{configuration} on $\AAA$ to be a subset of $\Config(\AAA)$. In particular, if $n > 0$, we say a configuration $\C$ is an \emph{$n$ point configuration} if it is a subset of $\Config^n(\AAA)$. For a fixed configuration $\C$ on $\AAA$, we say a set $X \subset \AAA$ \emph{avoids} $\C$ if $\Config(X)$ is disjoint from $\C$. The \emph{pattern avoidance problem} asks to find sets $X$ of maximal size avoiding a fixed configuration $\C$. Often, the configuration $\C$ describes algebraic or geometric structure, and the pattern avoidance problem asks to find the maximal size of a set before it is guaranteed to have such structure.
 
 %\begin{example}[General Position Configuration]
 %	Suppose we wish to find a subset $X$ of $\RR^d$ such that for each positive integer $k \leq d$, and for each collection of $k+1$ distinct points $x_1, \dots, x_{k+1} \in X$, the points do not lie in a $k-1$ dimensional hyperplane. For each $k \leq d$, set
@@ -112,9 +112,9 @@ Depending on the structure of the ambient space $\AAA$ and the configuration $\C
 
 % TO DO: SWAPPING THIS RESULT FOR A DENSITY RESULT, IF WE CAN OBTAIN IT.
 
-Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with a quantity which can distinguish between the size of sets of measure zero. This is the \emph{fractal dimension} of a set.
+Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with various quantities that can distinguish between the size of sets of measure zero. These are the \emph{fractal dimensions} of a set.
 
-There are many variants of fractal dimension. Here we choose to use the Minkowski dimension, and the Hausdorff dimension. They assign the same dimension to any smooth manifold, but can differ for rougher sets. One major difference is that Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales.
+There are many variants of fractal dimension. Here we choose to focus on Minkowski dimension, Hausdorff dimension, and Fourier dimension. These quantities assign the same dimension to any smooth manifolds with non-vanishing curvature, but can differ for rougher sets. Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales. Fourier dimension is a refinement of Hausdorff dimension which places structural constraints on the set in the `frequency domain'.
 
 
 
@@ -133,7 +133,7 @@ Given $l > 0$, and a bounded set $E \subset \RR^d$, we let $N(l,E)$ denote the \
 If $\upminkdim(E) = \lowminkdim(E)$, then we refer to this common quantity as the \emph{Minkowski dimension} of $E$, denoted $\minkdim(E)$. Thus $\lowminkdim(E) < s$ if there exists a sequence of lengths $\{ l_k \}$ converging to zero such that for each $k$, $E$ is covered by fewer than $(1/l_k)^s$ sidelength $l_k$ cubes, and $\upminkdim(E) < s$ if $E$ is covered by fewer than $(1/l)^s$ sidelength $l$ cubes for \emph{any} suitably small $l$.
 
 \begin{remark}
-	Any cube with sidelength $r$ is covered in $O_d(1)$ balls of radius $r$. Conversely, any ball of radius $r$ is covered by $O_d(1)$ cubes of sidelength $r$. Thus for any $r > 0$, if we temporarily define $N_B(r,E)$ to be the optimal number of radius $r$ \emph{balls} it takes to cover $E$, then $N(r,E) \sim_d N_B(r,E)$. As $r \to 0$, this means
+	Any cube with sidelength $r$ is covered by $O_d(1)$ balls of radius $r$. Conversely, any ball of radius $r$ is covered by $O_d(1)$ cubes of sidelength $r$. Thus for any $r > 0$, if we temporarily define $N_B(r,E)$ to be the optimal number of radius $r$ \emph{balls} it takes to cover $E$, then $N(r,E) \sim_d N_B(r,E)$. As $r \to 0$, this means
 	%
 	\[ \frac{\log(N(r,E))}{\log(1/r)} = \frac{\log(N_B(r,E))}{\log(1/r)} + o(1). \]
 	%
@@ -146,7 +146,7 @@ It is often easy to upper bound the Minkowski dimension of a set, simply by prov
 	Let $S \subset \RR^d$ be a Lipschitz manifold of dimension $s$. Then for any compact set $K \subset S$, $\upminkdim(K) \leq s$.
 \end{theorem}
 \begin{proof}
-	Since $K$ is compact, we can find finitely many bi-Lipschitz maps $f_1, \dots, f_N$ such that the family $\{ f_i(U_i) : 1 \leq i \leq N \}$ covers $K$. Then there is $C$ such that for each $i$, if $x,y \in U_i$,
+	Since $K$ is compact, we can find finitely many bi-Lipschitz maps $f_1, \dots, f_N$ such that the family $\{ f_i(U_i) : 1 \leq i \leq N \}$ covers $K$. Then there is a constant $C > 0$ such that for each $i$, if $x,y \in U_i$,
 	%
 	\[ |f_i(x) - f_i(y)| \leq C \cdot |x-y|. \]
 	%
@@ -201,7 +201,7 @@ The majority of Borel sets which occur in practice fail to be measurable with re
 	%
 	\[ H^d[-N,N]^d = (2N)^d. \]
 	%
-	If $s > d$, Lemma \ref{HausdorffBoundary} shows $H^s[-N,N]^d = 0$. By countable additivity, taking $N \to \infty$ shows $H^s(\RR^d) = 0$. Since $H^s$ is a positive measure, $H^s(E) = 0$ for all $E$.
+	If $s > d$, Lemma \ref{HausdorffBoundary} implies $H^s[-N,N]^d = 0$. By countable additivity, taking $N \to \infty$ shows $H^s(\RR^d) = 0$. Since $H^s$ is a positive measure, $H^s(E) = 0$ for all $E$.
 \end{proof}
 
 Given any Borel set $E$, Corollary \ref{corollaryhausdorffzero}, combined with Lemma \ref{HausdorffBoundary}, implies there is a unique value $s_0 \in [0,d]$ such that $H^s(E) = 0$ for $s > s_0$, and $H^s(E) = \infty$ for $0 \leq s < s_0$. We refer to $s_0$ as the \emph{Hausdorff dimension} of $E$, denoted $\hausdim(E)$.
@@ -212,7 +212,7 @@ Given any Borel set $E$, Corollary \ref{corollaryhausdorffzero}, combined with L
 \begin{proof}
 	Given $l > 0$, we have a simple bound $H^s_l(E) \leq N(l,E) \cdot l^s$. If $\lowminkdim(E) < s$, then there exists a sequence $\{ l_k \}$ with $l_k \to 0$, and $N(l_k,E) \leq (1/l_k)^s$. We conclude that
 	%
-	\[ H^s(E) = \lim_{k \to \infty} H^s_{l_k}(E) \leq \lim_{k \to \infty} N(l_k,E) \cdot l_k^s \leq 1, \]
+	\[ H^s(E) = \lim_{k \to \infty} H^s_{l_k}(E) \leq \lim_{k \to \infty} N(l_k,E) \cdot l_k^s \leq 1. \]
 	%
 	Thus Lemma \ref{HausdorffBoundary} implies $\hausdim(E) \leq s$. Taking infima over all $s > \lowminkdim(E)$ shows $\hausdim(E) \leq \lowminkdim(E)$.
 \end{proof}
@@ -238,40 +238,6 @@ and
 \end{align*}
 %
 This notion of dimension, in a disguised form, appears in Chapter \ref{ch:RoughSets}.
-
-
-
-
-
-
-
-\section{Fourier Dimension}
-
-A popular technique in current research in geometric measure theory is exploiting Fourier analysis to obtain additional structural information about configurations in sets. A key insight to this technique is that the Frostman dimension of any finite Borel measure $\mu$ is equal to
-%
-\[ \sup \left\{ s > 0 : \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}} d\xi < \infty \right\}. \]
-%
-For brevity, we leave the proof to other sources, e.g. \cite[Section 3.5]{Matilla}. Note that if
-%
-\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}}\; d\xi < \infty, \]
-%
-then there exists a constant $C$ such that for \emph{most} values $\xi \in \RR^d$,
-%
-\begin{equation} \label{fourierdimensioncondition}
-    |\widehat{\mu}(\xi)| \leq C |\xi|^{-s/2}.
-\end{equation}
-%
-We obtain a strengthening of the Frostman measure condition if we require \eqref{fourierdimensioncondition} to hold for \emph{all} values $\xi$. In particular, we say a measure $\mu$ has \emph{Fourier dimension} $s$ if \eqref{fourierdimensioncondition} holds for all $\xi \in \RR^d$. If this is true, then for all $t < s$,
-%
-\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-t}}\; d\xi < \infty \]
-%
-so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph{Fourier dimension} of a set $E$ as
-%
-\[ \fordim(E) = \sup \left\{ s : \begin{array}{c} \text{there is a Borel probability measure $\mu$}\\ \text{supported on $E$ with Fourier dimension $s$} \end{array} \right\}, \]
-%
-then $\fordim(E) \leq \hausdim(E)$.
-
-We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, one heuristic is that the Fourier dimension of \emph{random} families of sets tend to almost surely have Fourier dimension equal to their Hausdorff dimension. Our main technique in Chapter \ref{ch:RoughSets} involves a random selection strategy, and so in Section 6.2, we attempt to utilize this random selection strategy to find sets with large Fourier dimension avoiding configurations.
 
 
 
@@ -317,7 +283,7 @@ Since any cube is covered by at most $O_d(1)$ cubes in $\DD$ of comparable sidel
 Our main purpose with working with dyadic cubes is to construct \emph{fractal-type sets}. By this, we mean defining sets $X$ as the intersection of a nested family of sets $\{ X_k \}$, where each $X_k$ is $\DD_k$ discretized, and each successive set $X_{k+1}$ is obtained from $X_k$ by application of a simple, recursive procedure. Such a construction satisfies the following three properties of Falconer's definition of a fractal, as detailed in the introduction to \cite{Falconer}:
 %
 \begin{itemize}
-	\item[(i)] $X$ has detail on arbitrarily small scales.
+	\item[(i)] $X$ has detail at arbitrarily small scales.
 	\item[(ii)] $X$ is too irregular to be described in traditional geometric language.
 	\item[(v)] $X$ is defined recursively.
 \end{itemize}
@@ -332,7 +298,7 @@ This justifies the term `fractal' when used to referring about these sets.
 	Then $C = \bigcap_{k \geq 0} C_k$ is the Cantor set.
 \end{example}
 
-Unfortunately, a \emph{constant} branching factor is not sufficient to describe the types of recursive procedures we discuss in this thesis. Thus, we introduce a more general family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
+Unfortunately, a \emph{constant} branching factor is not sufficient to describe the fractal type constructions we discuss in this thesis. Thus, we introduce a more general family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
 %
 \begin{itemize}
 	\item For each $k \geq 0$, we define 
@@ -369,6 +335,8 @@ Sometimes, our recursive constructions need a family of `intermediary' cubes tha
 \end{itemize}
 %
 The cubes in $\DR_k^d$ are coarser than those in $\DQ_k^d$, but finer than those in $\DQ_{k-1}^d$.
+
+In this thesis, when we say we apply a \emph{single-scale construction}, we utilize the cubes $\DQ^d$, for an appropriate choice of parameters $\{ N_k \}$, as well as the notation given in this section. When we apply a \emph{multi-scale construction}, we utilize both the cubes in $\DQ^d$ and $\DR^d$, for an appropriate choice of parameters $\{ N_k \}$ and $\{ M_k \}$, and use the notation introduced above.
 
 \begin{remark}
 	We note that there is some notational conflict between the cubes $\DD^d$ and the cubes $\DQ^d$, but since we never use both families simultaneously in a single argument, it should be clear which notation we are using.
@@ -592,7 +560,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 \end{proof}
 
 \begin{remark}
-	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $w$ is that in the weak limit, mass from cubes can `leak' into the mass of adjacent cubes. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the result is still a `mass distribution' result. It just means that the mass specified by $w$ may be shared by adjacent cubes in the weak limit. If, for each $Q' \in \DQ^d$,
+	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $w$ is that in the weak limit, mass from cubes can `leak' into the mass of adjacent cubes. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the result is still a `mass distribution' result. It just means that the mass specified by $w$ may be shared by adjacent cubes in the weak limit, if enough mass is pushed out to the boundary of these cubes. If, for each $Q' \in \DQ^d$,
 	%
 	\[ \lim_{k \to \infty} \sum_{Q \in \mathcal{Q}'_k} w(Q) = 0, \]
 	%
@@ -628,7 +596,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	Taking $\varepsilon \to 0$, we conclude $\mu(F) = 0$. Thus $\mu$ is absolutely continuous with respect to $H^s$. Since $\mu(E) > 0$, this means that $H^s(E) > 0$.
 
-	To prove the converse, we will suppose for simplicity that $E$ is compact. We work dyadically with the classical family of dyadic cubes $\DD$, with branching factor $N = 2$.  By translating, we may assume that $H^s(E \cap [0,1]^d) > 0$, and so without loss of generality we may assume $E \subset [0,1]^d$. For each $Q \in \DD^d$, define $w^+(Q) = H^s_\infty(E \cap Q)$. Then
+	To prove the converse, we will suppose for simplicity that $E$ is compact. We work dyadically with the classical family of dyadic cubes $\DD^d$, with branching factor $N = 2$.  By translating, we may assume that $H^s(E \cap [0,1]^d) > 0$, and so without loss of generality we may assume $E \subset [0,1]^d$. For each $Q \in \DD^d$, define $w^+(Q) = H^s_\infty(E \cap Q)$. Then
 	%
 	\begin{equation} \label{equation7099014901209} w^+(Q) \leq l(Q)^s, \end{equation}
 	%
@@ -751,6 +719,45 @@ then $\fordim(E) \leq \hausdim(E)$. A set $E$ is \emph{Salem} if $\fordim(E) = \
 Later on, we will use two important principles to calculate the Fourier transforms of measures supported $\DQ_k$ discretized sets. The first property is an instance of the Heisenberg uncertainty principle, which says that the Fourier transform of a function $f$ supported on a sidelength $r$ intervals has fast decay outside of a sidelength $1/r$ interval. The second is an instance of the Poisson summation formula, which says that the Fourier transform of a measure $\mu$ supported on $[0,1]^d$ can be read off from it's Fourier series $\{ \widehat{\mu}(k) : k \in \ZZ^d \}$.
 
 \end{comment}
+
+
+
+
+
+\section{Fourier Dimension}
+
+A popular technique in current research in geometric measure theory is exploiting Fourier analysis to obtain additional structural information about configurations in sets. A key insight to this technique is that the Frostman dimension of any finite Borel measure $\mu$ is equal to
+%
+\[ \sup \left\{ s > 0 : \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}} d\xi < \infty \right\}. \]
+%
+For brevity, we leave the proof to other sources, e.g. \cite[Section 3.5]{Matilla}. Note that if
+%
+\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-s}}\; d\xi < \infty, \]
+%
+then there exists a constant $C$ such that for \emph{most} values $\xi \in \RR^d$,
+%
+\begin{equation} \label{fourierdimensioncondition}
+    |\widehat{\mu}(\xi)| \leq C |\xi|^{-s/2}.
+\end{equation}
+%
+We obtain a strengthening of the Frostman measure condition if we require \eqref{fourierdimensioncondition} to hold for \emph{all} values $\xi$. In particular, we define the \emph{Fourier dimension} of a finite Borel measure $\mu$ on $\RR^d$ as
+%
+\[ \fordim(\mu) = \sup \{ 0 < s \leq d : \sup_{\xi \in \RR^d} |\xi|^s |\widehat{\mu}(\xi)| \}. \]
+%
+If this is true, then for all $t < s$,
+%
+\[ \int \frac{|\widehat{\mu}(\xi)|^2}{|\xi|^{d-t}}\; d\xi < \infty \]
+%
+so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph{Fourier dimension} of a set $E$ as
+%
+\[ \fordim(E) = \sup \left\{ \fordim(\mu): \mu\ \text{is supported on $E$} \right\}, \]
+%
+then $\fordim(E) \leq \hausdim(E)$.
+
+We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, one heuristic is that the Fourier dimension of \emph{random} families of sets tend to almost surely have Fourier dimension equal to their Hausdorff dimension. Our main technique in Chapter \ref{ch:RoughSets} involves a random selection strategy, and so in Section 6.2, we attempt to utilize this random selection strategy to find sets with large Fourier dimension avoiding configurations.
+
+
+
 
 
 
