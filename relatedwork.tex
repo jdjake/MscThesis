@@ -132,7 +132,7 @@ under mild regularity conditions on the function $f: \C^n[0,1]^d \to [0,1]^m$.
     For simplicity, we only prove the result for a single function, rather than a countable family of functions. The only major difference between the two approaches is the choice of scales we must choose later on in the argument, and a slight modification of the queuing argument.
 \end{remark}
 
-Just like Keleti, Pramanik and Fraser begin by solving a discrete variant of the configuration problem in Theorem \ref{pramanikandfrasertheorem}, which they can then iteratively apply at each scale. In the discrete setting, rather than making a linear shift in one of the variables, as in Keleti's approach, Pramanik and Fraser must utilize the smoothness properties of the function to find large segments of an interval avoiding. Corollary \ref{PramanikFraserBuildingBlockLemma} gives the discrete result that Pramanik and Fraser utilize in a queuing construction to find a set $X$ satisfying the conclusions of Theorem \ref{pramanikandfrasertheorem}. Here, a multi-scale approach proves useful, so we utilize the family of cubes $\DQ$ and $\DR$, assuming the existence of two sequences of branching factors $\{ N_k \}$ and $\{ M_k \}$ which we will specify later on in the argument.
+Just like Keleti, Pramanik and Fraser begin by solving a discrete variant of the configuration problem in Theorem \ref{pramanikandfrasertheorem}, which they can then iteratively apply at each scale. In the discrete setting, rather than making a linear shift in one of the variables, as in Keleti's approach, Pramanik and Fraser must utilize the smoothness properties of the function which defines the configuration to find large sets. Corollary \ref{PramanikFraserBuildingBlockLemma} gives the discrete result that Pramanik and Fraser utilize in a queuing construction, analogous to the queueing method of Keleti, to find a set $X$ satisfying the conclusions of Theorem \ref{pramanikandfrasertheorem}. Here, a multi-scale approach proves useful, so we utilize the family of cubes $\DQ$ and $\DR$, assuming the existence of two sequences of branching factors $\{ N_k \}$ and $\{ M_k \}$ which we will specify later on in the argument.
 
 \begin{lemma} \label{Lemma315091513}
     Fix $n > 1$. Let $T \subset [0,1]^d$ and $T' \subset [0,1]^{(n-1)d}$ be $\DQ_k$ discretized sets. Let $B \subset T \times T'$ be $\DQ_{k+1}$ discretized. Then there exists a $\DQ_{k+1}$ discretized set $S \subset T$, and a $\DQ_{k+1}$ discretized set $B' \subset T'$, such that
@@ -230,7 +230,7 @@ We apply the lemma recursively $n-1$ times to continually reduce the dimensional
         &\leq (2/M_{k+1}^d) \left(C \cdot 2^{n-1} (N_1 \dots N_k)^{2dn} (M_{k+1}/N_{k+1})^{d(n-1)} \right).\\
         &= \left[ 2^n C (N_1 \dots N_k)^{2dn} \right] \left( M_{k+1}^{d(n-2)} / N_{k+1}^{m-d} \right)\\
         &< (N_{k+1}/M_{k+1})^d\\
-        &= \DQ_{k+1}(R)
+        &= \DQ_{k+1}(R).
     \end{align*}
     %
     Thus for each $R \in \mathcal{R}(Q_0)$, we can find $Q_R \in \DQ_{k+1}(R)$ such that $Q_R \cap B = \emptyset$. And so if we set
@@ -259,7 +259,7 @@ We apply the lemma recursively $n-1$ times to continually reduce the dimensional
     %
     \[ V(f) = \{ (x_1, \dots, x_n) \in \C^n(\RR^d) : f(x_1, \dots, x_n) = 0 \}, \]
     %
-    the implicit function theorem implies $V(f)$ is a smooth manifold of dimension $nd - m$ in $\RR^{dn}$, and the co-area formula implies the existence of a constant $C$ such that for each $k$,
+    the implicit function theorem implies $V(f)$ is a smooth manifold of dimension $nd - m$ in $\RR^{dn}$, and so the co-area formula implies the existence of a constant $C$ such that for each $k$,
     %
     \[ \# \{ Q \in \DQ_k^{dn} : Q \cap V(f) \neq \emptyset \} \leq C/l_k^{dn-m}. \]
     %

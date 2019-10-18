@@ -8,7 +8,7 @@ To conclude this thesis, we sketch some ideas developing the theory of `rough se
 
 \section{Low Rank Avoidance}
 
-One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize addition geometric structure of the rough configuration $\C$ to obtain larger avoiding sets. Recall that in Chapter \ref{ch:RoughSets}, we studied the avoidance problem for configurations with low Minkowski dimension. This condition means precisely that these configurations are efficiently covered by cubes at all scales. The idea of this section is to study configurations which are efficiently covered by other families of geometric objects at all scales, i.e. by a family of thickened hyperplanes, or by a family of thickened lines. Note that a set $E$ is efficiently covered by a family of thickened parallel hyperplanes at all scales if and only, for a linear transformation $M$ with that hyperplane as a kernel, $M(E)$ has low Minkowski dimension.
+One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize addition geometric structure of the rough configuration $\C$ to obtain larger avoiding sets. Recall that in Chapter \ref{ch:RoughSets}, we studied the avoidance problem for configurations with low Minkowski dimension. This condition means precisely that these configurations are efficiently covered by cubes at all scales. The idea of this section is to study configurations which are efficiently covered by other families of geometric objects at all scales. Here, we study the simple setting where our set is efficiently covered by families of thickened hyperplanes or thickened lines. We note that a set $E$ is efficiently covered by a family of thickened parallel hyperplanes at all scales if and only, for a linear transformation $M$ with that hyperplane as a kernel, $M(E)$ has low Minkowski dimension.
 
 \begin{theorem} \label{theorem9063909014901}
     Let $\C \subset \C(\RR)$ be the countable union of sets $\{ \C_i \}$ such that
@@ -35,7 +35,7 @@ One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize ad
         %
         whenever $s_i \geq 1$ for all $i$. We plan to pursue whether this conjecture is true in further research.
 
-        \item[3.] Also note that the theorem only applies in the one-dimensional configuration avoidance setting. We also plan to find higher dimensional analogues to this theorem, when $d > 1$, in the near future.
+        \item[3.] Compared to Theorem \ref{mainTheorem}, this result only applies in the one-dimensional configuration avoidance setting. We also plan to find higher dimensional analogues to this theorem, when $d > 1$, in the near future.
     \end{enumerate}
 \end{remarks}
 
@@ -111,11 +111,14 @@ such that the transformation $M$ is invertible when restricted to the span of $\
     %
     In particular, if $X \neq X'$, $\mathcal{A}(X)$ and $\mathcal{A}(X')$ are disjoint. Equation \eqref{equation19024u1298352389} implies there is a constant $C(n,m,M)$, such that
     %
-    \begin{align*}
-        \# \left\{ n \in \mathbf{Z}^m : d \left( \frac{n}{N_1 \dots N_{k+1}}, B \right) \leq \frac{2}{\sqrt{d} \cdot \| M \|} \frac{1}{N_1 \dots N_{k+1}} \right\} \leq C(n,m,M)^{m - (s + \varepsilon)} \cdot N_{k+1}^{s + \varepsilon}.
-    \end{align*}
+    \begin{equation} \label{equation69129319031209}
+    \begin{split}
+        \#& \left\{ n \in \mathbf{Z}^m : d \left( \frac{n}{N_1 \dots N_{k+1}}, B \right) \leq \frac{2}{\sqrt{d} \cdot \| M \|} \frac{1}{N_1 \dots N_{k+1}} \right\}\\
+        &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \leq C(n,m,M)^{m - (s + \varepsilon)} \cdot N_{k+1}^{s + \varepsilon}.
+    \end{split}
+    \end{equation}
     %
-    Applying the pigeonhole principle and \eqref{equation6091904232093}, there exists some value $X_0$ such that
+    Applying the pigeonhole principle, \eqref{equation6091904232093}, and \eqref{equation69129319031209}, there exists some value $X_0$ such that
     %
     \begin{align*}
         \# \left\{ n \in \mathbf{A}(X_0) : d(n,B) \leq \frac{2}{\sqrt{d} \cdot \| M \|} \frac{1}{N_1 \dots N_{k+1}} \right\} &\leq \frac{C(n,m,M)^{m - (s + \varepsilon)} \cdot N_{k+1}^{s + \varepsilon}}{(N_{k+1}/M_{k+1})^m}\\
@@ -129,7 +132,7 @@ such that the transformation $M$ is invertible when restricted to the span of $\
     is disjoint from $B$. Taking $S_i = S_i(X_0)$ for each $i$ completes the proof.
 \end{proof}
 
-Before we move on, let's consider one application of Theorem \ref{theorem9063909014901}, which gives an extension of Theorem \ref{sumset-application} to arbitrarily large sums.
+Before we move on, consider one application of Theorem \ref{theorem9063909014901}, which gives an extension of Theorem \ref{sumset-application} to arbitrarily large sums.
 
 \begin{theorem}
     Let $Y \subset \RR$ be a countable union of pre-compact sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR$ with Hausdorff dimension at least $1 - t$ such that for any integer $n > 0$, for any $a_1, \dots, a_n \in \QQ$, and for any $x_1, \dots, x_n \in X$,
@@ -141,13 +144,13 @@ Before we move on, let's consider one application of Theorem \ref{theorem9063909
     %
     \[ \C_{n,a,i} = \{ (x_1, \dots, x_n) \in \C^n : a_1x_1 + \dots + a_nx_n \in Y_i \}, \]
     %
-    and let $\C = \bigcup \C_{n,a,i}$. Let $T_{n,i,a}(x_1,\dots,x_n)$ be the linear map given by
+    and let $\C = \bigcup \C_{n,a,i}$. Let $T_{n,a}(x_1,\dots,x_n)$ be the linear map given by
     %
     \[ T_{n,a}(x_1,\dots,x_n) = a_1x_1 + \dots + a_nx_n. \]
     %
     Then $T_{n,a}$ is nonzero, and $T_{n,a}(\C_{n,i,a})$ how lower Minkowski dimension at most $t$. Applying Theorem \ref{theorem9063909014901}, we obtain a set $X \subset [0,1]$ avoiding $\C$ with Hausdorff dimension at least $1 - t$.
 
-    We prove $X$ satisfies the conclusions of this theorem by induction on $n$. Consider the case $n = 1$, and fix $a \in \QQ$. If $a \neq 0$, then because $X$ avoids $\C_{a,i}$ for each $i$, if $x \in X$, $ax \not \in Y$, so $aX \cap Y = \emptyset$. If $a = 0$, then $aX = 0$, so $(aX) \cap Y \subset (0)$.
+    We prove $X$ satisfies the conclusions of this theorem by induction on $n$. Consider the case $n = 1$, and fix $a \in \QQ$. If $a \neq 0$, then because $X$ avoids $\C_{n,a,i}$ for each $i$, if $x \in X$, $ax \not \in Y$, so $aX \cap Y = \emptyset$. If $a = 0$, then $aX = 0$, so $(aX) \cap Y \subset (0)$.
 
     In general, consider $a = (a_1, \dots, a_{n+1}) \in \QQ^{n+1}$. If $a \neq 0$, then because $X$ avoids $\C_{n,a,i}$ for each $i$, we know if $x_1, \dots, x_{n+1} \in X$ are distinct, then $a_1 x_1 + \dots + a_{n+1} x_{n+1} \not \in Y$. If the values $x_1, \dots, x_{n+1} \in X$ are not distinct, then by rearranging both the values $\{ x_i \}$ and $\{ a_i \}$, we may without loss of generality assume that $x_n = x_{n+1}$. Then
     %
@@ -175,10 +178,10 @@ Recently, there has been much interest in determining whether sets with large Fo
     Suppose $\C$ is a configuration on $\RR$, formed from the countable union of pre-compact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]$ with Fourier dimension at least $(n - s)/n$ avoiding $\C$.
 \end{theorem}
 
-We begin with a lemma which uses the Poisson summation theorem to restrict the analysis of the Fourier decay of the probability measures we study to the analysis of frequencies in $\ZZ^d$.
+We begin with a lemma which uses the Poisson summation theorem to restrict the analysis of the Fourier decay of the probability measures we study to the analysis of frequencies in $\ZZ$.
 
 \begin{lemma} \label{discretefouriermeasures}
-    Fix $s \in [0,d]$. Suppose $\mu$ is a compactly supported finite Borel measure on $\RR^d$. Then there exists a constant $A$, depending only on the dimension of $d$ and the radius of the support of $\mu$, such that
+    Fix $s \in [0,d]$. Suppose $\mu$ is a compactly supported finite Borel measure on $\RR^d$. Then there exists a constant $A \geq 1$, depending only on the dimension of $d$ and the radius of the support of $\mu$, such that
     %
     \[ \sup_{\xi \in \RR^d} |\xi|^{s/2} |\widehat{\mu}(\xi)| \leq 1 + A \left( \sup_{m \in \ZZ^d} |m|^{s/2} |\widehat{\mu}(m)| \right). \]
 \end{lemma}
@@ -224,7 +227,7 @@ We begin with a lemma which uses the Poisson summation theorem to restrict the a
     \end{split}
     \end{equation}
     %
-    Combining \eqref{calculation1}, \eqref{calculation2}, and \eqref{calculation3} with \eqref{mubounded}, we conclude that there exists a constant $A$ depending only on the dimension $d$ such that if $|\xi| \geq 2$,
+    Combining \eqref{calculation1}, \eqref{calculation2}, and \eqref{calculation3} with \eqref{mubounded}, we conclude that there exists a constant $A \geq 1$ depending only on the dimension $d$ such that if $|\xi| \geq 2$,
     %
     \begin{equation} \label{endequation53}
         |\widehat{\mu}(\xi)| \leq A \cdot C \cdot |\xi|^{-s/2}.
@@ -348,7 +351,7 @@ The purpose of introducing $\eta_k$ is so that, given a measure $\mu$ which is a
     \end{split}
     \end{equation}
     %
-    The function $\widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T}$ is $N_1 \dots N_{k+1}$ periodic. Thus, to uniformly bound this function, we need only bound the function over $N_1 \dots N_{k+1}$ values of $m$. Applying a union bound with \eqref{equation5551902402919120}, which is uniform over $m$, we conclude
+    The function $\widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T}$ is $N_1 \dots N_{k+1}$ periodic. Thus, to uniformly bound this function, we need only bound the function over $N_1 \dots N_{k+1}$ values of $m$. Applying a union bound with \eqref{equation5551902402919120}, we conclude
     %
     \begin{equation} \label{equation6662410242191209}
         \PP \left( \| \widehat{\nu_S} - \widehat{\eta_{k+1}} \widehat{\nu_T} \|_{L^\infty(\ZZ)} \geq t \right) \leq 2 N_1 \dots N_{k+1} \exp \left( \frac{- \#(\DQ_k(T)) M_{k+1} t^2}{4} \right).
@@ -759,7 +762,7 @@ Let $\nu_k = \nu_{X_k}$ for each $k$. Property (B) of Lemma \ref{discreteFourier
     \left\| \widehat{\nu_{k+1}} - \widehat{\eta_{k+1}} \widehat{\nu_k} \right\|_{L^\infty(\ZZ)} \leq A(n,s) \cdot (N_1 \dots N_{k+1})^{- \frac{n-s}{2n} + 2\varepsilon_{k+1}}.
 \end{equation}
 %
-We shall form a sequence of measures $\{ \mu_k \}$ by colving the measure which will be sufficient to obtain the required asymptotic bound.
+We shall form a sequence of measures $\{ \mu_k \}$ by convolving the measures $\{ \nu_k \}$ with an appropriate family of mollifiers, which will be sufficient to obtain the required asymptotic bound.
 
 \begin{lemma}
     There exists a sequence of probability measures $\{ \mu_k \}$, with $\mu_k$ supported on $X_k$ for each $k$, such that for each $\varepsilon > 0$,
@@ -781,7 +784,7 @@ We shall form a sequence of measures $\{ \mu_k \}$ by colving the measure which 
     %
     \[ \widehat{\mu_k}(\xi) = \widehat{\nu_k}(\xi) \widehat{\psi_k}(\xi). \]
     %
-    Also note that $\psi_k = \psi_{k+1} * \eta_{k+1}$. If $\varepsilon > 0$, then
+    Also note that $\psi_k = \psi_{k+1} * \eta_{k+1}$. If $\varepsilon > 0$, then we can apply \eqref{equation77770123091293120} with \eqref{equation901418294891481792} to conclude
     %
     \begin{equation} \label{equation6892489214781278}
     \begin{split}
@@ -816,7 +819,7 @@ We shall form a sequence of measures $\{ \mu_k \}$ by colving the measure which 
     %
     \[ A_k = O \left( \sum_{k = 1}^\infty (N_1 \dots N_k)^{2\varepsilon_{k+1} - \varepsilon} \right). \]
     %
-    Provided the sum on the right hand side converges, this gives a uniform bound of $A_k$ in $k$ for each $\varepsilon > 0$, completing the proof. But for suitably large $k$, depending on $\varepsilon$, it is eventually true that $\varepsilon_{k+1} \leq \varepsilon/8$, and so
+    Provided the sum on the right hand side converges for each $\varepsilon > 0$, this gives a uniform bound of $A_k$ in $k$ for each $\varepsilon > 0$, completing the proof. But for suitably large $k$, depending on $\varepsilon$, it is eventually true that $\varepsilon_{k+1} \leq \varepsilon/8$, and so
     %
     \begin{align*}
         A_k &= O_\varepsilon(1) + \sum_{k = 1}^\infty (N_1 \dots N_k)^{-\varepsilon/4} = O_\varepsilon(1) + \sum_{k = 1}^\infty 2^{-k\varepsilon/4} = O_\varepsilon(1). \qedhere

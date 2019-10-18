@@ -23,7 +23,7 @@ We call $\Config(\AAA)$ the \emph{configuration space} of $\mathbf{A}$.
 	%
 	\[ \C = \left\{ (x, x + av, x + 2av) \in \C^3(\RR^d) : a \in \RR - \{ 0 \}, v \in \RR^d - \{ 0 \} \right\}. \]
 	%
-	Then $X$ avoids colinear points if and only if for any $x_1,x_2,x_3 \in X$, $(x_1,x_2,x_3) \not \in \C$.
+	Then $X$ avoids colinear points if and only if $\C^3(X)$ is disjoint from $\C$.
 \end{example}
 
 \begin{example}[Isosceles Triangle Configuration]
@@ -31,26 +31,30 @@ We call $\Config(\AAA)$ the \emph{configuration space} of $\mathbf{A}$.
 	%
 	\[ \C = \left\{ (x_1, x_2, x_3) \in \Config^3(\RR^2) : |x_1-x_2| = |x_1-x_3| \right\}. \]
 	%
-	A set $X$ avoids isosceles triangles if and only for any $x_1,x_2,x_3 \in X$, $(x_1,x_2,x_3) \not \in \C$. %Notice that $|x_1 - x_2| = |x_1 - x_3|$ holds if and only if $|x_1 - x_2|^2 = |x_1 - x_3|^2$, which is an algebraic equation in the coordinates of $x_1,x_2$, and $x_3$. Thus $\C$ is an algebraic hypersurface of degree two in $\RR^6$.
+	A set $X$ avoids isosceles triangles if and only if $\C^3(X)$ is disjoint from $\C$. %Notice that $|x_1 - x_2| = |x_1 - x_3|$ holds if and only if $|x_1 - x_2|^2 = |x_1 - x_3|^2$, which is an algebraic equation in the coordinates of $x_1,x_2$, and $x_3$. Thus $\C$ is an algebraic hypersurface of degree two in $\RR^6$.
 \end{example}
 
 \begin{example}[Linear Independence Configuration]
 	Let $V$ be a vector space over a field $K$. We set
 	%
-	\[ \C = \bigcup_{n = 1}^\infty \left\{ (x_1, \dots, x_n) \in \Config^n(V): \begin{array}{c}
+	\[ \C = \bigcup_{n = 1}^\infty \left\{ (x_1, \dots, x_n) \in \Config^n(V): \left\{ \begin{array}{c}
 			\text{there is $a_1, \dots, a_n \in K$ such}\\
 			\text{that $a_1x_1 + \dots + a_nx_n = 0$}
-		\end{array} \right\}. \]
+		\end{array} \right\} \right\}. \]
 	%
-	A set $X \subset V$ is linearly independent in $V$ if, for any $n$, and any set of $n$ points $x_1, \dots, x_n \in X$, $(x_1, \dots, x_n) \not \in \C$. In this thesis, we will be interested in the case where $K = \QQ$, and $V = \RR$.
+	A set $X \subset V$ is linearly independent in $V$ if and only if $\C(X)$ is disjoint from $\C$.
 \end{example}
+
+\begin{remark}
+	In this thesis, we will be most interested in the linear independence configuration where $K = \QQ$, and $V = \RR$. Results in this setting are discussed in both Chapter \ref{ch:Applications} and \ref{ch:Conclusions}.
+\end{remark}
 
 \begin{example}[Sum Set Configuration]
 	Let $G$ be an abelian group, and fix $Y \subset G$. Set
 	%
 	\[ \C^1 = \{ g \in \Config^1(G): g + g \in Y \} \quad \text{and} \quad \C^2 = \{ (g_1,g_2) \in \Config^2(G): g_1 + g_2 \in Y \}. \]
 	%
-	Define $\C = \C^1 \cup \C^2$. Then $(X + X) \cap Y = \emptyset$ if and only if for any $x_1,x_2 \in X$, $(x_1,x_2) \not \in \C^2$, and for any $x \in X$, $x \not \in \C^1$.
+	Define $\C = \C^1 \cup \C^2$. Then $(X + X) \cap Y = \emptyset$ if and only if $\C(X)$ is disjoint from $\C$.
 \end{example}
 
 All the configurations we discuss in this thesis can be specified in terms of subsets of $\Config(\AAA)$. Thus we formally define a \emph{configuration} on $\AAA$ to be a subset of $\Config(\AAA)$. In particular, if $n > 0$, we say a configuration $\C$ is an \emph{$n$ point configuration} if it is a subset of $\Config^n(\AAA)$. For a fixed configuration $\C$ on $\AAA$, we say a set $X \subset \AAA$ \emph{avoids} $\C$ if $\Config(X)$ is disjoint from $\C$. The \emph{pattern avoidance problem} asks to find sets $X$ of maximal size avoiding a fixed configuration $\C$. Often, the configuration $\C$ describes algebraic or geometric structure, and the pattern avoidance problem asks to find the maximal size of a set before it is guaranteed to have such structure.
@@ -80,7 +84,7 @@ Depending on the structure of the ambient space $\AAA$ and the configuration $\C
 	Then no set with positive Lebesgue measure avoids $\C$.
 \end{theorem}
 \begin{proof}
-	Let $X \subset \RR^d$ have positive Lebesgue measure. The Lebesgue density theorem shows that there exists a point $x \in X$ such that
+	Let $X \subset \RR^d$ have positive Lebesgue measure. The Lebesgue density theorem implies that there exists a point $x \in X$ such that
 	%
 	\begin{equation} \label{densityApplication} \lim_{l(Q) \to 0} \frac{|X \cap Q|}{|Q|} = 1, \end{equation}
 	%
@@ -112,9 +116,9 @@ Depending on the structure of the ambient space $\AAA$ and the configuration $\C
 
 % TO DO: SWAPPING THIS RESULT FOR A DENSITY RESULT, IF WE CAN OBTAIN IT.
 
-Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with various quantities that can distinguish between the size of sets of measure zero. These are the \emph{fractal dimensions} of a set.
+Since no set of positive Lebesgue measure can avoid non-discrete, translation invariant configurations, we cannot use the Lebesgue measure to quantify the size of pattern avoiding sets in this setting. Geometric measure theory provides us with various quantities that are able to distinguish between the size of sets of measure zero. These are the \emph{fractal dimensions} of a set. In all configuration avoidance problems in this thesis, we use a fractal dimension to measure the size of configuration avoiding sets.
 
-There are many variants of fractal dimension. Here we choose to focus on Minkowski dimension, Hausdorff dimension, and Fourier dimension. These quantities assign the same dimension to any smooth manifolds with non-vanishing curvature, but can differ for rougher sets. Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales. Fourier dimension is a refinement of Hausdorff dimension which places structural constraints on the set in the `frequency domain'.
+There are many variants of fractal dimension. Here we choose to focus on Minkowski dimension, Hausdorff dimension, and Fourier dimension. These quantities assign the same dimension to any smooth manifold with non-vanishing curvature, but can differ for rougher sets. Minkowski dimension measures relative density at a single scale, whereas Hausdorff dimension measures relative density at countably many scales. Fourier dimension is a refinement of Hausdorff dimension which places structural constraints on the set in the `frequency domain'.
 
 
 
@@ -250,7 +254,7 @@ This notion of dimension, in a disguised form, appears in Chapter \ref{ch:RoughS
 
 \section{Dyadic Scales} \label{sec:Dyadics}
 
-It is now useful to introduce the dyadic notation we utilize throughout this thesis. At the cost of losing access to the continuous structure of $\RR^d$, applying dyadic techniques often allows us to elegantly discretize problems in Euclidean space.
+It is now useful to introduce the dyadic notation we utilize throughout this thesis. At the cost of some techniques which can be used by exploiting the full continuous structure of $\RR^d$, applying dyadic techniques often allows us to elegantly discretize problems in Euclidean space.
 
 Fix an integer $N$. The classic family of dyadic cubes with \emph{branching factor} $N$ is given by setting, for each integer $k \geq 0$,
 %
@@ -288,7 +292,7 @@ Our main purpose with working with dyadic cubes is to construct \emph{fractal-ty
 	\item[(v)] $X$ is defined recursively.
 \end{itemize}
 %
-This justifies the term `fractal' when used to referring about these sets.
+This justifies the term `fractal' when used to refer to these sets.
 
 \begin{example}
 	Let us construct the middle thirds Cantor set $C$ as a fractal-type set. We form $C$ from the family of dyadic cubes with branching factor $N = 3$. We initially set $C_0 = [0,1]$. Then, given the $\DD_k$ discretized set $C_k$, we consider each $I \in \DD_k^1(C_k)$, and let $\DD_{k+1}^1(I) = \{ I_1, I_2, I_3 \}$, where $I_1, I_2, I_3$ are given in increasing order with respect to their appearance in $I$. We set
@@ -298,7 +302,7 @@ This justifies the term `fractal' when used to referring about these sets.
 	Then $C = \bigcap_{k \geq 0} C_k$ is the Cantor set.
 \end{example}
 
-Unfortunately, a \emph{constant} branching factor is not sufficient to describe the fractal type constructions we discuss in this thesis. Thus, we introduce a more general family of cubes. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
+Unfortunately, a \emph{constant} branching factor is not sufficient to describe the fractal type constructions we discuss in this thesis. Thus, we introduce a more general family of cubes, which, abusing terminology, we also refer to as dyadic. Instead of a single branching factor $N$, we fix a sequence of positive integers $\{ N_k : k \geq 1 \}$, with $N_k \geq 2$ for all $k$, which gives the branching factor at each stage of the class of cubes we define.
 %
 \begin{itemize}
 	\item For each $k \geq 0$, we define 
@@ -560,7 +564,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 \end{proof}
 
 \begin{remark}
-	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $w$ is that in the weak limit, mass from cubes can `leak' into the mass of adjacent cubes. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the result is still a `mass distribution' result. It just means that the mass specified by $w$ may be shared by adjacent cubes in the weak limit, if enough mass is pushed out to the boundary of these cubes. If, for each $Q' \in \DQ^d$,
+	The reason why we cannot necessarily find a function $\mu$ which \emph{precisely} extends $w$ is that in the weak limit, mass which the weight function $w$ assigns to one cube can `leak' into the mass of adjacent cubes when we take a weak limit. This is why we must use the weaker `extension bounds' \eqref{massdissupperbound} and \eqref{massdisslowerbound}. This doesn't cause us to `gain' or `lose' any mass in the weak limit, as \eqref{massdissupperbound} shows, so the result is still a `mass distribution' result. It just means that the mass specified by $w$ may be shared by adjacent cubes in the weak limit, if enough mass is pushed out to the boundary of these cubes. If, for each $Q' \in \DQ^d$,
 	%
 	\[ \lim_{k \to \infty} \sum_{Q \in \mathcal{Q}'_k} w(Q) = 0, \]
 	%
@@ -754,7 +758,7 @@ so $\mu$ has Frostman dimension $t$ for all $t < s$. Thus if we define the \emph
 %
 then $\fordim(E) \leq \hausdim(E)$.
 
-We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, one heuristic is that the Fourier dimension of \emph{random} families of sets tend to almost surely have Fourier dimension equal to their Hausdorff dimension. Our main technique in Chapter \ref{ch:RoughSets} involves a random selection strategy, and so in Section 6.2, we attempt to utilize this random selection strategy to find sets with large Fourier dimension avoiding configurations.
+We view the Fourier dimension as a refinement of the Hausdorff dimension which gives greater structural control on the set in the `frequency domain'. Most classical examples of fractals, like the middle-thirds Cantor set, have Fourier dimension zero. Nonetheless, one principle in this setting is that the Fourier dimension of \emph{random} families of sets tend to almost surely have Fourier dimension equal to their Hausdorff dimension. Our main technique to construct configuration avoiding sets in Chapter \ref{ch:RoughSets} involves a random selection strategy, and so in Section 6.2, we attempt to utilize this random selection strategy to find sets with large Fourier dimension avoiding configurations.
 
 
 
