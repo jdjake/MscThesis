@@ -8,15 +8,15 @@ To conclude this thesis, we sketch some ideas developing the theory of `rough se
 
 \section{Low Rank Avoidance}
 
-One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize addition geometric structure of the rough configuration $\C$ to obtain larger avoiding sets. Recall that in Chapter \ref{ch:RoughSets}, we studied the avoidance problem for configurations with low Minkowski dimension. This condition means precisely that these configurations are efficiently covered by cubes at all scales. The idea of this section is to study configurations which are efficiently covered by other families of geometric objects at all scales. Here, we study the simple setting where our set is efficiently covered by families of thickened hyperplanes or thickened lines. We note that a set $E$ is efficiently covered by a family of thickened parallel hyperplanes at all scales if and only, for a linear transformation $M$ with that hyperplane as a kernel, $M(E)$ has low Minkowski dimension.
+One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize additional geometric structure of particular rough configurations $\C$ to obtain larger avoiding sets. Recall that in Chapter \ref{ch:RoughSets}, we studied the avoidance problem for configurations with low Minkowski dimension. This condition means precisely that these configurations are efficiently covered by cubes at all scales. The idea of this section is to study configurations which are efficiently covered by other families of geometric objects at all scales. Here, we study the simple setting where our set is efficiently covered by families of thickened hyperplanes or thickened lines. We note that a set $E$ is efficiently covered by a family of thickened parallel hyperplanes, at each scale of thickening, if and only, for a linear transformation $M$ with that hyperplane as a kernel, $M(E)$ has low Minkowski dimension.
 
 \begin{theorem} \label{theorem9063909014901}
     Let $\C \subset \C(\RR)$ be the countable union of sets $\{ \C_i \}$ such that
     %
     \begin{itemize}
-        \item For each $i$, there exists $n_i$ such that $\C_i$ is a pre-compact subset of $\C^{n_i}(\RR)$.
+        \item For each $i$, there exists $n_i$ such that $\C_i \subset \C^{n_i}(\RR)$.
 
-        \item There exists an integer $m_i > 0$ and $s_i \in [0,m_i)$, together with a full-rank rational-coefficient linear transformation $M_i: \RR^{n_i} \to \RR^{m_i}$ such that $M_i(\C_i)$ has lower Minkowski dimension at most $s_i$.
+        \item There exists an integer $m_i > 0$ and $s_i \in [0,m_i)$, together with a full-rank rational-coefficient linear transformation $M_i: \RR^{n_i} \to \RR^{m_i}$ such that $M_i(\C_i)$ is a bounded subset of $\RR^{m_i}$ with lower Minkowski dimension at most $s_i$.
     \end{itemize}
     %
     Then there exists a set $X \subset [0,1]$ avoiding $\C$ with Hausdorff dimension at least
@@ -27,19 +27,19 @@ One way we can extend the results of Chapter \ref{ch:RoughSets} is to utilize ad
 \begin{remarks}
     \
     \begin{enumerate}
-        \item[1.] A useful feature of this method is that the resulting set does not depend on the number of points in a configuration. This is a feature only shared by Math\'{e}'s result, Theorem \ref{mathemainresult} in Section 3.3. We exploit this feature later on in this section to find large subsets avoiding a countable family of equations with arbitrarily many variables.
+        \item[1.] A useful feature of this method is that the resulting set does not depend on the number of points in a configuration, i.e. we do not need to restrict ourselves to an $n$ point configuration for some fixed integer $n$. This is a feature only shared by Math\'{e}'s result, Theorem \ref{mathemainresult} in Section 3.3. We exploit this feature later on in this section to find large subsets avoiding a countable family of equations with arbitrarily many variables.
 
         \item[2.] It might be expected, based on the result of Theorem \ref{mainTheorem}, that one should be able to obtain a set $X \subset [0,1]$ avoiding $\C$ with Hausdorff dimension
         %
         \[ \inf_i \left( \frac{m_i - s_i}{m_i - 1} \right), \]
         %
-        whenever $s_i \geq 1$ for all $i$. We plan to pursue whether this conjecture is true in further research.
+        whenever $s_i \geq 1$ for all $i$. We plan to study whether Theorem \ref{theorem9063909014901} can be improved to give this bound in the near future.
 
-        \item[3.] Compared to Theorem \ref{mainTheorem}, this result only applies in the one-dimensional configuration avoidance setting. We also plan to find higher dimensional analogues to this theorem, when $d > 1$, in the near future.
+        \item[3.] Compared to Theorem \ref{mainTheorem}, this result only applies in the one-dimensional configuration avoidance setting. We also plan to study higher dimensional analogues to this theorem, when $d > 1$.
     \end{enumerate}
 \end{remarks}
 
-For purpose of brevity, here we only describe a solution to the discretized version of the problem. This can be fleshed out into a full proof of Theorem \ref{theorem9063909014901} by techniques analogous to those given in Chapters \ref{ch:RelatedWork} and \ref{ch:RoughSets}. Thus we discuss a single linear transformation $M: \RR^{dn} \to \RR^m$, and try to avoid a discretized version of a low dimensional set.
+For the purpose of brevity, here we only describe a solution to the discretized version of the problem. This can be fleshed out into a full proof of Theorem \ref{theorem9063909014901} by techniques analogous to those given in Chapters \ref{ch:RelatedWork} and \ref{ch:RoughSets}. Thus we discuss a single linear transformation $M: \RR^{dn} \to \RR^m$, and try to avoid a discretized version of a low dimensional set.
 
 Before we describe the discretized result, let us simplify the problem slightly. Since our transformation $M$ has full rank, we may find indices
 %
@@ -63,7 +63,7 @@ such that the transformation $M$ is invertible when restricted to the span of $\
     then there exists $\DQ_{k+1}$ discretized sets $S_1 \subset T_1$, \dots, $S_n \subset T_n$ such that
     %
     \begin{enumerate}
-        \item For any collection of $n$ distinct cubes $Q_i \in \DQ_{k+1}(S_i)$,
+        \item For any collection of $n$ distinct cubes $Q_1, \dots, Q_n \in \DQ_{k+1}(S_i)$,
         %
         \[ Q_1 \times \dots \times Q_n \not \in \DQ_{k+1}(B). \]
 
@@ -135,7 +135,7 @@ such that the transformation $M$ is invertible when restricted to the span of $\
 Before we move on, consider one application of Theorem \ref{theorem9063909014901}, which gives an extension of Theorem \ref{sumset-application} to arbitrarily large sums.
 
 \begin{theorem}
-    Let $Y \subset \RR$ be a countable union of pre-compact sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR$ with Hausdorff dimension at least $1 - t$ such that for any integer $n > 0$, for any $a_1, \dots, a_n \in \QQ$, and for any $x_1, \dots, x_n \in X$,
+    Let $Y \subset \RR$ be a countable union of bounded sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR$ with Hausdorff dimension at least $1 - t$ such that for any integer $n > 0$, for any $a_1, \dots, a_n \in \QQ$, and for any $x_1, \dots, x_n \in X$,
     %
     \[ (a_1X + \dots + a_n X) \cap Y \subset (0). \]
 \end{theorem}
@@ -175,7 +175,7 @@ Before we move on, consider one application of Theorem \ref{theorem9063909014901
 Recently, there has been much interest in determining whether sets with large Fourier dimension can avoid configurations. Results published recently in the literature include \cite{PramanikLaba} and \cite{Shmerkin}. In this Section, we attempt to modify the procedure of Theorem \ref{mainTheorem} to obtain a set with large Fourier dimension. We obtain such a result, though with a suboptimal dimension to what we expect from Theorem \ref{mainTheorem}, and only holds in the setting where $d = 1$. We are currently researching methods to resolve the deficiencies in this method.
 
 \begin{theorem} \label{FourierTheorem}
-    Suppose $\C$ is a configuration on $\RR$, formed from the countable union of pre-compact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]$ with Fourier dimension at least $(n - s)/n$ avoiding $\C$.
+    Suppose $\C$ is a configuration on $\RR$, formed from the countable union of bounded sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]$ with Fourier dimension at least $(n - s)/n$ avoiding $\C$.
 \end{theorem}
 
 We begin with a lemma which uses the Poisson summation theorem to restrict the analysis of the Fourier decay of the probability measures we study to the analysis of frequencies in $\ZZ$.
@@ -236,10 +236,23 @@ We begin with a lemma which uses the Poisson summation theorem to restrict the a
     Since $\| \widehat{\mu} \|_{L^\infty(\RR^d)} \leq 1$, \eqref{endequation53} actually holds for all $\xi \in \RR^d$, provided $C \geq 1$.
 \end{proof}
 
-Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use to obtain have sharp control over the Fourier transform of these measures at each scale of our construction. A key strategy is to obtain high probability bounds controlling the Fourier transform of functions on the sets we choose using Hoeffding's inequality.
+Our goal now is to carefully modify the discrete selection strategy and discretized probability measures we use to obtain have sharp control over the Fourier transform of these measures at each scale of our construction. In particular, we aim to obtain a sequence of pairs $\{ (\mu_k, X_k) \}$, where $\{ X_k \}$ is a decreasing family of subsets of $\RR$ such that the set $X = \bigcap X_k$ is configuration avoiding, and $\mu_k$ is a probability measure supported on $X_k$ such that for each integer $k$ and $\varepsilon > 0$, there exists a constant $C_{k,\varepsilon} > 0$ such that
+%
+\begin{equation} \label{equation12901909}
+    \sup_{m \in \ZZ^d} |m|^{\frac{n - s}{2} - \varepsilon} |\widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m)| \leq C_{k,\varepsilon},
+\end{equation}
+%
+and for each $\varepsilon > 0$, $\sum_{k = 0}^\infty C_{k,\varepsilon} < \infty$. We will initialize this sequence by letting $X_0 = [0,1]$, and let $\mu_0$ be the Lebesgue measure restricted to $X_0$. It then follows that if $\mu$ is a weak limit of some subsequence of the measures $\mu_k$, then $\widehat{\mu}$ is the pointwise limit of some subsequence of $\widehat{\mu_k}$. And so for each $\varepsilon > 0$,
+%
+\begin{align*}
+    \sup_{m \in \ZZ} |m|^{\frac{n-s}{2} - \varepsilon} |\widehat{\mu}(m)| &\leq \sup_{m \in \ZZ} |m|^{\frac{n-s}{2} - \varepsilon} |\widehat{\mu_0}(m)| + \sum_{k = 0}^\infty \sup_{m \in \ZZ} |m|^{\frac{n-s}{2} - \varepsilon} |\widehat{\mu_{k+1}}(m) - \widehat{\mu_k}(m)|\\
+    &\lesssim 1 + \sum_{k = 0}^\infty C_{k,\varepsilon} < \infty.
+\end{align*}
+%
+Combined with Lemma \ref{discretefouriermeasures}, this implies that $X$, upon which $\mu$ is supported, has the required Fourier dimension. A key strategy to obtaining bounds of the form \eqref{equation12901909}, in light of our random selection strategy, is to obtain high probability bounds using Hoeffding's inequality.
 
 \begin{theorem}[Hoeffding's Inequality]
-    Let $\{ X_i \}$ be an independent family of $N$ mean-zero random variables, and let $A > 0$ be a constant such that $\| X_i \|_\infty \leq A$ for each $i$. Then for each $t > 0$,
+    Let $\{ X_i \}$ be an independent family of $N$ mean-zero random variables, and let $A > 0$ be a constant such that $|X_i| \leq A$ almost surely for each $i$. Then for each $t > 0$,
     %
     \[ \PP \left( \left| \frac{1}{N} \sum_{i = 1}^N X_i \right| \geq t \right) \leq 2 \exp \left( (N/A^2) \cdot (- t^2) \right). \]
 \end{theorem}
@@ -734,6 +747,10 @@ Thus $\widehat{\mu_E}$ has large decay for frequencies of large magnitude, and i
 \end{proof}
 \end{comment}
 
+\begin{remark}
+    Comparing the method of this lemma to that of Lemma \ref{discretelemma}, note that here we never needed to perform a non-random `deletion step' after the formation of our random set $S$. This is because \eqref{equation5523786128439} gives a larger gap between $N_k$ and $M_k$ than the gap provided by the analogous inequality \eqref{rBound} in Lemma \ref{discretelemma}, which results in the Fourier dimension bound in Theorem \ref{FourierTheorem} being smaller than the Hausdorff dimension bound in Theorem \ref{mainTheorem}. While performing non-random deletions of $O(M_{k+1}^d)$ intervals results in a negligible change to a Frostman-type bound like those dealt with in Chapter \ref{ch:RoughSets} once normalized. However, this many non-random deletions can cause a drastic shift in the Fourier transform of the associated measure on the set if these deletions occur non pseudorandomly. Improving Theorem \ref{FourierTheorem} thus requires a more subtle analysis of the deletions we must perform at each step.
+\end{remark}
+
 The construction of the set $X$ follows essentially the construction of the configuration avoiding set in Chapter \ref{ch:RoughSets}. We choose a decreasing sequence of parameters $\{ \varepsilon_k \}$ such that $\varepsilon_k < (n-s)/4$ for each $k$, as well as parameters $\{ N_k \}$ such that
 %
 \[ N_k \geq 3^{1/\varepsilon_k}, \]
@@ -754,6 +771,8 @@ and such that the collection $\{ B_k \}$ forms a strong cover of the configurati
 %
 \[ M_k \leq N_k^{\frac{n-s-2\varepsilon_k}{n}} \leq 2 M_{k+1}. \]
 %
+We also assume each $N_k$ and $M_k$ is a power of two, which means automatically that $M_k \divides N_k$ for each $k$.
+
 Just as was done in Chapter \ref{ch:RoughSets}, this choice of parameters enables us to find a nested family of sets $\{ X_k \}$, obtained by setting $X_0 = [0,1]$, and letting $X_{k+1}$ be obtained from $X_k$ by applying Lemma \ref{discreteFourierBuildingBlock} with $\varepsilon = \varepsilon_{k+1}$, $T = X_k$, and $B = B_{k+1}$. We set $X = \bigcap X_k$. Since Property (A) of Lemma \eqref{discreteFourierBuildingBlock} is true at each step of the process, this is sufficient to guarantee that $X$ avoids the configuration $\C$. The remainder of this section is devoted to showing that Property (B) of Lemma \ref{discreteFourierBuildingBlock} is sufficient to obtain the Fourier dimension bound on $X$ guaranteed by Theorem \ref{FourierTheorem}.
 
 Let $\nu_k = \nu_{X_k}$ for each $k$. Property (B) of Lemma \ref{discreteFourierBuildingBlock} implies that for each $k$,

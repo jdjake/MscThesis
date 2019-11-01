@@ -454,7 +454,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\[ \left\{ \int f d\mu_i \right\} \]
 	%
-	is Cauchy. Then there is a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly, in the sense that for any $f \in C_C(\RR^d)$,
+	is Cauchy. Then there is a regular Borel measure $\mu$ such that $\mu_i \to \mu$ vaguely, in the sense that for any $f \in C_C(\RR^d)$,
 	%
 	\[ \int f d\mu = \lim_{i \to \infty} \int f d\mu_i. \]
 \end{lemma}
@@ -463,7 +463,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\[ \mu_i(K) = \int \mathbf{I}_K d\mu_i \leq \int \varphi d\mu_i. \]
 	%
-	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, the values $\int \varphi d\mu_i$ are uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Applying the Banach Alaoglu theorem, we conclude that the collection of measures $\{ \mu_i|_K \}$ is contained in a compact subset of the space of non-negative Borel measures with respect to the weak $*$ topology. But every compact subset of a locally convex space is complete, and so we can therefore find a finite Borel measure $\mu^K$ supported on $K$ such that $\mu_i|_K \to \mu^K$ weakly.
+	Since $\{ \int \varphi d\mu_i \}$ is Cauchy, the values $\int \varphi d\mu_i$ are uniformly bounded in $i$. In particular, $\mu_i(K)$ is uniformly bounded in $i$. Applying the Banach Alaoglu theorem, we conclude that the collection of measures $\{ \mu_i|_K \}$ is contained in a compact subset of the space of non-negative Borel measures with respect to the vague topology. But every compact subset of a locally convex space is complete, and so we can therefore find a finite Borel measure $\mu^K$ supported on $K$ such that $\mu_i|_K \to \mu^K$ vaguely.
 
 	If $f \in C_c(\RR^d)$ is supported on $K_1 \cap K_2$, for two compact sets $K_1$ and $K_2$, then
 	%
@@ -477,7 +477,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	\[ \int f d\mu = \int f d\mu^K = \lim_{i \to \infty} \int_K f d\mu_i = \lim_{i \to \infty} \int f d\mu_i. \]
 	%
-	Since $f$ was arbitrary, $\mu_i \to \mu$ weakly.
+	Since $f$ was arbitrary, $\mu_i \to \mu$ in the vague topology.
 \end{proof}
 
 \begin{comment}
@@ -548,7 +548,7 @@ It is often easy to upper bound Hausdorff dimension, but non-trivial to \emph{lo
 	%
 	which is therefore bounded independently of $i$. Since $\varepsilon$ and $\varphi$ were arbitrary, this shows $\{ \mu_i \}$ is Cauchy.
 
-	Applying Lemma \ref{weakstarcompleteness}, we find a regular Borel measure $\mu$ such that $\mu_i \to \mu$ weakly. For any $Q \in \DQ^d$, since $Q$ is a closed set,
+	Applying Lemma \ref{weakstarcompleteness}, we find a regular Borel measure $\mu$ such that $\mu_i \to \mu$ vaguely. For any $Q \in \DQ^d$, since $Q$ is a closed set,
 	%
 	\[ \mu(Q) \geq \limsup_{i \to \infty} \mu_i(Q) = w(Q), \]
 	%
