@@ -4,7 +4,7 @@
 \chapter{Avoiding Rough Sets}
 \label{ch:RoughSets}
 
-In the previous chapter, we saw that many authors have considered the pattern avoidance problem for configurations $\C$ which take the form of many general classes of smooth shapes; in Math\'{e}'s work, $\C$ can take the form of an algebraic variety of low degree, and in Pramanik and Fraser's work, $\C$ can take the form of a smooth manifold. In this chapter, we consider the pattern avoidance problem for an even more general class of `rough' patterns, that are the countable union of sets with controlled lower Minkowski dimension.
+In the previous chapter, we saw that many authors have considered the pattern avoidance problem for configurations $\C$ which take the form of many general classes of smooth shapes; in Math\'{e}'s work, $\C$ can take the form of an algebraic variety of low degree, and in Pramanik and Fraser's work, $\C$ can take the form of a smooth manifold. In this chapter, we consider the pattern avoidance problem for an even more general class of `rough' patterns, that are the countable union of sets with controlled lower Minkowski dimension. The results of this chapter, and the applications obtained from these results detailed in the following chapter, have been accepted into the Springer series \emph{Harmonic Analysis and Applications}, in a paper entitled \emph{Large Sets Avoiding Rough Patterns}. A preprint \cite{roughSetsAvoidingPatterns} is also available on the ArXiv.
 %
 \begin{theorem}\label{mainTheorem}
 	Let $s \geq d$, and suppose $\C \subset \C^n(\RR^d)$ is the countable union of precompact sets, each with lower Minkowski dimension at most $s$. Then there exists a set $X \subset [0,1]^d$ with Hausdorff dimension at least $(nd - s)/(n-1)$ avoiding $\C$.
@@ -31,7 +31,7 @@ In the previous chapter, we saw that many authors have considered the pattern av
 	\end{enumerate}
 \end{remarks}
 
-Like with the results considered in the last chapter, we construct the set $X$ in Theorem \ref{mainTheorem} by repeatedly applying a discrete avoidance result at the scales corresponding to cubes $\DQ^d$, constructing a Frostman measure with equal mass at intermediary scales, and applying Lemma \ref{uniformMassFrostman}. However, our method has several innovations that simplify the analysis of the resulting set $X = \bigcap X_k$ than from previous results. In particular, through a probabilistic selection process we are able to use a simplified queuing technique then that used in \cite{KeletiDimOneSet} and \cite{MalabikaRob}, that required storage of data from each step of the iterated construction to be retrieved at a much later stage of the construction process.
+Like with the results considered in the last chapter, we construct the set $X$ in Theorem \ref{mainTheorem} by repeatedly applying a discrete avoidance result at the scales corresponding to cubes $\DQ^d$, constructing a Frostman measure with equal mass at intermediary scales, and applying Lemma \ref{uniformMassFrostman}. However, our method has several innovations that simplify the analysis of the resulting set $X = \bigcap X_k$ than from previous results. In particular, through a probabilistic selection process we are able to use a simplified queuing technique then that used in \cite{MalabikaRob} and \cite{KeletiDimOneSet}, that required storage of data from each step of the iterated construction to be retrieved at a much later stage of the construction process.
 
 %The details of a single step of this construction are described in Section \ref{discretesection}. In Section \ref{discretizationsection}, we explain how the branching factors $\{ N_k \}$ must be chosen, complete the construction of $X$, and prove $X$ avoids the configuration $\C$. In Section \ref{dimensionsection} we analyze the size of $X$ and show it has the Hausdorff dimension guaranteed by the conclusion of Theorem \ref{mainTheorem}.
 
@@ -266,7 +266,7 @@ where $t = (nd - s)/d(n-1)$. \eqref{equation1403463468957983} is a form of Prope
 
 As discussed in the introduction, Theorem \ref{mainTheorem} generalizes Theorems 1.1 and 1.2 from \cite{MalabikaRob}. In this chapter, we present two applications of Theorem \ref{mainTheorem} in settings where previous methods do not yield any results.
 
-\section{Sum-sets avoiding specified sets}
+\section{Sum Sets Avoiding Specified Sets}
 
 \begin{theorem} \label{sumset-application} 
 	Let $Y \subset \RR^d$ be a countable union of sets with lower Minkowski dimension at most $t$. Then there exists a set $X \subset \RR^d$ with Hausdorff dimension at least $d - t$ such that $X + X$ is disjoint from $Y$.
